@@ -6,5 +6,5 @@ var app = express();
 });*/
 
 app.use('/app', express.static(__dirname + '/app'));
-
-app.listen();
+var port = process.env.PORT || 1337;
+app.listen(port);
