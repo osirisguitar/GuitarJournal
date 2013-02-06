@@ -7,4 +7,4 @@ var app = express();
 
 app.use('/app', express.static(__dirname + '/app'));
 
-app.listen(1337);
+app.listen(80);
