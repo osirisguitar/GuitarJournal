@@ -6,4 +6,7 @@
   "dependencies": {
     "express": "3.x"
   }
+  "engines": {
+  	"node": "0.8.x"
+  }
 }
