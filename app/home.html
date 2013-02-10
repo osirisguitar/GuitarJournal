@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
   <head>
     <meta charset="utf-8">
     <title>Ratchet template page</title>
@@ -21,6 +21,8 @@
 
     <!-- Include the compiled Ratchet JS -->
     <script src="ratchet.js"></script>
+    <script src="libs/angular.min.js"></script>
+    <script src="controllers/home.js"></script>
 
     <!-- Intro paragraph styles. Delete once you start using this page -->
     <style type="text/css">
@@ -31,14 +33,14 @@
     </style>
 
   </head>
-  <body>
+  <body ng-controller="HomeCtrl">
 
   <!-- Make sure all your bars are the first things in your <body> -->
   <header class="bar-title">
-    <h1 class="title">Guitar Journal</h1>
+    <h1 class="title">Guitar {{test}}</h1>
   </header>
-  <nav class="bar-tab">
-    <ul class="tab-inner">
+   <nav class="bar-tab">
+   <ul class="tab-inner">
       <li class="tab-item active">
         <a href="home.html">
           <img class="tab-icon" src="/app/img/tab-bar/home.png">
@@ -46,7 +48,7 @@
         </a>
       </li>
       <li class="tab-item">
-        <a href="list.html">
+        <a href="sessions.html">
           <img class="tab-icon" src="/app/img/tab-bar/list.png">
           <div class="tab-label">Sessions</div>
         </a>
@@ -65,6 +67,7 @@
       </li>
     </ul>
   </nav>
+
 
   <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
   <div class="content">
