@@ -1,3 +1,7 @@
+function AppCtrl($scope) {
+	$scope.pageSettings = {};		
+}
+
 function HomeCtrl($scope) {
-	$scope.test = "go";
+	$scope.pageSettings.pageTitle = "Home";
 }
