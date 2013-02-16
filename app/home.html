@@ -21,7 +21,6 @@
     <script src="libs/angular/angular.min.js"></script>
     <script src="controllers/app.js"></script>
     <script src="controllers/home.js"></script>
-    <script src="controllers/session.js"></script>
   </head>
   <body ng-controller="AppCtrl">
 
@@ -31,13 +30,13 @@
   </header>
    <nav class="bar-tab">
    <ul class="tab-inner">
-      <li class="tab-item active">
+      <li class="tab-item {{pageSettings.active == 'home' && 'active' || ''}}">
         <a href="/">
           <img class="tab-icon" src="/app/img/tab-bar/home.png">
           <div class="tab-label">Home</div>
         </a>
       </li>
-      <li class="tab-item">
+      <li class="tab-item {{pageSettings.active == 'sessions' && 'active' || ''}}">
         <a href="/sessions">
           <img class="tab-icon" src="/app/img/tab-bar/list.png">
           <div class="tab-label">Sessions</div>
@@ -73,7 +72,7 @@
 
   <script id="sessions.html" type="text/ng-template">
     <h2>Sessions</h2>
-    <ul class="list inset">
+    <ul class="list">
       <li ng-repeat="session in sessions">
         <a href="http://maker.github.com/ratchet/">
           <strong>{{session.date}}: {{session.length}} minutes.</strong>

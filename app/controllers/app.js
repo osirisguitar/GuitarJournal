@@ -5,7 +5,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', []).
         templateUrl: 'home.html', 
         controller: "HomeCtrl"
       }).
-      when('app/home.html', {
+      when('/app/', {
         templateUrl: 'home.html', 
         controller: "HomeCtrl"
       }).
