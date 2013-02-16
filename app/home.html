@@ -2,7 +2,7 @@
 <html ng-app="GuitarJournalApp">
   <head>
     <meta charset="utf-8">
-    <title>Ratchet template page</title>
+    <title>Osiris Guitar Journal</title>
 
     <!-- Sets initial viewport load and disables zooming  -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -29,7 +29,7 @@
     <a class="button-prev" href="javascript:history.back();" ng-show="pageSettings.showBackButton">
       Back
     </a>
-    <h1 class="title">Guitar Journal - {{pageSettings.pageTitle}}</h1>
+    <h1 class="title">{{pageSettings.pageTitle}}</h1>
   </header>
    <nav class="bar-tab">
    <ul class="tab-inner">
@@ -92,6 +92,16 @@
   <script id="session.html" type="text/ng-template">
     <div class="content-padded">
       <h2>Session {{sessionId}}</h2>
+      <div class="input-group">
+        <div class="input-row">
+          <label>Date</label>
+          <div>{{session.date}}</div>
+        </div>
+        <div class="input-row">
+          <label>Length (min)</label>
+          <div>{{session.length}}</div>
+        </div>
+      </div>
     </div>
   </script>
 
