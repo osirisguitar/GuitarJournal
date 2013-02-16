@@ -26,6 +26,9 @@
 
   <!-- Make sure all your bars are the first things in your <body> -->
   <header class="bar-title">
+    <a class="button-prev" href="javascript:history.back();" ng-show="pageSettings.showBackButton">
+      Back
+    </a>
     <h1 class="title">Guitar Journal - {{pageSettings.pageTitle}}</h1>
   </header>
    <nav class="bar-tab">
@@ -42,13 +45,13 @@
           <div class="tab-label">Sessions</div>
         </a>
       </li>
-      <li class="tab-item">
+      <li class="tab-item {{pageSettings.active == 'stats' && 'active' || ''}}">
         <a href="">
           <img class="tab-icon" src="">
           <div class="tab-label">Stats</div>
         </a>
       </li>
-      <li class="tab-item">
+      <li class="tab-item {{pageSettings.active == 'profile' && 'active' || ''}}">
         <a href="">
           <img class="tab-icon" src="">
           <div class="tab-label">Profile</div>
@@ -60,27 +63,38 @@
 
   <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
   <div class="content">
-    <div class="content-padded">
       <ng-view></ng-view>
-    </div>
   </div>
 
   <script id="home.html" type="text/ng-template">
-  <h2>Home</h2>
-  Here is home.
+    <div class="content-padded">
+      <h2>Home</h2>
+      <p>
+        Here is home.
+      </p>
+    </div>
   </script>
 
   <script id="sessions.html" type="text/ng-template">
-    <h2>Sessions</h2>
+    <div class="content-padded">
+      <h2>Sessions</h2>
+    </div>
     <ul class="list">
       <li ng-repeat="session in sessions">
-        <a href="http://maker.github.com/ratchet/">
+        <a href="/session/{{session.id}}">
           <strong>{{session.date}}: {{session.length}} minutes.</strong>
           <span class="chevron"></span>
         </a>
       </li>
     </ul>
   </script>
+
+  <script id="session.html" type="text/ng-template">
+    <div class="content-padded">
+      <h2>Session {{sessionId}}</h2>
+    </div>
+  </script>
+
   
   </body>
 </html>
