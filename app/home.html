@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="ratchet.css">
     <script src="libs/angular/angular.min.js"></script>
     <script src="controllers/app.js"></script>
-    <script src="controllers/home.js"></script>
+    <script src="controllers/controllers.js"></script>
   </head>
   <body ng-controller="AppCtrl">
 
@@ -68,7 +68,6 @@
 
   <script id="home.html" type="text/ng-template">
     <div class="content-padded">
-      <h2>Home</h2>
       <p>
         Here is home.
       </p>
@@ -76,9 +75,6 @@
   </script>
 
   <script id="sessions.html" type="text/ng-template">
-    <div class="content-padded">
-      <h2>Sessions</h2>
-    </div>
     <ul class="list">
       <li ng-repeat="session in sessions">
         <a href="/session/{{session.id}}">
@@ -91,7 +87,6 @@
 
   <script id="session.html" type="text/ng-template">
     <div class="content-padded">
-      <h2>Session {{sessionId}}</h2>
       <div class="input-group">
         <div class="input-row">
           <label>Date</label>
