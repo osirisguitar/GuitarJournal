@@ -1,8 +1,14 @@
 var express = require('express');
 var app = express();
 
+
+
 app.get("/", function(req, res) {
-	res.redirect("/app/");
+	res.sendfile(__dirname + "/app/home.html");
+});
+
+app.get("/session*", function(req, res) {
+	res.sendfile(__dirname + "/app/home.html");
 });
 
 app.get("/app", function(req, res) {
