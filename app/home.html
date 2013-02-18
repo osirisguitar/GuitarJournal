@@ -30,6 +30,9 @@
       Back
     </a>
     <h1 class="title">{{pageSettings.pageTitle}}</h1>
+    <a class="button" ng-show="pageSettings.rightButtonText != null" ng-click="pageSettings.rightButtonClick()">
+      {{pageSettings.rightButtonText}}
+    </a>
   </header>
    <nav class="bar-tab">
    <ul class="tab-inner">
