@@ -1,0 +1,9 @@
+.bar-title {
+  background-color: #555555;
+  background-image: -webkit-linear-gradient(top, #555555 0, #000000 100%);
+  background-image: linear-gradient(to bottom, #555555 0, #000000 100%);
+  border-bottom: 1px solid #959595;
+  box-shadow: inset 0 1px 1px -1px rgba(255, 255, 255, .8);
+  -webkit-box-orient: horizontal;
+          box-orient: horizontal;
+}
