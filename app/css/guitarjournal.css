@@ -7,3 +7,10 @@
   -webkit-box-orient: horizontal;
           box-orient: horizontal;
 }
+
+.bar-title [class*="button"] {
+  background-color: #BD934F;
+  background-image: -webkit-linear-gradient(top, #BD934F 0, #BD934F 100%);
+  background-image: linear-gradient(to bottom, #BD934F 0, #BD934F 100%);
+  border: 1px solid #BD934F;
+}
