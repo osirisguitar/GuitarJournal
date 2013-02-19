@@ -38,7 +38,7 @@ function SessionCtrl($scope, $routeParams, $http) {
 
 	// dummy code
 	for (i = 0; i < $scope.sessions.length; i++)  {
-		if ($scope.sessions[i].id == $scope.sessionId) {
+		if ($scope.sessions[i]._id == $scope.sessionId) {
 			$scope.session = $scope.sessions[i];
 			break;
 		}

@@ -81,7 +81,7 @@
   <script id="sessions.html" type="text/ng-template">
     <ul class="list">
       <li ng-repeat="session in sessions">
-        <a href="/session/{{session.id}}">
+        <a href="/session/{{session._id}}">
           <strong>{{session.date}}: {{session.length}} minutes.</strong>
           <span class="chevron"></span>
         </a>
