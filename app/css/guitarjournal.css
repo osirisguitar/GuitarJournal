@@ -24,8 +24,10 @@
 }
 .bar-title .button-prev:before {
   left: -5px;
-  background-image: -webkit-gradient(linear, left bottom, right top, from(#E6B360), to(#997740));
-  background-image: gradient(linear, left bottom, right top, from(#E6B360), to(#997740));
+  background-image: -webkit-gradient(linear, left bottom, right top, from(#997740), to(#E6B360));
+  background-image: gradient(linear, left bottom, right top, from(#997740), to(#E6B360));
+/*  background-image: -webkit-gradient(linear, left bottom, right top, from(#E6B360), to(#997740));
+  background-image: gradient(linear, left bottom, right top, from(#E6B360), to(#997740));*/
   border-left: 1.5px solid rgba(255, 255, 255, .25);
   -webkit-transform: rotate(-45deg) skew(-10deg, -10deg);
           transform: rotate(-45deg) skew(-10deg, -10deg);
