@@ -1,6 +1,6 @@
 function AppCtrl($scope, $http) {
 	$scope.pageSettings = {};
-	$http.get('/api/users/123/sessions')
+	$http.get('/api/sessions')
 		.success(function(data) {
 			$scope.sessions = data;
 		})
@@ -27,14 +27,23 @@ function SessionsCtrl($scope, $http) {
 }
 
 function SessionCtrl($scope, $routeParams, $http) {
+	$scope.pageSettings.pageTitle = "Session";
 	$scope.sessionId = $routeParams.id;
 	$scope.pageSettings.active = "sessions";
 	$scope.pageSettings.showBackButton = true;
 	$scope.pageSettings.rightButtonText = "Edit";
+	$scope.editMode = false;
 
 	$scope.pageSettings.rightButtonClick = function() {
-		alert("Edit!")
+		$scope.editMode = true;
+		$scope.pageSettings.showBackButton = false;
 	};
+
+	$scope.save = function()
+	{
+		$scope.editMode = false;
+		$scope.pageSettings.showBackButton = true;
+	}
 
 	// dummy code
 	for (i = 0; i < $scope.sessions.length; i++)  {

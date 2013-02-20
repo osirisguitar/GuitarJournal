@@ -23,20 +23,29 @@
                   mask-image: gradient(linear, left top, right bottom, from(#000), color-stop(.33, #000), color-stop(.5, transparent), to(transparent));
 }
 .bar-title .button-prev:before {
-  left: -5px;
   background-image: -webkit-gradient(linear, left bottom, right top, from(#997740), to(#E6B360));
   background-image: gradient(linear, left bottom, right top, from(#997740), to(#E6B360));
-/*  background-image: -webkit-gradient(linear, left bottom, right top, from(#E6B360), to(#997740));
-  background-image: gradient(linear, left bottom, right top, from(#E6B360), to(#997740));*/
-  border-left: 1.5px solid rgba(255, 255, 255, .25);
-  -webkit-transform: rotate(-45deg) skew(-10deg, -10deg);
-          transform: rotate(-45deg) skew(-10deg, -10deg);
 }
 .bar-title .button-next:before {
-  right: -5px;
   background-image: -webkit-gradient(linear, left bottom, right top, from(#997740), to(#E6B360));
   background-image: gradient(linear, left bottom, right top, from(#997740), to(#E6B360));
-  border-top: 1.5px solid rgba(255, 255, 255, .25);
-  -webkit-transform: rotate(135deg) skew(-10deg, -10deg);
-          transform: rotate(135deg) skew(-10deg, -10deg);
+}
+
+.input-row div
+{
+  padding-top:11px;
+  padding-bottom:9px;
+}
+
+.input-row input:disabled, .input-row textarea:disabled
+{
+  color:black;
+}
+
+.input-row textarea
+{
+  padding-left:0;
+  width:65%;
+  float:right;
+  border:none;
 }
