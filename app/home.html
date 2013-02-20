@@ -100,27 +100,27 @@
       <div class="input-group">
         <div class="input-row">
           <label>Date</label>
-          <input type="date" value="{{session.date}}" ng-disabled="!editMode" />
+          <input type="date" ng-model="session.date" ng-disabled="!editMode" />
         </div>
         <div class="input-row">
           <label>Length (min)</label>
-          <input type="number" value="{{session.length}}" ng-disabled="!editMode" />
+          <input type="text" ng-model="session.length" ng-disabled="!editMode" />
         </div>
         <div class="input-row">
           <label>Goal</label>
-          <input type="text" value="{{session.goal}}" ng-disabled="!editMode" />
+          <input type="text" ng-model="session.goal" ng-disabled="!editMode" />
         </div>
         <div class="input-row">
           <label>Instrument</label>
-          <input type="text" value="{{session.instrument}}" ng-disabled="!editMode" />
+          <input type="text" ng-model="session.instrument" ng-disabled="!editMode" />
         </div>
         <div class="input-row">
           <label>Grade</label>
-          <input type="number" value="{{session.grade}}" ng-disabled="!editMode" />
+          <input type="number" ng-model="session.grade" ng-disabled="!editMode" />
         </div>
         <div class="input-row">
           <label>Notes</label>
-          <textarea ng-disabled="!editMode">{{session.notes}}</textarea>
+          <textarea ng-disabled="!editMode" ng-model="session.notes"></textarea>
         </div>
       </div>
       <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
