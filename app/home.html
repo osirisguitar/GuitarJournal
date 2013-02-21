@@ -2,7 +2,7 @@
 <html ng-app="GuitarJournalApp">
   <head>
     <meta charset="utf-8">
-    <title>Osiris Guitar Journal</title>
+    <title>OSIRIS GUITAR Journal</title>
 
     <!-- Sets initial viewport load and disables zooming  -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -78,9 +78,17 @@
 
   <script id="home.html" type="text/ng-template">
     <div class="content-padded">
-      <p>
-        Here is home.
-      </p>
+      <h2>Sessions</h2>
+      <div class="label">Total sessions:</div>
+      <div class="info">{{sessions.length}}</div>
+      <div class="label">Total time:</div>
+      <div class="info">{{sessions.length}}</div>      
+      <div class="label">Average time:</div>
+      <div class="info">{{sessions.length}}</div>
+      <div class="label">Sessions per week (month/year/forever):</div>
+      <div class="info">{{sessions.length}}/{{sessions.length}}/{{sessions.length}}</div>      
+      <div class="label">Last session:</div>
+      <div class="info">{{sessions[0].date}}</div>      
     </div>
   </script>
 
@@ -104,11 +112,15 @@
         </div>
         <div class="input-row">
           <label>Length (min)</label>
-          <input type="text" ng-model="session.length" ng-disabled="!editMode" />
+          <input type="number" ng-model="session.length" ng-disabled="!editMode" />
         </div>
         <div class="input-row">
           <label>Goal</label>
           <input type="text" ng-model="session.goal" ng-disabled="!editMode" />
+        </div>
+        <div class="input-row">
+          <label>Goal contribution (%)</label>
+          <input type="number" ng-model="session.goalContribution" ng-disabled="!editMode" />
         </div>
         <div class="input-row">
           <label>Instrument</label>
@@ -124,6 +136,7 @@
         </div>
       </div>
       <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
+      <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
     </div>
   </script>
 

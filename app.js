@@ -2,8 +2,12 @@ var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
-var mongoose = require('mongoose');
+//var mongoose = require('mongoose');
 var mongoConnectionString = "mongodb://osiris:testmongo123@linus.mongohq.com:10003/app11622295";
+
+/*var schema = mongoose.Schema({ 
+
+});*/
 
 app.use(express.bodyParser());
 // App stuff, static files
