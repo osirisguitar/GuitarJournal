@@ -36,6 +36,36 @@ app.get("/api/sessions", function(req, res) {
 	});
 });
 
+app.get("/api/sessions/statistics", function(req, res) {
+
+	// Connect to the db
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var sessions = db.collection('Sessions');
+		var results = {};
+		console.log(results.totalSessions);
+		console.log(sessions.find().count());
+		sessions.count(function(error, count) {
+   			// Do what you need the count for here.
+   			results.totalSessions = count;
+   			sessions.aggregate({
+   				$group: {
+   					_id: "$userid",
+   					averageLength: { $avg: "$length" },
+   					totalLength: { $sum: "$length" }
+   				}
+   			}, function(err, agg) 
+   			{ 
+   				console.log(agg);
+   				results.averageLength = agg[0].averageLength;
+   				results.totalLength = agg[0].totalLength;
+   				res.json(results);
+   			});
+		});
+	});
+});
+
 app.get("/api/session/:id", function(req, res) {
 
 	// Connect to the db

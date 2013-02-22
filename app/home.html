@@ -16,6 +16,15 @@
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/app/touch-icons/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/app/touch-icons/apple-touch-icon-57x57.png">
 
+    <!-- iPhone -->
+    <link rel="apple-touch-startup-image" href="/app/img/splash.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)">
+
+    <!-- iPhone (Retina) -->
+    <!--<link rel="apple-touch-startup-image" href="http://www.example.com/mobile/images/apple-startup-iPhone-RETINA.jpg" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">-->
+
+    <!-- iPhone 5 -->
+    <!--<link rel="apple-touch-startup-image" href="http://www.example.com/mobile/images/apple-startup-iPhone-Tall-RETINA.jpg"  media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">-->
+
     <!-- Include the compiled Ratchet CSS -->
     <link rel="stylesheet" href="/app/css/ratchet.css">
     <link rel="stylesheet" href="/app/css/guitarjournal.css">
@@ -80,11 +89,11 @@
     <div class="content-padded">
       <h2>Sessions</h2>
       <div class="label">Total sessions:</div>
-      <div class="info">{{sessions.length}}</div>
+      <div class="info">{{totalSessions}}</div>
       <div class="label">Total time:</div>
-      <div class="info">{{sessions.length}}</div>      
+      <div class="info">{{totalLength}} minutes</div>      
       <div class="label">Average time:</div>
-      <div class="info">{{sessions.length}}</div>
+      <div class="info">{{averageLength}} minutes</div>
       <div class="label">Sessions per week (month/year/forever):</div>
       <div class="info">{{sessions.length}}/{{sessions.length}}/{{sessions.length}}</div>      
       <div class="label">Last session:</div>

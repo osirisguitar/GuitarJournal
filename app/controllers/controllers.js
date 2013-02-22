@@ -22,11 +22,22 @@ function AppCtrl($scope, $http) {
 	}
 }
 
-function HomeCtrl($scope) {
+function HomeCtrl($scope, $http) {
 	$scope.pageSettings.pageTitle = "OSIRIS GUITAR Journal";
 	$scope.pageSettings.active = "home";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
+
+	$http.get('/api/sessions/statistics')
+		.success(function(data) {
+			$scope.totalSessions = data.totalSessions;
+			$scope.averageLength = data.averageLength;
+			$scope.totalLength = data.totalLength;
+			console.log(data);
+		})
+		.error(function(data) {
+			alert("Error when getting statistics overview.");
+		});
 }
 
 function SessionsCtrl($scope, $http, $location) {

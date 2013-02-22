@@ -49,3 +49,16 @@
   float:right;
   border:none;
 }
+
+.label
+{
+  float:left;
+  width:50%;
+  font-weight:bold;
+}
+
+.info
+{
+  float: right;
+  width: 50%;
+}
