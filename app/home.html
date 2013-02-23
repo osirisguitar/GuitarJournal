@@ -149,6 +149,36 @@
     </div>
   </script>
 
+  <script id="goals.html" type="text/ng-template">
+    <ul class="list">
+      <li ng-repeat="goal in goals">
+        <a href="/goal/{{goal._id}}">
+          <strong>{{session.title}} {{goal.completion}}</strong>
+          <span class="chevron"></span>
+        </a>
+      </li>
+    </ul>
+  </script>
   
+  <script id="goal.html" type="text/ng-template">
+    <div class="content-padded">
+      <div class="input-group">
+        <div class="input-row">
+          <label>Title</label>
+          <input type="text" ng-model="goal.title" ng-disabled="!editMode" />
+        </div>
+        <div class="input-row">
+          <label>Description</label>
+          <textarea ng-disabled="!editMode" ng-model="goal.description"></textarea>
+        </div>
+        <div class="input-row">
+          <label>Completion (%)</label>
+          <input type="number" ng-model="session.goal" ng-disabled="!editMode" />
+        </div>
+      </div>
+      <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
+      <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
+    </div>
+  </script>
   </body>
 </html>

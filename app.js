@@ -2,12 +2,8 @@ var express = require('express');
 var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
-//var mongoose = require('mongoose');
 var mongoConnectionString = "mongodb://osiris:testmongo123@linus.mongohq.com:10003/app11622295";
-
-/*var schema = mongoose.Schema({ 
-
-});*/
+var loggedInUser = ObjectID("512684441ea176ca050002b7");
 
 app.use(express.bodyParser());
 // App stuff, static files
@@ -30,7 +26,12 @@ app.get("/api/sessions", function(req, res) {
 		if(err) { return console.dir(err); }
 
 		var collection = db.collection('Sessions');
-		collection.find().toArray(function(err, items) {
+		collection.find({ "userId": loggedInUser }).toArray(function(err, items) {
+			if (err)
+			{
+				console.log(err);
+				return (err);
+			}
 			res.json(items);
 		});
 	});
@@ -44,14 +45,15 @@ app.get("/api/sessions/statistics", function(req, res) {
 
 		var sessions = db.collection('Sessions');
 		var results = {};
-		console.log(results.totalSessions);
-		console.log(sessions.find().count());
-		sessions.count(function(error, count) {
+		sessions.find({ "userId": loggedInUser }).count(function(error, count) {
    			// Do what you need the count for here.
    			results.totalSessions = count;
    			sessions.aggregate({
+   				$match: {
+   					userId: loggedInUser
+   				},
    				$group: {
-   					_id: "$userid",
+   					_id: "$userId",
    					averageLength: { $avg: "$length" },
    					totalLength: { $sum: "$length" }
    				}
@@ -80,8 +82,6 @@ app.get("/api/session/:id", function(req, res) {
 });
 
 app.post("/api/sessions", function(req, res) {
-	console.log("Body:");
-	console.log(req.body);
 	if (req.body._id)
 	{
 		req.body._id = ObjectID(req.body._id);
@@ -90,6 +90,21 @@ app.post("/api/sessions", function(req, res) {
 		if(err) { return console.dir(err); }
 
 		var collection = db.collection('Sessions');
+		collection.save(req.body, {safe:true}, function(err, savedSession) {
+			res.json(savedSession);
+		});
+	});
+});
+
+app.post("/api/goals", function(req, res) {
+	if (req.body._id)
+	{
+		req.body._id = ObjectID(req.body._id);
+	}
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var collection = db.collection('Goals');
 		collection.save(req.body, {safe:true}, function(err, savedSession) {
 			res.json(savedSession);
 		});

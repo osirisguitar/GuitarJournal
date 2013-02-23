@@ -1,5 +1,6 @@
 function AppCtrl($scope, $http) {
 	$scope.pageSettings = {};
+	$scope.loggedInUser = ''
 	$http.get('/api/sessions')
 		.success(function(data) {
 			$scope.sessions = data;
@@ -7,6 +8,14 @@ function AppCtrl($scope, $http) {
 		})
 		.error(function(data) {
 			alert("Error when getting sessions.")
+		});
+
+	$http.get('/api/goals')
+		.success(function(data) {
+			$scope.goals = data;
+		})
+		.error(function(data) {
+			alert("Error when getting goals.")
 		});
 
 	$scope.sortSessions = function()
@@ -115,4 +124,14 @@ function SessionCtrl($scope, $routeParams, $http) {
 			.error(function(data) { alert("Error saving session: " + data)});
 	}
 
+}
+
+function GoalsCtrl($scope, $http, $location) {
+	$scope.pageSettings.pageTitle = "Goals";
+	$scope.pageSettings.active = "goals";
+	$scope.pageSettings.showBackButton = false;
+	$scope.pageSettings.rightButtonText = "New";
+	$scope.pageSettings.rightButtonClick = function() {
+		$location.path('/goal/');
+	};
 }
