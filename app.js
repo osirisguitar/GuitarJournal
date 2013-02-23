@@ -13,6 +13,9 @@ app.get("/", function(req, res) {
 app.get("/session*", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });
+app.get("/goal*", function(req, res) {
+	res.sendfile(__dirname + "/app/home.html");
+});
 app.get("/app", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });
@@ -82,9 +85,11 @@ app.get("/api/session/:id", function(req, res) {
 });
 
 app.post("/api/sessions", function(req, res) {
-	if (req.body._id)
-	{
+	if (req.body._id) {
 		req.body._id = ObjectID(req.body._id);
+	}
+	if (req.body.userId) {
+		req.body.userId = ObjectID(req.body.userId);
 	}
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
@@ -92,6 +97,25 @@ app.post("/api/sessions", function(req, res) {
 		var collection = db.collection('Sessions');
 		collection.save(req.body, {safe:true}, function(err, savedSession) {
 			res.json(savedSession);
+		});
+	});
+});
+
+app.get("/api/goals", function(req, res) {
+
+	// Connect to the db
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var collection = db.collection('Goals');
+		collection.find({ "userId": loggedInUser }).toArray(function(err, items) {
+			if (err)
+			{
+				console.log(err);
+				return (err);
+			}
+			console.log(items);
+			res.json(items);
 		});
 	});
 });

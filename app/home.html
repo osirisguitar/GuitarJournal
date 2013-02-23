@@ -105,7 +105,8 @@
     <ul class="list">
       <li ng-repeat="session in sessions">
         <a href="/session/{{session._id}}">
-          <strong>{{session.date}}: {{session.length}} minutes.</strong>
+          <strong>{{session.date}}: {{session.length}} minutes.</strong><br>
+          {{session.instrument}} ({{session.location}})
           <span class="chevron"></span>
         </a>
       </li>
@@ -140,6 +141,10 @@
           <input type="number" ng-model="session.grade" ng-disabled="!editMode" />
         </div>
         <div class="input-row">
+          <label>Location</label>
+          <input type="text" ng-model="session.location" ng-disabled="!editMode" />
+        </div>
+        <div class="input-row">
           <label>Notes</label>
           <textarea ng-disabled="!editMode" ng-model="session.notes"></textarea>
         </div>
@@ -153,7 +158,8 @@
     <ul class="list">
       <li ng-repeat="goal in goals">
         <a href="/goal/{{goal._id}}">
-          <strong>{{session.title}} {{goal.completion}}</strong>
+          <strong>{{goal.title}} ({{goal.completion}} %)</strong><br>
+          {{goal.description}}
           <span class="chevron"></span>
         </a>
       </li>
