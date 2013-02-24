@@ -185,7 +185,7 @@ function GoalCtrl($scope, $routeParams, $http) {
 
 	$scope.save = function()
 	{
-		$http.post('/api/goal', $scope.goal)
+		$http.post('/api/goals', $scope.goal)
 			.success(function(data) {
 				$scope.editMode = false;
 				$scope.pageSettings.showBackButton = true;

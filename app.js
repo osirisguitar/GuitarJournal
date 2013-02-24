@@ -91,6 +91,13 @@ app.post("/api/sessions", function(req, res) {
 	if (req.body.userId) {
 		req.body.userId = ObjectID(req.body.userId);
 	}
+	else
+	{
+		req.body.userId = loggedInUser;
+	}
+	if (req.body.goalId) {
+		req.body.goalId = ObjectID(req.body.goalId);		
+	}
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
@@ -124,6 +131,13 @@ app.post("/api/goals", function(req, res) {
 	if (req.body._id)
 	{
 		req.body._id = ObjectID(req.body._id);
+	}
+	if (req.body.userId) {
+		req.body.userId = ObjectID(req.body.userId);
+	}
+	else
+	{
+		req.body.userId = loggedInUser;
 	}
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
