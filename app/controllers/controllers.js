@@ -135,3 +135,70 @@ function GoalsCtrl($scope, $http, $location) {
 		$location.path('/goal/');
 	};
 }
+
+function GoalCtrl($scope, $routeParams, $http) {
+	$scope.pageSettings.pageTitle = "Goal";
+	$scope.pageSettings.active = "goals";
+	$scope.pageSettings.showBackButton = true;
+	$scope.pageSettings.rightButtonText = "Edit";
+	$scope.editMode = false;
+
+	// If id is provided, get session, from memory or DB.
+	if ($routeParams.id != null && $routeParams.id != "")
+	{
+		// First, try to find session in the loaded array
+		for (index in $scope.goals)
+		{
+			if ($scope.goals[index]._id == $routeParams.id)
+			{
+				$scope.goal = $scope.goals[index];
+				break;
+			}
+		}
+
+		if ($scope.goal == null)
+		{
+			// Not loaded into memory, get from DB.
+			$http.get('/api/goal/' + $routeParams.id)
+				.success(function(data) {
+					$scope.goal = data;
+				})
+				.error(function(data) {
+					alert("Error getting goal: " + data);
+				});
+		}
+	}
+	else
+	{
+		$scope.goal = { date: new Date() };
+		$scope.editMode = true;
+	}
+
+	$scope.pageSettings.rightButtonClick = function() {
+		$scope.editMode = !$scope.editMode;
+		$scope.pageSettings.showBackButton = !$scope.pageSettings.showBackButton;
+		if ($scope.pageSettings.rightButtonText == "Edit")
+			$scope.pageSettings.rightButtonText = "Cancel";
+		else
+			$scope.pageSettings.rightButtonText = "Edit";
+	};
+
+	$scope.save = function()
+	{
+		$http.post('/api/goal', $scope.goal)
+			.success(function(data) {
+				$scope.editMode = false;
+				$scope.pageSettings.showBackButton = true;
+				// 1 means updated, otherwise replace to get proper db id.
+				if (data != 1)
+				{
+					$scope.goal = data;					
+					$scope.goals.push(data);
+				}
+				$scope.rightButtonText = "Edit";
+				//$scope.sortSessions();
+			})
+			.error(function(data) { alert("Error saving goal: " + data)});
+	}
+
+}
