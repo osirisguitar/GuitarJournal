@@ -105,6 +105,7 @@
     <ul class="list">
       <li ng-repeat="session in sessions">
         <a href="/session/{{session._id}}">
+          <img src="http://placehold.it/35x35">
           <strong>{{session.date}}: {{session.length}} minutes.</strong><br>
           {{session.instrument}} ({{session.location}})
           <span class="chevron"></span>
@@ -126,7 +127,9 @@
         </div>
         <div class="input-row">
           <label>Goal</label>
-          <input type="text" ng-model="session.goal" ng-disabled="!editMode" />
+          <select ng-model="session.goalId" ng-disabled="!editMode">
+            <option ng-repeat="goal in goals" value="{{goal._id}}" ng-selected="session.goalId == goal._id">{{goal.title}}</option>
+          </select>
         </div>
         <div class="input-row">
           <label>Goal contribution (%)</label>

@@ -37,17 +37,22 @@
   padding-bottom:9px;
 }
 
-.input-row input:disabled, .input-row textarea:disabled
+.input-row input:disabled, .input-row textarea:disabled, .input-row select
 {
   color:black;
 }
 
-.input-row textarea
+.input-row textarea, .input-row select
 {
-  padding-left:0;
   width:65%;
   float:right;
   border:none;
+  margin-bottom:2px;
+}
+
+.input-row textarea
+{
+  padding-left:0;  
 }
 
 .label
@@ -67,4 +72,10 @@
 {
   padding-top:15px;
   padding-bottom:15px;
+}
+
+.list img
+{
+  float:left;
+  padding-right:5px;
 }
