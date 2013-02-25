@@ -106,8 +106,8 @@
       <li ng-repeat="session in sessions">
         <a href="/session/{{session._id}}">
           <img src="/app/img/instrument.jpg">
-          <strong>{{session.date}}: {{session.length}} minutes.</strong><br>
-          {{session.instrument}} ({{session.location}})
+          <strong>{{session.date}}: {{session.length}} minutes</strong><br>
+          {{session.goalId && getGoalName(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
           <span class="chevron"></span>
         </a>
       </li>
@@ -138,6 +138,10 @@
         <div class="input-row">
           <label>Instrument</label>
           <input type="text" ng-model="session.instrument" ng-disabled="!editMode" />
+        </div>
+        <div class="input-row">
+          <label>Other gear</label>
+          <input type="text" ng-model="session.gear" ng-disabled="!editMode" />
         </div>
         <div class="input-row">
           <label>Grade</label>
@@ -181,8 +185,8 @@
           <textarea ng-disabled="!editMode" ng-model="goal.description"></textarea>
         </div>
         <div class="input-row">
-          <label>Completion (%)</label>
-          <input type="number" ng-model="session.goal" ng-disabled="!editMode" />
+          <label>Complete</label>
+          <input type="checkbox" ng-model="goal.completed" ng-disabled="!editMode" />
         </div>
       </div>
       <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>

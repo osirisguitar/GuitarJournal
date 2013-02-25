@@ -29,6 +29,14 @@ function AppCtrl($scope, $http) {
 			else return 0;
 		});
 	}
+
+	$scope.getGoalName = function(goalId) {
+		for (index in $scope.goals)
+		{
+			if ($scope.goals[index]._id == goalId)
+				return $scope.goals[index].title;
+		}
+	};
 }
 
 function HomeCtrl($scope, $http) {
