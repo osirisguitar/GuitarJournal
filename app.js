@@ -60,12 +60,14 @@ app.get("/api/sessions/statistics", function(req, res) {
    				$group: {
    					_id: "$userId",
    					averageLength: { $avg: "$length" },
-   					totalLength: { $sum: "$length" }
+   					totalLength: { $sum: "$length" },
+   					averageRating: { $avg: "$rating" }
    				}
    			}, function(err, agg) 
    			{ 
    				results.averageLength = Math.round(agg[0].averageLength);
    				results.totalLength = agg[0].totalLength;
+   				results.averageRating = agg[0].averageRating;
    				res.json(results);
    			});
 		});

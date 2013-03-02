@@ -56,10 +56,7 @@ function HomeCtrl($scope, $http) {
 
 	$http.get('/api/sessions/statistics')
 		.success(function(data) {
-			$scope.totalSessions = data.totalSessions;
-			$scope.averageLength = data.averageLength;
-			$scope.totalLength = data.totalLength;
-			console.log(data);
+			$scope.sessionStats = data;
 		})
 		.error(function(data) {
 			alert("Error when getting statistics overview.");
@@ -145,7 +142,7 @@ function SessionCtrl($scope, $routeParams, $http, $location) {
 		$http.delete('/api/session/' + $scope.session._id)
 			.success(function(data){
 				$scope.removeSession($scope.session._id);
-				$location.path("/session/");
+				$location.path("/sessions/");
 			})
 			.error(function(data){
 				alert("Couldn't delete the session.");

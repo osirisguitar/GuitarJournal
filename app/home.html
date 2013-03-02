@@ -91,11 +91,13 @@
     <div class="content-padded">
       <h2>Sessions</h2>
       <div class="label">Total sessions:</div>
-      <div class="info">{{totalSessions}}</div>
+      <div class="info">{{sessionStats.totalSessions}}</div>
       <div class="label">Total time:</div>
-      <div class="info">{{totalLength}} minutes</div>
+      <div class="info">{{sessionStats.totalLength}} minutes</div>
       <div class="label">Average time:</div>
-      <div class="info">{{averageLength}} minutes</div>
+      <div class="info">{{sessionStats.averageLength}} minutes</div>
+      <div class="label">Average rating:</div>
+      <div class="info">{{sessionStats.averageRating}}</div>
       <div class="label">Sessions per week:</div>
       <div class="info">{{sessions.length}}/{{sessions.length}}/{{sessions.length}}</div>      
       <div class="label">Last session:</div>
@@ -147,7 +149,7 @@
         </div>
         <div class="input-row">
           <label>Rating</label>
-          <input type="number" ng-model="session.grade" ng-disabled="!editMode" />
+          <input type="number" ng-model="session.rating" ng-disabled="!editMode" />
         </div>
         <div class="input-row">
           <label>Location</label>
