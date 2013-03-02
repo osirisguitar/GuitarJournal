@@ -64,8 +64,7 @@ app.get("/api/sessions/statistics", function(req, res) {
    				}
    			}, function(err, agg) 
    			{ 
-   				console.log(agg);
-   				results.averageLength = agg[0].averageLength;
+   				results.averageLength = Math.round(agg[0].averageLength);
    				results.totalLength = agg[0].totalLength;
    				res.json(results);
    			});
@@ -74,13 +73,26 @@ app.get("/api/sessions/statistics", function(req, res) {
 });
 
 app.get("/api/session/:id", function(req, res) {
-
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
 		var collection = db.collection('Sessions');
 		collection.findOne({ _id: ObjectID(req.params.id) }, function(err, item) {
+			res.json(item);
+		});
+	});
+});
+
+app.delete("/api/session/:id", function(req, res) {
+	console.log("Sesssion DELETE: " + req.params.id);
+	// Connect to the db
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var collection = db.collection('Sessions');
+		collection.remove({ _id: ObjectID(req.params.id) }, 1, function(err, item) {
+			console.log("Removed " + req.params.id);
 			res.json(item);
 		});
 	});
@@ -123,7 +135,6 @@ app.get("/api/goals", function(req, res) {
 				console.log(err);
 				return (err);
 			}
-			console.log(items);
 			res.json(items);
 		});
 	});

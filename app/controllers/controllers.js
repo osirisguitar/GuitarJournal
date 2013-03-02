@@ -30,6 +30,15 @@ function AppCtrl($scope, $http) {
 		});
 	}
 
+	$scope.removeSession = function(sessionId) {
+		for (i = 0; i < $scope.sessions.length; i++) {
+			if ($scope.sessions[i]._id == sessionId)
+			{
+				$scope.sessions.splice(i, 1);
+			}
+		}
+	};
+
 	$scope.getGoalName = function(goalId) {
 		for (index in $scope.goals)
 		{
@@ -67,7 +76,7 @@ function SessionsCtrl($scope, $http, $location) {
 	};
 }
 
-function SessionCtrl($scope, $routeParams, $http) {
+function SessionCtrl($scope, $routeParams, $http, $location) {
 	$scope.pageSettings.pageTitle = "Session";
 	$scope.pageSettings.active = "sessions";
 	$scope.pageSettings.showBackButton = true;
@@ -130,8 +139,18 @@ function SessionCtrl($scope, $routeParams, $http) {
 				$scope.sortSessions();
 			})
 			.error(function(data) { alert("Error saving session: " + data)});
-	}
+	};
 
+	$scope.delete = function() {
+		$http.delete('/api/session/' + $scope.session._id)
+			.success(function(data){
+				$scope.removeSession($scope.session._id);
+				$location.path("/session/");
+			})
+			.error(function(data){
+				alert("Couldn't delete the session.");
+			});
+	};
 }
 
 function GoalsCtrl($scope, $http, $location) {
