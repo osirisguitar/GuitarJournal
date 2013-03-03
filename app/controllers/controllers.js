@@ -18,6 +18,22 @@ function AppCtrl($scope, $http) {
 			alert("Error when getting goals.")
 		});
 
+	$http.get('/api/profile')
+		.success(function(data) {
+			$scope.profile = data;
+		})
+		.error(function(data){
+			alert("Error when getting profile.")
+		});
+
+	$http.get('/api/instruments')
+		.success(function(data) {
+			$scope.instruments = data;
+		})
+		.error(function(data) {
+			alert("Error when getting instruments.");
+		});
+
 	$scope.sortSessions = function()
 	{
 		// Sort sessions in reverse chronological order.
@@ -224,5 +240,10 @@ function GoalCtrl($scope, $routeParams, $http) {
 			})
 			.error(function(data) { alert("Error saving goal: " + data)});
 	}
+
+}
+
+function ProfileCtrl($scope, $http, $location)
+{
 
 }

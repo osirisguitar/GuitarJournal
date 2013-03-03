@@ -88,3 +88,7 @@
 {
   min-height:35px;
 }
+
+.list.inset, .content-padded {
+  clear:left;
+}

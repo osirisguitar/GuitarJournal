@@ -18,6 +18,12 @@ app.get("/session*", function(req, res) {
 app.get("/goal*", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });
+app.get("/profile*", function(req, res) {
+	res.sendfile(__dirname + "/app/home.html");
+});
+app.get("/instrument*", function(req, res) {
+	res.sendfile(__dirname + "/app/home.html");
+});
 app.get("/app", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });
@@ -164,6 +170,35 @@ app.post("/api/goals", function(req, res) {
 	});
 });
 
+app.get("/api/profile", function(req, res) {
+	// Connect to the db
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var users = db.collection('Users');
+		users.findOne({ _id: loggedInUser }, function(err, item) {
+			res.json(item);
+		});
+	});
+});
+
+app.get("/api/instruments", function(req, res) {
+
+	// Connect to the db
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var instruments = db.collection('Instruments');
+		instruments.find({ "userId": loggedInUser }).toArray(function(err, items) {
+			if (err)
+			{
+				console.log(err);
+				return (err);
+			}
+			res.json(items);
+		});
+	});
+});
 
 var port = process.env.PORT || 1337;
 app.listen(port);

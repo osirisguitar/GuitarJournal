@@ -26,8 +26,12 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', []).
         controller: "GoalCtrl"
       }).
       when('/profile', {
-        templateUrl: 'session.html', 
+        templateUrl: 'profile.html', 
         controller: "ProfileCtrl"
+      }).
+      when('/instrument/:id', {
+        templateUrl: 'instrument.html', 
+        controller: "InstrumentCtrl"
       });
     $locationProvider.html5Mode(true);
   }]);

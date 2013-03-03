@@ -101,7 +101,21 @@
       <div class="label">Sessions per week:</div>
       <div class="info">{{sessions.length}}/{{sessions.length}}/{{sessions.length}}</div>      
       <div class="label">Last session:</div>
-      <div class="info">{{sessions[0].date}}</div>      
+      <div class="info">{{sessions[0].date}}</div> 
+    </div>
+    <div class="content-padded">
+      <h2>Goals</h2>
+      <div class="label">Active goals:</div>
+      <div class="info">{{goalStats.activeGoals}}</div>
+      <div class="label">Completed goals:</div>
+      <div class="info">{{goalStats.completedGoals}}</div>
+    </div>
+    <div class="content-padded">
+      <h2>Instruments</h2>
+      <div class="label">Intruments:</div>
+      <div class="info">{{instrumentStats.numInstruments}}</div>
+      <div class="label">Most popular:</div>
+      <div class="info">{{instrumentStats.mostUsedInstrument}}</div>
     </div>
   </script>
 
@@ -141,7 +155,9 @@
         </div>
         <div class="input-row">
           <label>Instrument</label>
-          <input type="text" ng-model="session.instrument" ng-disabled="!editMode" />
+          <select ng-model="session.instrumentId" ng-disabled="!editMode">
+            <option ng-repeat="instrument in instruments" value="{{instrument._id}}" ng-selected="session.instrumentId == instrument._id">{{instrument.name}}</option>
+          </select>
         </div>
         <div class="input-row">
           <label>Other gear</label>
@@ -196,6 +212,25 @@
       <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
       <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
     </div>
+  </script>
+
+    <script id="profile.html" type="text/ng-template">
+    <div class="content-padded">
+      <div class="label">Username:</div>
+      <div class="info">{{profile.username}}</div>
+      <div class="label">Email:</div>
+      <div class="info">{{profile.email}}</div>
+    </div>
+      <ul class="list inset">
+        <li ng-repeat="instrument in instruments">
+          <a href="/instrument/{{instrument._id}}">
+            <img src="/app/img/instrument.jpg">
+            <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
+            {{instrument.description}}
+            <span class="chevron"></span>
+          </a>
+        </li>
+      </ul>
   </script>
   </body>
 </html>
