@@ -44,7 +44,7 @@ function AppCtrl($scope, $http) {
 				return -1;
 			else return 0;
 		});
-	}
+	};
 
 	$scope.removeSession = function(sessionId) {
 		for (i = 0; i < $scope.sessions.length; i++) {
@@ -241,9 +241,10 @@ function GoalCtrl($scope, $routeParams, $http) {
 			.error(function(data) { alert("Error saving goal: " + data)});
 	}
 
-}
+};
 
 function ProfileCtrl($scope, $http, $location)
 {
-
-}
+	$scope.pageSettings.pageTitle = "Profile";
+	$scope.pageSettings.active = "profile";
+};
