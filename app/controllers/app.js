@@ -34,4 +34,19 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', []).
         controller: "InstrumentCtrl"
       });
     $locationProvider.html5Mode(true);
-  }]);
+  }])
+  .directive('file', function() {
+    return {
+      scope: { file: '=' },
+      link: function(scope, el, attrs) {
+          el.bind('change', function(event) {
+              console.log("Directive!");
+              var files = event.target.files;
+              var file = files[0];
+              scope.file = file;
+//              scope.file = file ? file.name : undefined;
+              scope.$apply();
+          });
+      }
+    }
+  });

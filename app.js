@@ -69,11 +69,10 @@ app.get("/api/sessions/statistics", function(req, res) {
    					totalLength: { $sum: "$length" },
    					averageRating: { $avg: "$rating" }
    				}
-   			}, function(err, agg) 
-   			{ 
+   			}, function(err, agg) { 
    				results.averageLength = Math.round(agg[0].averageLength);
    				results.totalLength = agg[0].totalLength;
-   				results.averageRating = agg[0].averageRating;
+   				results.averageRating = Math.round(agg[0].averageRating*100)/100;
    				res.json(results);
    			});
 		});
@@ -93,14 +92,12 @@ app.get("/api/session/:id", function(req, res) {
 });
 
 app.delete("/api/session/:id", function(req, res) {
-	console.log("Sesssion DELETE: " + req.params.id);
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
 		var collection = db.collection('Sessions');
 		collection.remove({ _id: ObjectID(req.params.id) }, 1, function(err, item) {
-			console.log("Removed " + req.params.id);
 			res.json(item);
 		});
 	});
@@ -119,6 +116,9 @@ app.post("/api/sessions", function(req, res) {
 	}
 	if (req.body.goalId) {
 		req.body.goalId = ObjectID(req.body.goalId);		
+	}
+	if (req.body.instrumentId) {
+		req.body.instrumentId = ObjectID(req.body.instrumentId);
 	}
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
@@ -199,6 +199,42 @@ app.get("/api/instruments", function(req, res) {
 		});
 	});
 });
+
+app.post("/api/instruments", function(req, res) {
+	if (req.body._id)
+	{
+		req.body._id = ObjectID(req.body._id);
+	}
+	if (req.body.userId) {
+		req.body.userId = ObjectID(req.body.userId);
+	}
+	else
+	{
+		req.body.userId = loggedInUser;
+	}
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var instruments = db.collection('Instruments');
+		instruments.save(req.body, {safe:true}, function(err, savedSession) {
+			res.json(savedSession);
+		});
+	});
+});
+
+app.delete("/api/instrument/:id", function(req, res) {
+	// Connect to the db
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var instruments = db.collection('Instruments');
+		instruments.remove({ _id: ObjectID(req.params.id) }, 1, function(err, item) {
+			console.log("Removed instrument");
+				res.json(item);
+		});
+	});
+});
+
 
 var port = process.env.PORT || 1337;
 app.listen(port);

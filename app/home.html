@@ -124,7 +124,7 @@
       <li ng-repeat="session in sessions">
         <a href="/session/{{session._id}}">
           <img src="/app/img/instrument.jpg">
-          <strong>{{session.date}}: {{session.length}} minutes</strong><br>
+          <strong>{{session.date}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
           {{session.goalId && getGoalName(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
           <span class="chevron"></span>
         </a>
@@ -232,5 +232,27 @@
         </li>
       </ul>
   </script>
+
+  <script id="instrument.html" type="text/ng-template">
+    <div class="content-padded">
+      <div class="input-group">
+        <div class="input-row">
+          <label>Name</label>
+          <input type="text" ng-model="instrument.name" ng-disabled="!editMode" />
+        </div>
+        <div class="input-row">
+          <label>Type</label>
+          <input type="text" ng-model="instrument.type" ng-disabled="!editMode" />
+        </div>
+        <div class="input-row">
+          <label>Description</label>
+          <textarea ng-disabled="!editMode" ng-model="instrument.description"></textarea>
+        </div>
+      </div>
+      <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
+      <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
+    </div>
+  </script>
+
   </body>
 </html>

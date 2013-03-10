@@ -55,6 +55,15 @@ function AppCtrl($scope, $http) {
 		}
 	};
 
+	$scope.removeInstrument = function(instrumentId) {
+		for (i = 0; i < $scope.instruments.length; i++) {
+			if ($scope.instruments[i]._id == instrumentId)
+			{
+				$scope.instruments.splice(i, 1);
+			}
+		}		
+	}
+
 	$scope.getGoalName = function(goalId) {
 		for (index in $scope.goals)
 		{
@@ -62,6 +71,14 @@ function AppCtrl($scope, $http) {
 				return $scope.goals[index].title;
 		}
 	};
+
+	$scope.getInstrument = function (instrumentId) {
+		for (i = 0; $scope.instruments && i < $scope.instruments.length; i++) {
+			if ($scope.instruments[i]._id == instrumentId) {
+				return $scope.instruments[i];
+			}
+		}
+	}
 }
 
 function HomeCtrl($scope, $http) {
@@ -87,6 +104,13 @@ function SessionsCtrl($scope, $http, $location) {
 	$scope.pageSettings.rightButtonClick = function() {
 		$location.path('/session/');
 	};
+
+	$scope.getInstrumentName = function(instrumentId) {
+		var instrument = $scope.getInstrument(instrumentId);
+		console.log(instrument);
+		if (instrument)
+			return instrument.name;
+	}
 }
 
 function SessionCtrl($scope, $routeParams, $http, $location) {
@@ -184,20 +208,16 @@ function GoalCtrl($scope, $routeParams, $http) {
 	$scope.editMode = false;
 
 	// If id is provided, get session, from memory or DB.
-	if ($routeParams.id != null && $routeParams.id != "")
-	{
+	if ($routeParams.id != null && $routeParams.id != "") {
 		// First, try to find session in the loaded array
-		for (index in $scope.goals)
-		{
-			if ($scope.goals[index]._id == $routeParams.id)
-			{
+		for (index in $scope.goals) {
+			if ($scope.goals[index]._id == $routeParams.id) {
 				$scope.goal = $scope.goals[index];
 				break;
 			}
 		}
 
-		if ($scope.goal == null)
-		{
+		if ($scope.goal == null) {
 			// Not loaded into memory, get from DB.
 			$http.get('/api/goal/' + $routeParams.id)
 				.success(function(data) {
@@ -208,8 +228,7 @@ function GoalCtrl($scope, $routeParams, $http) {
 				});
 		}
 	}
-	else
-	{
+	else {
 		$scope.goal = { date: new Date() };
 		$scope.editMode = true;
 	}
@@ -247,4 +266,87 @@ function ProfileCtrl($scope, $http, $location)
 {
 	$scope.pageSettings.pageTitle = "Profile";
 	$scope.pageSettings.active = "profile";
+	$scope.pageSettings.showBackButton = true;
+	$scope.pageSettings.rightButtonText = "New";
+	$scope.pageSettings.rightButtonClick = function() {
+		$location.path('/instrument/');
+	};
+
 };
+
+function InstrumentCtrl($scope, $http, $location, $routeParams)
+{
+	$scope.pageSettings.pageTitle = "Instrument";
+	$scope.pageSettings.active = "profile";
+	$scope.pageSettings.showBackButton = true;
+	$scope.pageSettings.rightButtonText = "Edit";
+	$scope.editMode = false;
+
+	// If id is provided, get session, from memory or DB.
+	if ($routeParams.id != null && $routeParams.id != "")
+	{
+		// First, try to find session in the loaded array
+		for (index in $scope.instruments)
+		{
+			if ($scope.instruments[index]._id == $routeParams.id)
+			{
+				$scope.instrument = $scope.instruments[index];
+				break;
+			}
+		}
+
+		if ($scope.instrument == null)
+		{
+			// Not loaded into memory, get from DB.
+			$http.get('/api/instrument/' + $routeParams.id)
+				.success(function(data) {
+					$scope.goal = data;
+				})
+				.error(function(data) {
+					alert("Error getting instrument: " + data);
+				});
+		}
+	}
+	else
+	{
+		$scope.instrument = {};
+		$scope.editMode = true;
+	}
+
+	$scope.pageSettings.rightButtonClick = function() {
+		$scope.editMode = !$scope.editMode;
+		$scope.pageSettings.showBackButton = !$scope.pageSettings.showBackButton;
+		if ($scope.pageSettings.rightButtonText == "Edit")
+			$scope.pageSettings.rightButtonText = "Cancel";
+		else
+			$scope.pageSettings.rightButtonText = "Edit";
+	};
+
+	$scope.save = function() {
+		$http.post('/api/instruments', $scope.instrument)
+			.success(function(data) {
+				$scope.editMode = false;
+				$scope.pageSettings.showBackButton = true;
+				// 1 means updated, otherwise replace to get proper db id.
+				if (data != 1)
+				{
+					$scope.goal = data;					
+					$scope.goals.push(data);
+				}
+				$scope.rightButtonText = "Edit";
+				//$scope.sortSessions();
+			})
+			.error(function(data) { alert("Error saving instrument: " + data)});
+	}
+
+	$scope.delete = function() {
+		$http.delete('/api/instrument/' + $scope.instrument._id)
+			.success(function(data){
+				$scope.removeInstrument($scope.instrument._id);
+				$location.path("/profile/");
+			})
+			.error(function(data){
+				alert("Couldn't delete the instrument.");
+			});
+	}
+}
