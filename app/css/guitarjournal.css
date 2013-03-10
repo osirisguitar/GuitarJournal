@@ -92,3 +92,7 @@
 .list.inset, .content-padded {
   clear:left;
 }
+
+.completed {
+  color:#bbbbbb;
+}

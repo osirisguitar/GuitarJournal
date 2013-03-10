@@ -137,9 +137,8 @@ app.get("/api/goals", function(req, res) {
 		if(err) { return console.dir(err); }
 
 		var collection = db.collection('Goals');
-		collection.find({ "userId": loggedInUser }).toArray(function(err, items) {
-			if (err)
-			{
+		collection.find({ "userId": loggedInUser }).sort({ completionDate: 1, title: 1 }).toArray(function(err, items) {
+			if (err) {
 				console.log(err);
 				return (err);
 			}

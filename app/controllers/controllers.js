@@ -10,13 +10,16 @@ function AppCtrl($scope, $http) {
 			alert("Error when getting sessions.")
 		});
 
-	$http.get('/api/goals')
-		.success(function(data) {
-			$scope.goals = data;
-		})
-		.error(function(data) {
-			alert("Error when getting goals.")
-		});
+	$scope.readGoals = function() {
+		$http.get('/api/goals')
+			.success(function(data) {
+				$scope.goals = data;
+			})
+			.error(function(data) {
+				alert("Error when getting goals.")
+			});		
+	}
+	$scope.readGoals();
 
 	$http.get('/api/profile')
 		.success(function(data) {
@@ -242,6 +245,10 @@ function GoalCtrl($scope, $routeParams, $http) {
 			$scope.pageSettings.rightButtonText = "Edit";
 	};
 
+	$scope.getDate = function() {
+		return new Date();
+	}
+
 	$scope.save = function()
 	{
 		$http.post('/api/goals', $scope.goal)
@@ -251,8 +258,8 @@ function GoalCtrl($scope, $routeParams, $http) {
 				// 1 means updated, otherwise replace to get proper db id.
 				if (data != 1)
 				{
-					$scope.goal = data;					
-					$scope.goals.push(data);
+					$scope.goal = data;
+					$scope.readGoals();
 				}
 				$scope.rightButtonText = "Edit";
 				//$scope.sortSessions();
@@ -266,7 +273,7 @@ function ProfileCtrl($scope, $http, $location)
 {
 	$scope.pageSettings.pageTitle = "Profile";
 	$scope.pageSettings.active = "profile";
-	$scope.pageSettings.showBackButton = true;
+	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = "New";
 	$scope.pageSettings.rightButtonClick = function() {
 		$location.path('/instrument/');
