@@ -1,6 +1,6 @@
 function AppCtrl($scope, $http) {
 	$scope.pageSettings = {};
-	$scope.loggedInUser = ''
+	$scope.loggedInUser = '';
 	$http.get('/api/sessions')
 		.success(function(data) {
 			$scope.sessions = data;
@@ -8,6 +8,19 @@ function AppCtrl($scope, $http) {
 		})
 		.error(function(data) {
 			alert("Error when getting sessions.")
+		});
+
+	$http.get('/api/statistics/overview')
+		.success(function(data) {
+			$scope.statsOverview = data;
+			var firstSession = new Date($scope.statsOverview.firstSession);
+			var lastSession = new Date($scope.statsOverview.latestSession);
+			var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+			var weeks = days/7;
+			$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
+		})
+		.error(function(data) {
+			alert("Error when getting statistics overview.");
 		});
 
 	$scope.readGoals = function() {
@@ -67,6 +80,15 @@ function AppCtrl($scope, $http) {
 		}		
 	}
 
+	$scope.removeGoal = function(goalId) {
+		for (i = 0; i < $scope.goals.length; i++) {
+			if ($scope.goals[i]._id == goalId)
+			{
+				$scope.goals.splice(i, 1);
+			}
+		}		
+	}
+
 	$scope.getGoalName = function(goalId) {
 		for (index in $scope.goals)
 		{
@@ -89,14 +111,6 @@ function HomeCtrl($scope, $http) {
 	$scope.pageSettings.active = "home";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
-
-	$http.get('/api/sessions/statistics')
-		.success(function(data) {
-			$scope.sessionStats = data;
-		})
-		.error(function(data) {
-			alert("Error when getting statistics overview.");
-		});
 }
 
 function SessionsCtrl($scope, $http, $location) {
@@ -110,7 +124,6 @@ function SessionsCtrl($scope, $http, $location) {
 
 	$scope.getInstrumentName = function(instrumentId) {
 		var instrument = $scope.getInstrument(instrumentId);
-		console.log(instrument);
 		if (instrument)
 			return instrument.name;
 	}
@@ -203,7 +216,7 @@ function GoalsCtrl($scope, $http, $location) {
 	};
 }
 
-function GoalCtrl($scope, $routeParams, $http) {
+function GoalCtrl($scope, $routeParams, $http, $location) {
 	$scope.pageSettings.pageTitle = "Goal";
 	$scope.pageSettings.active = "goals";
 	$scope.pageSettings.showBackButton = true;
@@ -267,6 +280,16 @@ function GoalCtrl($scope, $routeParams, $http) {
 			.error(function(data) { alert("Error saving goal: " + data)});
 	}
 
+	$scope.delete = function() {
+		$http.delete('/api/goal/' + $scope.goal._id)
+			.success(function(data){
+				$scope.removeGoal($scope.goal._id);
+				$location.path("/goals/");
+			})
+			.error(function(data){
+				alert("Couldn't delete the goal.");
+			});
+	};
 };
 
 function ProfileCtrl($scope, $http, $location)

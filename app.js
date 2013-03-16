@@ -48,8 +48,7 @@ app.get("/api/sessions", function(req, res) {
 	});
 });
 
-app.get("/api/sessions/statistics", function(req, res) {
-
+app.get("/api/statistics/overview", function(req, res) {
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
@@ -67,13 +66,33 @@ app.get("/api/sessions/statistics", function(req, res) {
    					_id: "$userId",
    					averageLength: { $avg: "$length" },
    					totalLength: { $sum: "$length" },
-   					averageRating: { $avg: "$rating" }
+   					averageRating: { $avg: "$rating" },
+   					firstSession: { $min: "$date" },
+   					latestSession: { $max: "$date" }
    				}
    			}, function(err, agg) { 
    				results.averageLength = Math.round(agg[0].averageLength);
    				results.totalLength = agg[0].totalLength;
    				results.averageRating = Math.round(agg[0].averageRating*100)/100;
-   				res.json(results);
+   				results.firstSession = agg[0].firstSession;
+   				results.latestSession = agg[0].latestSession;
+	   			sessions.aggregate(
+	   			{
+	   				$match: {
+	   					userId: loggedInUser
+	   				},
+	   				$group: {
+	   					_id: '$instrumentId', 
+	   					numUses: { $sum: 1 }
+	   				}
+	   			},
+ 				{
+   					$sort: { numUses: -1 }
+   				}
+	   			, function (err, agg) {
+	   				results.mostUsedInstrument = agg[0]._id;
+	   				res.json(results);
+	   			});
    			});
 		});
 	});
@@ -139,7 +158,6 @@ app.get("/api/goals", function(req, res) {
 		var collection = db.collection('Goals');
 		collection.find({ "userId": loggedInUser }).sort({ completionDate: 1, title: 1 }).toArray(function(err, items) {
 			if (err) {
-				console.log(err);
 				return (err);
 			}
 			res.json(items);
@@ -148,15 +166,13 @@ app.get("/api/goals", function(req, res) {
 });
 
 app.post("/api/goals", function(req, res) {
-	if (req.body._id)
-	{
+	if (req.body._id) {
 		req.body._id = ObjectID(req.body._id);
 	}
 	if (req.body.userId) {
 		req.body.userId = ObjectID(req.body.userId);
 	}
-	else
-	{
+	else {
 		req.body.userId = loggedInUser;
 	}
 	MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -165,6 +181,19 @@ app.post("/api/goals", function(req, res) {
 		var collection = db.collection('Goals');
 		collection.save(req.body, {safe:true}, function(err, savedSession) {
 			res.json(savedSession);
+		});
+	});
+});
+
+app.delete("/api/goal/:id", function(req, res) {
+	// Connect to the db
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var goals = db.collection('Goals');
+		goals.remove({ _id: ObjectID(req.params.id) }, 1, function(err, item) {
+			console.log("Removed goal");
+				res.json(item);
 		});
 	});
 });
