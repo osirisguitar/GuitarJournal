@@ -1,3 +1,15 @@
+.content {
+  background-color: #dddddd;
+}
+
+.content-padded {
+  border:1px solid rgba(0,0,0,0.2);
+  border-radius: 6px;
+  margin:10px;
+  overflow:auto;
+}
+
+
 .bar-title {
   background-color: #555555;
   background-image: -webkit-linear-gradient(top, #555555 0, #000000 100%);
@@ -91,6 +103,7 @@
 
 .list.inset, .content-padded {
   clear:left;
+  background-color: #fff;
 }
 
 .completed {

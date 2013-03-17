@@ -292,6 +292,13 @@ function GoalCtrl($scope, $routeParams, $http, $location) {
 	};
 };
 
+function StatsCtrl($scope, $http) {
+	$scope.pageSettings.pageTitle = "OSIRIS GUITAR Journal";
+	$scope.pageSettings.active = "stats";
+	$scope.pageSettings.showBackButton = false;
+	$scope.pageSettings.rightButtonText = null;
+}
+
 function ProfileCtrl($scope, $http, $location)
 {
 	$scope.pageSettings.pageTitle = "Profile";

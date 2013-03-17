@@ -214,6 +214,39 @@
     </div>
   </script>
 
+  <script id="stats.html" type="text/ng-template">
+    <div class="content-padded">
+      <h2>Sessions</h2>
+      <div class="label">Total sessions:</div>
+      <div class="info">{{statsOverview.totalSessions}}</div>
+      <div class="label">Total time:</div>
+      <div class="info">{{statsOverview.totalLength}} minutes</div>
+      <div class="label">Average time:</div>
+      <div class="info">{{statsOverview.averageLength}} minutes</div>
+      <div class="label">Average rating:</div>
+      <div class="info">{{statsOverview.averageRating}}</div>
+      <div class="label">Sessions per week:</div>
+      <div class="info">{{statsOverview.sessionsPerWeek}}</div>      
+      <div class="label">Latest session:</div>
+      <div class="info">{{statsOverview.latestSession}}</div> 
+    </div>
+    <div class="content-padded">
+      <h2>Goals</h2>
+      <div class="label">Active goals:</div>
+      <div class="info">{{statsOverview.activeGoals}}</div>
+      <div class="label">Completed goals:</div>
+      <div class="info">{{statsOverview.completedGoals}}</div>
+    </div>
+    <div class="content-padded">
+      <h2>Instruments</h2>
+      <div class="label">Intruments:</div>
+      <div class="info">{{statsOverview.numInstruments}}</div>
+      <div class="label">Most popular:</div>
+      <div class="info">{{getInstrument(statsOverview.mostUsedInstrument).name}}</div>
+    </div>
+  </script>
+
+
   <script id="profile.html" type="text/ng-template">
     <div class="content-padded">
       <h2>Profile</h2>
