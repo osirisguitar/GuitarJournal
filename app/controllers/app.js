@@ -25,6 +25,10 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', []).
         templateUrl: 'goal.html', 
         controller: "GoalCtrl"
       }).
+      when('/stats', {
+        templateUrl: 'stats.html', 
+        controller: "StatsCtrl"
+      }).
       when('/profile', {
         templateUrl: 'profile.html', 
         controller: "ProfileCtrl"

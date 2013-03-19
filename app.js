@@ -21,6 +21,9 @@ app.get("/goal*", function(req, res) {
 app.get("/profile*", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });
+app.get("/stats*", function(req, res) {
+	res.sendfile(__dirname + "/app/home.html");
+});
 app.get("/instrument*", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });

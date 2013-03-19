@@ -6,9 +6,15 @@
   border:1px solid rgba(0,0,0,0.2);
   border-radius: 6px;
   margin:10px;
+  margin-top:5px;
   overflow:auto;
 }
 
+h2.padded {
+  margin-top: 15px;
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
 
 .bar-title {
   background-color: #555555;
@@ -102,7 +108,7 @@
 }
 
 .list.inset, .content-padded {
-  clear:left;
+  //clear:left;
   background-color: #fff;
 }
 
