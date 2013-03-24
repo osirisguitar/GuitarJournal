@@ -1,14 +1,15 @@
-function AppCtrl($scope, $http) {
+function AppCtrl($scope, $http, Sessions) {
 	$scope.pageSettings = {};
 	$scope.loggedInUser = '';
-	$http.get('/api/sessions')
-		.success(function(data) {
-			$scope.sessions = data;
-			$scope.sortSessions();
-		})
-		.error(function(data) {
-			alert("Error when getting sessions.")
-		});
+
+	$scope.localsessions = Sessions.sessions;
+	$scope.$watch('localsessions', function() {
+		console.log('scope sessions', $scope.localsessions);
+	}, true);
+	$scope.$watch(Sessions.sessions, function () {
+		console.log('service sessions', Sessions.sessions);
+	});
+
 
 	$http.get('/api/statistics/overview')
 		.success(function(data) {
@@ -49,18 +50,6 @@ function AppCtrl($scope, $http) {
 		.error(function(data) {
 			alert("Error when getting instruments.");
 		});
-
-	$scope.sortSessions = function()
-	{
-		// Sort sessions in reverse chronological order.
-		$scope.sessions.sort(function(s1, s2) {
-			if (s1.date < s2.date)
-				return 1;
-			else if (s1.date > s2.date)
-				return -1;
-			else return 0;
-		});
-	};
 
 	$scope.removeSession = function(sessionId) {
 		for (i = 0; i < $scope.sessions.length; i++) {
@@ -113,7 +102,8 @@ function HomeCtrl($scope, $http) {
 	$scope.pageSettings.rightButtonText = null;
 }
 
-function SessionsCtrl($scope, $http, $location) {
+function SessionsCtrl($scope, $http, $location, Sessions) {
+	$scope.Sessions = Sessions;
 	$scope.pageSettings.pageTitle = "Sessions";
 	$scope.pageSettings.active = "sessions";
 	$scope.pageSettings.showBackButton = false;
@@ -129,7 +119,7 @@ function SessionsCtrl($scope, $http, $location) {
 	}
 }
 
-function SessionCtrl($scope, $routeParams, $http, $location) {
+function SessionCtrl($scope, $routeParams, $http, $location, Sessions) {
 	$scope.pageSettings.pageTitle = "Session";
 	$scope.pageSettings.active = "sessions";
 	$scope.pageSettings.showBackButton = true;
@@ -139,27 +129,13 @@ function SessionCtrl($scope, $routeParams, $http, $location) {
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id != null && $routeParams.id != "")
 	{
-		// First, try to find session in the loaded array
-		for (index in $scope.sessions)
-		{
-			if ($scope.sessions[index]._id == $routeParams.id)
-			{
-				$scope.session = $scope.sessions[index];
-				break;
-			}
-		}
-
-		if ($scope.session == null)
-		{
-			// Not loaded into memory, get from DB.
-			$http.get('/api/session/' + $routeParams.id)
-				.success(function(data) {
-					$scope.session = data;
-				})
-				.error(function(data) {
-					alert("Error getting session: " + data);
-				});
-		}
+		Sessions.getSession($routeParams.id, 
+			function(session) {
+				$scope.session = session;
+			},
+			function(error) {
+				alert("Couldn't get session");
+			});
 	}
 	else
 	{
@@ -178,20 +154,16 @@ function SessionCtrl($scope, $routeParams, $http, $location) {
 
 	$scope.save = function()
 	{
-		$http.post('/api/sessions', $scope.session)
-			.success(function(data) {
+		Sessions.saveSession($scope.session, 
+			function() {
 				$scope.editMode = false;
 				$scope.pageSettings.showBackButton = true;
-				// 1 means updated, otherwise replace to get proper db id.
-				if (data != 1)
-				{
-					$scope.session = data;					
-					$scope.sessions.push(data);
-				}
 				$scope.rightButtonText = "Edit";
-				$scope.sortSessions();
-			})
-			.error(function(data) { alert("Error saving session: " + data)});
+			},
+			function() {
+				alert("Error saving session");
+			}
+		);
 	};
 
 	$scope.delete = function() {

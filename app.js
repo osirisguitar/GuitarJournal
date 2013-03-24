@@ -30,6 +30,7 @@ app.get("/instrument*", function(req, res) {
 app.get("/app", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });
+app.use('/componenttest', express.static(__dirname + '/componenttest'));
 app.use('/app', express.static(__dirname + '/app'));
 
 // API stuff
@@ -40,7 +41,7 @@ app.get("/api/sessions", function(req, res) {
 		if(err) { return console.dir(err); }
 
 		var collection = db.collection('Sessions');
-		collection.find({ "userId": loggedInUser }).toArray(function(err, items) {
+		collection.find({ "userId": loggedInUser }).sort({ date: -1 }).toArray(function(err, items) {
 			if (err)
 			{
 				console.log(err);

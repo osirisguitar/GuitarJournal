@@ -1,0 +1,11 @@
+<html ng-app="ComponentTestApp">
+	<head>
+	    <script src="/app/libs/angular/angular.min.js"></script>
+	    <script src="/componenttest/app.js"></script>
+	    <script src="/componenttest/controllers.js"></script>
+	</head>
+	<body ng-controller="PageCtrl">
+		Hej
+		<client-component ng-repeat="client in clients"></client-component>
+	</body>
+</html>
