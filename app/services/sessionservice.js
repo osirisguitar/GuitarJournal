@@ -3,7 +3,6 @@ GuitarJournalApp.factory('Sessions', function($http) {
 	service.sessions = undefined;
 
 	service.getSessions = function() {
-		console.log("getSessions")
 		$http.get('/api/sessions')
 			.success(function(data) {
 				service.sessions = data;
@@ -52,6 +51,20 @@ GuitarJournalApp.factory('Sessions', function($http) {
 				if (failureCallback)
 					failureCallback();
 			});
+	}
+
+	service.deleteSession = function(sessionId, successCallback, failureCallback) {
+		$http.delete('/api/session/' + sessionId)
+			.success(function(data){
+				service.getSessions();
+				if (successCallback)
+					successCallback();
+			})
+			.error(function(error){
+				if (failureCallback)
+					failureCallback();
+			});
+
 	}
 
 	service.getSessions();

@@ -33,6 +33,7 @@
     <script src="/app/libs/angular/angular.min.js"></script>
     <script src="/app/controllers/app.js"></script>
     <script src="/app/services/sessionservice.js"></script>
+    <script src="/app/services/goalservice.js"></script>
     <script src="/app/controllers/controllers.js"></script>
   </head>
   <body ng-controller="AppCtrl">
@@ -126,7 +127,7 @@
         <a href="/session/{{session._id}}">
           <img src="/app/img/instrument.jpg">
           <strong>{{session.date}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
-          {{session.goalId && getGoalName(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
+          {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
           <span class="chevron"></span>
         </a>
       </li>
@@ -177,12 +178,12 @@
       </div>
     </div>
     <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
-    <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
-  </div>
+    <a class="button-negative button-block" ng-click="delete()" ng-show="editMode && session._id">Delete</a>
+  </script>
 
   <script id="goals.html" type="text/ng-template">
     <ul class="list">
-      <li ng-repeat="goal in goals" class="{{goal.completed && 'completed' || ''}}">
+      <li ng-repeat="goal in Goals.goals" class="{{goal.completed && 'completed' || ''}}">
         <a href="/goal/{{goal._id}}">
           <strong>{{goal.title}}</strong><br>
           {{goal.description}}

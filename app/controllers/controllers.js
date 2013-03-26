@@ -2,15 +2,6 @@ function AppCtrl($scope, $http, Sessions) {
 	$scope.pageSettings = {};
 	$scope.loggedInUser = '';
 
-	$scope.localsessions = Sessions.sessions;
-	$scope.$watch('localsessions', function() {
-		console.log('scope sessions', $scope.localsessions);
-	}, true);
-	$scope.$watch(Sessions.sessions, function () {
-		console.log('service sessions', Sessions.sessions);
-	});
-
-
 	$http.get('/api/statistics/overview')
 		.success(function(data) {
 			$scope.statsOverview = data;
@@ -51,29 +42,11 @@ function AppCtrl($scope, $http, Sessions) {
 			alert("Error when getting instruments.");
 		});
 
-	$scope.removeSession = function(sessionId) {
-		for (i = 0; i < $scope.sessions.length; i++) {
-			if ($scope.sessions[i]._id == sessionId)
-			{
-				$scope.sessions.splice(i, 1);
-			}
-		}
-	};
-
 	$scope.removeInstrument = function(instrumentId) {
 		for (i = 0; i < $scope.instruments.length; i++) {
 			if ($scope.instruments[i]._id == instrumentId)
 			{
 				$scope.instruments.splice(i, 1);
-			}
-		}		
-	}
-
-	$scope.removeGoal = function(goalId) {
-		for (i = 0; i < $scope.goals.length; i++) {
-			if ($scope.goals[i]._id == goalId)
-			{
-				$scope.goals.splice(i, 1);
 			}
 		}		
 	}
@@ -102,8 +75,9 @@ function HomeCtrl($scope, $http) {
 	$scope.pageSettings.rightButtonText = null;
 }
 
-function SessionsCtrl($scope, $http, $location, Sessions) {
+function SessionsCtrl($scope, $http, $location, Sessions, Goals) {
 	$scope.Sessions = Sessions;
+	$scope.Goals = Goals;
 	$scope.pageSettings.pageTitle = "Sessions";
 	$scope.pageSettings.active = "sessions";
 	$scope.pageSettings.showBackButton = false;
@@ -156,9 +130,7 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions) {
 	{
 		Sessions.saveSession($scope.session, 
 			function() {
-				$scope.editMode = false;
-				$scope.pageSettings.showBackButton = true;
-				$scope.rightButtonText = "Edit";
+				$location.path("/sessions/");
 			},
 			function() {
 				alert("Error saving session");
@@ -167,18 +139,19 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions) {
 	};
 
 	$scope.delete = function() {
-		$http.delete('/api/session/' + $scope.session._id)
-			.success(function(data){
-				$scope.removeSession($scope.session._id);
+		Sessions.deleteSession($scope.session._id,
+			function() {
 				$location.path("/sessions/");
-			})
-			.error(function(data){
-				alert("Couldn't delete the session.");
-			});
+			},
+			function(error) {
+				alert("Could not delete the session.");
+			}
+		);
 	};
 }
 
-function GoalsCtrl($scope, $http, $location) {
+function GoalsCtrl($scope, $http, $location, Goals) {
+	$scope.Goals = Goals;
 	$scope.pageSettings.pageTitle = "Goals";
 	$scope.pageSettings.active = "goals";
 	$scope.pageSettings.showBackButton = false;
@@ -265,7 +238,7 @@ function GoalCtrl($scope, $routeParams, $http, $location) {
 };
 
 function StatsCtrl($scope, $http) {
-	$scope.pageSettings.pageTitle = "OSIRIS GUITAR Journal";
+	$scope.pageSettings.pageTitle = "Statistics";
 	$scope.pageSettings.active = "stats";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
