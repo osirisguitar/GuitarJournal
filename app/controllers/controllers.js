@@ -15,17 +15,6 @@ function AppCtrl($scope, $http, Sessions) {
 			alert("Error when getting statistics overview.");
 		});
 
-	$scope.readGoals = function() {
-		$http.get('/api/goals')
-			.success(function(data) {
-				$scope.goals = data;
-			})
-			.error(function(data) {
-				alert("Error when getting goals.")
-			});		
-	}
-	$scope.readGoals();
-
 	$http.get('/api/profile')
 		.success(function(data) {
 			$scope.profile = data;
@@ -51,14 +40,6 @@ function AppCtrl($scope, $http, Sessions) {
 		}		
 	}
 
-	$scope.getGoalName = function(goalId) {
-		for (index in $scope.goals)
-		{
-			if ($scope.goals[index]._id == goalId)
-				return $scope.goals[index].title;
-		}
-	};
-
 	$scope.getInstrument = function (instrumentId) {
 		for (i = 0; $scope.instruments && i < $scope.instruments.length; i++) {
 			if ($scope.instruments[i]._id == instrumentId) {
@@ -68,11 +49,13 @@ function AppCtrl($scope, $http, Sessions) {
 	}
 }
 
-function HomeCtrl($scope, $http) {
+function HomeCtrl($scope, $http, Sessions, Goals) {
 	$scope.pageSettings.pageTitle = "OSIRIS GUITAR Journal";
 	$scope.pageSettings.active = "home";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
+	$scope.Sessions = Sessions;
+	$scope.Goals = Goals;
 }
 
 function SessionsCtrl($scope, $http, $location, Sessions, Goals) {

@@ -105,20 +105,30 @@
       <div class="label">Latest session:</div>
       <div class="info">{{statsOverview.latestSession}}</div> 
     </div>
-    <div class="content-padded">
-      <h2>Goals</h2>
-      <div class="label">Active goals:</div>
-      <div class="info">{{statsOverview.activeGoals}}</div>
-      <div class="label">Completed goals:</div>
-      <div class="info">{{statsOverview.completedGoals}}</div>
-    </div>
-    <div class="content-padded">
-      <h2>Instruments</h2>
-      <div class="label">Intruments:</div>
-      <div class="info">{{statsOverview.numInstruments}}</div>
-      <div class="label">Most popular:</div>
-      <div class="info">{{getInstrument(statsOverview.mostUsedInstrument).name}}</div>
-    </div>
+    <h2 class="padded">Sessions</h2>
+    <ul class="list inset">
+      <li ng-repeat="session in Sessions.sessions | take:3">
+        <a href="/session/{{session._id}}">
+          <img src="/app/img/instrument.jpg">
+          <strong>{{session.date}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
+          {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
+          <span class="chevron"></span>
+        </a>
+      </li>
+    </ul>
+    <a class="button-block">New session</a>
+    <h2 class="padded">Instruments</h2>
+    <ul class="list inset">
+      <li ng-repeat="instrument in instruments | take:1">
+        <a href="/instrument/{{instrument._id}}">
+          <img src="/app/img/instrument.jpg">
+          <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
+          {{instrument.description}}
+          <span class="chevron"></span>
+          <span class="count">{{instruments.length}}</span>
+        </a>
+      </li>
+    </ul>
   </script>
 
   <script id="sessions.html" type="text/ng-template">

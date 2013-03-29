@@ -53,4 +53,15 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', []).
           });
       }
     }
+  })
+  .filter('take', function() {
+    return function(input, numItems) {
+      if (!input || !input.length)
+        return input;
+
+      return input.filter(function(elem, index) {
+        return index < numItems;
+      });
+    }
+
   });

@@ -62,37 +62,48 @@ app.get("/api/statistics/overview", function(req, res) {
 		sessions.find({ "userId": loggedInUser }).count(function(error, count) {
    			// Do what you need the count for here.
    			results.totalSessions = count;
-   			sessions.aggregate({
-   				$match: {
-   					userId: loggedInUser
+   			sessions.aggregate([
+   				{
+   					$match: { userId: loggedInUser }
    				},
-   				$group: {
-   					_id: "$userId",
-   					averageLength: { $avg: "$length" },
-   					totalLength: { $sum: "$length" },
-   					averageRating: { $avg: "$rating" },
-   					firstSession: { $min: "$date" },
-   					latestSession: { $max: "$date" }
+	   			{
+   					$group: {
+	   					_id: "$userId",
+	   					averageLength: { $avg: "$length" },
+	   					totalLength: { $sum: "$length" },
+	   					averageRating: { $avg: "$rating" },
+	   					firstSession: { $min: "$date" },
+	   					latestSession: { $max: "$date" }
+   					}
    				}
-   			}, function(err, agg) { 
+   			], function(err, agg) { 
+   				if (err) {
+   					console.log(err);
+   					res.json();
+   					return;
+   				}
    				results.averageLength = Math.round(agg[0].averageLength);
    				results.totalLength = agg[0].totalLength;
    				results.averageRating = Math.round(agg[0].averageRating*100)/100;
    				results.firstSession = agg[0].firstSession;
    				results.latestSession = agg[0].latestSession;
-	   			sessions.aggregate(
+	   			sessions.aggregate([
 	   			{
-	   				$match: {
+	   				$match: 
+	   				{
 	   					userId: loggedInUser
-	   				},
-	   				$group: {
+	   				}
+	   			},
+	   			{
+	   				$group: 
+	   				{
 	   					_id: '$instrumentId', 
 	   					numUses: { $sum: 1 }
 	   				}
 	   			},
  				{
    					$sort: { numUses: -1 }
-   				}
+   				}]
 	   			, function (err, agg) {
 	   				results.mostUsedInstrument = agg[0]._id;
 	   				res.json(results);
