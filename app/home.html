@@ -90,20 +90,8 @@
   </div>
 
   <script id="home.html" type="text/ng-template">
+    <h2 class="padded">{{profile.fullName}}</h2>
     <div class="content-padded">
-      <h2>{{profile.fullName}}</h2>
-      <div class="label">Total sessions:</div>
-      <div class="info">{{statsOverview.totalSessions}}</div>
-      <div class="label">Total time:</div>
-      <div class="info">{{statsOverview.totalLength}} minutes</div>
-      <div class="label">Average time:</div>
-      <div class="info">{{statsOverview.averageLength}} minutes</div>
-      <div class="label">Average rating:</div>
-      <div class="info">{{statsOverview.averageRating}}</div>
-      <div class="label">Sessions per week:</div>
-      <div class="info">{{statsOverview.sessionsPerWeek}}</div>      
-      <div class="label">Latest session:</div>
-      <div class="info">{{statsOverview.latestSession}}</div> 
     </div>
     <h2 class="padded">Sessions</h2>
     <ul class="list inset">
@@ -116,7 +104,7 @@
         </a>
       </li>
     </ul>
-    <a class="button-block">New session</a>
+    <a class="button-block inset">New session</a>
     <h2 class="padded">Instruments</h2>
     <ul class="list inset">
       <li ng-repeat="instrument in instruments | take:1">
@@ -142,6 +130,7 @@
         </a>
       </li>
     </ul>
+    <a class="button-block" ng-click="Sessions.getSessions(true)" >Load more</a>
   </script>
 
   <script id="session.html" type="text/ng-template">

@@ -115,3 +115,8 @@ h2.padded {
 .completed {
   color:#bbbbbb;
 }
+
+.button-block.inset {
+  margin-left:10px;
+  margin-right:10px;
+}

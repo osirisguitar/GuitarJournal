@@ -34,14 +34,17 @@ app.use('/componenttest', express.static(__dirname + '/componenttest'));
 app.use('/app', express.static(__dirname + '/app'));
 
 // API stuff
-app.get("/api/sessions", function(req, res) {
+app.get("/api/sessions/:skip?", function(req, res) {
+	var skip = req.params.skip ? parseInt(req.params.skip) : 0;
+
+	console.log(skip);
 
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
 		var collection = db.collection('Sessions');
-		collection.find({ "userId": loggedInUser }).sort({ date: -1 }).toArray(function(err, items) {
+		collection.find({ "userId": loggedInUser }).sort({ date: -1 }).skip(skip).limit(3).toArray(function(err, items) {
 			if (err)
 			{
 				console.log(err);

@@ -2,10 +2,20 @@ GuitarJournalApp.factory('Sessions', function($http) {
 	var service = {};
 	service.sessions = undefined;
 
-	service.getSessions = function() {
-		$http.get('/api/sessions')
+	service.getSessions = function(loadMore) {
+		var url = '/api/sessions';
+		if (!loadMore) {
+			service.sessions = [];
+		}
+		else {
+			url += '/' + service.sessions.length;
+		}
+
+		$http.get(url)
 			.success(function(data) {
-				service.sessions = data;
+				console.log("success, contatenating", service.sessions, data);
+				service.sessions = service.sessions.concat(data);
+				console.log("result", service.sessions);
 			})
 			.error(function(data) {
 				alert("Error when getting sessions.");
