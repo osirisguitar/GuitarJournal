@@ -150,3 +150,13 @@ h2.padded {
   font-size:24px;
   font-weight:bold;
 }
+
+.trend-down:before {
+  content:'\25bc';
+  color:red;
+}
+
+.trend-up:before {
+  content:'\25b2';
+  color:green;
+}

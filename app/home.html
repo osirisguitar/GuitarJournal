@@ -98,8 +98,7 @@
           Blabla lorem ipsum dolor sit amet. Blabla lorem ipsum dolor sit amet. 
         </div>
         <div>
-          <span class="large">{{getLastMonday()}} sessions</span>
-          this week
+          <span class="large" ng-class="{'trend-up':sessionsThisWeek() > statsOverview.sessionsPerWeek,'trend-down': sessionsThisWeek() < statsOverview.sessionsPerWeek}">{{sessionsThisWeek()}}</span> sessions this week
         </div>
       </div>
       <div class="overview-row">
