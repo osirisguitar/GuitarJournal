@@ -98,7 +98,7 @@
           Blabla lorem ipsum dolor sit amet. Blabla lorem ipsum dolor sit amet. 
         </div>
         <div>
-          <span class="large" ng-class="{'trend-up':sessionsThisWeek() > statsOverview.sessionsPerWeek,'trend-down': sessionsThisWeek() < statsOverview.sessionsPerWeek}">{{sessionsThisWeek()}}</span> sessions this week
+          <span class="large" ng-class="{'trend-up':sessionsThisWeek() > statsOverview.sessionsPerWeek,'trend-down': sessionsThisWeek() < statsOverview.sessionsPerWeek}">{{sessionsThisWeek()}}</span><br>sessions this week
         </div>
       </div>
       <div class="overview-row">
@@ -148,7 +148,16 @@
   </script>
 
   <script id="session.html" type="text/ng-template">
-    <div class="input-group">
+    <div class="content-padded" ng-show="!editMode">
+      <div class="label">Date:</div><div class="info">{{session.date}}</div>
+      <div class="label">Length:</div><div class="info">{{session.length}}</div>
+      <div class="label">Goal:</div><div class="info">TBD</div>
+      <div class="label">Goal contribution:</div><div class="info">{{session.goalContribution}}</div>
+      <div class="label">Instrument:</div><div class="info">TBD</div>
+      <div class="label">Other gear:</div><div class="info">{{session.gear}}</div>
+      <div class="label">Rating:</div><div class="info">{{session.rating}}</div>
+    </div>
+    <div class="input-group" ng-show="editMode">
       <div class="input-row">
         <label>Date</label>
         <input type="date" ng-model="session.date" ng-disabled="!editMode" />
