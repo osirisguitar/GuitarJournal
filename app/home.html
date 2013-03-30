@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="/app/css/ratchet.css">
     <link rel="stylesheet" href="/app/css/guitarjournal.css">
     <script src="/app/libs/angular/angular.min.js"></script>
+    <script src="/app/libs/moment.min.js"></script>
     <script src="/app/controllers/app.js"></script>
     <script src="/app/services/sessionservice.js"></script>
     <script src="/app/services/goalservice.js"></script>
@@ -91,9 +92,26 @@
 
   <script id="home.html" type="text/ng-template">
     <h2 class="padded">{{profile.fullName}}</h2>
-    <div class="content-padded">
+    <div class="content-padded overview">
+      <div class="overview-row">
+        <div>
+          Blabla lorem ipsum dolor sit amet. Blabla lorem ipsum dolor sit amet. 
+        </div>
+        <div>
+          <span class="large">{{getLastMonday()}} sessions</span>
+          this week
+        </div>
+      </div>
+      <div class="overview-row">
+        <div>
+          Blabla
+        </div>
+        <div>
+          Hejhej
+        </div>
+      </div>
     </div>
-    <h2 class="padded">Sessions</h2>
+    <h2 class="padded">Latest sessions</h2>
     <ul class="list inset">
       <li ng-repeat="session in Sessions.sessions | take:3">
         <a href="/session/{{session._id}}">
@@ -107,13 +125,10 @@
     <a class="button-block inset">New session</a>
     <h2 class="padded">Instruments</h2>
     <ul class="list inset">
-      <li ng-repeat="instrument in instruments | take:1">
-        <a href="/instrument/{{instrument._id}}">
-          <img src="/app/img/instrument.jpg">
-          <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
-          {{instrument.description}}
+      <li>
+        <a href="/profile">
+          <img src="/app/img/instrument.jpg" ng-repeat="instrument in instruments | take:5">
           <span class="chevron"></span>
-          <span class="count">{{instruments.length}}</span>
         </a>
       </li>
     </ul>
@@ -130,7 +145,7 @@
         </a>
       </li>
     </ul>
-    <a class="button-block" ng-click="Sessions.getSessions(true)" >Load more</a>
+    <a class="button-block" ng-click="Sessions.getSessions(true)">Load more</a>
   </script>
 
   <script id="session.html" type="text/ng-template">

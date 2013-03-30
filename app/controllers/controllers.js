@@ -56,6 +56,12 @@ function HomeCtrl($scope, $http, Sessions, Goals) {
 	$scope.pageSettings.rightButtonText = null;
 	$scope.Sessions = Sessions;
 	$scope.Goals = Goals;
+
+	$scope.getLastMonday = function() {
+		var currentWeekday = new Date().getDay();
+		console.log(moment().subtract('days', currentWeekday - 1).format("YYYY-MM-DD"));
+		return 2;
+	}
 }
 
 function SessionsCtrl($scope, $http, $location, Sessions, Goals) {

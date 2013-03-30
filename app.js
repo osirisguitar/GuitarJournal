@@ -44,7 +44,7 @@ app.get("/api/sessions/:skip?", function(req, res) {
 		if(err) { return console.dir(err); }
 
 		var collection = db.collection('Sessions');
-		collection.find({ "userId": loggedInUser }).sort({ date: -1 }).skip(skip).limit(3).toArray(function(err, items) {
+		collection.find({ "userId": loggedInUser }).sort({ date: -1 }).skip(skip).limit(10).toArray(function(err, items) {
 			if (err)
 			{
 				console.log(err);
