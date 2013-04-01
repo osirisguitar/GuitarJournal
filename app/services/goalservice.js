@@ -45,6 +45,7 @@ GuitarJournalApp.factory('Goals', function($http) {
 			service.goals.some(function (goal) {
 				if (goal._id == goalId) {
 					title = goal.title;
+					return true;
 				}
 			});
 

@@ -22,51 +22,27 @@ function AppCtrl($scope, $http, Sessions) {
 		.error(function(data){
 			alert("Error when getting profile.")
 		});
-
-	$http.get('/api/instruments')
-		.success(function(data) {
-			$scope.instruments = data;
-		})
-		.error(function(data) {
-			alert("Error when getting instruments.");
-		});
-
-	$scope.removeInstrument = function(instrumentId) {
-		for (i = 0; i < $scope.instruments.length; i++) {
-			if ($scope.instruments[i]._id == instrumentId)
-			{
-				$scope.instruments.splice(i, 1);
-			}
-		}		
-	}
-
-	$scope.getInstrument = function (instrumentId) {
-		for (i = 0; $scope.instruments && i < $scope.instruments.length; i++) {
-			if ($scope.instruments[i]._id == instrumentId) {
-				return $scope.instruments[i];
-			}
-		}
-	}
 }
 
-function HomeCtrl($scope, $http, Sessions, Goals) {
+function HomeCtrl($scope, $http, Sessions, Goals, Instruments) {
 	$scope.pageSettings.pageTitle = "OSIRIS GUITAR Journal";
 	$scope.pageSettings.active = "home";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
 	$scope.Sessions = Sessions;
 	$scope.Goals = Goals;
+	$scope.Instruments = Instruments;
 
 	$scope.sessionsThisWeek = function() {
 		var currentWeekday = new Date().getDay();
-		console.log(moment().subtract('days', currentWeekday - 1).format("YYYY-MM-DD"));
-		return 5;
+		return 2;
 	}
 }
 
-function SessionsCtrl($scope, $http, $location, Sessions, Goals) {
+function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments) {
 	$scope.Sessions = Sessions;
 	$scope.Goals = Goals;
+	$scope.Instruments = Instruments;
 	$scope.pageSettings.pageTitle = "Sessions";
 	$scope.pageSettings.active = "sessions";
 	$scope.pageSettings.showBackButton = false;
@@ -74,15 +50,11 @@ function SessionsCtrl($scope, $http, $location, Sessions, Goals) {
 	$scope.pageSettings.rightButtonClick = function() {
 		$location.path('/session/');
 	};
-
-	$scope.getInstrumentName = function(instrumentId) {
-		var instrument = $scope.getInstrument(instrumentId);
-		if (instrument)
-			return instrument.name;
-	}
 }
 
-function SessionCtrl($scope, $routeParams, $http, $location, Sessions) {
+function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, Instruments) {
+	$scope.Goals = Goals;
+	$scope.Instruments = Instruments;
 	$scope.pageSettings.pageTitle = "Session";
 	$scope.pageSettings.active = "sessions";
 	$scope.pageSettings.showBackButton = true;
@@ -150,33 +122,19 @@ function GoalsCtrl($scope, $http, $location, Goals) {
 	};
 }
 
-function GoalCtrl($scope, $routeParams, $http, $location) {
+function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 	$scope.pageSettings.pageTitle = "Goal";
 	$scope.pageSettings.active = "goals";
 	$scope.pageSettings.showBackButton = true;
 	$scope.pageSettings.rightButtonText = "Edit";
 	$scope.editMode = false;
+	$scope.Goals = Goals;
 
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id != null && $routeParams.id != "") {
-		// First, try to find session in the loaded array
-		for (index in $scope.goals) {
-			if ($scope.goals[index]._id == $routeParams.id) {
-				$scope.goal = $scope.goals[index];
-				break;
-			}
-		}
-
-		if ($scope.goal == null) {
-			// Not loaded into memory, get from DB.
-			$http.get('/api/goal/' + $routeParams.id)
-				.success(function(data) {
-					$scope.goal = data;
-				})
-				.error(function(data) {
-					alert("Error getting goal: " + data);
-				});
-		}
+		Goals.getGoal($routeParams.id, function(goal) {
+			$scope.goal = goal;
+		}, function() { alert("Couldn't get goal");});
 	}
 	else {
 		$scope.goal = { date: new Date() };
@@ -198,30 +156,22 @@ function GoalCtrl($scope, $routeParams, $http, $location) {
 
 	$scope.save = function()
 	{
-		$http.post('/api/goals', $scope.goal)
-			.success(function(data) {
-				$scope.editMode = false;
-				$scope.pageSettings.showBackButton = true;
-				// 1 means updated, otherwise replace to get proper db id.
-				if (data != 1)
-				{
-					$scope.goal = data;
-					$scope.readGoals();
-				}
-				$scope.rightButtonText = "Edit";
-				//$scope.sortSessions();
-			})
-			.error(function(data) { alert("Error saving goal: " + data)});
+		Goals.saveGoal($scope.goal, 
+			function() {
+				$location.path('/goals/');
+			}, 
+			function() {
+				alert("Error saving goal");
+			});
 	}
 
 	$scope.delete = function() {
-		$http.delete('/api/goal/' + $scope.goal._id)
-			.success(function(data){
-				$scope.removeGoal($scope.goal._id);
-				$location.path("/goals/");
-			})
-			.error(function(data){
-				alert("Couldn't delete the goal.");
+		Goals.deleteGoal($scope.goal._id,
+			function() {
+				$location.path('/goals/');
+			}, 
+			function() {
+				alert("Couldn't delete goal");
 			});
 	};
 };
@@ -233,8 +183,9 @@ function StatsCtrl($scope, $http) {
 	$scope.pageSettings.rightButtonText = null;
 }
 
-function ProfileCtrl($scope, $http, $location)
+function ProfileCtrl($scope, $http, $location, Instruments)
 {
+	$scope.Instruments = Instruments;
 	$scope.pageSettings.pageTitle = "Profile";
 	$scope.pageSettings.active = "profile";
 	$scope.pageSettings.showBackButton = false;
@@ -245,8 +196,9 @@ function ProfileCtrl($scope, $http, $location)
 
 };
 
-function InstrumentCtrl($scope, $http, $location, $routeParams)
+function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments)
 {
+	$scope.Instruments = Instruments;
 	$scope.pageSettings.pageTitle = "Instrument";
 	$scope.pageSettings.active = "profile";
 	$scope.pageSettings.showBackButton = true;
@@ -256,27 +208,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams)
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id != null && $routeParams.id != "")
 	{
-		// First, try to find session in the loaded array
-		for (index in $scope.instruments)
-		{
-			if ($scope.instruments[index]._id == $routeParams.id)
-			{
-				$scope.instrument = $scope.instruments[index];
-				break;
-			}
-		}
-
-		if ($scope.instrument == null)
-		{
-			// Not loaded into memory, get from DB.
-			$http.get('/api/instrument/' + $routeParams.id)
-				.success(function(data) {
-					$scope.goal = data;
-				})
-				.error(function(data) {
-					alert("Error getting instrument: " + data);
-				});
-		}
+		$scope.instrument = Instruments.getInstrument($routeParams.id);
 	}
 	else
 	{

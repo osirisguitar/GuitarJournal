@@ -35,6 +35,7 @@
     <script src="/app/controllers/app.js"></script>
     <script src="/app/services/sessionservice.js"></script>
     <script src="/app/services/goalservice.js"></script>
+    <script src="/app/services/instrumentservice.js"></script>
     <script src="/app/controllers/controllers.js"></script>
   </head>
   <body ng-controller="AppCtrl">
@@ -126,7 +127,7 @@
     <ul class="list inset">
       <li>
         <a href="/profile">
-          <img src="/app/img/instrument.jpg" ng-repeat="instrument in instruments | take:5">
+          <img src="/app/img/instrument.jpg" ng-repeat="instrument in Instruments.instruments | take:5">
           <span class="chevron"></span>
         </a>
       </li>
@@ -149,13 +150,14 @@
 
   <script id="session.html" type="text/ng-template">
     <div class="content-padded" ng-show="!editMode">
-      <div class="label">Date:</div><div class="info">{{session.date}}</div>
-      <div class="label">Length:</div><div class="info">{{session.length}}</div>
-      <div class="label">Goal:</div><div class="info">TBD</div>
+      <h2>{{session.date}}, {{session.length}} minutes</h2>
+      <div class="label">Goal:</div><div class="info">{{Goals.getGoalTitle(session.goalId)}}</div>
       <div class="label">Goal contribution:</div><div class="info">{{session.goalContribution}}</div>
-      <div class="label">Instrument:</div><div class="info">TBD</div>
+      <div class="label">Instrument:</div><div class="info">{{Instruments.getInstrumentName(session.instrumentId)}}</div>
       <div class="label">Other gear:</div><div class="info">{{session.gear}}</div>
       <div class="label">Rating:</div><div class="info">{{session.rating}}</div>
+      <div class="label">Location:</div><div class="info">{{session.location}}</div>
+      <div class="label">Notes:</div><div class="info">{{session.notes}}</div>
     </div>
     <div class="input-group" ng-show="editMode">
       <div class="input-row">
@@ -216,24 +218,26 @@
   </script>
   
   <script id="goal.html" type="text/ng-template">
-    <div class="content-padded">
-      <div class="input-group">
-        <div class="input-row">
-          <label>Title</label>
-          <input type="text" ng-model="goal.title" ng-disabled="!editMode" />
-        </div>
-        <div class="input-row">
-          <label>Description</label>
-          <textarea ng-disabled="!editMode" ng-model="goal.description"></textarea>
-        </div>
-        <div class="input-row">
-          <label>Complete</label>
-          <input type="checkbox" ng-model="goal.completed" ng-change="goal.completionDate = getDate()" ng-disabled="!editMode" />
-        </div>
-      </div>
-      <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
-      <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
+    <div class="content-padded" ng-show="!editMode">
+      <h2>{{goal.title}} ({{goal.complete && '' || 'not ' }}complete)</h2>
+      {{goal.description}}
     </div>
+    <div class="input-group" ng-show="editMode">
+      <div class="input-row">
+        <label>Title</label>
+        <input type="text" ng-model="goal.title" ng-disabled="!editMode" />
+      </div>
+      <div class="input-row">
+        <label>Description</label>
+        <textarea ng-disabled="!editMode" ng-model="goal.description"></textarea>
+      </div>
+      <div class="input-row">
+        <label>Complete</label>
+        <input type="checkbox" ng-model="goal.completed" ng-change="goal.completionDate = getDate()" ng-disabled="!editMode" />
+      </div>
+    </div>
+    <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
+    <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
   </script>
 
   <script id="stats.html" type="text/ng-template">
@@ -279,7 +283,7 @@
     </div>
     <h2 class="padded">Instruments</h2>
     <ul class="list inset">
-      <li ng-repeat="instrument in instruments">
+      <li ng-repeat="instrument in Instruments.instruments">
         <a href="/instrument/{{instrument._id}}">
           <img src="/app/img/instrument.jpg">
           <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
