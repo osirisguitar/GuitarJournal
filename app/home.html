@@ -96,11 +96,12 @@
     <div class="content-padded overview">
       <div class="overview-row">
         <div>
-          Blabla lorem ipsum dolor sit amet. Blabla lorem ipsum dolor sit amet. 
+          Sessions/week<br>
+          <span class="large" ng-class="{'trend-up':weekStats.totalSessions > statsOverview.sessionsPerWeek,'trend-down': weekStats.totalSessions < statsOverview.sessionsPerWeek}">{{statsOverview.sessionsPerWeek}}</span>
         </div>
         <div>
-          Sessions/week<br>
-          <span class="large" ng-class="{'trend-up':weekStats.totalSessions > statsOverview.sessionsPerWeek,'trend-down': weekStats.totalSessions < statsOverview.sessionsPerWeek}">{{weekStats.totalSessions}}</span>
+          Average length<br>
+          <span class="large" ng-class="{'trend-up':weekStats.averageLength > statsOverview.averageLength,'trend-down': weekStats.averageLength < statsOverview.averageLength}">{{statsOverview.averageLength}} min</span>          
         </div>
       </div>
       <div class="overview-row">
@@ -153,7 +154,7 @@
 
   <script id="session.html" type="text/ng-template">
     <div class="content-padded" ng-show="!editMode">
-      <h2>{{session.date}}, {{session.length}} minutes</h2>
+      <h2>{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
       <div class="label">Goal:</div><div class="info">{{Goals.getGoalTitle(session.goalId)}}</div>
       <div class="label">Goal contribution:</div><div class="info">{{session.goalContribution}}</div>
       <div class="label">Instrument:</div><div class="info">{{Instruments.getInstrumentName(session.instrumentId)}}</div>
