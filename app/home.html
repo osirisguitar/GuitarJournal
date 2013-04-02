@@ -99,15 +99,18 @@
           Blabla lorem ipsum dolor sit amet. Blabla lorem ipsum dolor sit amet. 
         </div>
         <div>
-          <span class="large" ng-class="{'trend-up':sessionsThisWeek() > statsOverview.sessionsPerWeek,'trend-down': sessionsThisWeek() < statsOverview.sessionsPerWeek}">{{sessionsThisWeek()}}</span><br>sessions this week
+          Sessions/week<br>
+          <span class="large" ng-class="{'trend-up':weekStats.totalSessions > statsOverview.sessionsPerWeek,'trend-down': weekStats.totalSessions < statsOverview.sessionsPerWeek}">{{weekStats.totalSessions}}</span>
         </div>
       </div>
       <div class="overview-row">
         <div>
-          Blabla
+          Average rating<br>
+          <span class="large" ng-class="{'trend-up':weekStats.averageRating > statsOverview.averageRating,'trend-down': weekStats.averageRating < statsOverview.averageRating}">{{statsOverview.averageRating}}</span>          
         </div>
         <div>
-          Hejhej
+          Active goals<br>
+          <span class="large">{{Goals.getActiveGoals().length}}</span>
         </div>
       </div>
     </div>
@@ -116,7 +119,7 @@
       <li ng-repeat="session in Sessions.sessions | take:3">
         <a href="/session/{{session._id}}">
           <img src="/app/img/instrument.jpg">
-          <strong>{{session.date}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
+          <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min {{getInstrumentName(session.instrumentId)}}</strong><br>
           {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
           <span class="chevron"></span>
         </a>
@@ -139,7 +142,7 @@
       <li ng-repeat="session in Sessions.sessions">
         <a href="/session/{{session._id}}">
           <img src="/app/img/instrument.jpg">
-          <strong>{{session.date}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
+          <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
           {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
           <span class="chevron"></span>
         </a>

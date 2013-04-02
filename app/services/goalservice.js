@@ -82,6 +82,19 @@ GuitarJournalApp.factory('Goals', function($http) {
 
 	}
 
+	service.getActiveGoals = function() {
+		if (service.goals) {
+			var activeGoals = [];
+			service.goals.forEach(function (goal){
+				if (!goal.completed)
+					activeGoals.push(goal);
+			});
+			return activeGoals;
+		}
+		else 
+			return [];
+	}
+
 	service.getGoals();
 	return service;
 });

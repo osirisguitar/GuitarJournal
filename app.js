@@ -55,19 +55,27 @@ app.get("/api/sessions/:skip?", function(req, res) {
 	});
 });
 
-app.get("/api/statistics/overview", function(req, res) {
+app.get("/api/statistics/overview/:days?", function(req, res) {
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
 		var sessions = db.collection('Sessions');
 		var results = {};
-		sessions.find({ "userId": loggedInUser }).count(function(error, count) {
+		var match = { userId: loggedInUser };
+		if (req.params.days) {
+			var daysAgo = new Date();
+			daysAgo.setDate(daysAgo.getDate() - req.params.days);
+			match.date = { $gte: daysAgo };
+			console.log(match);
+		}
+
+		sessions.find(match).count(function(error, count) {
    			// Do what you need the count for here.
    			results.totalSessions = count;
    			sessions.aggregate([
    				{
-   					$match: { userId: loggedInUser }
+   					$match: match
    				},
 	   			{
    					$group: {
@@ -92,10 +100,7 @@ app.get("/api/statistics/overview", function(req, res) {
    				results.latestSession = agg[0].latestSession;
 	   			sessions.aggregate([
 	   			{
-	   				$match: 
-	   				{
-	   					userId: loggedInUser
-	   				}
+	   				$match: match
 	   			},
 	   			{
 	   				$group: 
@@ -144,18 +149,15 @@ app.post("/api/sessions", function(req, res) {
 	if (req.body._id) {
 		req.body._id = ObjectID(req.body._id);
 	}
-	if (req.body.userId) {
-		req.body.userId = ObjectID(req.body.userId);
-	}
-	else
-	{
-		req.body.userId = loggedInUser;
-	}
+	req.body.userId = loggedInUser;
 	if (req.body.goalId) {
 		req.body.goalId = ObjectID(req.body.goalId);		
 	}
 	if (req.body.instrumentId) {
 		req.body.instrumentId = ObjectID(req.body.instrumentId);
+	}
+	if (req.body.date) {
+		req.body.date = new Date(req.body.date);
 	}
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }

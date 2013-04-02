@@ -15,6 +15,19 @@ function AppCtrl($scope, $http, Sessions) {
 			alert("Error when getting statistics overview.");
 		});
 
+	$http.get('/api/statistics/overview/30')
+		.success(function(data) {
+			$scope.weekStats = data;
+			var firstSession = new Date($scope.weekStats.firstSession);
+			var lastSession = new Date($scope.weekStats.latestSession);
+			var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+			var weeks = days/7;
+			$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
+		})
+		.error(function(data) {
+			alert("Error when getting statistics overview.");
+		});
+
 	$http.get('/api/profile')
 		.success(function(data) {
 			$scope.profile = data;
@@ -208,7 +221,13 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments)
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id != null && $routeParams.id != "")
 	{
-		$scope.instrument = Instruments.getInstrument($routeParams.id);
+		Instruments.getInstrument($routeParams.id,
+			function(instrument) {
+				$scope.instrument = instrument;
+			},
+			function() {
+				alert("Could not load instrument");
+			});
 	}
 	else
 	{
@@ -226,30 +245,22 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments)
 	};
 
 	$scope.save = function() {
-		$http.post('/api/instruments', $scope.instrument)
-			.success(function(data) {
-				$scope.editMode = false;
-				$scope.pageSettings.showBackButton = true;
-				// 1 means updated, otherwise replace to get proper db id.
-				if (data != 1)
-				{
-					$scope.goal = data;					
-					$scope.goals.push(data);
-				}
-				$scope.rightButtonText = "Edit";
-				//$scope.sortSessions();
-			})
-			.error(function(data) { alert("Error saving instrument: " + data)});
+		Instruments.saveInstrument($scope.instrument,
+			function() {
+				$location.path("/profile/");
+			},
+			function() {
+				alert("Could not save instrument");
+			});
 	}
 
 	$scope.delete = function() {
-		$http.delete('/api/instrument/' + $scope.instrument._id)
-			.success(function(data){
-				$scope.removeInstrument($scope.instrument._id);
+		Instruments.deleteInstrument($scope.instrument._id,
+			function() {
 				$location.path("/profile/");
-			})
-			.error(function(data){
-				alert("Couldn't delete the instrument.");
+			},
+			function() {
+				alert("Could not delete instrument");
 			});
 	}
 }
