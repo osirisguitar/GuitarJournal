@@ -3,6 +3,7 @@ var app = express();
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var GridStore = require('mongodb').GridStore;
+var Binary = require('mongodb').Binary;
 var mongoConnectionString = "mongodb://osiris:testmongo123@linus.mongohq.com:10003/app11622295";
 var loggedInUser = ObjectID("512684441ea176ca050002b7");
 var fs = require("fs");
@@ -39,8 +40,6 @@ app.use('/app', express.static(__dirname + '/app'));
 app.get("/api/sessions/:skip?", function(req, res) {
 	var skip = req.params.skip ? parseInt(req.params.skip) : 0;
 
-	console.log(skip);
-
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
@@ -69,7 +68,6 @@ app.get("/api/statistics/overview/:days?", function(req, res) {
 			var daysAgo = new Date();
 			daysAgo.setDate(daysAgo.getDate() - req.params.days);
 			match.date = { $gte: daysAgo };
-			console.log(match);
 		}
 
 		sessions.find(match).count(function(error, count) {
@@ -223,8 +221,7 @@ app.delete("/api/goal/:id", function(req, res) {
 
 		var goals = db.collection('Goals');
 		goals.remove({ _id: ObjectID(req.params.id) }, 1, function(err, item) {
-			console.log("Removed goal");
-				res.json(item);
+			res.json(item);
 		});
 	});
 });
@@ -261,16 +258,12 @@ app.get("/api/instruments", function(req, res) {
 
 app.post("/api/instruments", function(req, res) {
 	if (req.body._id)
-	{
 		req.body._id = ObjectID(req.body._id);
-	}
-	if (req.body.userId) {
+	if (req.body.userId)
 		req.body.userId = ObjectID(req.body.userId);
-	}
 	else
-	{
 		req.body.userId = loggedInUser;
-	}
+
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
@@ -281,27 +274,70 @@ app.post("/api/instruments", function(req, res) {
 	});
 });
 
-app.post("/api/instrument/:id/addimage", function(req, res) {
+app.post("/api/instrument/:id/setimage", function(req, res) {
 	var imagebytes = [];
+	if (req.params.id)
+		req.params.id = ObjectID(req.params.id);
 
-	imageMagick(req.files.imagefile.path)
-		.resize(75, 75)
-		.autoOrient()
-		.stream(function (err, stdout, stderr) {
-			if (err) console.log(err);
+	imageMagick(req.files.imagefile.path).size(function(err, size) {
+		var width = size.width;
+		var height = size.height;
 
-			stdout.on('data', function(data) {
-				console.log(data);
-				imagebytes.push(data);
-			});
+		var targetWidth = 75;
+		var targetHeight = 75;
+		var cropX = 0;
+		var cropY = 0;
 
-			stdout.on('close', function() {
-				console.log("close");
-				var image = Buffer.concat(imagebytes);
-				res.set('Content-Type', 'image/jpeg');
-				res.send(image);
-				return;
-			});
+		if (width > height) {
+			targetWidth = Math.round(width * 75 / height);
+			cropX = Math.round((targetWidth - targetHeight)/2);
+		}
+		else {
+			targetHeight = Math.round(height * 75 / width);
+			cropY = Math.round((targetHeight - targetWidth)/2);			
+		}
+
+		imageMagick(req.files.imagefile.path)
+			.resize(targetWidth, targetHeight)
+			.crop(75, 75, cropX, cropY)
+			.autoOrient()
+			.stream(function (err, stdout, stderr) {
+				if (err) console.log(err);
+
+				stdout.on('data', function(data) {
+					imagebytes.push(data);
+				});
+
+				stdout.on('close', function() {
+					var image = Buffer.concat(imagebytes);
+					var imageData = Binary(image);
+
+					MongoClient.connect(mongoConnectionString, function(err, db) {
+						if(err) { return console.dir(err); }
+
+						db.collection('Instruments').findOne({ "userId": loggedInUser, "_id": req.params.id }, function(err, instrument) {
+							if (err) {
+								console.log(err);
+								return (err);
+							}
+
+							instrument.image = imageData;
+
+							db.collection('Instruments').save(instrument, { safe:true }, function(err, updatedInstrument) {
+								if (err) {
+									console.log(err);
+									res.send(500, "Could not set image for instrument");
+								}
+
+								res.set('Content-Type', 'image/jpeg');
+								res.send(image);
+								return;
+							})
+						});
+					});
+				});
+		});
+
 	});
 });
 
@@ -312,8 +348,7 @@ app.delete("/api/instrument/:id", function(req, res) {
 
 		var instruments = db.collection('Instruments');
 		instruments.remove({ _id: ObjectID(req.params.id) }, 1, function(err, item) {
-			console.log("Removed instrument");
-				res.json(item);
+			res.json(item);
 		});
 	});
 });

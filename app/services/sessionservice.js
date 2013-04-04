@@ -13,9 +13,7 @@ GuitarJournalApp.factory('Sessions', function($http) {
 
 		$http.get(url)
 			.success(function(data) {
-				console.log("success, contatenating", service.sessions, data);
 				service.sessions = service.sessions.concat(data);
-				console.log("result", service.sessions);
 			})
 			.error(function(data) {
 				alert("Error when getting sessions.");

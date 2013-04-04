@@ -119,7 +119,7 @@
     <ul class="list inset">
       <li ng-repeat="session in Sessions.sessions | take:3">
         <a href="/session/{{session._id}}">
-          <img src="/app/img/instrument.jpg">
+          <img src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
           <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min {{getInstrumentName(session.instrumentId)}}</strong><br>
           {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
           <span class="chevron"></span>
@@ -131,7 +131,7 @@
     <ul class="list inset">
       <li>
         <a href="/profile">
-          <img src="/app/img/instrument.jpg" ng-repeat="instrument in Instruments.instruments | take:5">
+          <img src="{{Instruments.getInstrumentImageData(instrument._id)}}" ng-repeat="instrument in Instruments.instruments | take:5">
           <span class="chevron"></span>
         </a>
       </li>
@@ -142,7 +142,7 @@
     <ul class="list">
       <li ng-repeat="session in Sessions.sessions">
         <a href="/session/{{session._id}}">
-          <img src="/app/img/instrument.jpg">
+          <img src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
           <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
           {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
           <span class="chevron"></span>
@@ -289,7 +289,7 @@
     <ul class="list inset">
       <li ng-repeat="instrument in Instruments.instruments">
         <a href="/instrument/{{instrument._id}}">
-          <img src="/app/img/instrument.jpg">
+          <img src="{{Instruments.getInstrumentImageData(instrument._id)}}">
           <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
           {{instrument.description}}
           <span class="chevron"></span>
@@ -298,6 +298,17 @@
     </ul>
   </script>
 
+  <script type="text/javascript">
+    function setActionId(instrumentId)
+    {
+      iframe = document.getElementById('uploadFrame');
+      if (iframe) {
+        innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+        innerDoc.getElementById('uploadForm').action = innerDoc.getElementById('uploadForm').action.replace('/id/', "/" + instrumentId + "/");
+        console.log(innerDoc.getElementById('uploadForm').action);        
+      }
+    }
+  </script>
   <script id="instrument.html" type="text/ng-template">
     <div class="input-group">
       <div class="input-row">
@@ -312,9 +323,12 @@
         <label>Description</label>
         <textarea ng-disabled="!editMode" ng-model="instrument.description"></textarea>
       </div>
+      <div class="input-row">
+        <label>Image</label>
+        <iframe id="uploadFrame" src="/app/partials/imageupload.html" ng-show="editMode" onload="setActionId('{{instrument._id}}');">
+        </iframe>
+      </div>
     </div>
-    <iframe src="/app/partials/imageupload.html" ng-show="editMode">
-    </iframe>
     <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
     <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
   </script>

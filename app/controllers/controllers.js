@@ -206,7 +206,6 @@ function ProfileCtrl($scope, $http, $location, Instruments)
 	$scope.pageSettings.rightButtonClick = function() {
 		$location.path('/instrument/');
 	};
-
 };
 
 function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments)

@@ -7,6 +7,7 @@ GuitarJournalApp.factory('Instruments', function($http) {
 		$http.get('/api/instruments')
 			.success(function(data) {
 				service.instruments = data;
+				console.log(service.instruments);
 			})
 			.error(function(data) {
 				alert("Error when getting instruments.");
@@ -50,6 +51,21 @@ GuitarJournalApp.factory('Instruments', function($http) {
 
 			return name;
 		}
+	}
+
+	service.getInstrumentImageData = function(instrumentId) {
+		if (service.instruments) {
+			var name = null;
+			service.instruments.some(function (instrument) {
+				if (instrument._id == instrumentId) {
+					imageData = instrument.image;
+				}
+			});
+
+			if (imageData) {
+				return "data:image/jpeg;base64," + imageData;			
+			}
+		}		
 	}
 
 	service.saveInstrument = function(instrument, successCallback, failureCallback) {
