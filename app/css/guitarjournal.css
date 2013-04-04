@@ -161,12 +161,12 @@ h2.padded {
   color:green;
 }
 
-.session img {
+.view img {
   float:right;
   padding-left:10px;
 /*  display:inline-block;*/
 }
 
-.session div {
+.view div {
   margin-bottom:5px;
 }

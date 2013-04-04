@@ -153,10 +153,10 @@
   </script>
 
   <script id="session.html" type="text/ng-template">
-    <div class="content-padded session" ng-show="!editMode">
+    <h2 class="padded">{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
+    <div class="content-padded view" ng-show="!editMode">
       <img src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
       <div>
-        <h2>{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
         <div>
           <b>Goal</b><br>
           {{Goals.getGoalTitle(session.goalId)}} {{session.goalContribution}}
@@ -177,12 +177,6 @@
           <b>Notes</b><br>
           {{session.notes}}
         </div>
-        <!--<div class="label">Goal:</div><div class="info">{{Goals.getGoalTitle(session.goalId)}}</div>
-        <div class="label">Goal contribution:</div><div class="info">{{session.goalContribution}}</div>
-        <div class="label">Other gear:</div><div class="info">{{session.gear}}</div>
-        <div class="label">Rating:</div><div class="info">{{session.rating}}</div>
-        <div class="label">Location:</div><div class="info">{{session.location}}</div>
-        <div class="label">Notes:</div><div class="info">{{session.notes}}</div>-->
       </div>
     </div>
     <div class="input-group" ng-show="editMode">
@@ -332,7 +326,21 @@
     }
   </script>
   <script id="instrument.html" type="text/ng-template">
-    <div class="input-group">
+    <h2 class="padded">{{instrument.name}}</h2>
+    <div class="content-padded view" ng-show="!editMode">
+      <img src="{{Instruments.getInstrumentImageData(instrument._id)}}">
+      <div>
+        <div>
+          <b>Type</b><br>
+          {{instrument.type}}
+        </div>
+        <div>
+          <b>Description</b><br>
+          {{instrument.description}}
+        </div>
+      </div>
+    </div>
+    <div class="input-group" ng-show="editMode">
       <div class="input-row">
         <label>Name</label>
         <input type="text" ng-model="instrument.name" ng-disabled="!editMode" />
