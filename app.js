@@ -257,24 +257,34 @@ app.get("/api/instruments", function(req, res) {
 });
 
 app.post("/api/instruments", function(req, res) {
-	if (req.body._id)
-		req.body._id = ObjectID(req.body._id);
-	if (req.body.userId)
-		req.body.userId = ObjectID(req.body.userId);
-	else
-		req.body.userId = loggedInUser;
-	if (req.body.image)
-		delete req.body.image;
-
-	console.log(req.body);
+	var instrumentId = undefined;
+	if (req.body._id) {
+		instrumentId = ObjectID(req.body._id);
+		// Delete _id, since you can't use it in update.
+		delete req.body._id;	
+	}
+	req.body.userId = loggedInUser;
+	if (req.body.image) {
+		// This is not recieved in a proper format.
+		delete req.body.image;		
+	}
 
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
 		var instruments = db.collection('Instruments');
-		instruments.save(req.body, {safe:true}, function(err, savedSession) {
-			res.json(savedSession);
-		});
+		if (instrumentId) {
+			instruments.update({ _id: instrumentId }, { $set: req.body }, {safe:true}, function(err, updatedInstrument) {
+				if (err) console.log(err);
+				res.json(updatedInstrument);
+			});
+		}
+		else {
+			instruments.save(req.body, {safe:true}, function(err, insertedInstrument) {
+				if (err) console.log(err);
+				res.json(insertedInstrument);
+			});
+		}
 	});
 });
 
@@ -318,16 +328,8 @@ app.post("/api/instrument/:id/setimage", function(req, res) {
 
 					MongoClient.connect(mongoConnectionString, function(err, db) {
 						if(err) { return console.dir(err); }
-
-						db.collection('Instruments').findOne({ "userId": loggedInUser, "_id": req.params.id }, function(err, instrument) {
-							if (err) {
-								console.log(err);
-								return (err);
-							}
-
-							instrument.image = imageData;
-
-							db.collection('Instruments').save(instrument, { safe:true }, function(err, updatedInstrument) {
+						db.collection('Instruments')
+							.update({ _id: req.params.id }, { $set: { image: imageData } }, { safe:true }, function(err, updatedInstrument) {
 								if (err) {
 									console.log(err);
 									res.send(500, "Could not set image for instrument");
@@ -336,12 +338,10 @@ app.post("/api/instrument/:id/setimage", function(req, res) {
 								res.set('Content-Type', 'image/jpeg');
 								res.send(image);
 								return;
-							})
-						});
+							});
 					});
 				});
-		});
-
+			});
 	});
 });
 

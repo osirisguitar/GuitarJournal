@@ -162,11 +162,11 @@ h2.padded {
 }
 
 .session img {
-  display:inline-block;
-  width:30px;
-  height:30px;
+  float:right;
+  padding-left:10px;
+/*  display:inline-block;*/
 }
 
-.session h2 {
-  display:inline-block;
+.session div {
+  margin-bottom:5px;
 }

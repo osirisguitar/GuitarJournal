@@ -155,14 +155,34 @@
   <script id="session.html" type="text/ng-template">
     <div class="content-padded session" ng-show="!editMode">
       <img src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
-      <h2>{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
       <div>
-        <div class="label">Goal:</div><div class="info">{{Goals.getGoalTitle(session.goalId)}}</div>
+        <h2>{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
+        <div>
+          <b>Goal</b><br>
+          {{Goals.getGoalTitle(session.goalId)}} {{session.goalContribution}}
+        </div>
+        <div>
+          <b>Other gear</b><br>
+          {{session.gear}}
+        </div>
+        <div>
+          <b>Rating</b><br>
+          {{session.rating}}
+        </div>
+        <div>
+          <b>Location</b><br>
+          {{session.location}}
+        </div>
+        <div>
+          <b>Notes</b><br>
+          {{session.notes}}
+        </div>
+        <!--<div class="label">Goal:</div><div class="info">{{Goals.getGoalTitle(session.goalId)}}</div>
         <div class="label">Goal contribution:</div><div class="info">{{session.goalContribution}}</div>
         <div class="label">Other gear:</div><div class="info">{{session.gear}}</div>
         <div class="label">Rating:</div><div class="info">{{session.rating}}</div>
         <div class="label">Location:</div><div class="info">{{session.location}}</div>
-        <div class="label">Notes:</div><div class="info">{{session.notes}}</div>
+        <div class="label">Notes:</div><div class="info">{{session.notes}}</div>-->
       </div>
     </div>
     <div class="input-group" ng-show="editMode">
