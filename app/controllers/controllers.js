@@ -15,7 +15,7 @@ function AppCtrl($scope, $http, Sessions) {
 			alert("Error when getting statistics overview.");
 		});
 
-	$http.get('/api/statistics/overview/14')
+	$http.get('/api/statistics/overview/7')
 		.success(function(data) {
 			$scope.weekStats = data;
 			var firstSession = new Date($scope.weekStats.firstSession);

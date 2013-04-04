@@ -6,6 +6,8 @@ var GridStore = require('mongodb').GridStore;
 var mongoConnectionString = "mongodb://osiris:testmongo123@linus.mongohq.com:10003/app11622295";
 var loggedInUser = ObjectID("512684441ea176ca050002b7");
 var fs = require("fs");
+var gm = require("gm");
+var imageMagick = gm.subClass({ imageMagick: true });
 
 app.use(express.bodyParser());
 // App stuff, static files
@@ -93,11 +95,13 @@ app.get("/api/statistics/overview/:days?", function(req, res) {
    					res.json();
    					return;
    				}
-   				results.averageLength = Math.round(agg[0].averageLength);
-   				results.totalLength = agg[0].totalLength;
-   				results.averageRating = Math.round(agg[0].averageRating*100)/100;
-   				results.firstSession = agg[0].firstSession;
-   				results.latestSession = agg[0].latestSession;
+   				if (agg && agg.length > 0) {
+	   				results.averageLength = Math.round(agg[0].averageLength);
+	   				results.totalLength = agg[0].totalLength;
+	   				results.averageRating = Math.round(agg[0].averageRating*100)/100;
+	   				results.firstSession = agg[0].firstSession;
+	   				results.latestSession = agg[0].latestSession;   					
+   				}
 	   			sessions.aggregate([
 	   			{
 	   				$match: match
@@ -113,7 +117,14 @@ app.get("/api/statistics/overview/:days?", function(req, res) {
    					$sort: { numUses: -1 }
    				}]
 	   			, function (err, agg) {
-	   				results.mostUsedInstrument = agg[0]._id;
+	   				if (err) {
+	   					console.log(err);
+	   					res.json();
+	   					return;	   					
+	   				}
+	   				if (agg && agg.length > 0) {
+	   					results.mostUsedInstrument = agg[0]._id;
+	   				}
 	   				res.json(results);
 	   			});
    			});
@@ -267,6 +278,30 @@ app.post("/api/instruments", function(req, res) {
 		instruments.save(req.body, {safe:true}, function(err, savedSession) {
 			res.json(savedSession);
 		});
+	});
+});
+
+app.post("/api/instrument/:id/addimage", function(req, res) {
+	var imagebytes = [];
+
+	imageMagick(req.files.imagefile.path)
+		.resize(75, 75)
+		.autoOrient()
+		.stream(function (err, stdout, stderr) {
+			if (err) console.log(err);
+
+			stdout.on('data', function(data) {
+				console.log(data);
+				imagebytes.push(data);
+			});
+
+			stdout.on('close', function() {
+				console.log("close");
+				var image = Buffer.concat(imagebytes);
+				res.set('Content-Type', 'image/jpeg');
+				res.send(image);
+				return;
+			});
 	});
 });
 

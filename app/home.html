@@ -175,7 +175,7 @@
       <div class="input-row">
         <label>Goal</label>
         <select ng-model="session.goalId" ng-disabled="!editMode">
-          <option ng-repeat="goal in goals" value="{{goal._id}}" ng-selected="session.goalId == goal._id">{{goal.title}}</option>
+          <option ng-repeat="goal in Goals.goals" value="{{goal._id}}" ng-selected="session.goalId == goal._id">{{goal.title}}</option>
         </select>
       </div>
       <div class="input-row">
@@ -185,7 +185,7 @@
       <div class="input-row">
         <label>Instrument</label>
         <select ng-model="session.instrumentId" ng-disabled="!editMode">
-          <option ng-repeat="instrument in instruments" value="{{instrument._id}}" ng-selected="session.instrumentId == instrument._id">{{instrument.name}}</option>
+          <option ng-repeat="instrument in Instruments.instruments" value="{{instrument._id}}" ng-selected="session.instrumentId == instrument._id">{{instrument.name}}</option>
         </select>
       </div>
       <div class="input-row">
@@ -299,7 +299,7 @@
   </script>
 
   <script id="instrument.html" type="text/ng-template">
-    <div class="inset input-group">
+    <div class="input-group">
       <div class="input-row">
         <label>Name</label>
         <input type="text" ng-model="instrument.name" ng-disabled="!editMode" />
@@ -313,6 +313,8 @@
         <textarea ng-disabled="!editMode" ng-model="instrument.description"></textarea>
       </div>
     </div>
+    <iframe src="/app/partials/imageupload.html" ng-show="editMode">
+    </iframe>
     <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
     <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
   </script>
