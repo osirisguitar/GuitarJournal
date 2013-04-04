@@ -160,3 +160,13 @@ h2.padded {
   content:'\25b2';
   color:green;
 }
+
+.session img {
+  display:inline-block;
+  width:30px;
+  height:30px;
+}
+
+.session h2 {
+  display:inline-block;
+}

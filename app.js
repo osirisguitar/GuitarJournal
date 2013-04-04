@@ -263,6 +263,10 @@ app.post("/api/instruments", function(req, res) {
 		req.body.userId = ObjectID(req.body.userId);
 	else
 		req.body.userId = loggedInUser;
+	if (req.body.image)
+		delete req.body.image;
+
+	console.log(req.body);
 
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
