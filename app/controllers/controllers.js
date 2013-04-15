@@ -4,39 +4,41 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 		$location.path('/login');
 
 	$rootScope.$watch('loggedIn', function () {
-		$http.get('/api/statistics/overview')
-			.success(function(data) {
-				$scope.statsOverview = data;
-				var firstSession = new Date($scope.statsOverview.firstSession);
-				var lastSession = new Date($scope.statsOverview.latestSession);
-				var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-				var weeks = days/7;
-				$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
-			})
-			.error(function(data) {
-				alert("Error when getting statistics overview.");
-			});
+		if ($rootScope.loggedIn) {
+			$http.get('/api/statistics/overview')
+				.success(function(data) {
+					$scope.statsOverview = data;
+					var firstSession = new Date($scope.statsOverview.firstSession);
+					var lastSession = new Date($scope.statsOverview.latestSession);
+					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+					var weeks = days/7;
+					$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
+				})
+				.error(function(data) {
+					alert("Error when getting statistics overview.");
+				});
 
-		$http.get('/api/statistics/overview/7')
-			.success(function(data) {
-				$scope.weekStats = data;
-				var firstSession = new Date($scope.weekStats.firstSession);
-				var lastSession = new Date($scope.weekStats.latestSession);
-				var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-				var weeks = days/7;
-				$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
-			})
-			.error(function(data) {
-				alert("Error when getting statistics overview.");
-			});
+			$http.get('/api/statistics/overview/7')
+				.success(function(data) {
+					$scope.weekStats = data;
+					var firstSession = new Date($scope.weekStats.firstSession);
+					var lastSession = new Date($scope.weekStats.latestSession);
+					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+					var weeks = days/7;
+					$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
+				})
+				.error(function(data) {
+					alert("Error when getting statistics overview.");
+				});
 
-		$http.get('/api/profile')
-			.success(function(data) {
-				$scope.profile = data;
-			})
-			.error(function(data){
-				alert("Error when getting profile.")
-			});
+			$http.get('/api/profile')
+				.success(function(data) {
+					$scope.profile = data;
+				})
+				.error(function(data){
+					alert("Error when getting profile.")
+				});			
+		}
 	});
 }
 
