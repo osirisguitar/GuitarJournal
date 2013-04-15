@@ -1,4 +1,4 @@
-GuitarJournalApp.factory('Instruments', function($http) {
+GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 	var service = {};
 
 	service.instruments = undefined;
@@ -65,12 +65,14 @@ GuitarJournalApp.factory('Instruments', function($http) {
 			if (imageData) {
 				return "data:image/jpeg;base64," + imageData;			
 			}
+			else
+				return "";
 		}		
 	}
 
 	service.saveInstrument = function(instrument, successCallback, failureCallback) {
 		delete instrument.image;
-		$http.post('/api/instruments', instrument)
+		$http.post('/api/instruments', instrument, $rootScope.httpConfig)
 			.success(function(data) {
 				// 1 means updated, otherwise replace to get proper db id.
 				service.getInstruments();
@@ -85,7 +87,7 @@ GuitarJournalApp.factory('Instruments', function($http) {
 	}
 
 	service.deleteInstrument = function(instrumentId, successCallback, failureCallback) {
-		$http.delete('/api/instrument/' + instrumentId)
+		$http.delete('/api/instrument/' + instrumentId, $rootScope.httpConfig)
 			.success(function(data){
 				service.getInstruments();
 				if (successCallback)
@@ -98,6 +100,12 @@ GuitarJournalApp.factory('Instruments', function($http) {
 
 	}
 
-	service.getInstruments();
+	$rootScope.$watch('loggedIn', function() {
+		console.log("logged in", $rootScope.loggedIn);
+		if ($rootScope.loggedIn) {
+			service.getInstruments();
+		}
+	});
+
 	return service;
 });

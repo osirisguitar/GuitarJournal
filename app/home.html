@@ -30,7 +30,8 @@
     <!-- Include the compiled Ratchet CSS -->
     <link rel="stylesheet" href="/app/css/ratchet.css">
     <link rel="stylesheet" href="/app/css/guitarjournal.css">
-    <script src="/app/libs/angular/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
     <script src="/app/libs/moment.min.js"></script>
     <script src="/app/controllers/app.js"></script>
     <script src="/app/services/sessionservice.js"></script>
@@ -85,11 +86,24 @@
     </ul>
   </nav>
 
-
   <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
   <div class="content">
       <ng-view></ng-view>
   </div>
+
+  <script id="login.html" type="text/ng-template">
+    <div class="input-group">
+      <div class="input-row">
+        <label>Email</label>
+        <input ng-model="email" type="email" />
+      </div>
+      <div class="input-row">
+        <label>Password</label>
+        <input type="password" ng-model="password" />
+      </div>
+    </div>
+    <a class="button-block" ng-click="login()">Login</a>
+  </script>
 
   <script id="home.html" type="text/ng-template">
     <h2 class="padded">{{profile.fullName}}</h2>
@@ -119,7 +133,7 @@
     <ul class="list inset">
       <li ng-repeat="session in Sessions.sessions | take:3">
         <a href="/session/{{session._id}}">
-          <img src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
+          <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
           <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min {{getInstrumentName(session.instrumentId)}}</strong><br>
           {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
           <span class="chevron"></span>
@@ -131,7 +145,7 @@
     <ul class="list inset">
       <li>
         <a href="/profile">
-          <img src="{{Instruments.getInstrumentImageData(instrument._id)}}" ng-repeat="instrument in Instruments.instruments | take:5">
+          <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}" ng-repeat="instrument in Instruments.instruments | take:5">
           <span class="chevron"></span>
         </a>
       </li>
@@ -142,7 +156,7 @@
     <ul class="list">
       <li ng-repeat="session in Sessions.sessions">
         <a href="/session/{{session._id}}">
-          <img src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
+          <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
           <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
           {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
           <span class="chevron"></span>
@@ -155,7 +169,7 @@
   <script id="session.html" type="text/ng-template">
     <h2 class="padded">{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
     <div class="content-padded view" ng-show="!editMode">
-      <img src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
+      <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
       <div>
         <div>
           <b>Goal</b><br>
@@ -305,7 +319,7 @@
     <ul class="list inset">
       <li ng-repeat="instrument in Instruments.instruments">
         <a href="/instrument/{{instrument._id}}">
-          <img src="{{Instruments.getInstrumentImageData(instrument._id)}}">
+          <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}">
           <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
           {{instrument.description}}
           <span class="chevron"></span>
@@ -328,7 +342,7 @@
   <script id="instrument.html" type="text/ng-template">
     <h2 class="padded">{{instrument.name}}</h2>
     <div class="content-padded view" ng-show="!editMode">
-      <img src="{{Instruments.getInstrumentImageData(instrument._id)}}">
+      <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}">
       <div>
         <div>
           <b>Type</b><br>

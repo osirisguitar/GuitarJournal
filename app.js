@@ -5,14 +5,21 @@ var ObjectID = require('mongodb').ObjectID;
 var GridStore = require('mongodb').GridStore;
 var Binary = require('mongodb').Binary;
 var mongoConnectionString = "mongodb://osiris:testmongo123@linus.mongohq.com:10003/app11622295";
-var loggedInUser = ObjectID("512684441ea176ca050002b7");
+//var loggedInUser = ObjectID("512684441ea176ca050002b7");
 var fs = require("fs");
 var gm = require("gm");
 var imageMagick = gm.subClass({ imageMagick: true });
+var crypto = require("crypto");
 
+app.use(express.cookieParser('hejpa'));
+app.use(express.cookieSession({ secret: 'mongoVoldemort' }));
+app.use(express.csrf());
 app.use(express.bodyParser());
 // App stuff, static files
 app.get("/", function(req, res) {
+	res.sendfile(__dirname + "/app/home.html");
+});
+app.get("/login*", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });
 app.get("/session*", function(req, res) {
@@ -36,8 +43,43 @@ app.get("/app", function(req, res) {
 app.use('/componenttest', express.static(__dirname + '/componenttest'));
 app.use('/app', express.static(__dirname + '/app'));
 
+app.post('/api/login', function(req, res) {
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var users = db.collection('Users');
+		users.findOne({ email: req.body.email }, function(err, user) {
+			if (err)
+				console.log(err);
+			console.log("Logged in user", user);
+			req.session.loggedInUser = user._id;
+			res.json(user);
+		});
+	});
+});
+
+app.get('/api/loggedin', function(req, res) {
+	console.log(req.session);
+	res.json({user:req.session.loggedInUser,_csrf:req.session._csrf});
+});
+
+function checkLogin(req, res) {
+	if (!req.session.loggedInUser)
+	{
+		console.log("No logged in user");
+		res.send("401", "Not logged in");
+		return null;
+	}
+	else
+		return ObjectID(req.session.loggedInUser);
+}
+
 // API stuff
 app.get("/api/sessions/:skip?", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
+
+	console.log('Get sessions', req.session);
 	var skip = req.params.skip ? parseInt(req.params.skip) : 0;
 
 	// Connect to the db
@@ -57,6 +99,9 @@ app.get("/api/sessions/:skip?", function(req, res) {
 });
 
 app.get("/api/statistics/overview/:days?", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
+
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
@@ -155,10 +200,13 @@ app.delete("/api/session/:id", function(req, res) {
 });
 
 app.post("/api/sessions", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
+	req.body.userId = loggedInUser;
+
 	if (req.body._id) {
 		req.body._id = ObjectID(req.body._id);
 	}
-	req.body.userId = loggedInUser;
 	if (req.body.goalId) {
 		req.body.goalId = ObjectID(req.body.goalId);		
 	}
@@ -179,6 +227,8 @@ app.post("/api/sessions", function(req, res) {
 });
 
 app.get("/api/goals", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
 
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -195,15 +245,12 @@ app.get("/api/goals", function(req, res) {
 });
 
 app.post("/api/goals", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
 	if (req.body._id) {
 		req.body._id = ObjectID(req.body._id);
 	}
-	if (req.body.userId) {
-		req.body.userId = ObjectID(req.body.userId);
-	}
-	else {
-		req.body.userId = loggedInUser;
-	}
+	req.body.userId = loggedInUser;
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
@@ -215,18 +262,22 @@ app.post("/api/goals", function(req, res) {
 });
 
 app.delete("/api/goal/:id", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
 		var goals = db.collection('Goals');
-		goals.remove({ _id: ObjectID(req.params.id) }, 1, function(err, item) {
+		goals.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
 			res.json(item);
 		});
 	});
 });
 
 app.get("/api/profile", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
@@ -239,6 +290,8 @@ app.get("/api/profile", function(req, res) {
 });
 
 app.get("/api/instruments", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
 
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -257,6 +310,8 @@ app.get("/api/instruments", function(req, res) {
 });
 
 app.post("/api/instruments", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
 	var instrumentId = undefined;
 	if (req.body._id) {
 		instrumentId = ObjectID(req.body._id);
@@ -289,6 +344,8 @@ app.post("/api/instruments", function(req, res) {
 });
 
 app.post("/api/instrument/:id/setimage", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
 	var imagebytes = [];
 	if (req.params.id)
 		req.params.id = ObjectID(req.params.id);
@@ -329,7 +386,7 @@ app.post("/api/instrument/:id/setimage", function(req, res) {
 					MongoClient.connect(mongoConnectionString, function(err, db) {
 						if(err) { return console.dir(err); }
 						db.collection('Instruments')
-							.update({ _id: req.params.id }, { $set: { image: imageData } }, { safe:true }, function(err, updatedInstrument) {
+							.update({ _id: req.params.id, userId: loggedInUser }, { $set: { image: imageData } }, { safe:true }, function(err, updatedInstrument) {
 								if (err) {
 									console.log(err);
 									res.send(500, "Could not set image for instrument");
@@ -346,12 +403,15 @@ app.post("/api/instrument/:id/setimage", function(req, res) {
 });
 
 app.delete("/api/instrument/:id", function(req, res) {
+	if (!(loggedInUser = checkLogin(req, res)))
+		return;
+
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
 		var instruments = db.collection('Instruments');
-		instruments.remove({ _id: ObjectID(req.params.id) }, 1, function(err, item) {
+		instruments.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
 			res.json(item);
 		});
 	});

@@ -1,4 +1,4 @@
-GuitarJournalApp.factory('Goals', function($http) {
+GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 	var service = {};
 
 	service.goals = undefined;
@@ -54,7 +54,7 @@ GuitarJournalApp.factory('Goals', function($http) {
 	}
 
 	service.saveGoal = function(goal, successCallback, failureCallback) {
-		$http.post('/api/goals', goal)
+		$http.post('/api/goals', goal, $rootScope.httpConfig)
 			.success(function(data) {
 				// 1 means updated, otherwise replace to get proper db id.
 				service.getGoals();
@@ -69,7 +69,7 @@ GuitarJournalApp.factory('Goals', function($http) {
 	}
 
 	service.deleteGoal = function(goalId, successCallback, failureCallback) {
-		$http.delete('/api/goal/' + goalId)
+		$http.delete('/api/goal/' + goalId, $rootScope.httpConfig)
 			.success(function(data){
 				service.getGoals();
 				if (successCallback)
@@ -95,6 +95,12 @@ GuitarJournalApp.factory('Goals', function($http) {
 			return [];
 	}
 
-	service.getGoals();
+	$rootScope.$watch('loggedIn', function() {
+		console.log("logged in", $rootScope.loggedIn);
+		if ($rootScope.loggedIn) {
+			service.getGoals();
+		}
+	});
+
 	return service;
 });

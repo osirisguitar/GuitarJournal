@@ -1,4 +1,4 @@
-GuitarJournalApp.factory('Sessions', function($http) {
+GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 	var service = {};
 	service.sessions = undefined;
 
@@ -15,8 +15,9 @@ GuitarJournalApp.factory('Sessions', function($http) {
 			.success(function(data) {
 				service.sessions = service.sessions.concat(data);
 			})
-			.error(function(data) {
-				alert("Error when getting sessions.");
+			.error(function(data, status) {
+				alert("Error when getting sessions");
+				console.log("getSessions error", data, status);
 			});							
 	}
 
@@ -47,7 +48,7 @@ GuitarJournalApp.factory('Sessions', function($http) {
 	}
 
 	service.saveSession = function(session, successCallback, failureCallback) {
-		$http.post('/api/sessions', session)
+		$http.post('/api/sessions', session, $rootScope.httpConfig)
 			.success(function(data) {
 				// 1 means updated, otherwise replace to get proper db id.
 				service.getSessions();
@@ -62,7 +63,7 @@ GuitarJournalApp.factory('Sessions', function($http) {
 	}
 
 	service.deleteSession = function(sessionId, successCallback, failureCallback) {
-		$http.delete('/api/session/' + sessionId)
+		$http.delete('/api/session/' + sessionId, $rootScope.httpConfig)
 			.success(function(data){
 				service.getSessions();
 				if (successCallback)
@@ -75,6 +76,11 @@ GuitarJournalApp.factory('Sessions', function($http) {
 
 	}
 
-	service.getSessions();
+	$rootScope.$watch('loggedIn', function() {
+		console.log("logged in", $rootScope.loggedIn);
+		if ($rootScope.loggedIn) {
+			service.getSessions();
+		}
+	})
 	return service;
 });

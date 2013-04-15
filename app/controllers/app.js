@@ -1,4 +1,4 @@
-var GuitarJournalApp = angular.module('GuitarJournalApp', []).
+var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.
       when('/', {
@@ -8,6 +8,10 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', []).
       when('/app/', {
         templateUrl: 'home.html', 
         controller: "HomeCtrl"
+      }).
+      when('/login', {
+        templateUrl: 'login.html',
+        controller: "LoginCtrl"
       }).
       when('/sessions', {
         templateUrl: 'sessions.html', 

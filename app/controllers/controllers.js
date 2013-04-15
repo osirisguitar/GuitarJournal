@@ -1,40 +1,67 @@
-function AppCtrl($scope, $http, Sessions) {
+function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 	$scope.pageSettings = {};
-	$scope.loggedInUser = '';
+	if (!$rootScope.loggedIn)
+		$location.path('/login');
 
-	$http.get('/api/statistics/overview')
-		.success(function(data) {
-			$scope.statsOverview = data;
-			var firstSession = new Date($scope.statsOverview.firstSession);
-			var lastSession = new Date($scope.statsOverview.latestSession);
-			var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-			var weeks = days/7;
-			$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
-		})
-		.error(function(data) {
-			alert("Error when getting statistics overview.");
-		});
+	$rootScope.$watch('loggedIn', function () {
+		$http.get('/api/statistics/overview')
+			.success(function(data) {
+				$scope.statsOverview = data;
+				var firstSession = new Date($scope.statsOverview.firstSession);
+				var lastSession = new Date($scope.statsOverview.latestSession);
+				var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+				var weeks = days/7;
+				$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
+			})
+			.error(function(data) {
+				alert("Error when getting statistics overview.");
+			});
 
-	$http.get('/api/statistics/overview/7')
-		.success(function(data) {
-			$scope.weekStats = data;
-			var firstSession = new Date($scope.weekStats.firstSession);
-			var lastSession = new Date($scope.weekStats.latestSession);
-			var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-			var weeks = days/7;
-			$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
-		})
-		.error(function(data) {
-			alert("Error when getting statistics overview.");
-		});
+		$http.get('/api/statistics/overview/7')
+			.success(function(data) {
+				$scope.weekStats = data;
+				var firstSession = new Date($scope.weekStats.firstSession);
+				var lastSession = new Date($scope.weekStats.latestSession);
+				var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+				var weeks = days/7;
+				$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
+			})
+			.error(function(data) {
+				alert("Error when getting statistics overview.");
+			});
 
-	$http.get('/api/profile')
-		.success(function(data) {
-			$scope.profile = data;
-		})
-		.error(function(data){
-			alert("Error when getting profile.")
-		});
+		$http.get('/api/profile')
+			.success(function(data) {
+				$scope.profile = data;
+			})
+			.error(function(data){
+				alert("Error when getting profile.")
+			});
+	});
+}
+
+function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope) {
+	$http.get('/api/loggedin').success(function(data) {
+		console.log("logged in", data)
+		$rootScope.csrf = data._csrf;
+		$rootScope.httpConfig = {
+			headers: { "X-CSRF-Token": $rootScope.csrf }
+		};
+		if (data._id) {
+			$rootScope.loggedIn = true;
+			console.log(data._id);
+			$location.path('/');	
+		}
+	}).error(function(data) { console.log("Couldn't check logged in status"); });
+
+	$scope.login = function() {
+			$http.post("/api/login", {email: $scope.email, password: $scope.password}, $rootScope.httpConfig).success(function(data) {
+				if (data._id)
+					$rootScope.loggedIn = true;
+				console.log('Log in result', data);
+				$location.path("/");
+			}).error(function(data) { console.log("Could not log in") });
+	};
 }
 
 function HomeCtrl($scope, $http, Sessions, Goals, Instruments) {
