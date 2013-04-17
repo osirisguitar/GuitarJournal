@@ -11,7 +11,7 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 					var firstSession = new Date($scope.statsOverview.firstSession);
 					var lastSession = new Date($scope.statsOverview.latestSession);
 					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-					var weeks = days/7;
+					var weeks = Math.max(days/7, 1);
 					$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
 				})
 				.error(function(data) {
@@ -43,6 +43,7 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 }
 
 function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope) {
+	$scope.email = "anders@bornholm.se";
 	$http.get('/api/loggedin').success(function(data) {
 		console.log("logged in", data)
 		$rootScope.csrf = data._csrf;
@@ -237,7 +238,7 @@ function ProfileCtrl($scope, $http, $location, Instruments)
 	};
 };
 
-function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments)
+function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $rootScope)
 {
 	$scope.Instruments = Instruments;
 	$scope.pageSettings.pageTitle = "Instrument";
@@ -245,6 +246,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments)
 	$scope.pageSettings.showBackButton = true;
 	$scope.pageSettings.rightButtonText = "Edit";
 	$scope.editMode = false;
+	$scope._csrf = $rootScope.csrf;
 
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id != null && $routeParams.id != "")

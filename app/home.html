@@ -40,6 +40,38 @@
     <script src="/app/controllers/controllers.js"></script>
   </head>
   <body ng-controller="AppCtrl">
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      // init the FB JS SDK
+      FB.init({
+        appId      : '151038621732407',                        // App ID from the app dashboard
+        channelUrl : '//journal.osirisguitar.com/channel.html', // Channel file for x-domain comms
+        status     : true,                                 // Check Facebook Login status
+        xfbml      : true                                  // Look for social plugins on the page
+      });
+
+      // Additional initialization code such as adding Event Listeners goes here
+      FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+          console.log("FB connected!");
+        } else if (response.status === 'not_authorized') {
+          console.log("FB not authorized");
+        } else {
+          console.log("FB not logged in...");
+        }
+       });
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/all.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+  </script>
 
   <!-- Make sure all your bars are the first things in your <body> -->
   <header class="bar-title">
@@ -95,7 +127,7 @@
     <div class="input-group">
       <div class="input-row">
         <label>Email</label>
-        <input ng-model="email" type="email" />
+        <input ng-model="email" type="email"/>
       </div>
       <div class="input-row">
         <label>Password</label>
@@ -329,12 +361,13 @@
   </script>
 
   <script type="text/javascript">
-    function setActionId(instrumentId)
+    function setUploadParameters(instrumentId, _csrf)
     {
       iframe = document.getElementById('uploadFrame');
       if (iframe) {
         innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-        innerDoc.getElementById('uploadForm').action = innerDoc.getElementById('uploadForm').action.replace('/id/', "/" + instrumentId + "/");
+        innerDoc.getElementById('uploadForm').action = innerDoc.getElementById('uploadForm').action.replace('/id/', "/" + instrumentId + "/?_csrf=" + _csrf);
+        innerDoc.getElementById('_csrf').value = _csrf;
         console.log(innerDoc.getElementById('uploadForm').action);        
       }
     }
@@ -369,7 +402,7 @@
       </div>
       <div class="input-row">
         <label>Image</label>
-        <iframe id="uploadFrame" src="/app/partials/imageupload.html" ng-show="editMode" onload="setActionId('{{instrument._id}}');">
+        <iframe id="uploadFrame" src="/app/partials/imageupload.html" ng-show="editMode" onload="setUploadParameters('{{instrument._id}}', '{{_csrf}}');">
         </iframe>
       </div>
     </div>
