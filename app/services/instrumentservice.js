@@ -71,16 +71,19 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 	}
 
 	service.saveInstrument = function(instrument, successCallback, failureCallback) {
-		delete instrument.image;
+		//delete instrument.image;
+		console.log("saveInstrument", instrument);
 		$http.post('/api/instruments', instrument, $rootScope.httpConfig)
 			.success(function(data) {
 				// 1 means updated, otherwise replace to get proper db id.
+				console.log("success");
 				service.getInstruments();
 
 				if (successCallback)
 					successCallback();
 			})
 			.error(function(data) { 
+				console.log("failure");
 				if (failureCallback)
 					failureCallback();
 			});

@@ -43,9 +43,8 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 }
 
 function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope) {
-	$scope.email = "anders@bornholm.se";
+	$scope.email = "abo@iteam.se";
 	$http.get('/api/loggedin').success(function(data) {
-		console.log("logged in", data)
 		$rootScope.csrf = data._csrf;
 		$rootScope.httpConfig = {
 			headers: { "X-CSRF-Token": $rootScope.csrf }
@@ -273,6 +272,21 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 		else
 			$scope.pageSettings.rightButtonText = "Edit";
 	};
+
+	$scope.setImage = function(imageField) {
+		console.log(imageField.files[0]);
+		$scope.files = imageField.files;
+		var file = $scope.files[0];
+
+		var reader = new FileReader();
+		reader.onload = (function(selectedFile) {
+		    return function(e) {
+		      $scope.instrument.image = e.target.result.split(',')[1];
+		    };
+
+		})(file);
+		reader.readAsDataURL(file);
+	}
 
 	$scope.save = function() {
 		Instruments.saveInstrument($scope.instrument,

@@ -10,11 +10,60 @@ var fs = require("fs");
 var gm = require("gm");
 var imageMagick = gm.subClass({ imageMagick: true });
 var crypto = require("crypto");
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
 
 app.use(express.cookieParser('hejpa'));
 app.use(express.cookieSession({ secret: 'mongoVoldemort' }));
 app.use(express.csrf());
 app.use(express.bodyParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy({
+	    usernameField: 'email',
+	    passwordField: 'password'
+	},
+  	function(username, password, done) {
+  		console.log("Passport logging in", username, password);
+
+		MongoClient.connect(mongoConnectionString, function(err, db) {
+			if(err) { return done(err); }
+
+			var users = db.collection('Users');
+			users.findOne({ email: username }, function(err, user) {
+			    if (err)
+			    	return done(err);
+			    else
+			      	return done(null, user);
+	    	});
+ 		});
+ 	}
+));
+
+passport.serializeUser(function(user, done) {
+	console.log('serialize', user);
+	done(null, user._id);
+});
+
+passport.deserializeUser(function(id, done) {
+	console.log('deserialize', id);
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return done(err); }
+
+		var users = db.collection('Users');
+		users.findOne({ _id: ObjectID(id) }, function(err, user) {
+			console.log('deserialize: found', user);
+			done(err, user);
+    	});
+	});
+});
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login');
+}
+
 // App stuff, static files
 app.get("/", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
@@ -43,7 +92,14 @@ app.get("/app", function(req, res) {
 app.use('/componenttest', express.static(__dirname + '/componenttest'));
 app.use('/app', express.static(__dirname + '/app'));
 
-app.post('/api/login', function(req, res) {
+app.post('/api/login',
+	passport.authenticate('local'),
+	function (req, res) {
+		res.json(req.user);
+	}
+);
+
+/*app.post('/api/login', function(req, res) {
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
@@ -56,11 +112,13 @@ app.post('/api/login', function(req, res) {
 			res.json(user);
 		});
 	});
-});
+});*/
 
 app.get('/api/loggedin', function(req, res) {
-	console.log(req.session);
-	res.json({user:req.session.loggedInUser,_csrf:req.session._csrf});
+	if (req.isAuthenticated())
+		res.json(req.user);
+	else 
+		res.send("401", "Not logged in");
 });
 
 function checkLogin(req, res) {
@@ -75,11 +133,9 @@ function checkLogin(req, res) {
 }
 
 // API stuff
-app.get("/api/sessions/:skip?", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
+app.get("/api/sessions/:skip?", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 
-	console.log('Get sessions', req.session);
 	var skip = req.params.skip ? parseInt(req.params.skip) : 0;
 
 	// Connect to the db
@@ -98,9 +154,8 @@ app.get("/api/sessions/:skip?", function(req, res) {
 	});
 });
 
-app.get("/api/statistics/overview/:days?", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
+app.get("/api/statistics/overview/:days?", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -175,34 +230,35 @@ app.get("/api/statistics/overview/:days?", function(req, res) {
 	});
 });
 
-app.get("/api/session/:id", function(req, res) {
+app.get("/api/session/:id", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
 		var collection = db.collection('Sessions');
-		collection.findOne({ _id: ObjectID(req.params.id) }, function(err, item) {
+		collection.findOne({ _id: ObjectID(req.params.id), userId: loggedInUser }, function(err, item) {
 			res.json(item);
 		});
 	});
 });
 
-app.delete("/api/session/:id", function(req, res) {
+app.delete("/api/session/:id", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
 		var collection = db.collection('Sessions');
-		collection.remove({ _id: ObjectID(req.params.id) }, 1, function(err, item) {
+		collection.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
 			res.json(item);
 		});
 	});
 });
 
-app.post("/api/sessions", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
-	req.body.userId = loggedInUser;
+app.post("/api/sessions", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
+	req.body.userId = req.user._id;
 
 	if (req.body._id) {
 		req.body._id = ObjectID(req.body._id);
@@ -226,9 +282,8 @@ app.post("/api/sessions", function(req, res) {
 	});
 });
 
-app.get("/api/goals", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
+app.get("/api/goals", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id
 
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -244,9 +299,8 @@ app.get("/api/goals", function(req, res) {
 	});
 });
 
-app.post("/api/goals", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
+app.post("/api/goals", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 	if (req.body._id) {
 		req.body._id = ObjectID(req.body._id);
 	}
@@ -261,9 +315,8 @@ app.post("/api/goals", function(req, res) {
 	});
 });
 
-app.delete("/api/goal/:id", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
+app.delete("/api/goal/:id", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
@@ -275,9 +328,8 @@ app.delete("/api/goal/:id", function(req, res) {
 	});
 });
 
-app.get("/api/profile", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
+app.get("/api/profile", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
@@ -289,9 +341,8 @@ app.get("/api/profile", function(req, res) {
 	});
 });
 
-app.get("/api/instruments", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
+app.get("/api/instruments", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -309,21 +360,78 @@ app.get("/api/instruments", function(req, res) {
 	});
 });
 
-app.post("/api/instruments", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
+app.post("/api/instruments", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 	var instrumentId = undefined;
 	if (req.body._id) {
-		instrumentId = ObjectID(req.body._id);
-		// Delete _id, since you can't use it in update.
-		delete req.body._id;	
+		req.body._id = ObjectID(req.body._id);
 	}
 	req.body.userId = loggedInUser;
+	var imagebytes = [];
 	if (req.body.image) {
-		// This is not recieved in a proper format.
-		delete req.body.image;		
+		var imageStream = new Buffer(req.body.image, 'base64');
+		imageMagick(imageStream).size(function(err, size) {
+			if (err)
+				console.log(err);
+			var width = size.width;
+			var height = size.height;
+
+			var targetWidth = 75;
+			var targetHeight = 75;
+			var cropX = 0;
+			var cropY = 0;
+
+			if (width > height) {
+				targetWidth = Math.round(width * 75 / height);
+				cropX = Math.round((targetWidth - targetHeight)/2);
+			}
+			else {
+				targetHeight = Math.round(height * 75 / width);
+				cropY = Math.round((targetHeight - targetWidth)/2);			
+			}
+
+			imageMagick(imageStream)
+				.resize(targetWidth, targetHeight)
+				.crop(75, 75, cropX, cropY)
+				.autoOrient()
+				.stream(function (err, stdout, stderr) {
+					if (err) console.log(err);
+
+					stdout.on('data', function(data) {
+						imagebytes.push(data);
+					});
+
+					stdout.on('close', function() {
+						var image = Buffer.concat(imagebytes);
+						var imageData = Binary(image);
+						req.body.image = imageData;
+
+						MongoClient.connect(mongoConnectionString, function(err, db) {
+							if(err) { return console.dir(err); }
+							db.collection('Instruments')
+								.save(req.body, { safe:true }, function(err, updatedInstrument) {
+									if (err) {
+										console.log(err);
+										res.send(500, "Could not set image for instrument");
+									}
+
+									res.json(updatedInstrument);
+									return;
+								});
+						});
+					});
+				});
+		});
+
+	}
+	else
+	{
+		console.log("No image");
+		res.send(500, "Not yet");
 	}
 
+
+/*
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
@@ -340,12 +448,11 @@ app.post("/api/instruments", function(req, res) {
 				res.json(insertedInstrument);
 			});
 		}
-	});
+	});*/
 });
 
-app.post("/api/instrument/:id/setimage", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
+app.post("/api/instrument/:id/setimage", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 	var imagebytes = [];
 	if (req.params.id)
 		req.params.id = ObjectID(req.params.id);
@@ -402,9 +509,8 @@ app.post("/api/instrument/:id/setimage", function(req, res) {
 	});
 });
 
-app.delete("/api/instrument/:id", function(req, res) {
-	if (!(loggedInUser = checkLogin(req, res)))
-		return;
+app.delete("/api/instrument/:id", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
 
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {

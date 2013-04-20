@@ -42,7 +42,7 @@
   <body ng-controller="AppCtrl">
   <div id="fb-root"></div>
   <script>
-    window.fbAsyncInit = function() {
+    /*window.fbAsyncInit = function() {
       // init the FB JS SDK
       FB.init({
         appId      : '151038621732407',                        // App ID from the app dashboard
@@ -53,7 +53,9 @@
       });
 
 
-      FB.login();
+      FB.login(function(data) {
+        console.log(data);
+      });
       // Additional initialization code such as adding Event Listeners goes here
       FB.getLoginStatus(function(response) {
         if (response.status === 'connected') {
@@ -73,7 +75,7 @@
        js = d.createElement(s); js.id = id;
        js.src = "//connect.facebook.net/en_US/all.js";
        fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
+     }(document, 'script', 'facebook-jssdk'));*/
   </script>
 
   <!-- Make sure all your bars are the first things in your <body> -->
@@ -363,18 +365,6 @@
     </ul>
   </script>
 
-  <script type="text/javascript">
-    function setUploadParameters(instrumentId, _csrf)
-    {
-      iframe = document.getElementById('uploadFrame');
-      if (iframe) {
-        innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-        innerDoc.getElementById('uploadForm').action = innerDoc.getElementById('uploadForm').action.replace('/id/', "/" + instrumentId + "/?_csrf=" + _csrf);
-        innerDoc.getElementById('_csrf').value = _csrf;
-        console.log(innerDoc.getElementById('uploadForm').action);        
-      }
-    }
-  </script>
   <script id="instrument.html" type="text/ng-template">
     <h2 class="padded">{{instrument.name}}</h2>
     <div class="content-padded view" ng-show="!editMode">
@@ -404,9 +394,8 @@
         <textarea ng-disabled="!editMode" ng-model="instrument.description"></textarea>
       </div>
       <div class="input-row">
-        <label>Image</label>
-        <iframe id="uploadFrame" src="/app/partials/imageupload.html" ng-show="editMode" onload="setUploadParameters('{{instrument._id}}', '{{_csrf}}');">
-        </iframe>
+        <label>Realimage</label>
+        <input type="file" id="imagefield" onchange="angular.element(this).scope().setImage(this)" />
       </div>
     </div>
     <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
