@@ -118,7 +118,7 @@ app.get('/api/loggedin', function(req, res) {
 	if (req.isAuthenticated())
 		res.json(req.user);
 	else 
-		res.send("401", "Not logged in");
+		res.json({ _csrf: req.session._csrf});
 });
 
 function checkLogin(req, res) {
