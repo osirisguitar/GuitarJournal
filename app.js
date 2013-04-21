@@ -46,7 +46,7 @@ passport.use(new LocalStrategy({
 passport.use(new FacebookStrategy({
 		clientID: '151038621732407',
 	    clientSecret: '6a29a4ca71df925e48be56e21b5ec832',
-	    callbackURL: "http://jdev.osirisguitar.com/auth/facebook/callback"
+	    callbackURL: "http://journal.osirisguitar.com/auth/facebook/callback"
   	},
   	function(accessToken, refreshToken, profile, done) {
  		MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -167,7 +167,10 @@ app.post('/api/login',
 
 app.get('/api/loggedin', function(req, res) {
 	if (req.isAuthenticated())
-		res.json(req.user);
+	{
+		req.user._csrf = req.session._csrf;
+		res.json(req.user);		
+	}
 	else 
 		res.json({ _csrf: req.session._csrf});
 });
