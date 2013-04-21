@@ -50,6 +50,7 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 			headers: { "X-CSRF-Token": $rootScope.csrf }
 		};
 		if (data._id) {
+			
 			$rootScope.loggedIn = true;
 			console.log(data._id);
 			$location.path('/');	

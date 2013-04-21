@@ -38,6 +38,12 @@
     <script src="/app/services/goalservice.js"></script>
     <script src="/app/services/instrumentservice.js"></script>
     <script src="/app/controllers/controllers.js"></script>
+    <script>
+      function facebookAuth() {
+        window.location = "/auth/facebook";
+        return false;
+      }
+    </script>
   </head>
   <body ng-controller="AppCtrl">
   <div id="fb-root"></div>
@@ -140,6 +146,7 @@
       </div>
     </div>
     <a class="button-block" ng-click="login()">Login</a>
+    <a href="/auth/facebook" onclick="facebookAuth();">Facebook</a>
   </script>
 
   <script id="home.html" type="text/ng-template">

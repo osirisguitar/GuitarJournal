@@ -11,7 +11,9 @@ var gm = require("gm");
 var imageMagick = gm.subClass({ imageMagick: true });
 var crypto = require("crypto");
 var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+  , LocalStrategy = require('passport-local').Strategy
+  , FacebookStrategy = require('passport-facebook').Strategy;
+
 
 app.use(express.cookieParser('hejpa'));
 app.use(express.cookieSession({ secret: 'mongoVoldemort' }));
@@ -41,6 +43,41 @@ passport.use(new LocalStrategy({
  	}
 ));
 
+passport.use(new FacebookStrategy({
+		clientID: '151038621732407',
+	    clientSecret: '6a29a4ca71df925e48be56e21b5ec832',
+	    callbackURL: "http://jdev.osirisguitar.com/auth/facebook/callback"
+  	},
+  	function(accessToken, refreshToken, profile, done) {
+ 		MongoClient.connect(mongoConnectionString, function(err, db) {
+			if(err) { return done(err); }
+
+			var users = db.collection('Users');
+			users.findOne({ facebookId: profile.id }, function(err, user) {
+			    if (err)
+			    	return done(err);
+			    else
+			    {
+			    	if (user == null) {
+			    		var newUser = {};
+			    		newUser.facebookId = profile.id;
+			    		newUser.fullName = profile.displayName;
+			    		newUser.username = profile.username;
+			    		users.save(newUser, { safe: true}, function(err, user) {
+			    			if (err)
+			    				return done(err);
+			    			else
+			    				return done(null, user);
+			    		});
+			    	}
+			    	else
+				      	return done(null, user);			    	
+			    }
+	    	});
+ 		});
+  	}
+));
+
 passport.serializeUser(function(user, done) {
 	console.log('serialize', user);
 	done(null, user._id);
@@ -59,10 +96,24 @@ passport.deserializeUser(function(id, done) {
 	});
 });
 
+
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
 }
+
+// Redirect the user to Facebook for authentication.  When complete,
+// Facebook will redirect the user back to the application at
+//     /auth/facebook/callback
+app.get('/auth/facebook', passport.authenticate('facebook'));
+
+// Facebook will redirect the user to this URL after approval.  Finish the
+// authentication process by attempting to obtain an access token.  If
+// access was granted, the user will be logged in.  Otherwise,
+// authentication has failed.
+app.get('/auth/facebook/callback', 
+  passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/login' }));
 
 // App stuff, static files
 app.get("/", function(req, res) {
@@ -524,5 +575,5 @@ app.delete("/api/instrument/:id", ensureAuthenticated, function(req, res) {
 });
 
 
-var port = process.env.PORT || 1337;
+var port = process.env.PORT || 80;
 app.listen(port);
