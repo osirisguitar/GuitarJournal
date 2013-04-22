@@ -48,7 +48,7 @@
   <body ng-controller="AppCtrl">
   <div id="fb-root"></div>
   <script>
-    /*window.fbAsyncInit = function() {
+    window.fbAsyncInit = function() {
       // init the FB JS SDK
       FB.init({
         appId      : '151038621732407',                        // App ID from the app dashboard
@@ -81,7 +81,24 @@
        js = d.createElement(s); js.id = id;
        js.src = "//connect.facebook.net/en_US/all.js";
        fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));*/
+     }(document, 'script', 'facebook-jssdk'));
+
+    function postToFB() {
+      console.log("Posting to FB");
+      var body = 'Testelitest';
+      FB.api('me/ogjournal:finish', 'post',
+        {
+          practice_session: "http://samples.ogp.me/152697478233188"
+        },
+        function(response) {
+          if (!response || response.error) {
+            alert('Error occured');
+            console.log(response);
+          } else {
+            alert('Post ID: ' + response.id);
+          }
+        });
+    }
   </script>
 
   <!-- Make sure all your bars are the first things in your <body> -->
@@ -185,6 +202,7 @@
       </li>
     </ul>
     <a href="/session/" class="button-block inset">New session</a>
+    <a class="button-block inset" onclick="postToFB();">FB POST</a>
     <h2 class="padded">Instruments</h2>
     <ul class="list inset">
       <li>

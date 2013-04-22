@@ -73,6 +73,7 @@ passport.use(new FacebookStrategy({
 			    	else
 				      	return done(null, user);			    	
 			    }
+			    db.close();
 	    	});
  		});
   	}
@@ -91,6 +92,7 @@ passport.deserializeUser(function(id, done) {
 		var users = db.collection('Users');
 		users.findOne({ _id: ObjectID(id) }, function(err, user) {
 			console.log('deserialize: found', user);
+			db.close();
 			done(err, user);
     	});
 	});
@@ -105,7 +107,7 @@ function ensureAuthenticated(req, res, next) {
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'publish_actions' }));
 
 // Facebook will redirect the user to this URL after approval.  Finish the
 // authentication process by attempting to obtain an access token.  If
@@ -209,6 +211,7 @@ app.get("/api/sessions/:skip?", ensureAuthenticated, function(req, res) {
 				return (err);
 			}
 			res.json(items);
+			db.close();
 		});
 	});
 });
@@ -250,6 +253,7 @@ app.get("/api/statistics/overview/:days?", ensureAuthenticated, function(req, re
    				if (err) {
    					console.log(err);
    					res.json();
+   					db.close();
    					return;
    				}
    				if (agg && agg.length > 0) {
@@ -277,6 +281,7 @@ app.get("/api/statistics/overview/:days?", ensureAuthenticated, function(req, re
 	   				if (err) {
 	   					console.log(err);
 	   					res.json();
+	   					db.close();
 	   					return;	   					
 	   				}
 	   				if (agg && agg.length > 0) {
@@ -298,6 +303,7 @@ app.get("/api/session/:id", ensureAuthenticated, function(req, res) {
 		var collection = db.collection('Sessions');
 		collection.findOne({ _id: ObjectID(req.params.id), userId: loggedInUser }, function(err, item) {
 			res.json(item);
+			db.close();
 		});
 	});
 });
@@ -311,6 +317,7 @@ app.delete("/api/session/:id", ensureAuthenticated, function(req, res) {
 		var collection = db.collection('Sessions');
 		collection.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
 			res.json(item);
+			db.close();
 		});
 	});
 });
@@ -337,6 +344,7 @@ app.post("/api/sessions", ensureAuthenticated, function(req, res) {
 		var collection = db.collection('Sessions');
 		collection.save(req.body, {safe:true}, function(err, savedSession) {
 			res.json(savedSession);
+			db.close();
 		});
 	});
 });
@@ -354,6 +362,7 @@ app.get("/api/goals", ensureAuthenticated, function(req, res) {
 				return (err);
 			}
 			res.json(items);
+			db.close();
 		});
 	});
 });
@@ -370,6 +379,7 @@ app.post("/api/goals", ensureAuthenticated, function(req, res) {
 		var collection = db.collection('Goals');
 		collection.save(req.body, {safe:true}, function(err, savedSession) {
 			res.json(savedSession);
+			db.close();
 		});
 	});
 });
@@ -383,6 +393,7 @@ app.delete("/api/goal/:id", ensureAuthenticated, function(req, res) {
 		var goals = db.collection('Goals');
 		goals.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
 			res.json(item);
+			db.close();
 		});
 	});
 });
@@ -396,6 +407,7 @@ app.get("/api/profile", ensureAuthenticated, function(req, res) {
 		var users = db.collection('Users');
 		users.findOne({ _id: loggedInUser }, function(err, item) {
 			res.json(item);
+			db.close();
 		});
 	});
 });
@@ -415,6 +427,7 @@ app.get("/api/instruments", ensureAuthenticated, function(req, res) {
 				return (err);
 			}
 			res.json(items);
+			db.close();
 		});
 	});
 });
@@ -475,6 +488,7 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 									}
 
 									res.json(updatedInstrument);
+									db.close();
 									return;
 								});
 						});
@@ -560,6 +574,7 @@ app.post("/api/instrument/:id/setimage", ensureAuthenticated, function(req, res)
 
 								res.set('Content-Type', 'image/jpeg');
 								res.send(image);
+								db.close();
 								return;
 							});
 					});
@@ -578,6 +593,7 @@ app.delete("/api/instrument/:id", ensureAuthenticated, function(req, res) {
 		var instruments = db.collection('Instruments');
 		instruments.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
 			res.json(item);
+			db.close();
 		});
 	});
 });
