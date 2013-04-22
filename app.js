@@ -150,6 +150,11 @@ app.post('/api/login',
 	}
 );
 
+app.post('/api/logout', function(req, res) {
+	req.logout();
+	res.send(200, "OK");
+});
+
 /*app.post('/api/login', function(req, res) {
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }

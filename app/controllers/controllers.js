@@ -8,10 +8,11 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 		};
 		if (data._id) {
 			$rootScope.loggedIn = true;
-			console.log(data._id);
+			console.log('logged in user', data._id);
 		}
 		else {
-			$location.path = "/login";
+			console.log('logged in redirecting...');
+			$location.path("/login");
 		}
 	}).error(function(data) { console.log("Couldn't check logged in status"); });
 
@@ -31,33 +32,36 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 
 	$scope.$watch('Sessions.sessions', function () {
 		console.log("sessions updated!");
-		$http.get('/api/statistics/overview')
-			.success(function(data) {
-				console.log("overview", data);
-				$scope.statsOverview = data;
-				var firstSession = new Date($scope.statsOverview.firstSession);
-				var lastSession = new Date($scope.statsOverview.latestSession);
-				var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-				var weeks = Math.max(days/7, 1);
-				$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
-			})
-			.error(function(data) {
-				alert("Error when getting statistics overview.");
-			});
+		if ($rootScope.loggedIn) {
+			$http.get('/api/statistics/overview')
+				.success(function(data) {
+					console.log("overview", data);
+					$scope.statsOverview = data;
+					var firstSession = new Date($scope.statsOverview.firstSession);
+					var lastSession = new Date($scope.statsOverview.latestSession);
+					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+					var weeks = Math.max(days/7, 1);
+					$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
+				})
+				.error(function(data) {
+					alert("Error when getting statistics overview.");
+				});
 
-		$http.get('/api/statistics/overview/7')
-			.success(function(data) {
-				console.log("weekstats", data);
-				$scope.weekStats = data;
-				var firstSession = new Date($scope.weekStats.firstSession);
-				var lastSession = new Date($scope.weekStats.latestSession);
-				var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-				var weeks = days/7;
-				$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
-			})
-			.error(function(data) {
-				alert("Error when getting statistics overview.");
-			});		
+			$http.get('/api/statistics/overview/7')
+				.success(function(data) {
+					console.log("weekstats", data);
+					$scope.weekStats = data;
+					var firstSession = new Date($scope.weekStats.firstSession);
+					var lastSession = new Date($scope.weekStats.latestSession);
+					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+					var weeks = days/7;
+					$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
+				})
+				.error(function(data) {
+					alert("Error when getting statistics overview.");
+				});		
+			
+		}
 	}, true);
 }
 
@@ -72,11 +76,20 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 	};
 }
 
-function HomeCtrl($scope, $http, Sessions, Goals, Instruments) {
+function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instruments) {
 	$scope.pageSettings.pageTitle = "OSIRIS GUITAR Journal";
 	$scope.pageSettings.active = "home";
 	$scope.pageSettings.showBackButton = false;
-	$scope.pageSettings.rightButtonText = null;
+	$scope.pageSettings.rightButtonText = "Logout";
+	$scope.pageSettings.rightButtonClick = function() {
+		$http.post('/api/logout', {}, $rootScope.httpConfig)
+			.success(function() {
+				$location.path("/login");
+			})
+			.error(function() {
+				$location.path("/login");
+			});
+	}
 	$scope.Sessions = Sessions;
 	$scope.Goals = Goals;
 	$scope.Instruments = Instruments;
