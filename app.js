@@ -608,7 +608,7 @@ app.get("/api/practicesession/:id", function(req, res) {
 				'<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ogjournal: http://ogp.me/ns/fb/ogjournal#">' +
 				'<meta property="fb:app_id" content="151038621732407" />' +
         		'<meta property="og:title" content="A ' + session.length + ' Minute Practice Session" />' +
-        		'<meta property="og:image" content="http://journal.osirisguitar.com/api/practicesessionimage/' + session.imageId + '" />' +
+        		'<meta property="og:image" content="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '" />' +
         		'<meta property="og:url" content="http://journal.osirisguitar.com/api/practicesession/' + req.params.id + '" />' +
         		'<meta property="og:type" content="ogjournal:practice_session" />' +
         		'<meta property="session_length" content="' + session.length + '" />' +
