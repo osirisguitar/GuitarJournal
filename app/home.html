@@ -86,7 +86,7 @@
     function postToFB(sessionId) {
       console.log("Posting to FB");
       var body = 'Testelitest';
-      FB.api('me/ogjournal:finish', 'post',
+      FB.api('me/ogjournal:log', 'post',
         {
           practice_session: "http://journal.osirisguitar.com/api/practicesession/" + sessionId
         },

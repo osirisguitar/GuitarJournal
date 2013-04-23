@@ -607,10 +607,12 @@ app.get("/api/practicesession/:id", function(req, res) {
 			res.send('<html>' +
 				'<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ogjournal: http://ogp.me/ns/fb/ogjournal#">' +
 				'<meta property="fb:app_id" content="151038621732407" />' +
-        		'<meta property="og:title" content="' + session.length + ' Minute Practice Session" />' +
-        		'<meta property="og:image" content="https://fbstatic-a.akamaihd.net/images/devsite/attachment_blank.png" />' +
+        		'<meta property="og:title" content="A ' + session.length + ' Minute Practice Session" />' +
+        		'<meta property="og:image" content="http://journal.osirisguitar.com/api/practicesessionimage/' + session.imageId + '" />' +
         		'<meta property="og:url" content="http://journal.osirisguitar.com/api/practicesession/' + req.params.id + '" />' +
         		'<meta property="og:type" content="ogjournal:practice_session" />' +
+        		'<meta property="session_length" content="' + session.length + '" />' +
+        		'<meta property="session_instrument" content="' + "Gurka" + '" />' +
 				'</head>');
 			db.close();
 		});
@@ -621,9 +623,13 @@ app.get("/api/practicesessionimage/:id", function(req, res) {
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
 
-		var sessions = db.collection('Sessions');
-		sessions.findOne({ _id: ObjectID(req.params.id) }, function(err, session) {
-			res.send(item);
+		var instruments = db.collection('Instruments');
+		instruments.findOne({ _id: ObjectID(req.params.id) }, function(err, instrument) {
+			if (err)
+				return console.dir(err);
+			res.type("image/jpeg");
+			console.log(instrument.image);
+			res.send(instrument.image.buffer);
 			db.close();
 		});
 	});
