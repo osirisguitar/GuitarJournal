@@ -83,12 +83,12 @@
        fjs.parentNode.insertBefore(js, fjs);
      }(document, 'script', 'facebook-jssdk'));
 
-    function postToFB() {
+    function postToFB(sessionId) {
       console.log("Posting to FB");
       var body = 'Testelitest';
       FB.api('me/ogjournal:finish', 'post',
         {
-          practice_session: "http://samples.ogp.me/152697478233188"
+          practice_session: "http://journal.osirisguitar.com/api/practicesession/" + sessionId
         },
         function(response) {
           if (!response || response.error) {
@@ -202,7 +202,6 @@
       </li>
     </ul>
     <a href="/session/" class="button-block inset">New session</a>
-    <a class="button-block inset" onclick="postToFB();">FB POST</a>
     <h2 class="padded">Instruments</h2>
     <ul class="list inset">
       <li>
@@ -255,6 +254,7 @@
         </div>
       </div>
     </div>
+    <a class="button-block inset" onclick="postToFB();">Post to Facebook</a>
     <div class="input-group" ng-show="editMode">
       <div class="input-row">
         <label>Date</label>
