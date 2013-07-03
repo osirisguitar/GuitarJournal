@@ -80,16 +80,6 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 	$scope.pageSettings.pageTitle = "OSIRIS GUITAR Journal";
 	$scope.pageSettings.active = "home";
 	$scope.pageSettings.showBackButton = false;
-	$scope.pageSettings.rightButtonText = "Logout";
-	$scope.pageSettings.rightButtonClick = function() {
-		$http.post('/api/logout', {}, $rootScope.httpConfig)
-			.success(function() {
-				$location.path("/login");
-			})
-			.error(function() {
-				$location.path("/login");
-			});
-	}
 	$scope.Sessions = Sessions;
 	$scope.Goals = Goals;
 	$scope.Instruments = Instruments;
@@ -244,7 +234,7 @@ function StatsCtrl($scope, $http) {
 	$scope.pageSettings.rightButtonText = null;
 }
 
-function ProfileCtrl($scope, $http, $location, Instruments)
+function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)
 {
 	$scope.Instruments = Instruments;
 	$scope.pageSettings.pageTitle = "Profile";
@@ -254,6 +244,16 @@ function ProfileCtrl($scope, $http, $location, Instruments)
 	$scope.pageSettings.rightButtonClick = function() {
 		$location.path('/instrument/');
 	};
+
+	$scope.logout = function() {
+		$http.post('/api/logout', {}, $rootScope.httpConfig)
+			.success(function() {
+				$location.path("/login");
+			})
+			.error(function() {
+				$location.path("/login");
+			});
+	}
 };
 
 function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $rootScope)

@@ -43,6 +43,10 @@
         window.location = "/auth/facebook";
         return false;
       }
+
+      if (window.location.hash == '#_=_'){
+        window.location.hash = '';
+    }
     </script>
   </head>
   <body ng-controller="AppCtrl">
@@ -388,6 +392,9 @@
         </a>
       </li>
     </ul>
+    <div>
+        <a class="button-negative button-block" ng-click="logout()">Logout</a>
+    </div>
   </script>
 
   <script id="instrument.html" type="text/ng-template">
