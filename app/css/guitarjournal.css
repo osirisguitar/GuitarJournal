@@ -170,3 +170,8 @@ h2.padded {
 .view div {
   margin-bottom:5px;
 }
+
+.facebook-login {
+  margin-top:40px;
+  text-align:center
+}
