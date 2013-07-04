@@ -38,6 +38,14 @@
     <script src="/app/services/goalservice.js"></script>
     <script src="/app/services/instrumentservice.js"></script>
     <script src="/app/controllers/controllers.js"></script>
+    <script src="/app/libs/add-to-homescreen/src/add2home.js"></script>
+    <link rel="stylesheet" href="/app/libs/add-to-homescreen/style/add2home.css">
+
+    <script type="text/javascript">
+      var addToHomeConfig = {
+        message: 'To install this app, add it to you home screen.'
+      };
+    </script>
     <script>
       function facebookAuth() {
         window.location = "/auth/facebook";
