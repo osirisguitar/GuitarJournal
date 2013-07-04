@@ -611,8 +611,8 @@ app.get("/api/practicesession/:id", function(req, res) {
         		'<meta property="og:image" content="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '" />' +
         		'<meta property="og:url" content="http://journal.osirisguitar.com/api/practicesession/' + req.params.id + '" />' +
         		'<meta property="og:type" content="ogjournal:practice_session" />' +
-        		'<meta property="session_length" content="' + session.length + '" />' +
-        		'<meta property="session_instrument" content="' + "Gurka" + '" />' +
+        		'<meta property="ogjournal:session_length" content="' + session.length + '" />' +
+        		'<meta property="ogjournal:session_instrument" content="' + "Gurka" + '" />' +
 				'</head>');
 			db.close();
 		});
