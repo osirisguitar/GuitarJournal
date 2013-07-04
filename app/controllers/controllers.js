@@ -80,6 +80,7 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 	$scope.pageSettings.pageTitle = "OSIRIS GUITAR Journal";
 	$scope.pageSettings.active = "home";
 	$scope.pageSettings.showBackButton = false;
+	$scope.pageSettings.rightButtonText = null;
 	$scope.Sessions = Sessions;
 	$scope.Goals = Goals;
 	$scope.Instruments = Instruments;
