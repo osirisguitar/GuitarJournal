@@ -604,17 +604,35 @@ app.get("/api/practicesession/:id", function(req, res) {
 
 		var sessions = db.collection('Sessions');
 		sessions.findOne({ _id: ObjectID(req.params.id) }, function(err, session) {
-			res.send('<html>' +
-				'<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ogjournal: http://ogp.me/ns/fb/ogjournal#">' +
-				'<meta property="fb:app_id" content="151038621732407" />' +
-        		'<meta property="og:title" content="A ' + session.length + ' Minute Practice Session" />' +
-        		'<meta property="og:image" content="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '" />' +
-        		'<meta property="og:url" content="http://journal.osirisguitar.com/api/practicesession/' + req.params.id + '" />' +
-        		'<meta property="og:type" content="ogjournal:practice_session" />' +
-        		'<meta property="ogjournal:session_length" content="' + session.length + '" />' +
-        		'<meta property="ogjournal:session_instrument" content="' + "Gurka" + '" />' +
-				'</head>');
-			db.close();
+			var instruments = db.collection('Instruments');
+			instruments.findOne({ _id: session.instrumentId }, function(err, instrument) {			
+				var goals = db.collection('Goals');
+				goals.findOne({ _id: session.goalId }, function(err, goal) {
+					var html = '<html>' +
+						'<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ogjournal: http://ogp.me/ns/fb/ogjournal#">\n' +
+						'<meta property="fb:app_id" content="151038621732407" />\n' +
+		        		'<meta property="og:title" content="A ' + session.length + ' Minute Practice Session" />\n';
+		        		if (instrument) {
+		        			html += '<meta property="og:image" content="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '" />\n';
+		        			html += '<meta property="ogjournal:session_instrument" content="' + instrument.name + '" />';
+		        		}
+		        		html += '<meta property="og:url" content="http://journal.osirisguitar.com/api/practicesession/' + req.params.id + '" />\n' +
+		        		'<meta property="og:type" content="ogjournal:practice_session" />\n' +
+		        		'<meta property="ogjournal:session_length" content="' + session.length + '" />\n' +
+		        		'<meta property="ogjournal:session_rating" content="' + session.rating + '" />\n';	        		
+		        		if (goal) {
+		        			'<meta property="ogjournal:session_goal" content="' + goal.title + '"';
+		        		}
+		        		html += '<body>' +
+		        		'<h1>Practice Session</h1>' +
+		        		'<p><img style="float:left;padding-right:10px;" src="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '">' +
+		        		'A 45 minute practice session using the instrument ' + '</p>' +
+		        		'</body>' +
+						'</head>';
+					res.send(html);
+					db.close();
+				});
+			});
 		});
 	});
 });
