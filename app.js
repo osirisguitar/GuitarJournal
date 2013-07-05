@@ -615,15 +615,17 @@ app.get("/api/practicesession/:id", function(req, res) {
 					var html = '<html>' +
 						'<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ogjournal: http://ogp.me/ns/fb/ogjournal#">\n' +
 						'<meta property="fb:app_id" content="151038621732407" />\n' +
-		        		'<meta property="og:title" content="a ' + session.length + ' minute Practice Session" />\n';
+		        		'<meta property="og:title" content="A ' + session.length + ' minute Practice Session" />\n';
 		        		if (instrument) {
 		        			html += '<meta property="og:image" content="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '" />\n';
 		        			html += '<meta property="ogjournal:session_instrument" content="' + instrument.name + '" />';
 		        		}
 		        		html += '<meta property="og:url" content="http://journal.osirisguitar.com/api/practicesession/' + req.params.id + '" />\n' +
-		        		'<meta property="og:type" content="ogjournal:practice_session" />\n' +
-		        		'<meta property="ogjournal:session_length" content="' + session.length + '" />\n' +
-		        		'<meta property="ogjournal:session_rating" content="' + session.rating + '" />\n';	        		
+		        		'<meta property="og:type" content="ogjournal:practice_session" />\n';
+		        		if (session.length)
+		        			html += '<meta property="ogjournal:session_length" content="' + session.length + '" />\n';
+		        		if (session.rating)
+		        			html += '<meta property="ogjournal:session_rating" content="' + session.rating + '" />\n';	        		
 		        		if (goal) {
 		        			html += '<meta property="ogjournal:session_goal" content="' + goal.title + '"\n';
 		        		}
