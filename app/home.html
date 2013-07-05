@@ -64,8 +64,8 @@
       // init the FB JS SDK
       FB.init({
         appId      : '151038621732407',                        // App ID from the app dashboard
-        //channelUrl : '//journal.osirisguitar.com/channel.html', // Channel file for x-domain comms
-        channelUrl: '//jdev.osirisguitar.com:1337/app/channel.html',
+        channelUrl : '//journal.osirisguitar.com/channel.html', // Channel file for x-domain comms
+        //channelUrl: '//jdev.osirisguitar.com:1337/app/channel.html',
         status     : true,                                 // Check Facebook Login status
         xfbml      : true                                  // Look for social plugins on the page
       });
@@ -98,7 +98,7 @@
     function postToFB(sessionId) {
       console.log("Posting to FB");
       var body = 'Testelitest';
-      FB.api('me/ogjournal:log', 'post',
+      FB.api('me/ogjournal:complete', 'post',
         {
           practice_session: "http://journal.osirisguitar.com/api/practicesession/" + sessionId
         },
