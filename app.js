@@ -615,7 +615,7 @@ app.get("/api/practicesession/:id", function(req, res) {
 					var html = '<html>' +
 						'<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ogjournal: http://ogp.me/ns/fb/ogjournal#">\n' +
 						'<meta property="fb:app_id" content="151038621732407" />\n' +
-		        		'<meta property="og:title" content="A ' + session.length + ' minute Practice Session" />\n';
+		        		'<meta property="og:title" content="a ' + session.length + ' minute Practice Session" />\n';
 		        		if (instrument) {
 		        			html += '<meta property="og:image" content="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '" />\n';
 		        			html += '<meta property="ogjournal:session_instrument" content="' + instrument.name + '" />';
@@ -635,7 +635,7 @@ app.get("/api/practicesession/:id", function(req, res) {
 		        		if (instrument)
 		        			html += '<b>Instrument:</b> ' + instrument.name + '<br>\n';
 		        		if (goal)
-			        		html += '<b>Goal:</b> ' + instrument.title + '<br>\n';
+			        		html += '<b>Goal:</b> ' + goal.title + '<br>\n';
 		        		if (session.rating)
 			        		html += '<b>Rating:</b> ' + session.rating + '<br>\n';
 		        		'</p></body>';
