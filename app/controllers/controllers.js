@@ -31,11 +31,9 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 	$scope.Sessions = Sessions;
 
 	$scope.$watch('Sessions.sessions', function () {
-		console.log("sessions updated!");
 		if ($rootScope.loggedIn) {
 			$http.get('/api/statistics/overview')
 				.success(function(data) {
-					console.log("overview", data);
 					$scope.statsOverview = data;
 					var firstSession = new Date($scope.statsOverview.firstSession);
 					var lastSession = new Date($scope.statsOverview.latestSession);
@@ -49,7 +47,6 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 
 			$http.get('/api/statistics/overview/7')
 				.success(function(data) {
-					console.log("weekstats", data);
 					$scope.weekStats = data;
 					var firstSession = new Date($scope.weekStats.firstSession);
 					var lastSession = new Date($scope.weekStats.latestSession);
@@ -70,7 +67,6 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 			$http.post("/api/login", {email: $scope.email, password: $scope.password}, $rootScope.httpConfig).success(function(data) {
 				if (data._id)
 					$rootScope.loggedIn = true;
-				console.log('Log in result', data);
 				$location.path("/");
 			}).error(function(data) { console.log("Could not log in") });
 	};
@@ -294,7 +290,6 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 	};
 
 	$scope.setImage = function(imageField) {
-		console.log(imageField.files[0]);
 		$scope.files = imageField.files;
 		var file = $scope.files[0];
 
