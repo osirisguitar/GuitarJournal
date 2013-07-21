@@ -80,18 +80,15 @@ passport.use(new FacebookStrategy({
 ));
 
 passport.serializeUser(function(user, done) {
-	console.log('serialize', user);
 	done(null, user._id);
 });
 
 passport.deserializeUser(function(id, done) {
-	console.log('deserialize', id);
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return done(err); }
 
 		var users = db.collection('Users');
 		users.findOne({ _id: ObjectID(id) }, function(err, user) {
-			console.log('deserialize: found', user);
 			db.close();
 			done(err, user);
     	});
@@ -185,7 +182,6 @@ app.get('/api/loggedin', function(req, res) {
 function checkLogin(req, res) {
 	if (!req.session.loggedInUser)
 	{
-		console.log("No logged in user");
 		res.send("401", "Not logged in");
 		return null;
 	}
@@ -607,12 +603,15 @@ app.get("/api/practicesession/:id", function(req, res) {
 			var instruments = db.collection('Instruments');
 			instruments.findOne({ _id: session.instrumentId }, function(err, instrument) {
 				if (err)
-					console.dir(err);	
+					console.dir(err);
+				else
+					console.log("Instrument", session.instrumentId);
 				var goals = db.collection('Goals');
 				goals.findOne({ _id: session.goalId }, function(err, goal) {
 					if (err)
 						console.dir(err);
 					var html = '<html>' +
+						'<style>body { font-family:Arial,Helvetica; }</style>'
 						'<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ogjournal: http://ogp.me/ns/fb/ogjournal#">\n' +
 						'<meta property="fb:app_id" content="151038621732407" />\n' +
 		        		'<meta property="og:title" content="a ' + session.length + ' minute Practice Session" />\n';
