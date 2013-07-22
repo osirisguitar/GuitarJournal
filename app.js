@@ -627,7 +627,7 @@ app.get("/api/practicesession/:id", function(req, res) {
 		        		if (session.rating)
 		        			html += '<meta property="ogjournal:session_rating" content="' + session.rating + '" />\n';	        		
 		        		if (goal) {
-		        			html += '<meta property="ogjournal:session_goal" content="' + goal.title + '"\n';
+		        			html += '<meta property="ogjournal:session_goal" content="' + goal.title + '" />\n';
 		        		}
 		        		html += '</head><body>' +
 		        		'<h1>A ' + session.length + ' minute Practice Session</h1>' +
