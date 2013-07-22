@@ -44,7 +44,6 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies']).
     $locationProvider.html5Mode(true);
   }])
   .directive('fileChange', function () {
-
       var linker = function ($scope, element, attributes) {
           // onChange, push the files to $scope.files.
           element.bind('change', function (event) {

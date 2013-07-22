@@ -620,6 +620,7 @@ app.get("/api/practicesession/:id", function(req, res) {
 		        			html += '<meta property="ogjournal:session_instrument" content="' + instrument.name + '" />';
 		        		}
 		        		html += '<meta property="og:url" content="http://journal.osirisguitar.com/api/practicesession/' + req.params.id + '" />\n' +
+		        		'<meta property="fb:explicitly_shared" content="true"/>\n' +
 		        		'<meta property="og:type" content="ogjournal:practice_session" />\n';
 		        		if (session.length)
 		        			html += '<meta property="ogjournal:session_length" content="' + session.length + '" />\n';
