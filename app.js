@@ -611,7 +611,7 @@ app.get("/api/practicesession/:id", function(req, res) {
 					if (err)
 						console.dir(err);
 					var html = '<html>' +
-						'<style>body { font-family:Arial,Helvetica; }</style>'
+						'<style>body { font-family:Arial,Helvetica; }</style>' +
 						'<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ogjournal: http://ogp.me/ns/fb/ogjournal#">\n' +
 						'<meta property="fb:app_id" content="151038621732407" />\n' +
 		        		'<meta property="og:title" content="a ' + session.length + ' minute Practice Session" />\n';
