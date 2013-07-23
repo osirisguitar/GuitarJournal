@@ -96,7 +96,6 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 	}
 
 	$rootScope.$watch('loggedIn', function() {
-		console.log("logged in", $rootScope.loggedIn);
 		if ($rootScope.loggedIn) {
 			service.getGoals();
 		}

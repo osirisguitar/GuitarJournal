@@ -7,7 +7,6 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 		$http.get('/api/instruments')
 			.success(function(data) {
 				service.instruments = data;
-				console.log(service.instruments);
 			})
 			.error(function(data) {
 				alert("Error when getting instruments.");
@@ -54,8 +53,11 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 	}
 
 	service.getInstrumentImageData = function(instrumentId) {
+		if (!instrumentId)
+			return "";
 		if (service.instruments) {
 			var name = null;
+			var imageData = null;
 			service.instruments.some(function (instrument) {
 				if (instrument._id == instrumentId) {
 					imageData = instrument.image;
@@ -65,25 +67,22 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 			if (imageData) {
 				return "data:image/jpeg;base64," + imageData;			
 			}
-			else
-				return "";
+			else {
+				return "";				
+			}
 		}		
 	}
 
 	service.saveInstrument = function(instrument, successCallback, failureCallback) {
-		//delete instrument.image;
-		console.log("saveInstrument", instrument);
 		$http.post('/api/instruments', instrument, $rootScope.httpConfig)
 			.success(function(data) {
 				// 1 means updated, otherwise replace to get proper db id.
-				console.log("success");
 				service.getInstruments();
 
 				if (successCallback)
 					successCallback();
 			})
 			.error(function(data) { 
-				console.log("failure");
 				if (failureCallback)
 					failureCallback();
 			});
@@ -104,7 +103,6 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 	}
 
 	$rootScope.$watch('loggedIn', function() {
-		console.log("logged in", $rootScope.loggedIn);
 		if ($rootScope.loggedIn) {
 			service.getInstruments();
 		}

@@ -8,10 +8,8 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 		};
 		if (data._id) {
 			$rootScope.loggedIn = true;
-			console.log('logged in user', data._id);
 		}
 		else {
-			console.log('logged in redirecting...');
 			$location.path("/login");
 		}
 	}).error(function(data) { console.log("Couldn't check logged in status"); });

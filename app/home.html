@@ -101,7 +101,7 @@
       FB.api('me/ogjournal:complete', 'post',
         {
           practice_session: "http://journal.osirisguitar.com/api/practicesession/" + sessionId,
-          fb:explicitly_shared :true
+          "fb:explicitly_shared":"true"
         },
         function(response) {
           if (!response || response.error) {

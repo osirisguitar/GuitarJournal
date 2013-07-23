@@ -17,7 +17,6 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 			})
 			.error(function(data, status) {
 				alert("Error when getting sessions");
-				console.log("getSessions error", data, status);
 			});							
 	}
 
@@ -77,7 +76,6 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 	}
 
 	$rootScope.$watch('loggedIn', function() {
-		console.log("logged in", $rootScope.loggedIn);
 		if ($rootScope.loggedIn) {
 			service.getSessions();
 		}

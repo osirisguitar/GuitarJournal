@@ -630,10 +630,12 @@ app.get("/api/practicesession/:id", function(req, res) {
 		        			html += '<meta property="ogjournal:session_goal" content="' + goal.title + '" />\n';
 		        		}
 		        		html += '</head><body>' +
-		        		'<h1>A ' + session.length + ' minute Practice Session</h1>' +
-		        		'<p><img style="float:left;padding-right:10px;" src="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '">';
-		        		if (instrument)
+		        		'<h1>A ' + session.length + ' minute Practice Session</h1>\n' +
+		        		'<p>';
+		        		if (instrument) {
+							html += '<img style="float:left;padding-right:10px;" src="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '">\n';
 		        			html += '<b>Instrument:</b> ' + instrument.name + '<br>\n';
+		        		}
 		        		if (goal)
 			        		html += '<b>Goal:</b> ' + goal.title + '<br>\n';
 		        		if (session.rating)
