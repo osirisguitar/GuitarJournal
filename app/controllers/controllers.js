@@ -1,5 +1,8 @@
 function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 	$scope.pageSettings = {};
+	$rootScope.apiStatus = {};
+	$rootScope.apiStatus.loading = 0;
+	$scope.apiStatus = $rootScope.apiStatus;
 
 	$http.get('/api/loggedin').success(function(data) {
 		$rootScope.csrf = data._csrf;

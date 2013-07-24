@@ -4,12 +4,15 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 	service.goals = undefined;
 
 	service.getGoals = function() {
+		$rootScope.apiStatus.loading++;
 		$http.get('/api/goals')
 			.success(function(data) {
 				service.goals = data;
+				$rootScope.apiStatus.loading--;
 			})
 			.error(function(data) {
 				alert("Error when getting sessions.");
+				$rootScope.apiStatus.loading--;
 			});							
 	}
 
@@ -28,12 +31,15 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 			}
 
 			// Not loaded into memory, get from DB.
+			$rootScope.apiStatus.loading++;
 			$http.get('/api/goal/' + goalId)
 				.success(function(data) {
+					$rootScope.apiStatus.loading--;
 					if (successCallback)
 						successCallback(data);
 				})
 				.error(function(data) {
+					$rootScope.apiStatus.loading--;
 					failureCallback(data);
 				});
 		}

@@ -4,12 +4,15 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 	service.instruments = undefined;
 
 	service.getInstruments = function() {
+		$rootScope.apiStatus.loading++;
 		$http.get('/api/instruments')
 			.success(function(data) {
 				service.instruments = data;
+				$rootScope.apiStatus.loading--;
 			})
 			.error(function(data) {
 				alert("Error when getting instruments.");
+				$rootScope.apiStatus.loading--;
 			});							
 	}
 
@@ -28,12 +31,15 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 			}
 
 			// Not loaded into memory, get from DB.
+			$rootScope.apiStatus.loading++;
 			$http.get('/api/instrument/' + instrumentId)
 				.success(function(data) {
+					$rootScope.apiStatus.loading--;
 					if (successCallback)
 						successCallback(data);
 				})
 				.error(function(data) {
+					$rootScope.apiStatus.loading--;
 					failureCallback(data);
 				});
 		}

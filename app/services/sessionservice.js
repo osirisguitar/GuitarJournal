@@ -3,6 +3,7 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 	service.sessions = undefined;
 
 	service.getSessions = function(loadMore) {
+		$rootScope.apiStatus.loading++;
 		var url = '/api/sessions';
 		if (!loadMore) {
 			service.sessions = [];
@@ -14,9 +15,11 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 		$http.get(url)
 			.success(function(data) {
 				service.sessions = service.sessions.concat(data);
+				$rootScope.apiStatus.loading--;
 			})
 			.error(function(data, status) {
 				alert("Error when getting sessions");
+				$rootScope.apiStatus.loading--;
 			});							
 	}
 
@@ -35,12 +38,15 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 			}
 
 			// Not loaded into memory, get from DB.
+			$rootScope.apiStatus.loading++;
 			$http.get('/api/session/' + sessionId)
 				.success(function(data) {
+					$rootScope.apiStatus.loading--;
 					if (successCallback)
 						successCallback(data);
 				})
 				.error(function(data) {
+					$rootScope.apiStatus.loading--;
 					failureCallback(data);
 				});
 		}
