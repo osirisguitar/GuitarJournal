@@ -95,7 +95,6 @@ passport.deserializeUser(function(id, done) {
 	});
 });
 
-
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
@@ -117,6 +116,9 @@ app.get('/auth/facebook/callback',
 // App stuff, static files
 app.get("/", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
+});
+app.get("/about", function(req, res) {
+	res.sendfile(__dirname + "/about/about.html");
 });
 app.get("/login*", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
@@ -141,6 +143,7 @@ app.get("/app", function(req, res) {
 });
 app.use('/componenttest', express.static(__dirname + '/componenttest'));
 app.use('/app', express.static(__dirname + '/app'));
+app.use('/about', express.static(__dirname + '/about'));
 
 app.post('/api/login',
 	passport.authenticate('local'),

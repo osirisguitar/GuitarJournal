@@ -1,0 +1,56 @@
+body
+{
+	background: url(/about/bg-blur.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	font-family:'Helvetica Neue',Helvetica;
+	font-size:10pt;
+}
+
+h1, h2, h3
+{
+	/*font-family: Georgia,'Times New Roman',Serif;*/
+	font-family:Nobile;
+	font-weight:700;
+	color:#BD934F;
+	text-transform:uppercase;
+	padding-top:15px;
+}
+
+h1
+{
+	font-size:24px;
+	line-height:28px;
+}
+
+h2
+{
+	font-size:20px;
+	line-height:20px;
+}
+
+h3
+{
+	margin-top:20px;
+	font-size:17px;
+	line-height:17px;	
+}
+
+#wrapper {
+	margin:auto;
+	text-align:center;
+}
+
+#wrapper img {
+	padding:10px;
+}
+
+.content {
+	text-align:left;
+	background-color:rgba(22, 20, 16, 0.8);
+	color:#BBB;
+	margin:10px;
+	padding:20px;
+} 
