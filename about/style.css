@@ -7,6 +7,7 @@ body
 	background-size: cover;
 	font-family:'Helvetica Neue',Helvetica;
 	font-size:10pt;
+	line-height:14pt;
 }
 
 h1, h2, h3
@@ -16,13 +17,12 @@ h1, h2, h3
 	font-weight:700;
 	color:#BD934F;
 	text-transform:uppercase;
-	padding-top:15px;
 }
 
 h1
 {
 	font-size:24px;
-	line-height:28px;
+	line-height:24px;
 }
 
 h2
@@ -61,11 +61,7 @@ h3
 	color:#BBB;
 	margin:5px;
 	padding:20px;
-}
-
-.banner {
-	text-align:center;
-	display:block;
+	overflow:auto;
 }
 
 a:link, a:active, a:visited
@@ -75,4 +71,10 @@ a:link, a:active, a:visited
 	text-decoration:none;
 	font-size:12pt;
 	border-bottom:dotted 1px #BD934F;
+}
+
+a.banner {
+	text-align:center;
+	display:block;
+	border-bottom:none;
 }

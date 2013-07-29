@@ -616,6 +616,9 @@ app.get("/api/practicesession/:id", function(req, res) {
 					var html = '<html>' +
 						'<style>body { font-family:Arial,Helvetica; }</style>' +
 						'<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ogjournal: http://ogp.me/ns/fb/ogjournal#">\n' +
+						'<link rel="stylesheet" href="/about/style.css">\n' +
+						'<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile%3A700&#038;subset=latin%2Clatin-ext&#038;ver=All" type="text/css" media="all" />\n' +
+						'<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">\n' +
 						'<meta property="fb:app_id" content="151038621732407" />\n' +
 		        		'<meta property="og:title" content="a ' + session.length + ' minute Practice Session" />\n';
 		        		if (instrument) {
@@ -633,17 +636,22 @@ app.get("/api/practicesession/:id", function(req, res) {
 		        			html += '<meta property="ogjournal:session_goal" content="' + goal.title + '" />\n';
 		        		}
 		        		html += '</head><body>' +
-		        		'<h1>A ' + session.length + ' minute Practice Session</h1>\n' +
+		        		'<div id="wrapper">\n' +
+						'<img src="/about/og-logo.png">\n' +
+						'<div class="content">\n';
+		        		html += '<div style="float:left"><h1>A ' + session.length + ' minute Practice Session</h1>\n' +
 		        		'<p>';
 		        		if (instrument) {
-							html += '<img style="float:left;padding-right:10px;" src="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '">\n';
+							html += '<img style="float:right;padding-left:10px;margin-top:0px;margin-bottom:20px;" src="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '">\n';
+						}
+		        		if (instrument) {
 		        			html += '<b>Instrument:</b> ' + instrument.name + '<br>\n';
 		        		}
 		        		if (goal)
 			        		html += '<b>Goal:</b> ' + goal.title + '<br>\n';
 		        		if (session.rating)
 			        		html += '<b>Rating:</b> ' + session.rating + '<br>\n';
-		        		'</p></body>';
+		        		'</p></div></div></div></body>';
 					res.send(html);
 					db.close();
 				});
