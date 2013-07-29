@@ -59,13 +59,20 @@ h3
 	text-align:left;
 	background-color:rgba(22, 20, 16, 0.8);
 	color:#BBB;
-	margin:10px;
+	margin:5px;
 	padding:20px;
-} 
+}
+
+.banner {
+	text-align:center;
+	display:block;
+}
 
 a:link, a:active, a:visited
 {
-	color:#d8d7d3;
+	color:#BD934F;
 	font-weight:bold;
 	text-decoration:none;
+	font-size:12pt;
+	border-bottom:dotted 1px #BD934F;
 }
