@@ -230,6 +230,19 @@ function StatsCtrl($scope, $http) {
 	$scope.pageSettings.active = "stats";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
+	$scope.last30days = {
+		labels: ["1", "2", "3", "4", "5", "6"],
+		datasets: [ {
+            fillColor : "rgba(151,187,205,1)",
+            strokeColor : "#f1c40f",
+            pointColor : "rgba(151,187,205,1)",
+            pointStrokeColor : "#f1c40f",
+            data : [15, 30, 60, 20, 20, 30]
+		} ]
+	};
+	$scope.options30days = {
+
+	};
 }
 
 function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)

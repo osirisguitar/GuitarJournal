@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="/app/css/guitarjournal.css">
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
+    <script src="/app/libs/Chart.min.js"></script>
+    <script src="/app/libs/angles.js"></script>
     <script src="/app/libs/moment.min.js"></script>
     <script src="/app/controllers/app.js"></script>
     <script src="/app/services/sessionservice.js"></script>
@@ -548,7 +550,7 @@
 
   <script id="stats.html" type="text/ng-template">
     <div class="content-padded">
-      <h2>Sessions</h2>
+      <h2>Sessions (lifetime)</h2>
       <div class="label">Total sessions:</div>
       <div class="info">{{statsOverview.totalSessions}}</div>
       <div class="label">Total time:</div>
@@ -561,6 +563,10 @@
       <div class="info">{{statsOverview.sessionsPerWeek}}</div>      
       <div class="label">Latest session:</div>
       <div class="info">{{statsOverview.latestSession}}</div> 
+    </div>
+    <div class="content-padded">
+      <h2>Sessions last 30 days</h2>
+      <canvas barchart options="options30days" data="last30days" id="last30days" width="270" height="150"></canvas>    
     </div>
     <div class="content-padded">
       <h2>Goals</h2>
@@ -577,7 +583,6 @@
       <div class="info">{{getInstrument(statsOverview.mostUsedInstrument).name}}</div>
     </div>
   </script>
-
 
   <script id="profile.html" type="text/ng-template">
     <h2 class="padded">Profile</h2>
