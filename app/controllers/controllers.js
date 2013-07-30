@@ -231,18 +231,47 @@ function StatsCtrl($scope, $http) {
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
 	$scope.last30days = {
-		labels: ["1", "2", "3", "4", "5", "6"],
+		labels: ["", "", "12 jun", "", "", "", "", "", "", "19 jun", "", "", "", "", "", "", "26 jun", "", "", "", "", "", "", "3 aug", "", "", "", ""],
 		datasets: [ {
             fillColor : "rgba(151,187,205,1)",
             strokeColor : "#f1c40f",
             pointColor : "rgba(151,187,205,1)",
             pointStrokeColor : "#f1c40f",
-            data : [15, 30, 60, 20, 20, 30]
+            data : [15, 30, 60, 20, 20, 30, 11, 15, 30, 0, 20, 20, 30, 0, 0, 30, 60, 0, 0, 30, 11, 15, 30, 60, 20, 20, 30, 11]
 		} ]
 	};
-	$scope.options30days = {
 
-	};
+	$scope.mondayColor = "#bb0000";
+	$scope.tuesdayColor = "#bbbb00";
+	$scope.wednesdayColor = "#00bb00";
+	$scope.thursdayColor = "#00bbbb";
+	$scope.fridayColor = "#0000bb";
+	$scope.saturdayColor = "#bb00bb";
+	$scope.sundayColor = "#000000";
+	$scope.perWeekday =
+		[{
+			value: 12,
+			color: $scope.mondayColor
+		}, {
+			value: 50,
+			color: $scope.tuesdayColor
+		}, {
+			value: 22,
+			color: $scope.wednesdayColor
+		}, {
+			value: 41,
+			color: $scope.thursdayColor
+		}, {
+			value: 18,
+			color: $scope.fridayColor
+		}, {
+			value: 33,
+			color: $scope.saturdayColor
+		}, {
+			value: 22,
+			color: $scope.sundayColor
+		}
+		];
 }
 
 function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)

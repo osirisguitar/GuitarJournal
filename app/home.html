@@ -550,7 +550,7 @@
 
   <script id="stats.html" type="text/ng-template">
     <div class="content-padded">
-      <h2>Sessions (lifetime)</h2>
+      <h2>Sessions</h2>
       <div class="label">Total sessions:</div>
       <div class="info">{{statsOverview.totalSessions}}</div>
       <div class="label">Total time:</div>
@@ -565,8 +565,21 @@
       <div class="info">{{statsOverview.latestSession}}</div> 
     </div>
     <div class="content-padded">
-      <h2>Sessions last 30 days</h2>
-      <canvas barchart options="options30days" data="last30days" id="last30days" width="270" height="150"></canvas>    
+      <h2>Session durations/30 days</h2>
+      <canvas barchart options="options30days" data="last30days" id="last30days" width="270" height="200"></canvas>    
+    </div>
+    <div class="content-padded">
+      <h2>Sessions per weekday</h2>
+      <canvas donutchart options="optionsPerWeekday" data="perWeekday" id="perWeekday" width="200" height="200" style="float:left;"></canvas>
+      <div style="float:left;margin-top:20px;margin-left:15px;">
+        <div><span style="color:{{mondayColor}}">&#9724;</span> Mon</div>
+        <div><span style="color:{{tuesdayColor}}">&#9724;</span> Tue</div>
+        <div><span style="color:{{wednesdayColor}}">&#9724;</span> Wed</div>
+        <div><span style="color:{{thursdayColor}}">&#9724;</span> Thu</div>
+        <div><span style="color:{{fridayColor}}">&#9724;</span> Fri</div>
+        <div><span style="color:{{saturdayColor}}">&#9724;</span> Sat</div>
+        <div><span style="color:{{sundayColor}}">&#9724;</span> Sun</div>
+      </div>   
     </div>
     <div class="content-padded">
       <h2>Goals</h2>
