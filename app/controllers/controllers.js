@@ -233,9 +233,9 @@ function StatsCtrl($scope, $http) {
 	$scope.last30days = {
 		labels: ["", "", "12 jun", "", "", "", "", "", "", "19 jun", "", "", "", "", "", "", "26 jun", "", "", "", "", "", "", "3 aug", "", "", "", ""],
 		datasets: [ {
-            fillColor : "rgba(151,187,205,1)",
+            fillColor : "#BD934F",
             strokeColor : "#f1c40f",
-            pointColor : "rgba(151,187,205,1)",
+            pointColor : "#BD934F",
             pointStrokeColor : "#f1c40f",
             data : [15, 30, 60, 20, 20, 30, 11, 15, 30, 0, 20, 20, 30, 0, 0, 30, 60, 0, 0, 30, 11, 15, 30, 60, 20, 20, 30, 11]
 		} ]
@@ -272,6 +272,30 @@ function StatsCtrl($scope, $http) {
 			color: $scope.sundayColor
 		}
 		];
+
+	$scope.sessionsPerWeek = {
+		labels: ["", "", "", "", "", "", "", "", "", ""],
+		datasets: [{
+            fillColor : "#BD934F",
+            strokeColor : "#f1c40f",
+            pointColor : "#BD934F",
+            pointStrokeColor : "#f1c40f",
+            data : [2, 1, 0, 3, 2, 2, 1, 0, 0, 4]		
+		}]
+	};
+
+	$scope.minutesPerWeek = {
+		labels: ["", "", "", "", "", "", "", "", "", ""],
+		datasets: [{
+            fillColor : "#BD934F",
+            strokeColor : "#f1c40f",
+            pointColor : "#BD934F",
+            pointStrokeColor : "#f1c40f",
+            data : [15, 30, 60, 20, 20, 30, 11, 15, 30, 0]		
+		}]
+	};
+
+	$scope.Math = Math;
 }
 
 function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)

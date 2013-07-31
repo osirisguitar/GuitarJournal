@@ -554,7 +554,7 @@
       <div class="label">Total sessions:</div>
       <div class="info">{{statsOverview.totalSessions}}</div>
       <div class="label">Total time:</div>
-      <div class="info">{{statsOverview.totalLength}} minutes</div>
+      <div class="info">{{Math.floor(statsOverview.totalLength / 60)}} hours, {{statsOverview.totalLength % 60}} minutes</div>
       <div class="label">Average time:</div>
       <div class="info">{{statsOverview.averageLength}} minutes</div>
       <div class="label">Average rating:</div>
@@ -562,10 +562,18 @@
       <div class="label">Sessions per week:</div>
       <div class="info">{{statsOverview.sessionsPerWeek}}</div>      
       <div class="label">Latest session:</div>
-      <div class="info">{{statsOverview.latestSession}}</div> 
+      <div class="info">{{statsOverview.latestSession | date:'yyyy-MM-dd'}}</div> 
     </div>
     <div class="content-padded">
-      <h2>Session durations/30 days</h2>
+      <h2>Sessions per week</h2>
+      <canvas barchart options="optionsWeek" data="sessionsPerWeek" id="sessionsPerWeek" width="270" height="200"></canvas>    
+    </div>
+    <div class="content-padded">
+      <h2>Minutes per week</h2>
+      <canvas barchart options="optionsWeek" data="minutesPerWeek" id="minutesPerWeek" width="270" height="200"></canvas>    
+    </div>
+    <div class="content-padded">
+      <h2>Session durations per day</h2>
       <canvas barchart options="options30days" data="last30days" id="last30days" width="270" height="200"></canvas>    
     </div>
     <div class="content-padded">
