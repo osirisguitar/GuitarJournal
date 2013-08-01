@@ -39,6 +39,7 @@
     <script src="/app/services/sessionservice.js"></script>
     <script src="/app/services/goalservice.js"></script>
     <script src="/app/services/instrumentservice.js"></script>
+    <script src="/app/services/statisticsservice.js"></script>
     <script src="/app/controllers/controllers.js"></script>
     <script src="/app/libs/add-to-homescreen/src/add2home.js"></script>
     <link rel="stylesheet" href="/app/libs/add-to-homescreen/style/add2home.css">
@@ -580,13 +581,13 @@
       <h2>Sessions per weekday</h2>
       <canvas donutchart options="optionsPerWeekday" data="perWeekday" id="perWeekday" width="200" height="200" style="float:left;"></canvas>
       <div style="float:left;margin-top:20px;margin-left:15px;">
-        <div><span style="color:{{mondayColor}}">&#9724;</span> Mon</div>
-        <div><span style="color:{{tuesdayColor}}">&#9724;</span> Tue</div>
-        <div><span style="color:{{wednesdayColor}}">&#9724;</span> Wed</div>
-        <div><span style="color:{{thursdayColor}}">&#9724;</span> Thu</div>
-        <div><span style="color:{{fridayColor}}">&#9724;</span> Fri</div>
-        <div><span style="color:{{saturdayColor}}">&#9724;</span> Sat</div>
-        <div><span style="color:{{sundayColor}}">&#9724;</span> Sun</div>
+        <div><span style="color:{{weekdayColors[1]}}">&#9724;</span> Mon</div>
+        <div><span style="color:{{weekdayColors[2]}}">&#9724;</span> Tue</div>
+        <div><span style="color:{{weekdayColors[3]}}">&#9724;</span> Wed</div>
+        <div><span style="color:{{weekdayColors[4]}}">&#9724;</span> Thu</div>
+        <div><span style="color:{{weekdayColors[5]}}">&#9724;</span> Fri</div>
+        <div><span style="color:{{weekdayColors[6]}}">&#9724;</span> Sat</div>
+        <div><span style="color:{{weekdayColors[0]}}">&#9724;</span> Sun</div>
       </div>   
     </div>
     <div class="content-padded">

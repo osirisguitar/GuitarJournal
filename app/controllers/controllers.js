@@ -225,7 +225,10 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 	};
 };
 
-function StatsCtrl($scope, $http) {
+function StatsCtrl($scope, $http, Statistics) {
+	console.log(Statistics);
+	$scope.Statistics = Statistics;
+	Statistics.getSessionsPerWeekday();
 	$scope.pageSettings.pageTitle = "Statistics";
 	$scope.pageSettings.active = "stats";
 	$scope.pageSettings.showBackButton = false;
@@ -241,37 +244,15 @@ function StatsCtrl($scope, $http) {
 		} ]
 	};
 
-	$scope.mondayColor = "#bb0000";
-	$scope.tuesdayColor = "#bbbb00";
-	$scope.wednesdayColor = "#00bb00";
-	$scope.thursdayColor = "#00bbbb";
-	$scope.fridayColor = "#0000bb";
-	$scope.saturdayColor = "#bb00bb";
-	$scope.sundayColor = "#000000";
-	$scope.perWeekday =
-		[{
-			value: 12,
-			color: $scope.mondayColor
-		}, {
-			value: 50,
-			color: $scope.tuesdayColor
-		}, {
-			value: 22,
-			color: $scope.wednesdayColor
-		}, {
-			value: 41,
-			color: $scope.thursdayColor
-		}, {
-			value: 18,
-			color: $scope.fridayColor
-		}, {
-			value: 33,
-			color: $scope.saturdayColor
-		}, {
-			value: 22,
-			color: $scope.sundayColor
+	$scope.weekdayColors = [ "#bb0000", "#bbbb00", "#00bb00", "#00bbbb", "#0000bb", "#bb00bb", "#000000"];
+
+	$scope.$watch("Statistics.perWeekday", function() {
+		console.log($scope.Statistics.perWeekday);
+		$scope.perWeekday = [];
+		for (i = 0; i < 7; i++) {
+			$scope.perWeekday.push({ value: Statistics.perWeekday[i], color: $scope.weekdayColors[i] });
 		}
-		];
+	}, true);
 
 	$scope.sessionsPerWeek = {
 		labels: ["", "", "", "", "", "", "", "", "", ""],

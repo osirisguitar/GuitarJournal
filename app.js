@@ -293,6 +293,30 @@ app.get("/api/statistics/overview/:days?", ensureAuthenticated, function(req, re
 	});
 });
 
+app.get("/api/statistics/perweekday", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
+
+	// Connect to the db
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var sessions = db.collection('Sessions');
+		sessions.aggregate(
+			{ $match: { userId: loggedInUser } },
+			{ $project: { weekDay: { $dayOfWeek: "$date" } }},
+			{ $group: { _id: "$weekDay" , sessionCount: { $sum: 1 } } },
+			{ $project: { _id: 0, weekDay: { $subtract: ["$_id", 1] }, sessionCount: 1 }},
+			{ $sort: { weekDay: 1 } },
+			function(err, aggregate) {
+				console.log(aggregate);
+				res.json(aggregate);
+				db.close();
+			}
+		);
+	});
+});
+
+
 app.get("/api/session/:id", ensureAuthenticated, function(req, res) {
 	var loggedInUser = req.user._id;
 	// Connect to the db

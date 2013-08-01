@@ -1,0 +1,7 @@
+db.Sessions.aggregate(
+	{ $match: { userId: ObjectId("512684441ea176ca050002b7") } },
+	{ $project: { weekDay: { $dayOfWeek: "$date" } }},
+	{ $group: { _id: "$weekDay" , count: { $sum: 1 } } },
+	{ $project: { _id: 0, weekDay: { $subtract: ["$_id", 1] }, count: 1 }},
+	{ $sort: { weekDay: 1 } }
+)
