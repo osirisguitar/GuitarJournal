@@ -249,8 +249,8 @@ function StatsCtrl($scope, $http, Statistics) {
 	$scope.$watch("Statistics.perWeekday", function() {
 		console.log($scope.Statistics.perWeekday);
 		$scope.perWeekday = [];
-		for (i = 0; i < 7; i++) {
-			$scope.perWeekday.push({ value: Statistics.perWeekday[i], color: $scope.weekdayColors[i] });
+		for (i = 1; i <= 7; i++) {
+			$scope.perWeekday.push({ value: Statistics.perWeekday[i % 7], color: $scope.weekdayColors[i % 7] });
 		}
 	}, true);
 
