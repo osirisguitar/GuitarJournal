@@ -316,6 +316,30 @@ app.get("/api/statistics/perweekday", ensureAuthenticated, function(req, res) {
 	});
 });
 
+app.get("/api/statistics/minutesperday/:days?", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
+	var date = new Date();
+	date = new Date(date.setDate(date.getDate() - req.params.days)); // Is this REALLY the easiest way?
+
+	// Connect to the db
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var sessions = db.collection('Sessions');
+		sessions.aggregate(
+			{ $match: { userId: loggedInUser, date: { $gte: date } } }/*,
+			{ $project: { weekDay: { $dayOfWeek: "$date" } }}*/,
+			{ $group: { _id: { year: { $year: "$date" }, month: { $month: "$date" }, day: { $dayOfMonth: "$date" } }, totalMinutes: { $sum: "$length" } } },
+			{ $sort: { _id: 1 } },
+			function(err, aggregate) {
+				console.log(aggregate);
+				res.json(aggregate);
+				db.close();
+			}
+		);
+	});
+});
+
 
 app.get("/api/session/:id", ensureAuthenticated, function(req, res) {
 	var loggedInUser = req.user._id;

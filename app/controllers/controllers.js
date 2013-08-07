@@ -229,20 +229,24 @@ function StatsCtrl($scope, $http, Statistics) {
 	console.log(Statistics);
 	$scope.Statistics = Statistics;
 	Statistics.getSessionsPerWeekday();
+	Statistics.getMinutesPerDay(30);
 	$scope.pageSettings.pageTitle = "Statistics";
 	$scope.pageSettings.active = "stats";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
-	$scope.last30days = {
-		labels: ["", "", "12 jun", "", "", "", "", "", "", "19 jun", "", "", "", "", "", "", "26 jun", "", "", "", "", "", "", "3 aug", "", "", "", ""],
-		datasets: [ {
-            fillColor : "#BD934F",
-            strokeColor : "#f1c40f",
-            pointColor : "#BD934F",
-            pointStrokeColor : "#f1c40f",
-            data : [15, 30, 60, 20, 20, 30, 11, 15, 30, 0, 20, 20, 30, 0, 0, 30, 60, 0, 0, 30, 11, 15, 30, 60, 20, 20, 30, 11]
-		} ]
-	};
+
+	$scope.$watch("Statistics.minutesPerDay", function() {
+		$scope.last30days = {
+			labels: Statistics.minutesPerDay.labels,
+			datasets: [ {
+	            fillColor : "#BD934F",
+	            strokeColor : "#f1c40f",
+	            pointColor : "#BD934F",
+	            pointStrokeColor : "#f1c40f",
+	            data : Statistics.minutesPerDay.data
+			} ]
+		};
+	});
 
 	$scope.weekdayColors = [ "#bb0000", "#bbbb00", "#00bb00", "#00bbbb", "#0000bb", "#bb00bb", "#000000"];
 

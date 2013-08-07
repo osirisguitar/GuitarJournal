@@ -71,7 +71,6 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
               var files = event.target.files;
               var file = files[0];
               scope.file = file;
-//              scope.file = file ? file.name : undefined;
               scope.$apply();
           });
       }
@@ -86,5 +85,4 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
         return index < numItems;
       });
     }
-
   });
