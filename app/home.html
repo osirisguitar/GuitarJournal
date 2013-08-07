@@ -308,6 +308,12 @@
           }
         });
     }
+
+    function fbLogout() {
+      FB.logout(function (response) {
+        console.log(response);
+      });
+    }
   </script>
 
   <!-- Make sure all your bars are the first things in your <body> -->

@@ -295,6 +295,8 @@ function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)
 	};
 
 	$scope.logout = function() {
+		fbLogout();
+
 		$http.post('/api/logout', {}, $rootScope.httpConfig)
 			.success(function() {
 				$location.path("/login");
