@@ -53,7 +53,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 						var currentDate = new Date(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0).setDate(new Date().getDate() - i));
 
 						console.log("Checking", currentDate, "against", currentDataDate, "comparison", currentDate - currentDataDate === 0);
-						while (currentDataIndex < data.length && currentDataDate < currentDate) {
+						while (currentDataIndex < data.length - 1 && currentDataDate < currentDate) {
 							currentDataIndex++;
 							currentDataDate = new Date(data[currentDataIndex]._id.year, data[currentDataIndex]._id.month - 1, data[currentDataIndex]._id.day);
 							console.log("Checking", currentDate, "against", currentDataDate, "comparison", currentDate - currentDataDate === 0);
@@ -63,7 +63,6 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 							service.minutesPerDay.labels.push(moment(currentDate).format('MM-DD'));
 						else
 							service.minutesPerDay.labels.push("");
-							
 
 						if (currentDataIndex < data.length && currentDate - currentDataDate === 0)
 							service.minutesPerDay.data.push(data[currentDataIndex].totalMinutes);
