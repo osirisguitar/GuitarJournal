@@ -49,7 +49,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 					var currentDataDate = null;
 					currentDataDate = new Date(data[currentDataIndex]._id.year, data[currentDataIndex]._id.month - 1, data[currentDataIndex]._id.day);
 
-					for (i = 30; i > 0; i--) {
+					for (i = 29; i >= 0; i--) {
 						var currentDate = new Date(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0).setDate(new Date().getDate() - i));
 
 						console.log("Checking", currentDate, "against", currentDataDate, "comparison", currentDate - currentDataDate === 0);
