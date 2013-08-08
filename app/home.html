@@ -392,7 +392,7 @@
           <span class="large" ng-class="{'trend-up':weekStats.totalSessions > statsOverview.sessionsPerWeek,'trend-down': weekStats.totalSessions < statsOverview.sessionsPerWeek}">{{statsOverview.sessionsPerWeek || "" }}</span>
         </div>
         <div>
-          Average length<br>
+          Average duration<br>
           <span class="large" ng-class="{'trend-up':weekStats.averageLength > statsOverview.averageLength,'trend-down': weekStats.averageLength < statsOverview.averageLength}">{{statsOverview.averageLength | suffix:" min"}}</span>          
         </div>
       </div>
@@ -489,7 +489,7 @@
         <input type="date" ng-model="session.date" ng-disabled="!editMode" />
       </div>
       <div class="input-row">
-        <label>Length (min)</label>
+        <label>Duration (min)</label>
         <input type="number" ng-model="session.length" ng-disabled="!editMode" />
       </div>
       <div class="input-row">
@@ -589,7 +589,7 @@
       <canvas barchart options="optionsWeek" data="minutesPerWeek" id="minutesPerWeek" width="270" height="200"></canvas>    
     </div>
     <div class="content-padded">
-      <h2>Session durations per day</h2>
+      <h2>Durations last 30 days</h2>
       <canvas barchart options="options30days" data="last30days" id="last30days" width="270" height="200"></canvas>    
     </div>
     <div class="content-padded">
