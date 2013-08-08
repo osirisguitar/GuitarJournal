@@ -85,4 +85,11 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
         return index < numItems;
       });
     }
+  }).filter('suffix', function() {
+    return function(input, suffix) {
+      if (input && input.length > 0)
+        return input + suffix;
+      else
+        return input; 
+    }
   });

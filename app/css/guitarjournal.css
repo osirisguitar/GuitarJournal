@@ -185,3 +185,8 @@ h2.padded {
     position:fixed;
     padding-top:150px;
 }
+
+.complete {
+  color: green;
+  font-size: 22px;
+}

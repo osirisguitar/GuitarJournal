@@ -289,7 +289,7 @@ function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)
 	$scope.pageSettings.pageTitle = "Profile";
 	$scope.pageSettings.active = "profile";
 	$scope.pageSettings.showBackButton = false;
-	$scope.pageSettings.rightButtonText = "New";
+	$scope.pageSettings.rightButtonText = "New instrument";
 	$scope.pageSettings.rightButtonClick = function() {
 		$location.path('/instrument/');
 	};

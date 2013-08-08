@@ -385,27 +385,36 @@
 
   <script id="home.html" type="text/ng-template">
     <h2 class="padded">{{profile.fullName}}</h2>
-    <div class="content-padded overview">
+    <div class="content-padded overview" ng-show="Sessions.sessions.length > 0">
       <div class="overview-row">
         <div>
           Sessions/week<br>
-          <span class="large" ng-class="{'trend-up':weekStats.totalSessions > statsOverview.sessionsPerWeek,'trend-down': weekStats.totalSessions < statsOverview.sessionsPerWeek}">{{statsOverview.sessionsPerWeek}}</span>
+          <span class="large" ng-class="{'trend-up':weekStats.totalSessions > statsOverview.sessionsPerWeek,'trend-down': weekStats.totalSessions < statsOverview.sessionsPerWeek}">{{statsOverview.sessionsPerWeek || "" }}</span>
         </div>
         <div>
           Average length<br>
-          <span class="large" ng-class="{'trend-up':weekStats.averageLength > statsOverview.averageLength,'trend-down': weekStats.averageLength < statsOverview.averageLength}">{{statsOverview.averageLength}} min</span>          
+          <span class="large" ng-class="{'trend-up':weekStats.averageLength > statsOverview.averageLength,'trend-down': weekStats.averageLength < statsOverview.averageLength}">{{statsOverview.averageLength | suffix:" min"}}</span>          
         </div>
       </div>
       <div class="overview-row">
         <div>
           Average rating<br>
-          <span class="large" ng-class="{'trend-up':weekStats.averageRating > statsOverview.averageRating,'trend-down': weekStats.averageRating < statsOverview.averageRating}">{{statsOverview.averageRating}}</span>          
+          <span class="large" ng-class="{'trend-up':weekStats.averageRating > statsOverview.averageRating,'trend-down': weekStats.averageRating < statsOverview.averageRating}">{{statsOverview.averageRating || ""}}</span>          
         </div>
         <div>
           Active goals<br>
           <span class="large">{{Goals.getActiveGoals().length}}</span>
         </div>
       </div>
+    </div>
+    <div class="content-padded" ng-show="Goals.getActiveGoals().length == 0 || !Instruments.instruments || Instruments.instruments.length == 0 || !Sessions.sessions || Sessions.sessions.length == 0">
+      <h2>Get started!</h2>
+      1. Add a goal <span ng-show="Goals.getActiveGoals().length > 0" class="complete">&#x2713;</span><br>
+      <a href="/goal/" ng-show="Goals.getActiveGoals().length == 0" class="button-positive button-block">Add goal</a>
+      2. Add an instrument <span ng-show="Instruments.instruments && Instruments.instruments.length > 0" class="complete">&#x2713;</span><br>
+      <a href="/instrument/" ng-show="!Instruments.instruments || Instruments.instruments.length == 0" class="button-positive button-block">Add instrument</a>
+      3. Log a practice session <span ng-show="Sessions.sessions && Sessions.sessions.length > 0" class="complete">&#x2713;</span><br>
+      <a href="/session/" ng-show="!Sessions.sessions || Sessions.sessions.length == 0" class="button-positive button-block">New session</a>
     </div>
     <h2 class="padded">Latest sessions</h2>
     <ul class="list inset">
@@ -556,7 +565,7 @@
   </script>
 
   <script id="stats.html" type="text/ng-template">
-    <div class="content-padded">
+    <div class="content-padded" ng-show="statsOverview.totalMinutes">
       <h2>Sessions</h2>
       <div class="label">Total sessions:</div>
       <div class="info">{{statsOverview.totalSessions}}</div>
