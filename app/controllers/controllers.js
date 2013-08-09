@@ -231,6 +231,7 @@ function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
 	$scope.Instruments = Instruments;
 	Statistics.getSessionsPerWeekday();
 	Statistics.getMinutesPerDay(30);
+	Statistics.getSessionsPerWeek(10);
 	$scope.pageSettings.pageTitle = "Statistics";
 	$scope.pageSettings.active = "stats";
 	$scope.pageSettings.showBackButton = false;
@@ -252,34 +253,35 @@ function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
 	$scope.weekdayColors = [ "#bb0000", "#bbbb00", "#00bb00", "#00bbbb", "#0000bb", "#bb00bb", "#000000"];
 
 	$scope.$watch("Statistics.perWeekday", function() {
-		console.log($scope.Statistics.perWeekday);
 		$scope.perWeekday = [];
 		for (i = 1; i <= 7; i++) {
 			$scope.perWeekday.push({ value: Statistics.perWeekday[i % 7], color: $scope.weekdayColors[i % 7] });
 		}
 	}, true);
 
-	$scope.sessionsPerWeek = {
-		labels: ["", "", "", "", "", "", "", "", "", ""],
-		datasets: [{
-            fillColor : "#BD934F",
-            strokeColor : "#f1c40f",
-            pointColor : "#BD934F",
-            pointStrokeColor : "#f1c40f",
-            data : [2, 1, 0, 3, 2, 2, 1, 0, 0, 4]		
-		}]
-	};
+	$scope.$watch("Statistics.sessionsPerWeek", function() {
+		$scope.sessionsPerWeek = {
+			labels: Statistics.sessionsPerWeek.labels,
+			datasets: [{
+	            fillColor : "#BD934F",
+	            strokeColor : "#f1c40f",
+	            pointColor : "#BD934F",
+	            pointStrokeColor : "#f1c40f",
+	            data : Statistics.sessionsPerWeek.count		
+			}]
+		};
 
-	$scope.minutesPerWeek = {
-		labels: ["", "", "", "", "", "", "", "", "", ""],
-		datasets: [{
-            fillColor : "#BD934F",
-            strokeColor : "#f1c40f",
-            pointColor : "#BD934F",
-            pointStrokeColor : "#f1c40f",
-            data : [15, 30, 60, 20, 20, 30, 11, 15, 30, 0]		
-		}]
-	};
+		$scope.minutesPerWeek = {
+			labels: Statistics.sessionsPerWeek.labels,
+			datasets: [{
+	            fillColor : "#BD934F",
+	            strokeColor : "#f1c40f",
+	            pointColor : "#BD934F",
+	            pointStrokeColor : "#f1c40f",
+	            data : Statistics.sessionsPerWeek.minutes	
+			}]
+		};
+	}, true);
 
 	$scope.Math = Math;
 }

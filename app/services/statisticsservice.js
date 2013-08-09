@@ -5,7 +5,6 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 		$rootScope.apiStatus.loading++;
 		var url = '/api/statistics/perweekday';
 		service.perWeekday = [];
-		console.log(service.perWeekday);
 
 		$http.get(url)
 			.success(function(data) {
@@ -24,7 +23,6 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 						else
 							service.perWeekday.push(0);
 					}
-					console.log(service.perWeekday);
 					$rootScope.apiStatus.loading--;
 				}
 			})
@@ -52,11 +50,9 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 					for (i = 29; i >= 0; i--) {
 						var currentDate = new Date(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0).setDate(new Date().getDate() - i));
 
-						console.log("Checking", currentDate, "against", currentDataDate, "comparison", currentDate - currentDataDate === 0);
 						while (currentDataIndex < data.length - 1 && currentDataDate < currentDate) {
 							currentDataIndex++;
 							currentDataDate = new Date(data[currentDataIndex]._id.year, data[currentDataIndex]._id.month - 1, data[currentDataIndex]._id.day);
-							console.log("Checking", currentDate, "against", currentDataDate, "comparison", currentDate - currentDataDate === 0);
 						}
 
 						if (i % 5 == 0)
@@ -71,7 +67,50 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 					}						
 				}
 
-				console.log(service.minutesPerDay);
+				$rootScope.apiStatus.loading--;
+			})
+			.error(function(data, status) {
+				alert("Error when getting sessions");
+				$rootScope.apiStatus.loading--;
+			});							
+	};
+
+	service.getSessionsPerWeek = function (weeks) {
+		$rootScope.apiStatus.loading++;
+		var url = '/api/statistics/perweek/' + weeks;
+		service.sessionsPerWeek = {};
+		service.sessionsPerWeek.labels = [];
+		service.sessionsPerWeek.count = [];
+		service.sessionsPerWeek.minutes = [];
+
+		$http.get(url)
+			.success(function(data) {
+				if (data && data.length && data.length > 0) {
+					var currentDataIndex = 0;
+
+					for (i = 0; i < weeks; i++) {
+						var currentWeek = moment().subtract(moment.duration(weeks - i, 'weeks')).isoWeek();
+						service.sessionsPerWeek.labels.push(currentWeek);
+
+						console.log("Checking", currentWeek, "against", data[currentDataIndex].week);
+						while (currentDataIndex < data.length && data[currentDataIndex].week < currentWeek) {
+							currentDataIndex++;
+							console.log("Checking", currentWeek, "against", data[currentDataIndex].week);
+						}
+
+						if (data[currentDataIndex].week == currentWeek) {
+							service.sessionsPerWeek.count.push(data[currentDataIndex].count);
+							service.sessionsPerWeek.minutes.push(data[currentDataIndex].minutes);
+
+						}
+						else {
+							service.sessionsPerWeek.count.push(0);
+							service.sessionsPerWeek.minutes.push(0);
+						}
+					}
+
+					console.log(service.sessionsPerWeek);
+				}
 				$rootScope.apiStatus.loading--;
 			})
 			.error(function(data, status) {

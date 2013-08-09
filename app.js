@@ -308,6 +308,38 @@ app.get("/api/statistics/perweekday", ensureAuthenticated, function(req, res) {
 			{ $project: { _id: 0, weekDay: { $subtract: ["$_id", 1] }, sessionCount: 1 }},
 			{ $sort: { weekDay: 1 } },
 			function(err, aggregate) {
+				if (err) {
+					console.log(err);
+				}
+				console.log(aggregate);
+				res.json(aggregate);
+				db.close();
+			}
+		);
+	});
+});
+
+app.get("/api/statistics/perweek/:weeks?", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
+
+	// Connect to the db
+	MongoClient.connect(mongoConnectionString, function(err, db) {
+		if(err) { return console.dir(err); }
+
+		var sessions = db.collection('Sessions');
+		sessions.aggregate(
+			{ $match: { userId: loggedInUser } },
+			{ $project: { week: { $week: "$date" }, length: 1 }},
+			{ $group: { _id: "$week" , count: { $sum: 1 }, minutes: { $sum: "$length" } } },
+			{ $project: { _id: 0, week: "$_id", count: 1, minutes: 1 } },
+			{ $sort: { week: -1 } },
+			{ $limit: Number(req.params.weeks) },
+			{ $sort: { week: 1 } },
+			function(err, aggregate) {
+				if (err) {
+					console.log("Error", err);
+				}
+
 				console.log(aggregate);
 				res.json(aggregate);
 				db.close();
