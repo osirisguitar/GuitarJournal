@@ -225,9 +225,10 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 	};
 };
 
-function StatsCtrl($scope, $http, Statistics) {
-	console.log(Statistics);
+function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
+	$scope.Goals = Goals;	
 	$scope.Statistics = Statistics;
+	$scope.Instruments = Instruments;
 	Statistics.getSessionsPerWeekday();
 	Statistics.getMinutesPerDay(30);
 	$scope.pageSettings.pageTitle = "Statistics";

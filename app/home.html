@@ -608,16 +608,16 @@
     <div class="content-padded">
       <h2>Goals</h2>
       <div class="label">Active goals:</div>
-      <div class="info">{{statsOverview.activeGoals}}</div>
+      <div class="info">{{Goals.getActiveGoals().length}}</div>
       <div class="label">Completed goals:</div>
-      <div class="info">{{statsOverview.completedGoals}}</div>
+      <div class="info">{{Goals.goals.length - Goals.getActiveGoals().length}}</div>
     </div>
     <div class="content-padded">
       <h2>Instruments</h2>
       <div class="label">Intruments:</div>
-      <div class="info">{{statsOverview.numInstruments}}</div>
-      <div class="label">Most popular:</div>
-      <div class="info">{{getInstrument(statsOverview.mostUsedInstrument).name}}</div>
+      <div class="info">{{Instruments.instruments.length}}</div>
+      <!--<div class="label">Most popular:</div>
+      <div class="info">{{getInstrument(statsOverview.mostUsedInstrument).name}}</div>-->
     </div>
   </script>
 
