@@ -326,7 +326,7 @@
       {{pageSettings.rightButtonText}}
     </a>
   </header>
-   <nav class="bar-tab">
+  <nav class="bar-tab" ng-show="!pageSettings.hideNavigation">
    <ul class="tab-inner">
       <li class="tab-item {{pageSettings.active == 'home' && 'active' || ''}}">
         <a href="/">
@@ -367,7 +367,7 @@
   </div>
 
   <script id="login.html" type="text/ng-template">
-    <div class="input-group">
+    <div class="input-group" ng-show="false">
       <div class="input-row">
         <label>Email</label>
         <input ng-model="email" type="email"/>
@@ -377,7 +377,11 @@
         <input type="password" ng-model="password" />
       </div>
     </div>
-    <a class="button-block" ng-click="login()">Login</a>
+    <div class="content-padded">
+      <h2>Welcome to the OSIRIS GUITAR Journal</h2>
+      Get started right away by logging in with your Facebook account. This app will use your name and email address to create an account, never give the information away to anyone else and only post things to your timeline when you choose.
+    </div>
+    <a class="button-block" ng-click="login()" ng-show="false">Login</a>
     <div class="facebook-login">
       <a href="/auth/facebook" onclick="facebookAuth();"><img height="40" src="/app/img/facebook.png"></a>
     </div>
