@@ -92,10 +92,8 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 						var currentWeek = moment().subtract(moment.duration(weeks - i, 'weeks')).isoWeek();
 						service.sessionsPerWeek.labels.push(currentWeek);
 
-						console.log("Checking", currentWeek, "against", data[currentDataIndex].week);
 						while (currentDataIndex < data.length && data[currentDataIndex].week < currentWeek) {
 							currentDataIndex++;
-							console.log("Checking", currentWeek, "against", data[currentDataIndex].week);
 						}
 
 						if (data[currentDataIndex].week == currentWeek) {
@@ -108,8 +106,6 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 							service.sessionsPerWeek.minutes.push(0);
 						}
 					}
-
-					console.log(service.sessionsPerWeek);
 				}
 				$rootScope.apiStatus.loading--;
 			})

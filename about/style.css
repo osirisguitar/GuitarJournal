@@ -21,20 +21,20 @@ h1, h2, h3
 
 h1
 {
-	font-size:24px;
+	font-size:20px;
 	line-height:24px;
 }
 
 h2
 {
-	font-size:20px;
+	font-size:18px;
 	line-height:20px;
 }
 
 h3
 {
 	margin-top:20px;
-	font-size:17px;
+	font-size:15px;
 	line-height:17px;	
 }
 
@@ -77,4 +77,14 @@ a.banner {
 	text-align:center;
 	display:block;
 	border-bottom:none;
+}
+
+.about {
+	clear:left;
+	padding-top:50px;
+	font-size:8pt;
+}
+
+.about a:link, .about a:active, .about a:visited {
+	font-size:8pt;
 }

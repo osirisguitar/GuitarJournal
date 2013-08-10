@@ -67,7 +67,6 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
       scope: { file: '=' },
       link: function(scope, el, attrs) {
           el.bind('change', function(event) {
-              console.log("Directive!");
               var files = event.target.files;
               var file = files[0];
               scope.file = file;
@@ -87,7 +86,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
     }
   }).filter('suffix', function() {
     return function(input, suffix) {
-      if (input && input.length > 0)
+      if (input)
         return input + suffix;
       else
         return input; 

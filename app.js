@@ -731,7 +731,7 @@ app.get("/api/practicesession/:id", function(req, res) {
 			        		html += '<b>Goal:</b> ' + goal.title + '<br>\n';
 		        		if (session.rating)
 			        		html += '<b>Rating:</b> ' + session.rating + '<br>\n';
-		        		'</p></div></div></div></body>';
+		        		html += '</p></div><div class="about">Read more about the OSIRIS GUITAR Journal and <a href="/about">get your own account</a></div></div></div></body>';
 					res.send(html);
 					db.close();
 				});
