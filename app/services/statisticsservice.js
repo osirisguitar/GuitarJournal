@@ -115,10 +115,5 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 			});							
 	};
 
-/*	$rootScope.$watch('loggedIn', function() {
-		if ($rootScope.loggedIn) {
-		}
-	})*/
-
 	return service;
 });

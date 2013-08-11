@@ -515,8 +515,27 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 		req.body._id = ObjectID(req.body._id);
 	}
 	req.body.userId = loggedInUser;
-	var imagebytes = [];
+
+	// Local function that saves, needed since the image resize ends in a callback
+	var save = function() {
+		MongoClient.connect(mongoConnectionString, function(err, db) {
+			if(err) { return console.dir(err); }
+			db.collection('Instruments')
+				.save(req.body, { safe:true }, function(err, updatedInstrument) {
+					if (err) {
+						console.log(err);
+						res.send(500, "Could not set image for instrument");
+					}
+
+					res.json(updatedInstrument);
+					db.close();
+					return;
+				});
+		});
+	}
+
 	if (req.body.image) {
+		var imagebytes = [];
 		var imageStream = new Buffer(req.body.image, 'base64');
 		imageMagick(imageStream).size(function(err, size) {
 			if (err)
@@ -554,20 +573,7 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 						var imageData = Binary(image);
 						req.body.image = imageData;
 
-						MongoClient.connect(mongoConnectionString, function(err, db) {
-							if(err) { return console.dir(err); }
-							db.collection('Instruments')
-								.save(req.body, { safe:true }, function(err, updatedInstrument) {
-									if (err) {
-										console.log(err);
-										res.send(500, "Could not set image for instrument");
-									}
-
-									res.json(updatedInstrument);
-									db.close();
-									return;
-								});
-						});
+						save();
 					});
 				});
 		});
@@ -575,8 +581,7 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 	}
 	else
 	{
-		console.log("No image");
-		res.send(500, "Not yet");
+		save();
 	}
 
 
