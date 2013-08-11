@@ -60,28 +60,36 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 	}
 
 	service.saveGoal = function(goal, successCallback, failureCallback) {
+		$rootScope.apiStatus.loading++;
 		$http.post('/api/goals', goal, $rootScope.httpConfig)
 			.success(function(data) {
 				// 1 means updated, otherwise replace to get proper db id.
 				service.getGoals();
+				$rootScope.apiStatus.loading--;
 
 				if (successCallback)
 					successCallback();
 			})
 			.error(function(data) { 
+				$rootScope.apiStatus.loading--;
 				if (failureCallback)
 					failureCallback();
 			});
 	}
 
 	service.deleteGoal = function(goalId, successCallback, failureCallback) {
+		$rootScope.apiStatus.loading++;
 		$http.delete('/api/goal/' + goalId, $rootScope.httpConfig)
 			.success(function(data){
 				service.getGoals();
+				$rootScope.apiStatus.loading--;
+
 				if (successCallback)
 					successCallback();
 			})
 			.error(function(error){
+				$rootScope.apiStatus.loading--;
+
 				if (failureCallback)
 					failureCallback();
 			});

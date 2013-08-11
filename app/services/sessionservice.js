@@ -53,28 +53,38 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 	}
 
 	service.saveSession = function(session, successCallback, failureCallback) {
+		$rootScope.apiStatus.loading++;
 		$http.post('/api/sessions', session, $rootScope.httpConfig)
 			.success(function(data) {
 				// 1 means updated, otherwise replace to get proper db id.
 				service.getSessions();
+				$rootScope.apiStatus.loading--;
 
 				if (successCallback)
 					successCallback();
 			})
 			.error(function(data) { 
+				$rootScope.apiStatus.loading--;
+
 				if (failureCallback)
 					failureCallback();
 			});
 	}
 
 	service.deleteSession = function(sessionId, successCallback, failureCallback) {
+		$rootScope.apiStatus.loading++;
+
 		$http.delete('/api/session/' + sessionId, $rootScope.httpConfig)
 			.success(function(data){
 				service.getSessions();
+				$rootScope.apiStatus.loading--;
+
 				if (successCallback)
 					successCallback();
 			})
 			.error(function(error){
+				$rootScope.apiStatus.loading--;
+
 				if (failureCallback)
 					failureCallback();
 			});

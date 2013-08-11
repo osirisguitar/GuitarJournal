@@ -5,14 +5,17 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 	$scope.apiStatus = $rootScope.apiStatus;
 
 	$http.get('/api/loggedin').success(function(data) {
+		$rootScope.apiStatus.loading++;
 		$rootScope.csrf = data._csrf;
 		$rootScope.httpConfig = {
 			headers: { "X-CSRF-Token": $rootScope.csrf }
 		};
 		if (data._id) {
 			$rootScope.loggedIn = true;
+			$rootScope.apiStatus.loading--;
 		}
 		else {
+			$rootScope.apiStatus.loading--;
 			$location.path("/login");
 		}
 	}).error(function(data) { console.log("Couldn't check logged in status"); });
@@ -33,6 +36,7 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 
 	$scope.$watch('Sessions.sessions', function () {
 		if ($rootScope.loggedIn) {
+			$rootScope.apiStatus.loading++;
 			$http.get('/api/statistics/overview')
 				.success(function(data) {
 					$scope.statsOverview = data;
@@ -41,12 +45,15 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
 					var weeks = Math.max(days/7, 1);
 					$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
+					$rootScope.apiStatus.loading--;
 				})
 				.error(function(data) {
+					$rootScope.apiStatus.loading--;
 					alert("Error when getting statistics overview.");
 				});
 
-			$http.get('/api/statistics/overview/7')
+				$rootScope.apiStatus.loading++;
+				$http.get('/api/statistics/overview/7')
 				.success(function(data) {
 					$scope.weekStats = data;
 					var firstSession = new Date($scope.weekStats.firstSession);
@@ -54,8 +61,10 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
 					var weeks = days/7;
 					$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
+					$rootScope.apiStatus.loading--;
 				})
 				.error(function(data) {
+					$rootScope.apiStatus.loading++;
 					alert("Error when getting statistics overview.");
 				});		
 			

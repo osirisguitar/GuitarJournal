@@ -311,7 +311,6 @@ app.get("/api/statistics/perweekday", ensureAuthenticated, function(req, res) {
 				if (err) {
 					console.log(err);
 				}
-				console.log(aggregate);
 				res.json(aggregate);
 				db.close();
 			}
@@ -340,7 +339,6 @@ app.get("/api/statistics/perweek/:weeks?", ensureAuthenticated, function(req, re
 					console.log("Error", err);
 				}
 
-				console.log(aggregate);
 				res.json(aggregate);
 				db.close();
 			}
@@ -364,7 +362,6 @@ app.get("/api/statistics/minutesperday/:days?", ensureAuthenticated, function(re
 			{ $group: { _id: { year: { $year: "$date" }, month: { $month: "$date" }, day: { $dayOfMonth: "$date" } }, totalMinutes: { $sum: "$length" } } },
 			{ $sort: { _id: 1 } },
 			function(err, aggregate) {
-				console.log(aggregate);
 				res.json(aggregate);
 				db.close();
 			}

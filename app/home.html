@@ -411,7 +411,7 @@
         </div>
       </div>
     </div>
-    <div class="content-padded" ng-show="Goals.getActiveGoals().length == 0 || !Instruments.instruments || Instruments.instruments.length == 0 || !Sessions.sessions || Sessions.sessions.length == 0">
+    <div ng-cloak class="content-padded" ng-show="Goals.getActiveGoals().length == 0 || !Instruments.instruments || Instruments.instruments.length == 0 || !Sessions.sessions || Sessions.sessions.length == 0">
       <h2>Get started!</h2>
       1. Add a goal <span ng-show="Goals.getActiveGoals().length > 0" class="complete">&#x2713;</span><br>
       <a href="/goal/" ng-show="Goals.getActiveGoals().length == 0" class="button-positive button-block">Add goal</a>

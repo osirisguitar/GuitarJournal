@@ -80,28 +80,36 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 	}
 
 	service.saveInstrument = function(instrument, successCallback, failureCallback) {
+		$rootScope.apiStatus.loading++;
+
 		$http.post('/api/instruments', instrument, $rootScope.httpConfig)
 			.success(function(data) {
 				// 1 means updated, otherwise replace to get proper db id.
 				service.getInstruments();
+				$rootScope.apiStatus.loading--;
 
 				if (successCallback)
 					successCallback();
 			})
 			.error(function(data) { 
+				$rootScope.apiStatus.loading--;
+
 				if (failureCallback)
 					failureCallback();
 			});
 	}
 
 	service.deleteInstrument = function(instrumentId, successCallback, failureCallback) {
+		$rootScope.apiStatus.loading++;
 		$http.delete('/api/instrument/' + instrumentId, $rootScope.httpConfig)
 			.success(function(data){
 				service.getInstruments();
+				$rootScope.apiStatus.loading--;
 				if (successCallback)
 					successCallback();
 			})
 			.error(function(error){
+				$rootScope.apiStatus.loading--;
 				if (failureCallback)
 					failureCallback();
 			});
