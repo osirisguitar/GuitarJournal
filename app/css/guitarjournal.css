@@ -10,6 +10,10 @@
   overflow:auto;
 }
 
+.content-padded p {
+  margin-top:10px;
+}
+
 h2.padded {
   margin-top: 15px;
   margin-left: 20px;
@@ -189,4 +193,15 @@ h2.padded {
 .complete {
   color: green;
   font-size: 22px;
+}
+
+#login-logo {
+}
+
+#login-logo img {
+  max-width:300px;
+  margin:auto;
+  display:block;
+  padding-top:20px;
+  padding-bottom:20px;
 }
