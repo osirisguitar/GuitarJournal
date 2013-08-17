@@ -123,8 +123,10 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id != null && $routeParams.id != "")
 	{
+		console.log("Getting session", $routeParams.id);
 		Sessions.getSession($routeParams.id, 
 			function(session) {
+				console.log("Got session", session);
 				$scope.session = session;
 			},
 			function(error) {
@@ -133,6 +135,7 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 	}
 	else
 	{
+		console.log("New session...")
 		$scope.session = { date: new Date() };
 		$scope.editMode = true;
 	}

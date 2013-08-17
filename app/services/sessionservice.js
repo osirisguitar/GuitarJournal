@@ -36,12 +36,16 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 					return;
 				}
 			}
-
+		}
+		else
+		{
+			console.log("Not loaded, loading single");
 			// Not loaded into memory, get from DB.
 			$rootScope.apiStatus.loading++;
 			$http.get('/api/session/' + sessionId)
 				.success(function(data) {
 					$rootScope.apiStatus.loading--;
+					console.log("Loaded single session", data);
 					if (successCallback)
 						successCallback(data);
 				})
