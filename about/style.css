@@ -88,3 +88,15 @@ a.banner {
 .about a:link, .about a:active, .about a:visited {
 	font-size:8pt;
 }
+
+.screenshots {
+	margin-left:-15px;
+	margin-right:-15px;
+}
+
+.screenshots img {
+	width:31%;
+	float:left;
+	margin-left:15px;
+	margin-right:15px;
+}
