@@ -63,6 +63,11 @@ h2.padded {
 {
   color:black;
 }
+/*
+.input-row label + input, .input-row label + textarea {
+  border:1px solid #bbbbbb;
+  padding-left:5px;
+}*/
 
 .input-row textarea, .input-row select
 {
