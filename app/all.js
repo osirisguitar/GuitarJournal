@@ -60,7 +60,6 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
           restrict: 'A',
           link: linker
       };
-
   })
   .directive('file', function() {
     return {
@@ -508,7 +507,7 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 
 	service.getGoal = function(goalId, successCallback, failureCallback) {
 		if (service.goals) {
-			// First, try to find session in the loaded array
+			// First try to find session in the loaded array
 			for (i = 0; i < service.goals.length; i++)
 			{
 				if (service.goals[i]._id == goalId)

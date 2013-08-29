@@ -23,12 +23,20 @@ module.exports = function(grunt) {
 				dest: 'app/all.js'
 			},
 			css: {
-				src: ['app/css/bootstrap.min.css','app/css/guitarjournal.css', 'app/libs/**.css'],
+				src: ['app/css/bootstrap.min.css','app/css/guitarjournal.css', 'app/libs/**/*.css'],
 				dest: 'app/all.css'
+			}
+		},
+
+		watch: {
+			jsandcss: {
+				files: ['app/controllers/*.js','app/services/*.js','app/libs/**/*.js', 'app/js/*.js', 'app/css/bootstrap.min.css','app/css/guitarjournal.css', 'app/libs/**/*.css'],
+				tasks: ['concat']
 			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-watch');
 };

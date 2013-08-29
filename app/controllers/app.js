@@ -60,7 +60,6 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
           restrict: 'A',
           link: linker
       };
-
   })
   .directive('file', function() {
     return {
