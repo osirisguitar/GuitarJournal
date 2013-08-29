@@ -12,15 +12,23 @@ module.exports = function(grunt) {
 					module: true
 				}
 			}
-		}
+		},
 
 		concat: {
-			files: [  ],
 			options: {
 
+			},
+			javascripts: {
+				src: ['app/controllers/*.js','app/services/*.js','app/libs/**/*.js', 'app/js/*.js'],
+				dest: 'app/all.js'
+			},
+			css: {
+				src: ['app/css/bootstrap.min.css','app/css/guitarjournal.css', 'app/libs/**.css'],
+				dest: 'app/all.css'
 			}
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 };
