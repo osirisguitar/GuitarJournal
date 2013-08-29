@@ -28,8 +28,9 @@
     <!--<link rel="apple-touch-startup-image" href="http://www.example.com/mobile/images/apple-startup-iPhone-Tall-RETINA.jpg"  media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">-->
 
     <!-- Include the compiled Ratchet CSS -->
-    <link rel="stylesheet" href="/app/css/ratchet.css">
-    <link rel="stylesheet" href="/app/css/guitarjournal.css">
+    <!--link rel="stylesheet" href="/app/css/ratchet.css">
+    <link rel="stylesheet" href="/app/css/guitarjournal.css"-->
+    <link href="/app/css/bootstrap.min.css" rel="stylesheet">
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
     <script src="/app/libs/Chart.min.js"></script>
@@ -318,16 +319,20 @@
   </script>
 
   <!-- Make sure all your bars are the first things in your <body> -->
-  <header class="bar-title">
-    <a class="button-prev" href="javascript:history.back();" ng-show="pageSettings.showBackButton">
-      Back
-    </a>
-    <h1 class="title">{{pageSettings.pageTitle}}</h1>
-    <a class="button" ng-show="pageSettings.rightButtonText != null" ng-click="pageSettings.rightButtonClick()">
-      {{pageSettings.rightButtonText}}
-    </a>
+  <header class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <a class="button-prev" href="javascript:history.back();" ng-show="pageSettings.showBackButton">
+        Back
+      </a>
+      <div class="navbar-header">
+        <h1 class="navbar-brand">{{pageSettings.pageTitle}}</h1>
+      </div>
+      <a class="button" ng-show="pageSettings.rightButtonText != null" ng-click="pageSettings.rightButtonClick()">
+        {{pageSettings.rightButtonText}}
+      </a>
+    </div>
   </header>
-  <nav class="bar-tab" ng-show="!pageSettings.hideNavigation">
+  <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-show="!pageSettings.hideNavigation">
    <ul class="tab-inner">
       <li class="tab-item {{pageSettings.active == 'home' && 'active' || ''}}">
         <a href="/">
