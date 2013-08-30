@@ -320,36 +320,26 @@
     </div>
   </header>
   <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-show="!pageSettings.hideNavigation">
-    <div class="container">
-      <a class="{{pageSettings.active == 'home' && 'active' || ''}}" href="/">
-        <img class="tab-icon" src="/app/img/tab-bar/home.png">
-        <div class="tab-label">Home</div>
-      </a>
-      <a href="/sessions" class="{{pageSettings.active == 'sessions' && 'active' || ''}}">
-        <img class="tab-icon" src="/app/img/tab-bar/list.png">
-        <div class="tab-label">Sessions</div>
-      </a>
-      <ul class="tab-inner">
-        <li class="tab-item {{pageSettings.active == 'goals' && 'active' || ''}}">
-          <a href="/goals">
-            <img class="tab-icon" src="/app/img/tab-bar/goals.png">
-            <div class="tab-label">Goals</div>
-          </a>
-        </li>
-        <li class="tab-item {{pageSettings.active == 'stats' && 'active' || ''}}">
-          <a href="/stats">
-            <img class="tab-icon" src="/app/img/tab-bar/stats.png">
-            <div class="tab-label">Stats</div>
-          </a>
-        </li>
-        <li class="tab-item {{pageSettings.active == 'profile' && 'active' || ''}}">
-          <a href="/profile">
-            <img class="tab-icon" src="/app/img/tab-bar/profile.png">
-            <div class="tab-label">Profile</div>
-          </a>
-        </li>
-      </ul>
-    </div>
+    <a class="{{pageSettings.active == 'home' && 'active' || ''}}" href="/">
+      <img class="tab-icon" src="/app/img/tab-bar/home.png"><br>
+      <span class="tab-label">Home</span>
+    </a>
+    <a href="/sessions" class="{{pageSettings.active == 'sessions' && 'active' || ''}}">
+      <img class="tab-icon" src="/app/img/tab-bar/list.png"><br>
+      <span class="tab-label">Sessions</span>
+    </a>
+    <a href="/goals" class="{{pageSettings.active == 'goals' && 'active' || ''}}">
+      <img class="tab-icon" src="/app/img/tab-bar/goals.png">
+      <div class="tab-label">Goals</div>
+    </a>
+    <a href="/stats" class="{{pageSettings.active == 'stats' && 'active' || ''}}">
+      <img class="tab-icon" src="/app/img/tab-bar/stats.png">
+      <div class="tab-label">Stats</div>
+    </a>
+    <a href="/profile" class="{{pageSettings.active == 'profile' && 'active' || ''}}">
+      <img class="tab-icon" src="/app/img/tab-bar/profile.png">
+      <div class="tab-label">Profile</div>
+    </a>
   </nav>
 
   <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
