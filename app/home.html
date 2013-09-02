@@ -27,10 +27,10 @@
     <!-- iPhone 5 -->
     <!--<link rel="apple-touch-startup-image" href="http://www.example.com/mobile/images/apple-startup-iPhone-Tall-RETINA.jpg"  media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">-->
 
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.4/angular-cookies.min.js"></script>
-    <script src="/app/all.js"></script>
-    <link rel="stylesheet" href="/app/all.css">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.min.js"></script>
+    <script src="/app/compiled/all.js"></script>
+    <link rel="stylesheet" href="/app/compiled/all.css">
 
     <script type="text/javascript">
       var addToHomeConfig = {
@@ -307,44 +307,44 @@
 
   <!-- Make sure all your bars are the first things in your <body> -->
   <header class="navbar navbar-default navbar-fixed-top">
+    <a class="prev" href="javascript:history.back();" ng-show="pageSettings.showBackButton">
+      Back
+    </a>
+    <a class="right" ng-show="pageSettings.rightButtonText != null" ng-click="pageSettings.rightButtonClick()">
+      {{pageSettings.rightButtonText}}
+    </a>
     <div class="container">
-      <a class="button-prev" href="javascript:history.back();" ng-show="pageSettings.showBackButton">
-        Back
-      </a>
       <div class="navbar-header">
         <h1 class="navbar-brand">{{pageSettings.pageTitle}}</h1>
       </div>
-      <a class="button" ng-show="pageSettings.rightButtonText != null" ng-click="pageSettings.rightButtonClick()">
-        {{pageSettings.rightButtonText}}
-      </a>
     </div>
   </header>
   <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-show="!pageSettings.hideNavigation">
     <a class="{{pageSettings.active == 'home' && 'active' || ''}}" href="/">
-      <img class="tab-icon" src="/app/img/tab-bar/home.png"><br>
-      <span class="tab-label">Home</span>
+      <span class="glyphicon glyphicon-home"></span>
+      Home
     </a>
     <a href="/sessions" class="{{pageSettings.active == 'sessions' && 'active' || ''}}">
-      <img class="tab-icon" src="/app/img/tab-bar/list.png"><br>
-      <span class="tab-label">Sessions</span>
+      <span class="glyphicon glyphicon-list"></span>
+      Sessions
     </a>
     <a href="/goals" class="{{pageSettings.active == 'goals' && 'active' || ''}}">
-      <img class="tab-icon" src="/app/img/tab-bar/goals.png">
-      <div class="tab-label">Goals</div>
+      <span class="glyphicon glyphicon-flag"></span>
+      Goals
     </a>
     <a href="/stats" class="{{pageSettings.active == 'stats' && 'active' || ''}}">
-      <img class="tab-icon" src="/app/img/tab-bar/stats.png">
-      <div class="tab-label">Stats</div>
+      <span class="glyphicon glyphicon-dashboard"></span>
+      Stats
     </a>
     <a href="/profile" class="{{pageSettings.active == 'profile' && 'active' || ''}}">
-      <img class="tab-icon" src="/app/img/tab-bar/profile.png">
-      <div class="tab-label">Profile</div>
+      <span class="glyphicon glyphicon-user"></span>
+      Profile
     </a>
   </nav>
 
   <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
   <div class="content">
-      <ng-view></ng-view>
+      <ng-view ng-animate="'view'"></ng-view>
   </div>
 
   <script id="login.html" type="text/ng-template">
@@ -429,16 +429,13 @@
   </script>
 
   <script id="sessions.html" type="text/ng-template">
-    <ul class="list">
-      <li ng-repeat="session in Sessions.sessions">
-        <a href="/session/{{session._id}}">
-          <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
-          <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
-          {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
-          <span class="chevron"></span>
-        </a>
-      </li>
-    </ul>
+    <div class="list-group">
+      <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions">
+        <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
+        <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
+        {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
+       </a>
+    </div>
     <a class="button-block" ng-click="Sessions.getSessions(true)">Load more</a>
   </script>
 
@@ -519,15 +516,12 @@
   </script>
 
   <script id="goals.html" type="text/ng-template">
-    <ul class="list">
-      <li ng-repeat="goal in Goals.goals" class="{{goal.completed && 'completed' || ''}}">
-        <a href="/goal/{{goal._id}}">
+    <div class="list-group">
+      <a href="/goal/{{goal._id}}" class="list-group-item" ng-repeat="goal in Goals.goals" class="{{goal.completed && 'completed' || ''}}">
           <strong>{{goal.title}}</strong><br>
           {{goal.description}}
-          <span class="chevron"></span>
-        </a>
-      </li>
-    </ul>
+      </a>
+    </div>
   </script>
   
   <script id="goal.html" type="text/ng-template">

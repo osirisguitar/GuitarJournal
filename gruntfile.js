@@ -20,11 +20,11 @@ module.exports = function(grunt) {
 			},
 			javascripts: {
 				src: ['app/controllers/*.js','app/services/*.js','app/libs/**/*.js', 'app/js/*.js'],
-				dest: 'app/all.js'
+				dest: 'app/compiled/all.js'
 			},
 			css: {
 				src: ['app/css/bootstrap.min.css','app/css/guitarjournal.css', 'app/libs/**/*.css'],
-				dest: 'app/all.css'
+				dest: 'app/compiled/all.css'
 			}
 		},
 

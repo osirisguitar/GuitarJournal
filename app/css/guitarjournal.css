@@ -1,5 +1,6 @@
 body {
-  padding-top:70px;
+  padding-top:40px;
+  padding-bottom:44px;
 }
 
 nav a {
@@ -7,8 +8,90 @@ nav a {
   width:20%;
   float:left;
   margin:auto;
+  padding-top:10px;
   text-align:center;
+  font-size:11px;
+  color:#999;
 }
+
+nav a .glyphicon {
+  display:block;
+  font-size:20px;
+  margin-bottom:-2px;
+}
+
+.navbar {
+  min-height:0;
+}
+
+.navbar .navbar-header {
+  width:100%;
+}
+
+.navbar .navbar-header h1 {
+  width:100%;
+}
+
+nav a.active {
+  color:#BD934F;
+}
+
+nav a:hover {
+  text-decoration:none;
+}
+
+.view-enter {
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 1s linear;
+  margin-left:100%;
+}
+
+.view-enter.view-enter-active {
+  margin-left:0;
+}
+
+.navbar-default {
+  background-color:#eee;
+  border:none;
+  min-height:43px;
+}
+
+.navbar>.container .navbar-brand {
+  text-align:center;
+  color:#BD934F;
+  margin:0;
+  padding:0;
+}
+
+.navbar>.container .navbar-brand h1 {
+  margin:0;
+  padding:0;
+}
+
+.list-group-item img {
+  line-height:18px;
+  max-height:40px;
+  float:left;
+  padding-top:4px;
+  padding-right:5px;
+}
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg') format('svg');
+}
+
+header a.prev, header a.left {
+  float:left;
+  padding-left:10px;
+}
+
+header a.next, header a.right {
+  float:right;
+  padding-right:10px;
+}
+
 /*
 .content {
   background-color: #dddddd;

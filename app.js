@@ -5,7 +5,6 @@ var ObjectID = require('mongodb').ObjectID;
 var GridStore = require('mongodb').GridStore;
 var Binary = require('mongodb').Binary;
 var mongoConnectionString = "mongodb://osiris:testmongo123@linus.mongohq.com:10003/app11622295";
-//var loggedInUser = ObjectID("512684441ea176ca050002b7");
 var fs = require("fs");
 var gm = require("gm");
 var imageMagick = gm.subClass({ imageMagick: true });
@@ -14,6 +13,15 @@ var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy
   , FacebookStrategy = require('passport-facebook').Strategy;
 
+express.static.mime.define({'application/font-woff': ['woff']});
+
+app.on('uncaughtException', function(err) {
+	console.log(err);
+});
+
+app.on('error', function(err) {
+	console.log(err);
+});
 
 app.use(express.cookieParser('hejpa'));
 app.use(express.cookieSession({ secret: 'mongoVoldemort' }));
@@ -141,7 +149,6 @@ app.get("/instrument*", function(req, res) {
 app.get("/app", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });
-app.use('/componenttest', express.static(__dirname + '/componenttest'));
 app.use('/app', express.static(__dirname + '/app'));
 app.use('/about', express.static(__dirname + '/about'));
 
