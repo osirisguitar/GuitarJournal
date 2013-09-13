@@ -4,7 +4,8 @@ var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var GridStore = require('mongodb').GridStore;
 var Binary = require('mongodb').Binary;
-var mongoConnectionString = "mongodb://osiris:testmongo123@linus.mongohq.com:10003/app11622295";
+var mongoConnectionString = process.env.GITARRMONGO || "mongodb://osiris:testmongo123@linus.mongohq.com:10003/app11622295";
+console.log("Connecting to ", mongoConnectionString);
 var fs = require("fs");
 var gm = require("gm");
 var imageMagick = gm.subClass({ imageMagick: true });
@@ -15,11 +16,11 @@ var passport = require('passport')
 
 express.static.mime.define({'application/font-woff': ['woff']});
 
-app.on('uncaughtException', function(err) {
+process.on('uncaughtException', function(err) {
 	console.log(err);
 });
 
-app.on('error', function(err) {
+process.on('error', function(err) {
 	console.log(err);
 });
 

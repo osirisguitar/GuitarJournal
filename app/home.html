@@ -223,6 +223,7 @@
       </style>
   </head>
   <body ng-controller="AppCtrl">
+        
   <div id="spinner" ng-show="apiStatus.loading">
     <div id="floatingCirclesG">
     <div class="f_circleG" id="frotateG_01">
@@ -406,17 +407,14 @@
       <a href="/session/" ng-show="!Sessions.sessions || Sessions.sessions.length == 0" class="button-positive button-block">New session</a>
     </div>
     <h2 class="padded">Latest sessions</h2>
-    <ul class="list inset">
-      <li ng-repeat="session in Sessions.sessions | take:3">
-        <a href="/session/{{session._id}}">
-          <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
-          <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min {{getInstrumentName(session.instrumentId)}}</strong><br>
-          {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
-          <span class="chevron"></span>
-        </a>
-      </li>
-    </ul>
-    <a href="/session/" class="button-block inset">New session</a>
+    <div class="list-group">
+     <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions | take:3">
+        <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
+        <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
+        {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
+       </a>
+     </div>
+    <a href="/session/" type="button" class="btn btn-success">New Session</a>
     <h2 class="padded">Instruments</h2>
     <ul class="list inset">
       <li>
@@ -436,7 +434,7 @@
         {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
        </a>
     </div>
-    <a class="button-block" ng-click="Sessions.getSessions(true)">Load more</a>
+    <a class="btn btn-default" type="button" ng-click="Sessions.getSessions(true)">Load more</a>
   </script>
 
   <script id="session.html" type="text/ng-template">

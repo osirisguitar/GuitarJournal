@@ -1,6 +1,19 @@
+/* Prevents iOS text size adjust after orientation change, without disabling (Thanks to @necolas) */
+html {
+  -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+}
+
 body {
   padding-top:40px;
-  padding-bottom:44px;
+  padding-bottom:60px;
+  font-size:14px;
+  margin-left:10px;
+  margin-right:10px;
+}
+
+h2 {
+  font-size:18px;
 }
 
 nav a {
@@ -26,10 +39,9 @@ nav a .glyphicon {
 
 .navbar .navbar-header {
   width:100%;
-}
-
-.navbar .navbar-header h1 {
-  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:10px;
 }
 
 nav a.active {
@@ -41,9 +53,10 @@ nav a:hover {
 }
 
 .view-enter {
-  -webkit-transition: all 0.5s ease-out;
-  transition: all 1s linear;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
   margin-left:100%;
+  width:320px;
 }
 
 .view-enter.view-enter-active {
@@ -58,6 +71,7 @@ nav a:hover {
 
 .navbar>.container .navbar-brand {
   text-align:center;
+  float:none;
   color:#BD934F;
   margin:0;
   padding:0;
@@ -66,6 +80,12 @@ nav a:hover {
 .navbar>.container .navbar-brand h1 {
   margin:0;
   padding:0;
+  float:none;
+}
+
+.list-group {
+  margin-left:-10px;
+  margin-right:-10px;
 }
 
 .list-group-item img {
@@ -83,14 +103,21 @@ nav a:hover {
 }
 
 header a.prev, header a.left {
-  float:left;
-  padding-left:10px;
+  position:absolute;
+  left:10px;
+  top:11px;
 }
 
 header a.next, header a.right {
-  float:right;
-  padding-right:10px;
+  position:absolute;
+  right:10px;
+  top:11px;
 }
+
+.btn {
+  width:100%;
+}
+
 
 /*
 .content {
