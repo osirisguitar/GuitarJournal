@@ -223,7 +223,7 @@
       </style>
   </head>
   <body ng-controller="AppCtrl">
-        
+
   <div id="spinner" ng-show="apiStatus.loading">
     <div id="floatingCirclesG">
     <div class="f_circleG" id="frotateG_01">
@@ -322,34 +322,42 @@
   </header>
   <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-show="!pageSettings.hideNavigation">
     <a class="{{pageSettings.active == 'home' && 'active' || ''}}" href="/">
-      <span class="glyphicon glyphicon-home"></span>
+      <i class="icon-home icon-2x navicon"></i>
       Home
     </a>
     <a href="/sessions" class="{{pageSettings.active == 'sessions' && 'active' || ''}}">
-      <span class="glyphicon glyphicon-list"></span>
+      <i class="icon-list-ul icon-2x navicon"></i>
       Sessions
     </a>
     <a href="/goals" class="{{pageSettings.active == 'goals' && 'active' || ''}}">
-      <span class="glyphicon glyphicon-flag"></span>
+      <i class="icon-trophy icon-2x navicon"></i>
       Goals
     </a>
     <a href="/stats" class="{{pageSettings.active == 'stats' && 'active' || ''}}">
-      <span class="glyphicon glyphicon-dashboard"></span>
+      <i class="icon-bar-chart icon-2x navicon"></i>
       Stats
     </a>
     <a href="/profile" class="{{pageSettings.active == 'profile' && 'active' || ''}}">
-      <span class="glyphicon glyphicon-user"></span>
+      <i class="icon-user icon-2x navicon"></i>
       Profile
     </a>
   </nav>
 
   <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
   <div class="content">
-      <ng-view ng-animate="'view'"></ng-view>
+      <ng-view ng-animate=""></ng-view>
   </div>
 
   <script id="login.html" type="text/ng-template">
-    <div class="input-group" ng-show="false">
+    <div id="login-logo">
+      <img src="/about/og-logo.png">
+    </div>
+    <div class="content-padded">
+      <h2>Welcome to the OSIRIS GUITAR Journal</h2>
+      <p>
+      Get started right away by logging in with your Facebook account. This app will use your name and email address to create an account, never give the information away to anyone else and only post things to your timeline when you choose.</p>
+    </div>
+    <div class="input-group" ng-show="true">
       <div class="input-row">
         <label>Email</label>
         <input ng-model="email" type="email"/>
@@ -359,15 +367,7 @@
         <input type="password" ng-model="password" />
       </div>
     </div>
-    <div id="login-logo">
-      <img src="/about/og-logo.png">
-    </div>
-    <div class="content-padded">
-      <h2>Welcome to the OSIRIS GUITAR Journal</h2>
-      <p>
-      Get started right away by logging in with your Facebook account. This app will use your name and email address to create an account, never give the information away to anyone else and only post things to your timeline when you choose.</p>
-    </div>
-    <a class="button-block" ng-click="login()" ng-show="false">Login</a>
+    <a class="btn btn-default" ng-click="login()" ng-show="true">Login</a>
     <div class="facebook-login">
       <a href="/auth/facebook" onclick="facebookAuth();"><img height="40" src="/app/img/facebook.png"></a>
     </div>
@@ -406,7 +406,7 @@
       3. Log a practice session <span ng-show="Sessions.sessions && Sessions.sessions.length > 0" class="complete">&#x2713;</span><br>
       <a href="/session/" ng-show="!Sessions.sessions || Sessions.sessions.length == 0" class="button-positive button-block">New session</a>
     </div>
-    <h2 class="padded">Latest sessions</h2>
+    <h2>Latest sessions</h2>
     <div class="list-group">
      <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions | take:3">
         <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
@@ -414,16 +414,13 @@
         {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
        </a>
      </div>
-    <a href="/session/" type="button" class="btn btn-success">New Session</a>
-    <h2 class="padded">Instruments</h2>
-    <ul class="list inset">
-      <li>
-        <a href="/profile">
-          <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}" ng-repeat="instrument in Instruments.instruments | take:5">
-          <span class="chevron"></span>
-        </a>
-      </li>
-    </ul>
+    <a href="/session/" type="button" class="btn btn-default">New Session</a>
+    <h2>Instruments</h2>
+    <div class="list-group">
+      <a class="list-group-item" href="/profile">
+        <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}" ng-repeat="instrument in Instruments.instruments | take:5">
+      </a>
+    </div>
   </script>
 
   <script id="sessions.html" type="text/ng-template">
@@ -467,50 +464,46 @@
     <div class="facebook-login" ng-show="!editMode">
       <a href="" onclick="postToFB('{{session._id}}')"><img height="40" src="/app/img/facebook-share.png"></a>
     </div>
-    <div class="input-group" ng-show="editMode">
-      <div class="input-row">
-        <label>Date</label>
-        <input type="date" ng-model="session.date" ng-disabled="!editMode" />
+    <form class="form-horizontal" ng-show="editMode">
+      <div class="form-group">
+        <label class="control-label">Date</label>
+        <input class="form-control" type="date" ng-model="session.date" ng-disabled="!editMode" />
       </div>
-      <div class="input-row">
-        <label>Duration (min)</label>
-        <input type="number" ng-model="session.length" ng-disabled="!editMode" />
+      <div class="form-group">
+        <label class="control-label">Duration (min)</label>
+        <input class="form-control" type="number" ng-model="session.length" ng-disabled="!editMode" />
       </div>
-      <div class="input-row">
-        <label>Goal</label>
-        <select ng-model="session.goalId" ng-disabled="!editMode">
+      <div class="form-group">
+        <label class="control-label">Goal</label>
+        <select class="form-control" ng-model="session.goalId" ng-disabled="!editMode">
           <option ng-repeat="goal in Goals.goals" value="{{goal._id}}" ng-selected="session.goalId == goal._id">{{goal.title}}</option>
         </select>
       </div>
-      <div class="input-row">
-        <label>Goal contribution (%)</label>
-        <input type="number" ng-model="session.goalContribution" ng-disabled="!editMode" />
-      </div>
-      <div class="input-row">
-        <label>Instrument</label>
-        <select ng-model="session.instrumentId" ng-disabled="!editMode">
+      <div class="form-group">
+        <label class="control-label">Instrument</label>
+        <select class="form-control" ng-model="session.instrumentId" ng-disabled="!editMode">
           <option ng-repeat="instrument in Instruments.instruments" value="{{instrument._id}}" ng-selected="session.instrumentId == instrument._id">{{instrument.name}}</option>
         </select>
       </div>
-      <div class="input-row">
-        <label>Other gear</label>
-        <input type="text" ng-model="session.gear" ng-disabled="!editMode" />
+      <div class="form-group">
+        <label class="control-label">Other gear</label>
+        <input class="form-control" type="text" ng-model="session.gear" ng-disabled="!editMode" />
       </div>
-      <div class="input-row">
-        <label>Rating</label>
-        <input type="number" ng-model="session.rating" ng-disabled="!editMode" />
+      <div class="form-group">
+        <label class="control-label">Rating</label>
+        <input class="form-control" type="number" ng-model="session.rating" ng-disabled="!editMode" />
       </div>
-      <div class="input-row">
-        <label>Location</label>
-        <input type="text" ng-model="session.location" ng-disabled="!editMode" />
+      <div class="form-group">
+        <label class="control-label">Location</label>
+        <input class="form-control" type="text" ng-model="session.location" ng-disabled="!editMode" />
       </div>
-      <div class="input-row">
-        <label>Notes</label>
-        <textarea ng-disabled="!editMode" ng-model="session.notes"></textarea>
+      <div class="form-group">
+        <label class="control-label">Notes</label>
+        <textarea class="form-control" ng-disabled="!editMode" ng-model="session.notes"></textarea>
       </div>
-    </div>
-    <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
-    <a class="button-negative button-block" ng-click="delete()" ng-show="editMode && session._id">Delete</a>
+      <a class="btn btn-success" type="button" ng-click="save()" ng-show="editMode">Save</a>
+      <a class="btn btn-danger" type="button" ng-click="delete()" ng-show="editMode && session._id">Delete</a>
+    </form>
   </script>
 
   <script id="goals.html" type="text/ng-template">
@@ -527,38 +520,38 @@
       <h2>{{goal.title}} ({{goal.complete && '' || 'not ' }}complete)</h2>
       {{goal.description}}
     </div>
-    <div class="input-group" ng-show="editMode">
-      <div class="input-row">
-        <label>Title</label>
-        <input type="text" ng-model="goal.title" ng-disabled="!editMode" />
+    <div class="form-horizontal" ng-show="editMode">
+      <div class="form-group">
+        <label class="control-label">Title</label>
+        <input class="form-control" type="text" ng-model="goal.title" ng-disabled="!editMode" />
       </div>
-      <div class="input-row">
-        <label>Description</label>
-        <textarea ng-disabled="!editMode" ng-model="goal.description"></textarea>
+      <div class="form-group">
+        <label class="control-label">Description</label>
+        <textarea class="form-control" ng-disabled="!editMode" ng-model="goal.description"></textarea>
       </div>
-      <div class="input-row">
-        <label>Complete</label>
-        <input type="checkbox" ng-model="goal.completed" ng-change="goal.completionDate = getDate()" ng-disabled="!editMode" />
+      <div class="form-group">
+        <label class="control-label">Completed</label>
+        <input class="form-control" type="checkbox" ng-model="goal.completed" ng-change="goal.completionDate = getDate()" ng-disabled="!editMode" />
       </div>
     </div>
-    <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
-    <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
+    <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
+    <a class="btn btn-danger" ng-click="delete()" ng-show="editMode">Delete</a>
   </script>
 
   <script id="stats.html" type="text/ng-template">
     <div class="content-padded" ng-show="statsOverview.totalSessions > 0">
       <h2>Sessions</h2>
-      <div class="label">Total sessions:</div>
+      <div class="fieldLabel">Total sessions:</div>
       <div class="info">{{statsOverview.totalSessions}}</div>
-      <div class="label">Total time:</div>
+      <div class="fieldLabel">Total time:</div>
       <div class="info">{{Math.floor(statsOverview.totalLength / 60)}} hours, {{statsOverview.totalLength % 60}} minutes</div>
-      <div class="label">Average duration:</div>
+      <div class="fieldLabel">Average duration:</div>
       <div class="info">{{statsOverview.averageLength}} minutes</div>
-      <div class="label">Average rating:</div>
+      <div class="fieldLabel">Average rating:</div>
       <div class="info">{{statsOverview.averageRating}}</div>
-      <div class="label">Sessions per week:</div>
+      <div class="fieldLabel">Sessions per week:</div>
       <div class="info">{{statsOverview.sessionsPerWeek}}</div>      
-      <div class="label">Latest session:</div>
+      <div class="fieldLabel">Latest session:</div>
       <div class="info">{{statsOverview.latestSession | date:'yyyy-MM-dd'}}</div> 
     </div>
     <div class="content-padded">
@@ -588,14 +581,14 @@
     </div>
     <div class="content-padded">
       <h2>Goals</h2>
-      <div class="label">Active goals:</div>
+      <div class="fieldLabel">Active goals:</div>
       <div class="info">{{Goals.getActiveGoals().length}}</div>
-      <div class="label">Completed goals:</div>
+      <div class="fieldLabel">Completed goals:</div>
       <div class="info">{{Goals.goals.length - Goals.getActiveGoals().length}}</div>
     </div>
     <div class="content-padded">
       <h2>Instruments</h2>
-      <div class="label">Intruments:</div>
+      <div class="fieldLabel">Intruments:</div>
       <div class="info">{{Instruments.instruments.length}}</div>
       <!--<div class="label">Most popular:</div>
       <div class="info">{{getInstrument(statsOverview.mostUsedInstrument).name}}</div>-->
@@ -605,25 +598,23 @@
   <script id="profile.html" type="text/ng-template">
     <h2 class="padded">Profile</h2>
     <div class="content-padded">
-      <div class="label">Username:</div>
+      <div class="fieldLabel">Username:</div>
       <div class="info">{{profile.username}}</div>
-      <div class="label">Email:</div>
+      <div class="fieldLabel">Email:</div>
       <div class="info">{{profile.email}}</div>
     </div>
     <h2 class="padded">Instruments</h2>
-    <ul class="list inset">
-      <li ng-repeat="instrument in Instruments.instruments">
-        <a href="/instrument/{{instrument._id}}">
+    <div class="list-group">
+      <a class="list-group-item" href="/instrument/{{instrument._id}}" ng-repeat="instrument in Instruments.instruments">
           <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}">
           <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
           {{instrument.description}}
-          <span class="chevron"></span>
-        </a>
-      </li>
-    </ul>
-    <div>
-        <a class="button-negative button-block" ng-click="logout()">Logout</a>
+      </a>
     </div>
+
+    <a class="btn btn-default" type="button" href="instrument">Add Instrument</a>
+    <h2>Logout</a>
+    <a class="btn btn-danger" type="button" ng-click="logout()">Logout</a>
   </script>
 
   <script id="instrument.html" type="text/ng-template">
@@ -641,26 +632,26 @@
         </div>
       </div>
     </div>
-    <div class="input-group" ng-show="editMode">
-      <div class="input-row">
-        <label>Name</label>
-        <input type="text" ng-model="instrument.name" ng-disabled="!editMode" />
+    <div class="form-horizontal" ng-show="editMode">
+      <div class="form-group">
+        <label class="control-label">Name</label>
+        <input class="form-control" type="text" ng-model="instrument.name" ng-disabled="!editMode" />
       </div>
-      <div class="input-row">
-        <label>Type</label>
-        <input type="text" ng-model="instrument.type" ng-disabled="!editMode" />
+      <div class="form-group">
+        <label class="control-label">Type</label>
+        <input class="form-control" type="text" ng-model="instrument.type" ng-disabled="!editMode" />
       </div>
-      <div class="input-row">
-        <label>Description</label>
-        <textarea ng-disabled="!editMode" ng-model="instrument.description"></textarea>
+      <div class="form-group">
+        <label class="control-label">Description</label>
+        <textarea class="form-control" ng-disabled="!editMode" ng-model="instrument.description"></textarea>
       </div>
-      <div class="input-row">
-        <label>Image</label>
-        <input type="file" id="imagefield" onchange="angular.element(this).scope().setImage(this)" />
+      <div class="form-group">
+        <label class="control-label">Image</label>
+        <input class="form-control" type="file" id="imagefield" onchange="angular.element(this).scope().setImage(this)" />
       </div>
     </div>
-    <a class="button-positive button-block" ng-click="save()" ng-show="editMode">Save</a>
-    <a class="button-negative button-block" ng-click="delete()" ng-show="editMode">Delete</a>
+    <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
+    <a class="btn btn-danger" ng-click="delete()" ng-show="editMode">Delete</a>
   </script>
 
   </body>

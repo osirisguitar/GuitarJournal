@@ -43,6 +43,7 @@ passport.use(new LocalStrategy({
 
 			var users = db.collection('Users');
 			users.findOne({ email: username }, function(err, user) {
+				console.log("Found user!" + user._id);
 			    if (err)
 			    	return done(err);
 			    else

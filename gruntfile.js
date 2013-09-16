@@ -23,20 +23,30 @@ module.exports = function(grunt) {
 				dest: 'app/compiled/all.js'
 			},
 			css: {
-				src: ['app/css/bootstrap.min.css','app/css/guitarjournal.css', 'app/libs/**/*.css'],
+				src: ['app/css/bootstrap.min.css','app/css/font-awesome.min.css', 'app/css/guitarjournal.css', 'app/libs/**/*.css'],
 				dest: 'app/compiled/all.css'
 			}
 		},
 
 		watch: {
 			jsandcss: {
-				files: ['app/controllers/*.js','app/services/*.js','app/libs/**/*.js', 'app/js/*.js', 'app/css/bootstrap.min.css','app/css/guitarjournal.css', 'app/libs/**/*.css'],
+				files: ['app/controllers/*.js','app/services/*.js','app/libs/**/*.js', 'app/js/*.js', 'app/css/bootstrap.min.css','app/css/font-awesome.min.css', 'app/css/guitarjournal.css', 'app/libs/**/*.css'],
 				tasks: ['concat']
+			},
+			less: {
+				files: ['app/css/*.less'],
+				tasks: ['less']
 			}
+		},
+
+		less: {
+			src: 'app/css/*.less',
+			dest: 'app/css/bootstrap.min.css'
 		}
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-less');
 };

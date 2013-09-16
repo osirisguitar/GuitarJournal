@@ -33,40 +33,11 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 	});
 
 	$scope.Sessions = Sessions;
+	$rootScope.sessionsReload = true;
 
 	$scope.$watch('Sessions.sessions', function () {
 		if ($rootScope.loggedIn) {
-			$rootScope.apiStatus.loading++;
-			$http.get('/api/statistics/overview')
-				.success(function(data) {
-					$scope.statsOverview = data;
-					var firstSession = new Date($scope.statsOverview.firstSession);
-					var lastSession = new Date($scope.statsOverview.latestSession);
-					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-					var weeks = Math.max(days/7, 1);
-					$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
-					$rootScope.apiStatus.loading--;
-				})
-				.error(function(data) {
-					$rootScope.apiStatus.loading--;
-					alert("Error when getting statistics overview.");
-				});
-
-				$rootScope.apiStatus.loading++;
-				$http.get('/api/statistics/overview/7')
-				.success(function(data) {
-					$scope.weekStats = data;
-					var firstSession = new Date($scope.weekStats.firstSession);
-					var lastSession = new Date($scope.weekStats.latestSession);
-					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-					var weeks = days/7;
-					$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
-					$rootScope.apiStatus.loading--;
-				})
-				.error(function(data) {
-					$rootScope.apiStatus.loading++;
-					alert("Error when getting statistics overview.");
-				});		
+			$rootScope.sessionsReload = true;
 			
 		}
 	}, true);
@@ -75,11 +46,14 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope) {
 	$scope.pageSettings.hideNavigation = true;
 	$scope.login = function() {
-			$http.post("/api/login", {email: $scope.email, password: $scope.password}, $rootScope.httpConfig).success(function(data) {
-				if (data._id)
-					$rootScope.loggedIn = true;
-				$location.path("/");
-			}).error(function(data) { console.log("Could not log in") });
+		console.log("Trying to log in");
+		$http.post("/api/login", {email: $scope.email, password: $scope.password}, $rootScope.httpConfig).success(function(data) {
+			if (data._id) {
+				$rootScope.loggedIn = true;
+				$scope.pageSettings.hideNavigation = false;
+			}
+			$location.path("/");
+		}).error(function(data) { console.log("Could not log in") });
 	};
 }
 
@@ -91,6 +65,41 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 	$scope.Sessions = Sessions;
 	$scope.Goals = Goals;
 	$scope.Instruments = Instruments;
+
+	if ($rootScope.sessionsReload) {
+		$rootScope.sessionsReload = false;
+		$rootScope.apiStatus.loading++;
+		$http.get('/api/statistics/overview')
+			.success(function(data) {
+				$scope.statsOverview = data;
+				var firstSession = new Date($scope.statsOverview.firstSession);
+				var lastSession = new Date($scope.statsOverview.latestSession);
+				var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+				var weeks = Math.max(days/7, 1);
+				$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
+				$rootScope.apiStatus.loading--;
+			})
+			.error(function(data) {
+				$rootScope.apiStatus.loading--;
+				alert("Error when getting statistics overview.");
+			});
+
+			$rootScope.apiStatus.loading++;
+			$http.get('/api/statistics/overview/7')
+			.success(function(data) {
+				$scope.weekStats = data;
+				var firstSession = new Date($scope.weekStats.firstSession);
+				var lastSession = new Date($scope.weekStats.latestSession);
+				var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+				var weeks = days/7;
+				$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
+				$rootScope.apiStatus.loading--;
+			})
+			.error(function(data) {
+				$rootScope.apiStatus.loading++;
+				alert("Error when getting statistics overview.");
+			});
+	}
 
 	$scope.sessionsThisWeek = function() {
 		var currentWeekday = new Date().getDay();
@@ -305,10 +314,7 @@ function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)
 	$scope.pageSettings.pageTitle = "Profile";
 	$scope.pageSettings.active = "profile";
 	$scope.pageSettings.showBackButton = false;
-	$scope.pageSettings.rightButtonText = "New instrument";
-	$scope.pageSettings.rightButtonClick = function() {
-		$location.path('/instrument/');
-	};
+	$scope.pageSettings.rightButtonText = null;
 
 	$scope.logout = function() {
 		fbLogout();
