@@ -27,7 +27,7 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 					$scope.profile = data;
 				})
 				.error(function(data){
-					alert("Error when getting profile.")
+					alert("Error when getting profile.");
 				});			
 		}
 	});
@@ -53,11 +53,11 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 				$scope.pageSettings.hideNavigation = false;
 			}
 			$location.path("/");
-		}).error(function(data) { console.log("Could not log in") });
+		}).error(function(data) { console.log("Could not log in"); });
 	};
 }
 
-function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instruments) {
+function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instruments, Statistics) {
 	$scope.pageSettings.pageTitle = "OSIRIS GUITAR Journal";
 	$scope.pageSettings.active = "home";
 	$scope.pageSettings.showBackButton = false;
@@ -65,46 +65,24 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 	$scope.Sessions = Sessions;
 	$scope.Goals = Goals;
 	$scope.Instruments = Instruments;
+	$scope.Statistics = Statistics;
+	$scope.statsOverview = Statistics.statsOverview;
+	Statistics.getStatsOverview();
+	Statistics.getWeekStats();
 
-	if ($rootScope.sessionsReload) {
-		$rootScope.sessionsReload = false;
-		$rootScope.apiStatus.loading++;
-		$http.get('/api/statistics/overview')
-			.success(function(data) {
-				$scope.statsOverview = data;
-				var firstSession = new Date($scope.statsOverview.firstSession);
-				var lastSession = new Date($scope.statsOverview.latestSession);
-				var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-				var weeks = Math.max(days/7, 1);
-				$scope.statsOverview.sessionsPerWeek = Math.round($scope.statsOverview.totalSessions / weeks * 100)/100;
-				$rootScope.apiStatus.loading--;
-			})
-			.error(function(data) {
-				$rootScope.apiStatus.loading--;
-				alert("Error when getting statistics overview.");
-			});
-
-			$rootScope.apiStatus.loading++;
-			$http.get('/api/statistics/overview/7')
-			.success(function(data) {
-				$scope.weekStats = data;
-				var firstSession = new Date($scope.weekStats.firstSession);
-				var lastSession = new Date($scope.weekStats.latestSession);
-				var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
-				var weeks = days/7;
-				$scope.weekStats.sessionsPerWeek = Math.round($scope.weekStats.totalSessions / weeks * 100)/100;
-				$rootScope.apiStatus.loading--;
-			})
-			.error(function(data) {
-				$rootScope.apiStatus.loading++;
-				alert("Error when getting statistics overview.");
-			});
-	}
+	$scope.$watch("Statistics.statsOverview", function () {
+		console.log("statsOverview reloaded!");
+		$scope.statsOverview = Statistics.statsOverview;
+	});
+	$scope.$watch("Statistics.weekStats", function () {
+		console.log("weekStats reloaded!");
+		$scope.weekStats = Statistics.weekStats;
+	});
 
 	$scope.sessionsThisWeek = function() {
 		var currentWeekday = new Date().getDay();
 		return 2;
-	}
+	};
 }
 
 function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments) {
@@ -120,7 +98,7 @@ function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments) {
 	};
 }
 
-function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, Instruments) {
+function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, Instruments, Statistics) {
 	$scope.Goals = Goals;
 	$scope.Instruments = Instruments;
 	$scope.pageSettings.pageTitle = "Session";
@@ -130,9 +108,8 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 	$scope.editMode = false;
 
 	// If id is provided, get session, from memory or DB.
-	if ($routeParams.id != null && $routeParams.id != "")
+	if ($routeParams.id !== null && $routeParams.id !== "")
 	{
-		console.log("Getting session", $routeParams.id);
 		Sessions.getSession($routeParams.id, 
 			function(session) {
 				console.log("Got session", session);
@@ -144,7 +121,7 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 	}
 	else
 	{
-		console.log("New session...")
+		console.log("New session...");
 		$scope.session = { date: new Date() };
 		$scope.editMode = true;
 	}
@@ -163,6 +140,7 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 		Sessions.saveSession($scope.session, 
 			function() {
 				$location.path("/sessions/");
+				Statistics.flushStats();
 			},
 			function() {
 				alert("Error saving session");
@@ -202,7 +180,7 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 	$scope.Goals = Goals;
 
 	// If id is provided, get session, from memory or DB.
-	if ($routeParams.id != null && $routeParams.id != "") {
+	if ($routeParams.id !== null && $routeParams.id !== "") {
 		Goals.getGoal($routeParams.id, function(goal) {
 			$scope.goal = goal;
 		}, function() { alert("Couldn't get goal");});
@@ -223,7 +201,7 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 
 	$scope.getDate = function() {
 		return new Date();
-	}
+	};
 
 	$scope.save = function()
 	{
@@ -234,7 +212,7 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 			function() {
 				alert("Error saving goal");
 			});
-	}
+	};
 
 	$scope.delete = function() {
 		Goals.deleteGoal($scope.goal._id,
@@ -245,7 +223,7 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 				alert("Couldn't delete goal");
 			});
 	};
-};
+}
 
 function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
 	$scope.Goals = Goals;	
@@ -326,8 +304,8 @@ function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)
 			.error(function() {
 				$location.path("/login");
 			});
-	}
-};
+	};
+}
 
 function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $rootScope)
 {
@@ -340,7 +318,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 	$scope._csrf = $rootScope.csrf;
 
 	// If id is provided, get session, from memory or DB.
-	if ($routeParams.id != null && $routeParams.id != "")
+	if ($routeParams.id !== null && $routeParams.id !== "")
 	{
 		Instruments.getInstrument($routeParams.id,
 			function(instrument) {
@@ -377,7 +355,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 
 		})(file);
 		reader.readAsDataURL(file);
-	}
+	};
 
 	$scope.save = function() {
 		Instruments.saveInstrument($scope.instrument,
@@ -387,7 +365,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 			function() {
 				alert("Could not save instrument");
 			});
-	}
+	};
 
 	$scope.delete = function() {
 		Instruments.deleteInstrument($scope.instrument._id,
@@ -397,5 +375,5 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 			function() {
 				alert("Could not delete instrument");
 			});
-	}
+	};
 }

@@ -2,14 +2,16 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		jshint: {
 			// define the files to lint
-			files: ['gruntfile.js', 'app/**/*.js', 'test/**/*.js'],
+			files: ['gruntfile.js', 'app/controllers/*.js', 'app/services.js', 'app.js', '/app/app.js'],
 			// configure JSHint (documented at http://www.jshint.com/docs/)
 			options: {
 				// more options here if you want to override JSHint defaults
+				smarttabs:true,
+				"-W099": true,
 				globals: {
 					jQuery: true,
 					console: true,
-					module: true
+					module: true,
 				}
 			}
 		},
@@ -19,7 +21,7 @@ module.exports = function(grunt) {
 
 			},
 			javascripts: {
-				src: ['app/controllers/*.js','app/services/*.js','app/libs/**/*.js', 'app/js/*.js'],
+				src: ['app/controllers/*.js','app/services/*.js','app/libs/**/*.js'/*, 'app/js/*.js'*/],
 				dest: 'app/compiled/all.js'
 			},
 			css: {

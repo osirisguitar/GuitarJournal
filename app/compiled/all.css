@@ -418,7 +418,7 @@ html {
 }
 
 body {
-  padding-top:40px;
+  padding-top:42px;
   padding-bottom:60px;
   font-size:14px;
   margin-left:10px;
@@ -541,6 +541,10 @@ header a.prev, header a.left {
 header a.next, header a.right {
   right:10px;
   top:11px;
+}
+
+.form-horizontal .btn {
+  margin-top:15px;
 }
 
 .btn {
@@ -690,25 +694,48 @@ h2.padded {
   width:50%;
 }
 
+.form-horizontal {
+  margin-top:10px;
+}
+
 .form-group {
   margin-bottom:3px;
 }
 
 .form-control {
+  padding-top:0;
+  padding-bottom:0;
+  padding-left:3px;
+  float:left;
+  width:58%;
+}
+
+textarea.form-control, input[type="text"].form-control, input[type="number"].form-control, input[type="date"].form-control, select.form-control {
   -webkit-box-shadow:none;
   box-shadow:none;
   -webkit-appearance:none;
   height:34px;
-  padding-top:0;
-  padding-bottom:0;
-  padding-left:5px;
-  float:left;
-  width:55%;
 }
+
+textarea.form-control {
+  height:50px;
+}
+
+input[type="checkbox"].form-control {
+  height:20px;
+  margin-top:10px;
+}
+
+input[type="text"]:focus, textarea:focus, input[type="date"]:focus, input[type="number"]:focus, select:focus {
+    border-color: rgba(189, 147, 79, 0.8);
+    box-shadow: 0 1px 1px rgba(189, 147, 79, 0.075) inset, 0 0 8px rgba(189, 147, 79, 0.6);
+    outline: 0 none;
+}
+
 
 .form-horizontal .control-label {
   padding-top:9px;
-  width:40%;
+  width:37%;
   float:left;
   clear:left;
   padding-right:15px;

@@ -10,9 +10,9 @@ var fs = require("fs");
 var gm = require("gm");
 var imageMagick = gm.subClass({ imageMagick: true });
 var crypto = require("crypto");
-var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy
-  , FacebookStrategy = require('passport-facebook').Strategy;
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 express.static.mime.define({'application/font-woff': ['woff']});
 
@@ -68,7 +68,7 @@ passport.use(new FacebookStrategy({
 			    	return done(err);
 			    else
 			    {
-			    	if (user == null) {
+			    	if (user === null) {
 			    		var newUser = {};
 			    		newUser.facebookId = profile.id;
 			    		newUser.fullName = profile.displayName;
@@ -205,7 +205,7 @@ function checkLogin(req, res) {
 app.get("/api/sessions/:skip?", ensureAuthenticated, function(req, res) {
 	var loggedInUser = req.user._id;
 
-	var skip = req.params.skip ? parseInt(req.params.skip) : 0;
+	var skip = req.params.skip ? parseInt(req.params.skip, 10) : 0;
 
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -284,8 +284,8 @@ app.get("/api/statistics/overview/:days?", ensureAuthenticated, function(req, re
 	   			},
  				{
    					$sort: { numUses: -1 }
-   				}]
-	   			, function (err, agg) {
+   				}],
+	   			function (err, agg) {
 	   				if (err) {
 	   					console.log(err);
 	   					res.json();
@@ -366,8 +366,8 @@ app.get("/api/statistics/minutesperday/:days?", ensureAuthenticated, function(re
 
 		var sessions = db.collection('Sessions');
 		sessions.aggregate(
-			{ $match: { userId: loggedInUser, date: { $gte: date } } }/*,
-			{ $project: { weekDay: { $dayOfWeek: "$date" } }}*/,
+			{ $match: { userId: loggedInUser, date: { $gte: date } } },/*
+			{ $project: { weekDay: { $dayOfWeek: "$date" } }},*/
 			{ $group: { _id: { year: { $year: "$date" }, month: { $month: "$date" }, day: { $dayOfMonth: "$date" } }, totalMinutes: { $sum: "$length" } } },
 			{ $sort: { _id: 1 } },
 			function(err, aggregate) {
@@ -435,7 +435,7 @@ app.post("/api/sessions", ensureAuthenticated, function(req, res) {
 });
 
 app.get("/api/goals", ensureAuthenticated, function(req, res) {
-	var loggedInUser = req.user._id
+	var loggedInUser = req.user._id;
 
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -519,7 +519,7 @@ app.get("/api/instruments", ensureAuthenticated, function(req, res) {
 
 app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 	var loggedInUser = req.user._id;
-	var instrumentId = undefined;
+	var instrumentId;
 	if (req.body._id) {
 		req.body._id = ObjectID(req.body._id);
 	}
@@ -541,7 +541,7 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 					return;
 				});
 		});
-	}
+	};
 
 	if (req.body.image) {
 		var imagebytes = [];

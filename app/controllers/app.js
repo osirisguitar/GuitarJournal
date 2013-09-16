@@ -72,7 +72,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
               scope.$apply();
           });
       }
-    }
+    };
   })
   .filter('take', function() {
     return function(input, numItems) {
@@ -82,12 +82,12 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
       return input.filter(function(elem, index) {
         return index < numItems;
       });
-    }
+    };
   }).filter('suffix', function() {
     return function(input, suffix) {
       if (input)
         return input + suffix;
       else
         return input; 
-    }
+    };
   });

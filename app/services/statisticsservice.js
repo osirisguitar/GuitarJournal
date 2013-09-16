@@ -1,5 +1,7 @@
 GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 	var service = {};
+	service.statsOverview = undefined;
+	service.weekStats = undefined;
 
 	service.getSessionsPerWeekday = function() {
 		$rootScope.apiStatus.loading++;
@@ -92,7 +94,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 						var currentWeek = moment().subtract(moment.duration(weeks - i, 'weeks')).isoWeek();
 						service.sessionsPerWeek.labels.push(currentWeek);
 
-						while (currentDataIndex < data.length && data[currentDataIndex].week < currentWeek) {
+						while (currentDataIndex < (data.length - 1) && data[currentDataIndex].week < currentWeek) {
 							currentDataIndex++;
 						}
 
@@ -114,6 +116,51 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 				$rootScope.apiStatus.loading--;
 			});							
 	};
+
+	service.getStatsOverview = function () {
+		if (typeof service.statsOverview == undefined || service.statsOverview == null) {
+			$rootScope.apiStatus.loading++;
+			$http.get('/api/statistics/overview')
+				.success(function(data) {
+					service.statsOverview = data;
+					var firstSession = new Date(service.statsOverview.firstSession);
+					var lastSession = new Date(service.statsOverview.latestSession);
+					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+					var weeks = Math.max(days/7, 1);
+					service.statsOverview.sessionsPerWeek = Math.round(service.statsOverview.totalSessions / weeks * 100)/100;
+					$rootScope.apiStatus.loading--;
+				})
+				.error(function(data) {
+					$rootScope.apiStatus.loading--;
+					alert("Error when getting statistics overview.");
+				});
+		}
+	};
+
+	service.getWeekStats = function () {
+		if (typeof service.weekStats == undefined || service.weekStats == null) {
+			$rootScope.apiStatus.loading++;
+			$http.get('/api/statistics/overview/7')
+				.success(function(data) {
+					service.weekStats = data;
+					var firstSession = new Date(service.weekStats.firstSession);
+					var lastSession = new Date(service.weekStats.latestSession);
+					var days = Math.round(lastSession.getTime() - firstSession.getTime())/86400000;
+					var weeks = days/7;
+					service.weekStats.sessionsPerWeek = Math.round(service.weekStats.totalSessions / weeks * 100)/100;
+					$rootScope.apiStatus.loading--;
+				})
+				.error(function(data) {
+					$rootScope.apiStatus.loading++;
+					alert("Error when getting statistics overview.");
+				});
+		}
+	}
+
+	service.flushStats = function() {
+		service.statsOverview = undefined;
+		service.weekStats = undefined;
+	}
 
 	return service;
 });
