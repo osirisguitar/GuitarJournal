@@ -379,7 +379,7 @@
       <p>
       Get started right away by logging in with your Facebook account. This app will use your name and email address to create an account, never give the information away to anyone else and only post things to your timeline when you choose.</p>
     </div>
-    <div class="input-group" ng-show="true">
+    <div class="input-group" ng-show="false">
       <div class="input-row">
         <label>Email</label>
         <input ng-model="email" type="email"/>
@@ -389,7 +389,7 @@
         <input type="password" ng-model="password" />
       </div>
     </div>
-    <a class="btn btn-default" ng-click="login()" ng-show="true">Login</a>
+    <a class="btn btn-default" ng-click="login()" ng-show="false">Login</a>
     <div class="facebook-login">
       <a href="/auth/facebook" onclick="facebookAuth();"><img height="40" src="/app/img/facebook.png"></a>
     </div>
@@ -542,22 +542,24 @@
       <h2>{{goal.title}} ({{goal.complete && '' || 'not ' }}complete)</h2>
       {{goal.description}}
     </div>
-    <form class="form-horizontal" ng-show="editMode">
-      <div class="form-group">
-        <label class="control-label">Title</label>
-        <input class="form-control" placeholder="Example: Record new song" type="text" ng-model="goal.title" ng-disabled="!editMode" />
-      </div>
-      <div class="form-group">
-        <label class="control-label">Description</label>
-        <textarea class="form-control" placeholder="Example: Record and arrange tracks for new song" ng-disabled="!editMode" ng-model="goal.description"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="control-label">Completed</label>
-        <input class="form-control" type="checkbox" ng-model="goal.completed" ng-change="goal.completionDate = getDate()" ng-disabled="!editMode" />
-      </div>
-      <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
-      <a class="btn btn-danger" ng-click="delete()" ng-show="editMode && goal._id">Delete</a>
-    </form>
+    <div class="content-padded">
+      <form class="form-horizontal" ng-show="editMode">
+        <div class="form-group">
+          <label class="control-label">Title</label>
+          <input class="form-control" placeholder="Example: Record new song" type="text" ng-model="goal.title" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Description</label>
+          <textarea class="form-control" placeholder="Example: Record and arrange tracks for new song" ng-disabled="!editMode" ng-model="goal.description"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Completed</label>
+          <input class="form-control" type="checkbox" ng-model="goal.completed" ng-change="goal.completionDate = getDate()" ng-disabled="!editMode" />
+        </div>
+        <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
+        <a class="btn btn-danger" ng-click="delete()" ng-show="editMode && goal._id">Delete</a>
+      </form>
+    </div>
   </script>
 
   <script id="stats.html" type="text/ng-template">
