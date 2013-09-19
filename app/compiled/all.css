@@ -658,22 +658,6 @@ h2.padded {
   border: 1px solid #806335;
 }*/
 
-/* Pointed part of directional button */
-/*.bar-title .button-prev:before,
-.bar-title .button-next:before {
-  box-shadow: inset 1px 0 #806335, inset 0 1px #806335;
-  -webkit-mask-image: -webkit-gradient(linear, left top, right bottom, from(#000), color-stop(.33, #000), color-stop(.5, transparent), to(transparent));
-                  mask-image: gradient(linear, left top, right bottom, from(#000), color-stop(.33, #000), color-stop(.5, transparent), to(transparent));
-}
-.bar-title .button-prev:before {
-  background-image: -webkit-gradient(linear, left bottom, right top, from(#997740), to(#E6B360));
-  background-image: gradient(linear, left bottom, right top, from(#997740), to(#E6B360));
-}
-.bar-title .button-next:before {
-  background-image: -webkit-gradient(linear, left bottom, right top, from(#997740), to(#E6B360));
-  background-image: gradient(linear, left bottom, right top, from(#997740), to(#E6B360));
-}
-
 .input-row div
 {
   padding-top:11px;
