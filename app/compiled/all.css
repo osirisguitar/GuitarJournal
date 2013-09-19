@@ -412,17 +412,72 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 .icon-renren:before{content:"\f18b";}
 
 /* Prevents iOS text size adjust after orientation change, without disabling (Thanks to @necolas) */
-html {
+/*html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
-}
+}*/
 
-body {
+/*body {
   padding-top:42px;
   padding-bottom:60px;
   font-size:14px;
   margin-left:10px;
   margin-right:10px;
+}*/
+
+html, body {
+  margin:0px;
+  padding:0px;
+  overflow:hidden;
+  height:100%;
+  font-size:14px;
+}
+
+.vflex {
+  display:-webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  -webkit-box-flex:1;       
+}
+
+.scrolling {
+  -webkit-overflow-scrolling: touch;
+  overflow:auto;      
+}
+    
+.appbody {
+  position:absolute;
+  top:43px;
+  bottom:45px;
+  left:0;
+  right:0;
+  background:#999;
+}
+
+.wrapper-outer {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color:white;
+  /* gets .vflex + .scrolling */
+  
+}
+    
+.wrapper-inner {
+  background:#fff;
+  /* gets .vflex + .scrolling */
+}
+
+/* this adds the extra pixel that's neccessary if the content is < panel height */
+.panel-content {
+  background:#fff;
+  margin-left:10px;
+  margin-right:10px;  
+  margin-bottom:-1px;
+  padding-bottom:20px;
+  /* gets .vflex */
 }
 
 h2 {
@@ -531,7 +586,7 @@ header a, header a:hover {
   position:absolute;
   text-decoration:none;
   color:#BD934F;  
-}
+} 
 
 header a.prev, header a.left {
   left:10px;
@@ -557,6 +612,10 @@ header a.next, header a.right {
 
 .ng-dirty .btn-danger {
   display:none;
+}
+
+.content-padded {
+  padding-top:1px;
 }
 
 /*

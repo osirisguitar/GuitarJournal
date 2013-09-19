@@ -5,11 +5,11 @@
     <title>OG Journal</title>
 
     <!-- Sets initial viewport load and disables zooming  -->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 
     <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
 
     <!-- Set Apple icons for when prototype is saved to home screen -->
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/app/touch-icons/og-114.png">
@@ -30,6 +30,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.min.js"></script>
     <script src="/app/compiled/all.js"></script>
+    <script src="/app/js/nonbounce.js"></script>
+    <script>
+      nonbounce("scrollable-content")
+    </script>
     <link rel="stylesheet" href="/app/compiled/all.css">
 
     <script type="text/javascript">
@@ -46,6 +50,18 @@
       if (window.location.hash == '#_=_'){
         window.location.hash = '';
     }
+    </script>
+    <script>
+        /*document.addEventListener('touchmove', function(event) {
+          console.log(event.source);
+          //if (event.source == document.body)
+          event.preventDefault();
+        }, false);*/ 
+/*        document.addEventListener('touchstart', function(event) {
+          console.log(event.source);
+          //if (event.source == document.body)
+          event.preventDefault();
+        }, false); */
     </script>
     <style>
       #floatingCirclesG{
@@ -344,8 +360,14 @@
   </nav>
 
   <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-  <div class="content">
-      <ng-view ng-animate=""></ng-view>
+  <div class="appbody">
+    <div class="wrapper-outer vflex scrolling">
+      <div class="wrapper-inner vflex scrolling">
+        <div class="panel-content">
+          <ng-view ng-animate=""></ng-view>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script id="login.html" type="text/ng-template">
@@ -357,7 +379,7 @@
       <p>
       Get started right away by logging in with your Facebook account. This app will use your name and email address to create an account, never give the information away to anyone else and only post things to your timeline when you choose.</p>
     </div>
-    <div class="input-group" ng-show="false">
+    <div class="input-group" ng-show="true">
       <div class="input-row">
         <label>Email</label>
         <input ng-model="email" type="email"/>
@@ -367,15 +389,15 @@
         <input type="password" ng-model="password" />
       </div>
     </div>
-    <a class="btn btn-default" ng-click="login()" ng-show="false">Login</a>
+    <a class="btn btn-default" ng-click="login()" ng-show="true">Login</a>
     <div class="facebook-login">
       <a href="/auth/facebook" onclick="facebookAuth();"><img height="40" src="/app/img/facebook.png"></a>
     </div>
   </script>
 
   <script id="home.html" type="text/ng-template">
-    <h2 class="padded">{{profile.fullName}}</h2>
     <div class="content-padded overview" ng-show="Sessions.sessions.length > 0">
+      <h2>{{profile.fullName}}</h2>
       <div class="overview-row">
         <div>
           Sessions/week<br>
@@ -435,8 +457,8 @@
   </script>
 
   <script id="session.html" type="text/ng-template">
-    <h2 class="padded">{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
     <div class="content-padded view" ng-show="!editMode">
+      <h2>{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
       <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
       <div>
         <div>
@@ -596,8 +618,8 @@
   </script>
 
   <script id="profile.html" type="text/ng-template">
-    <h2 class="padded">Profile</h2>
     <div class="content-padded">
+      <h2>Profile</h2>
       <div class="fieldLabel">Username:</div>
       <div class="info">{{profile.username}}</div>
       <div class="fieldLabel">Email:</div>

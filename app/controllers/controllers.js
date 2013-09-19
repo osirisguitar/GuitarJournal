@@ -236,6 +236,18 @@ function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
 	$scope.pageSettings.active = "stats";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
+	Statistics.getStatsOverview();
+	Statistics.getWeekStats();
+
+	$scope.$watch("Statistics.statsOverview", function () {
+		console.log("statsOverview reloaded!");
+		$scope.statsOverview = Statistics.statsOverview;
+	});
+	$scope.$watch("Statistics.weekStats", function () {
+		console.log("weekStats reloaded!");
+		$scope.weekStats = Statistics.weekStats;
+	});
+
 
 	$scope.$watch("Statistics.minutesPerDay", function() {
 		$scope.last30days = {
