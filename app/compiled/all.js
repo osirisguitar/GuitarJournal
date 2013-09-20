@@ -599,6 +599,7 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 	$scope.pageSettings.active = "home";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
+	$scope.pageSettings.hideNavigation = false;
 	$scope.Sessions = Sessions;
 	$scope.Goals = Goals;
 	$scope.Instruments = Instruments;
@@ -643,6 +644,7 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 	$scope.pageSettings.showBackButton = true;
 	$scope.pageSettings.rightButtonText = "Edit";
 	$scope.editMode = false;
+	$scope.pageSettings.hideNavigation = false;
 
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id !== null && $routeParams.id !== "")
@@ -661,10 +663,12 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 		console.log("New session...");
 		$scope.session = { date: new Date() };
 		$scope.editMode = true;
+		$scope.pageSettings.hideNavigation = true;
 	}
 
 	$scope.pageSettings.rightButtonClick = function() {
 		$scope.editMode = !$scope.editMode;
+		$scope.pageSettings.hideNavigation = $scope.editMode;
 		$scope.pageSettings.showBackButton = !$scope.pageSettings.showBackButton;
 		if ($scope.pageSettings.rightButtonText == "Edit")
 			$scope.pageSettings.rightButtonText = "Cancel";
@@ -703,6 +707,7 @@ function GoalsCtrl($scope, $http, $location, Goals) {
 	$scope.pageSettings.active = "goals";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = "New";
+	$scope.pageSettings.hideNavigation = false;
 	$scope.pageSettings.rightButtonClick = function() {
 		$location.path('/goal/');
 	};
@@ -713,6 +718,7 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 	$scope.pageSettings.active = "goals";
 	$scope.pageSettings.showBackButton = true;
 	$scope.pageSettings.rightButtonText = "Edit";
+	$scope.pageSettings.hideNavigation = false;
 	$scope.editMode = false;
 	$scope.Goals = Goals;
 
@@ -773,6 +779,7 @@ function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
 	$scope.pageSettings.active = "stats";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
+	$scope.pageSettings.hideNavigation = false;
 	Statistics.getStatsOverview();
 	Statistics.getWeekStats();
 
@@ -842,6 +849,7 @@ function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)
 	$scope.pageSettings.active = "profile";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = null;
+	$scope.pageSettings.hideNavigation = false;
 
 	$scope.logout = function() {
 		fbLogout();
@@ -863,6 +871,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 	$scope.pageSettings.active = "profile";
 	$scope.pageSettings.showBackButton = true;
 	$scope.pageSettings.rightButtonText = "Edit";
+	$scope.pageSettings.hideNavigation = false;
 	$scope.editMode = false;
 	$scope._csrf = $rootScope.csrf;
 
@@ -881,10 +890,12 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 	{
 		$scope.instrument = {};
 		$scope.editMode = true;
+		$scope.pageSettings.hideNavigation = true;
 	}
 
 	$scope.pageSettings.rightButtonClick = function() {
 		$scope.editMode = !$scope.editMode;
+		$scope.pageSettings.hideNavigation = $scope.editMode;
 		$scope.pageSettings.showBackButton = !$scope.pageSettings.showBackButton;
 		if ($scope.pageSettings.rightButtonText == "Edit")
 			$scope.pageSettings.rightButtonText = "Cancel";
