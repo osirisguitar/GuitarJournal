@@ -51,18 +51,6 @@
         window.location.hash = '';
     }
     </script>
-    <script>
-        /*document.addEventListener('touchmove', function(event) {
-          console.log(event.source);
-          //if (event.source == document.body)
-          event.preventDefault();
-        }, false);*/ 
-/*        document.addEventListener('touchstart', function(event) {
-          console.log(event.source);
-          //if (event.source == document.body)
-          event.preventDefault();
-        }, false); */
-    </script>
     <style>
       #floatingCirclesG{
       position:relative;
@@ -428,20 +416,24 @@
       3. Log a practice session <span ng-show="Sessions.sessions && Sessions.sessions.length > 0" class="complete">&#x2713;</span><br>
       <a href="/session/" ng-show="!Sessions.sessions || Sessions.sessions.length == 0" class="button-positive button-block">New session</a>
     </div>
-    <h2>Latest sessions</h2>
-    <div class="list-group">
-     <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions | take:3">
-        <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
-        <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
-        {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
-       </a>
-     </div>
-    <a href="/session/" type="button" class="btn btn-default">New Session</a>
-    <h2>Instruments</h2>
-    <div class="list-group">
-      <a class="list-group-item" href="/profile">
-        <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}" ng-repeat="instrument in Instruments.instruments | take:5">
-      </a>
+    <div class="content-padded">
+      <h2>Latest sessions</h2>
+    </div>
+    <div>
+      <div class="list-group">
+        <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions | take:3">
+          <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
+          <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
+          {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
+         </a>
+       </div>
+      <a href="/session/" type="button" class="btn btn-default">New Session</a>
+      <h2>Instruments</h2>
+      <div class="list-group">
+        <a class="list-group-item" href="/profile">
+          <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}" ng-repeat="instrument in Instruments.instruments | take:5">
+        </a>
+      </div>
     </div>
   </script>
 
@@ -453,7 +445,9 @@
         {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
        </a>
     </div>
-    <a class="btn btn-default" type="button" ng-click="Sessions.getSessions(true)">Load more</a>
+    <div class="content-padded">
+      <a class="btn btn-default" type="button" ng-click="Sessions.getSessions(true)">Load more</a>
+    </div>
   </script>
 
   <script id="session.html" type="text/ng-template">
@@ -486,46 +480,48 @@
     <div class="facebook-login" ng-show="!editMode">
       <a href="" onclick="postToFB('{{session._id}}')"><img height="40" src="/app/img/facebook-share.png"></a>
     </div>
-    <form class="form-horizontal" ng-show="editMode">
-      <div class="form-group">
-        <label class="control-label">Date</label>
-        <input class="form-control" type="date" ng-model="session.date" ng-disabled="!editMode" />
-      </div>
-      <div class="form-group">
-        <label class="control-label">Duration (min)</label>
-        <input class="form-control" placeholder="Example: 60" type="number" ng-model="session.length" ng-disabled="!editMode" />
-      </div>
-      <div class="form-group">
-        <label class="control-label">Goal</label>
-        <select class="form-control" ng-model="session.goalId" ng-disabled="!editMode">
-          <option ng-repeat="goal in Goals.goals" value="{{goal._id}}" ng-selected="session.goalId == goal._id">{{goal.title}}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="control-label">Instrument</label>
-        <select class="form-control" ng-model="session.instrumentId" ng-disabled="!editMode">
-          <option ng-repeat="instrument in Instruments.instruments" value="{{instrument._id}}" ng-selected="session.instrumentId == instrument._id">{{instrument.name}}</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="control-label">Other gear</label>
-        <input class="form-control" placeholder="Example: AmpKit, DAW" type="text" ng-model="session.gear" ng-disabled="!editMode" />
-      </div>
-      <div class="form-group">
-        <label class="control-label">Rating</label>
-        <input class="form-control" placeholder="Your own rating (1-5)" type="number" ng-model="session.rating" ng-disabled="!editMode" />
-      </div>
-      <div class="form-group">
-        <label class="control-label">Location</label>
-        <input class="form-control" placeholder="Example: Home studio" type="text" ng-model="session.location" ng-disabled="!editMode" />
-      </div>
-      <div class="form-group">
-        <label class="control-label">Notes</label>
-        <textarea class="form-control" placeholder="General notes (never shared)" ng-disabled="!editMode" ng-model="session.notes"></textarea>
-      </div>
-      <a class="btn btn-success" type="button" ng-click="save()" ng-show="editMode">Save</a>
-      <a class="btn btn-danger" type="button" ng-click="delete()" ng-show="editMode && session._id">Delete</a>
-    </form>
+    <div class="content-padded">
+      <form class="form-horizontal" ng-show="editMode">
+        <div class="form-group">
+          <label class="control-label">Date</label>
+          <input class="form-control" type="date" ng-model="session.date" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Duration (min)</label>
+          <input class="form-control" placeholder="Example: 60" type="number" ng-model="session.length" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Goal</label>
+          <select class="form-control" ng-model="session.goalId" ng-disabled="!editMode">
+            <option ng-repeat="goal in Goals.goals" value="{{goal._id}}" ng-selected="session.goalId == goal._id">{{goal.title}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Instrument</label>
+          <select class="form-control" ng-model="session.instrumentId" ng-disabled="!editMode">
+            <option ng-repeat="instrument in Instruments.instruments" value="{{instrument._id}}" ng-selected="session.instrumentId == instrument._id">{{instrument.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Other gear</label>
+          <input class="form-control" placeholder="Example: AmpKit, DAW" type="text" ng-model="session.gear" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Rating</label>
+          <input class="form-control" placeholder="Your own rating (1-5)" type="number" ng-model="session.rating" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Location</label>
+          <input class="form-control" placeholder="Example: Home studio" type="text" ng-model="session.location" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Notes</label>
+          <textarea class="form-control" placeholder="General notes (never shared)" ng-disabled="!editMode" ng-model="session.notes"></textarea>
+        </div>
+        <a class="btn btn-success" type="button" ng-click="save()" ng-show="editMode">Save</a>
+        <a class="btn btn-danger" type="button" ng-click="delete()" ng-show="editMode && session._id">Delete</a>
+      </form>
+    </div>
   </script>
 
   <script id="goals.html" type="text/ng-template">
@@ -626,24 +622,24 @@
       <div class="info">{{profile.username}}</div>
       <div class="fieldLabel">Email:</div>
       <div class="info">{{profile.email}}</div>
-    </div>
-    <h2 class="padded">Instruments</h2>
-    <div class="list-group">
-      <a class="list-group-item" href="/instrument/{{instrument._id}}" ng-repeat="instrument in Instruments.instruments">
-          <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}">
-          <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
-          {{instrument.description}}
-      </a>
-    </div>
+      <h2 class="padded">Instruments</h2>
+      <div class="list-group">
+        <a class="list-group-item" href="/instrument/{{instrument._id}}" ng-repeat="instrument in Instruments.instruments">
+            <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}">
+            <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
+            {{instrument.description}}
+        </a>
+      </div>
 
-    <a class="btn btn-default" type="button" href="/instrument/">Add Instrument</a>
-    <h2>Logout</a>
-    <a class="btn btn-danger" type="button" ng-click="logout()">Logout</a>
+      <a class="btn btn-default" type="button" href="/instrument/">Add Instrument</a>
+      <h2>Logout</h2>
+      <a class="btn btn-danger" type="button" ng-click="logout()">Logout</a>
+    </div>
   </script>
 
   <script id="instrument.html" type="text/ng-template">
-    <h2 class="padded">{{instrument.name}}</h2>
     <div class="content-padded view" ng-show="!editMode">
+      <h2>{{instrument.name}}</h2>
       <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}">
       <div>
         <div>
