@@ -4,7 +4,7 @@ var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var GridStore = require('mongodb').GridStore;
 var Binary = require('mongodb').Binary;
-var mongoConnectionString = process.env.GITARRMONGO || "mongodb://osiris:testmongo123@linus.mongohq.com:10003/app11622295";
+var mongoConnectionString = process.env.GITARRMONGO;
 console.log("Connecting to ", mongoConnectionString);
 var fs = require("fs");
 var gm = require("gm");
