@@ -1,5 +1,6 @@
 var express = require('express');
 var app = express();
+var journalStore = require('./api/guitarjournalstore');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var GridStore = require('mongodb').GridStore;
@@ -15,6 +16,8 @@ var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 express.static.mime.define({'application/font-woff': ['woff']});
+
+journalStore.setConnectionString(mongoConnectionString);
 
 process.on('uncaughtException', function(err) {
 	console.log(err);
@@ -37,19 +40,9 @@ passport.use(new LocalStrategy({
 	},
   	function(username, password, done) {
   		console.log("Passport logging in", username, password);
-
-		MongoClient.connect(mongoConnectionString, function(err, db) {
-			if(err) { return done(err); }
-
-			var users = db.collection('Users');
-			users.findOne({ email: username }, function(err, user) {
-				console.log("Found user!" + user._id);
-			    if (err)
-			    	return done(err);
-			    else
-			      	return done(null, user);
-	    	});
- 		});
+  		journalStore.checkLogin(username, password, function(err, user) {
+  			return done(err, user);
+  		});
  	}
 ));
 
@@ -106,7 +99,9 @@ passport.deserializeUser(function(id, done) {
 });
 
 function ensureAuthenticated(req, res, next) {
-  if (req.isAuthenticated()) { return next(); }
+  if (req.isAuthenticated()) { 
+  	return next(); 
+  }
   res.redirect('/login');
 }
 
@@ -123,7 +118,8 @@ app.get('/auth/facebook/callback',
   passport.authenticate('facebook', { successRedirect: '/',
                                       failureRedirect: '/login' }));
 
-// App stuff, static files
+// One page app routing, the client-side app
+// handles the internal routing.
 app.get("/", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });
@@ -151,7 +147,11 @@ app.get("/instrument*", function(req, res) {
 app.get("/app", function(req, res) {
 	res.sendfile(__dirname + "/app/home.html");
 });
+
+// Route for app resources like css and javascript
 app.use('/app', express.static(__dirname + '/app'));
+
+// Route for static about-site
 app.use('/about', express.static(__dirname + '/about'));
 
 app.post('/api/login',
@@ -203,24 +203,15 @@ function checkLogin(req, res) {
 
 // API stuff
 app.get("/api/sessions/:skip?", ensureAuthenticated, function(req, res) {
-	var loggedInUser = req.user._id;
-
 	var skip = req.params.skip ? parseInt(req.params.skip, 10) : 0;
 
-	// Connect to the db
-	MongoClient.connect(mongoConnectionString, function(err, db) {
-		if(err) { return console.dir(err); }
-
-		var collection = db.collection('Sessions');
-		collection.find({ "userId": loggedInUser }).sort({ date: -1 }).skip(skip).limit(10).toArray(function(err, items) {
-			if (err)
-			{
-				console.log(err);
-				return (err);
-			}
+	data = journalStore.getSessions(req.user._id, skip, function(err, items) {
+		if (err) {
+			console.error("Error when getting sessions", err);
+			res.send(500, "An error occured when getting sessions");
+		} else {
 			res.json(items);
-			db.close();
-		});
+		}
 	});
 });
 

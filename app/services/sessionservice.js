@@ -24,6 +24,7 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 	}
 
 	service.getSession = function(sessionId, successCallback, failureCallback) {
+		console.log("Getting session");
 		if (service.sessions) {
 			// First, try to find session in the loaded array
 			for (i = 0; i < service.sessions.length; i++)

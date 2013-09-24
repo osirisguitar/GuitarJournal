@@ -536,6 +536,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
     };
   });
 function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
+	console.log($location);
 	$scope.pageSettings = {};
 	$rootScope.apiStatus = {};
 	$rootScope.apiStatus.loading = 0;
@@ -645,6 +646,7 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 	$scope.pageSettings.rightButtonText = "Edit";
 	$scope.editMode = false;
 	$scope.pageSettings.hideNavigation = false;
+	console.dir("Entering session control");
 
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id !== null && $routeParams.id !== "")
@@ -1209,6 +1211,7 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 	}
 
 	service.getSession = function(sessionId, successCallback, failureCallback) {
+		console.log("Getting session");
 		if (service.sessions) {
 			// First, try to find session in the loaded array
 			for (i = 0; i < service.sessions.length; i++)
@@ -1451,3 +1454,59 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 
 	return service;
 });
+var nonbounce = function(elems) {
+    var cont;
+    var startY;
+    var idOfContent = "";
+    nonbounce_touchmoveBound = false;
+
+    var isContent = function(elem) {
+        var id = elem.getAttribute("id");
+        
+        while (id !== idOfContent && elem.nodeName.toLowerCase() !== "body") {
+            elem = elem.parentNode;
+            id = elem.getAttribute("id");
+        }
+        
+        return (id === idOfContent);
+    };
+    
+    var touchstart = function(evt) {
+        // Prevents scrolling of all but the nonbounce element
+        if (!isContent(evt.target)) {
+            evt.preventDefault();
+            return false;
+        }
+
+        startY = (evt.touches) ? evt.touches[0].screenY : evt.screenY;
+    };
+    
+    var touchmove = function(evt) {
+        var elem = evt.target;
+
+        var y = (evt.touches) ? evt.touches[0].screenY : evt.screenY;
+        
+        // Prevents scrolling of content to top
+        if (cont.scrollTop === 0 && startY <= y) {
+            evt.preventDefault();
+        }
+        
+        // Prevents scrolling of content to bottom
+        if (cont.scrollHeight-cont.offsetHeight === cont.scrollTop && startY >= y) {
+            evt.preventDefault();
+        }
+    }
+    
+    if (typeof elems === "string") {
+        cont = document.getElementById(elems);
+        
+        if (cont) {
+            idOfContent = cont.getAttribute("id");
+            window.addEventListener("touchstart", touchstart, false);
+        }
+    }
+    
+    if (!nonbounce_touchmoveBound) {
+        window.addEventListener("touchmove", touchmove ,false);
+    }
+};

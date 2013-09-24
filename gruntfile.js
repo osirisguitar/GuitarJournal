@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
 			},
 			javascripts: {
-				src: ['app/libs/**/*.js','app/controllers/*.js','app/services/*.js',/*, 'app/js/*.js'*/],
+				src: ['app/libs/**/*.js','app/controllers/*.js','app/services/*.js', 'app/js/nonbounce.js'],
 				dest: 'app/compiled/all.js'
 			},
 			css: {
@@ -44,6 +44,30 @@ module.exports = function(grunt) {
 		less: {
 			src: 'app/css/*.less',
 			dest: 'app/css/bootstrap.min.css'
+		},
+
+		manifest: {
+  			generate: {
+			    options: {
+			      basePath: "app/",
+			      network: ["*"],
+			      preferOnline: false,
+			      timestamp: true,
+			      hash: false,
+			      cache: ["http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js",
+			      	"http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.min.js"]
+			    },
+			    src: [
+			        "home.html",
+			        "compiled/*.js",
+			        "compiled/*.css",
+			        "img/facebook.png",
+			        "img/splash.png",
+			        "img/splash-640x1096.png",
+			        "font/fontawesome*"
+			    ],
+			    dest: "app/manifest.appcache"
+			}
 		}
 	});
 
@@ -51,4 +75,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-manifest');
 };

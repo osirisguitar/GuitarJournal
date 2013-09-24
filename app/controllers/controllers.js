@@ -1,4 +1,5 @@
 function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
+	console.log($location);
 	$scope.pageSettings = {};
 	$rootScope.apiStatus = {};
 	$rootScope.apiStatus.loading = 0;
@@ -108,6 +109,7 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 	$scope.pageSettings.rightButtonText = "Edit";
 	$scope.editMode = false;
 	$scope.pageSettings.hideNavigation = false;
+	console.dir("Entering session control");
 
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id !== null && $routeParams.id !== "")
