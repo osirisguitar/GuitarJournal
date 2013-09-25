@@ -57,8 +57,10 @@ passport.use(new FacebookStrategy({
 
 			var users = db.collection('Users');
 			users.findOne({ facebookId: profile.id }, function(err, user) {
-			    if (err)
+			    if (err) {
+   				    db.close();
 			    	return done(err);
+			    }
 			    else
 			    {
 			    	if (user === null) {
@@ -67,16 +69,18 @@ passport.use(new FacebookStrategy({
 			    		newUser.fullName = profile.displayName;
 			    		newUser.username = profile.username;
 			    		users.save(newUser, { safe: true}, function(err, user) {
+			    			db.close();
 			    			if (err)
 			    				return done(err);
 			    			else
 			    				return done(null, user);
 			    		});
 			    	}
-			    	else
+			    	else {
+			    		db.close();
 				      	return done(null, user);			    	
+			    	}
 			    }
-			    db.close();
 	    	});
  		});
   	}
@@ -286,6 +290,7 @@ app.get("/api/statistics/overview/:days?", ensureAuthenticated, function(req, re
 	   				if (agg && agg.length > 0) {
 	   					results.mostUsedInstrument = agg[0]._id;
 	   				}
+	   				db.close();
 	   				res.json(results);
 	   			});
    			});
@@ -311,8 +316,8 @@ app.get("/api/statistics/perweekday", ensureAuthenticated, function(req, res) {
 				if (err) {
 					console.log(err);
 				}
-				res.json(aggregate);
 				db.close();
+				res.json(aggregate);
 			}
 		);
 	});
@@ -339,8 +344,8 @@ app.get("/api/statistics/perweek/:weeks?", ensureAuthenticated, function(req, re
 					console.log("Error", err);
 				}
 
-				res.json(aggregate);
 				db.close();
+				res.json(aggregate);
 			}
 		);
 	});
@@ -362,8 +367,8 @@ app.get("/api/statistics/minutesperday/:days?", ensureAuthenticated, function(re
 			{ $group: { _id: { year: { $year: "$date" }, month: { $month: "$date" }, day: { $dayOfMonth: "$date" } }, totalMinutes: { $sum: "$length" } } },
 			{ $sort: { _id: 1 } },
 			function(err, aggregate) {
-				res.json(aggregate);
 				db.close();
+				res.json(aggregate);
 			}
 		);
 	});
@@ -378,8 +383,8 @@ app.get("/api/session/:id", ensureAuthenticated, function(req, res) {
 
 		var collection = db.collection('Sessions');
 		collection.findOne({ _id: ObjectID(req.params.id), userId: loggedInUser }, function(err, item) {
-			res.json(item);
 			db.close();
+			res.json(item);
 		});
 	});
 });
@@ -392,8 +397,8 @@ app.delete("/api/session/:id", ensureAuthenticated, function(req, res) {
 
 		var collection = db.collection('Sessions');
 		collection.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
-			res.json(item);
 			db.close();
+			res.json(item);
 		});
 	});
 });
@@ -419,8 +424,8 @@ app.post("/api/sessions", ensureAuthenticated, function(req, res) {
 
 		var collection = db.collection('Sessions');
 		collection.save(req.body, {safe:true}, function(err, savedSession) {
-			res.json(savedSession);
 			db.close();
+			res.json(savedSession);
 		});
 	});
 });
@@ -437,8 +442,8 @@ app.get("/api/goals", ensureAuthenticated, function(req, res) {
 			if (err) {
 				return (err);
 			}
-			res.json(items);
 			db.close();
+			res.json(items);
 		});
 	});
 });
@@ -454,8 +459,8 @@ app.post("/api/goals", ensureAuthenticated, function(req, res) {
 
 		var collection = db.collection('Goals');
 		collection.save(req.body, {safe:true}, function(err, savedSession) {
-			res.json(savedSession);
 			db.close();
+			res.json(savedSession);
 		});
 	});
 });
@@ -468,8 +473,8 @@ app.delete("/api/goal/:id", ensureAuthenticated, function(req, res) {
 
 		var goals = db.collection('Goals');
 		goals.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
-			res.json(item);
 			db.close();
+			res.json(item);
 		});
 	});
 });
@@ -482,8 +487,8 @@ app.get("/api/profile", ensureAuthenticated, function(req, res) {
 
 		var users = db.collection('Users');
 		users.findOne({ _id: loggedInUser }, function(err, item) {
-			res.json(item);
 			db.close();
+			res.json(item);
 		});
 	});
 });
@@ -502,8 +507,8 @@ app.get("/api/instruments", ensureAuthenticated, function(req, res) {
 				console.log(err);
 				return (err);
 			}
-			res.json(items);
 			db.close();
+			res.json(items);
 		});
 	});
 });
