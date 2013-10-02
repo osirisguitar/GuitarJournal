@@ -61,10 +61,8 @@ module.exports = function(grunt) {
 			        "home.html",
 			        "compiled/*.js",
 			        "compiled/*.css",
-			        "img/facebook.png",
-			        "img/splash.png",
-			        "img/splash-640x1096.png",
-			        "font/fontawesome*"
+			        "img/*.png",
+			        "font/**",
 			    ],
 			    dest: "app/manifest.appcache"
 			}
