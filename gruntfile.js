@@ -62,7 +62,7 @@ module.exports = function(grunt) {
 			        "compiled/*.js",
 			        "compiled/*.css",
 			        "img/*.png",
-			        "font/**",
+			        "font/**.*",
 			    ],
 			    dest: "app/manifest.appcache"
 			}
