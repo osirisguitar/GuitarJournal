@@ -41,10 +41,10 @@ module.exports = function(grunt) {
 			}
 		},
 
-		less: {
+		/*less: {
 			src: 'app/css/*.less',
 			dest: 'app/css/bootstrap.min.css'
-		},
+		},*/
 
 		manifest: {
   			generate: {
@@ -74,4 +74,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-manifest');
+	grunt.loadNpmTasks('grunt-recess');
 };
