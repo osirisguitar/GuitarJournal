@@ -25,19 +25,34 @@ module.exports = function(grunt) {
 				dest: 'app/compiled/all.js'
 			},
 			css: {
-				src: ['app/css/bootstrap.min.css','app/css/font-awesome.min.css', 'app/css/guitarjournal.css', 'app/libs/**/*.css'],
+				src: ['app/css/flatly.css','app/css/font-awesome.min.css', 'app/css/guitarjournal.css', 'app/libs/**/*.css'],
 				dest: 'app/compiled/all.css'
 			}
 		},
 
 		watch: {
 			jsandcss: {
-				files: ['app/controllers/*.js','app/services/*.js','app/libs/**/*.js', 'app/js/*.js', 'app/css/bootstrap.min.css','app/css/font-awesome.min.css', 'app/css/guitarjournal.css', 'app/libs/**/*.css'],
+				files: ['app/controllers/*.js','app/services/*.js','app/libs/**/*.js', 'app/js/*.js', 'app/css/flatly.css','app/css/font-awesome.min.css', 'app/css/guitarjournal.css', 'app/libs/**/*.css'],
 				tasks: ['concat']
 			},
 			less: {
 				files: ['app/css/*.less'],
 				tasks: ['less']
+			},
+			bootswatch: {
+				files: ['bootswatch/flatly/bootstrap.css'],
+				tasks: ['copy:flatly']
+			},
+			manifest: {
+				files: ['app/compiled/*.*', 'app/home.html'],
+				tasks: ['manifest']
+			}
+		},
+
+		copy: {
+			flatly: {
+				src: 'bootswatch/flatly/bootstrap.css',
+				dest: 'app/css/flatly.css'
 			}
 		},
 
@@ -73,6 +88,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-manifest');
 	grunt.loadNpmTasks('grunt-recess');
 };
