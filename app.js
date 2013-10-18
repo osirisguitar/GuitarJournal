@@ -109,6 +109,13 @@ function ensureAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
+app.get('/auth/allowsimple', function(req, res) {
+	if (process.env.ALLOWSIMPLELOGIN)
+		res.send(true);
+	else
+		res.send(false);
+});
+
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback

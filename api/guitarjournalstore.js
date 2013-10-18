@@ -10,7 +10,7 @@ exports.setConnectionString = function(newConnectionString) {
 // Checks username and password against database, and calls
 // callback with either error or user set.
 exports.checkLogin = function (username, password, callback) {
-	MongoClient.connect(mongoConnectionString, function(err, db) {
+	mongoClient.connect(connectionString, function(err, db) {
 		if(err) { return done(err); }
 
 		var users = db.collection('Users');

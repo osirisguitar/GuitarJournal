@@ -369,7 +369,7 @@
       <p>
       Get started right away by logging in with your Facebook account. This app will use your name and email address to create an account, never give the information away to anyone else and only post things to your timeline when you choose.</p>
     </div>
-    <div class="input-group" ng-show="false">
+    <div class="input-group" ng-show="allowSimpleLogin">
       <div class="input-row">
         <label>Email</label>
         <input ng-model="email" type="email"/>
@@ -379,7 +379,7 @@
         <input type="password" ng-model="password" />
       </div>
     </div>
-    <a class="btn btn-default" ng-click="login()" ng-show="false">Login</a>
+    <a class="btn btn-default" ng-click="login()" ng-show="allowSimpleLogin">Login</a>
     <div class="facebook-login">
       <a href="/auth/facebook" onclick="facebookAuth();"><img height="40" src="/app/img/facebook.png"></a>
     </div>

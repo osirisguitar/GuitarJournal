@@ -4,6 +4,12 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
 	$rootScope.apiStatus = {};
 	$rootScope.apiStatus.loading = 0;
 	$scope.apiStatus = $rootScope.apiStatus;
+	$scope.allowSimpleLogin = false;
+
+	$http.get('auth/allowsimple').success(function(data) {
+		if (data == "true")
+			$scope.allowSimpleLogin = true;
+	});
 
 	$http.get('/api/loggedin').success(function(data) {
 		$rootScope.apiStatus.loading++;
