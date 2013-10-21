@@ -142,11 +142,13 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 	$scope.$watch("editMode", function() {
 		$scope.pageSettings.hideNavigation = $scope.editMode;
 		if ($scope.editMode) {
-			$scope.pageSettings.hideNavigation = "Cancel";
+			$scope.pageSettings.hideNavigation = true;
+			$scope.pageSettings.rightButtonText = "Cancel";
 			$scope.pageSettings.showBackButton = false;			
 		} 
 		else {
-			$scope.pageSettings.hideNavigation = "Edit";
+			$scope.pageSettings.hideNavigation = false;
+			$scope.pageSettings.rightButtonText = "Edit";
 			$scope.pageSettings.showBackButton = true;						
 		}
 	});
