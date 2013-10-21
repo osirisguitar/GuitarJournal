@@ -250,6 +250,7 @@
     </div>
   </div>
   <div id="fb-root"></div>
+  <div growl class="growl"></div>
   <script>
     window.fbAsyncInit = function() {
       // init the FB JS SDK
@@ -287,7 +288,6 @@
      }(document, 'script', 'facebook-jssdk'));
 
     function postToFB(sessionId) {
-      console.log("Posting to FB");
       var body = 'Testelitest';
       FB.api('me/ogjournal:complete', 'post',
         {
@@ -528,7 +528,7 @@
 
   <script id="goals.html" type="text/ng-template">
     <div class="list-group">
-      <a href="/goal/{{goal._id}}" class="list-group-item" ng-repeat="goal in Goals.goals" class="{{goal.completed && 'completed' || ''}}">
+      <a href="/goal/{{goal._id}}" class="list-group-item {{goal.completed && 'completed' || ''}}" ng-repeat="goal in Goals.goals">
           <strong>{{goal.title}}</strong><br>
           {{goal.description}}
       </a>

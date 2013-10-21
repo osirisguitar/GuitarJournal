@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 				dest: 'app/compiled/all.js'
 			},
 			css: {
-				src: ['app/css/flatly.css','app/css/font-awesome.min.css', 'app/css/guitarjournal.css', 'app/libs/**/*.css'],
+				src: ['app/css/flatly.css','app/css/font-awesome.min.css', 'app/libs/**/*.css', 'app/css/guitarjournal.css'],
 				dest: 'app/compiled/all.css'
 			}
 		},

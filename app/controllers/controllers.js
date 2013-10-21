@@ -1,4 +1,4 @@
-function AppCtrl($scope, $http, $location, Sessions, $rootScope) {
+function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl) {
 	console.log($location);
 	$scope.pageSettings = {};
 	$rootScope.apiStatus = {};
@@ -101,12 +101,13 @@ function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments) {
 	$scope.pageSettings.active = "sessions";
 	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = "New";
+	$scope.pageSettings.hideNavigation = false;
 	$scope.pageSettings.rightButtonClick = function() {
 		$location.path('/session/');
 	};
 }
 
-function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, Instruments, Statistics) {
+function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, Instruments, Statistics, growl) {
 	$scope.Goals = Goals;
 	$scope.Instruments = Instruments;
 	$scope.pageSettings.pageTitle = "Session";
@@ -115,7 +116,6 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 	$scope.pageSettings.rightButtonText = "Edit";
 	$scope.editMode = false;
 	$scope.pageSettings.hideNavigation = false;
-	console.dir("Entering session control");
 
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id !== null && $routeParams.id !== "")
@@ -131,21 +131,25 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 	}
 	else
 	{
-		console.log("New session...");
 		$scope.session = { date: new Date() };
 		$scope.editMode = true;
-		$scope.pageSettings.hideNavigation = true;
 	}
 
 	$scope.pageSettings.rightButtonClick = function() {
 		$scope.editMode = !$scope.editMode;
-		$scope.pageSettings.hideNavigation = $scope.editMode;
-		$scope.pageSettings.showBackButton = !$scope.pageSettings.showBackButton;
-		if ($scope.pageSettings.rightButtonText == "Edit")
-			$scope.pageSettings.rightButtonText = "Cancel";
-		else
-			$scope.pageSettings.rightButtonText = "Edit";
 	};
+
+	$scope.$watch("editMode", function() {
+		$scope.pageSettings.hideNavigation = $scope.editMode;
+		if ($scope.editMode) {
+			$scope.pageSettings.hideNavigation = "Cancel";
+			$scope.pageSettings.showBackButton = false;			
+		} 
+		else {
+			$scope.pageSettings.hideNavigation = "Edit";
+			$scope.pageSettings.showBackButton = true;						
+		}
+	});
 
 	$scope.save = function()
 	{
@@ -153,11 +157,14 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 			function() {
 				$location.path("/sessions/");
 				Statistics.flushStats();
+				growl.addSuccessMessage('Session saved', { ttl:3000 });
 			},
 			function() {
 				alert("Error saving session");
 			}
 		);
+
+
 	};
 
 	$scope.delete = function() {

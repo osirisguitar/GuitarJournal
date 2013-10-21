@@ -1,1 +1,1 @@
-First Bitbucket/Node/Heroku project. GO!
+A runkeeper for guitarists - set goals, track practice, share!

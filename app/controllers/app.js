@@ -1,4 +1,4 @@
-var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles']).
+var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles', 'angular-growl']).
   config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
     $routeProvider.
       when('/', {

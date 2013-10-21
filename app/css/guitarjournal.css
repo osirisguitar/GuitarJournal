@@ -163,6 +163,10 @@ nav a:hover {
   padding-right:5px;
 }
 
+.list-group-item.completed {
+  color:#bbb;
+}
+
 @font-face {
   font-family: 'Glyphicons Halflings';
   src: url('../fonts/glyphicons-halflings-regular.eot');
@@ -350,4 +354,10 @@ input[type="checkbox"].form-control {
   display:block;
   padding-top:20px;
   padding-bottom:20px;
+}
+
+.growl {
+  position:relative;
+  z-index:1000;
+  top:30px;
 }
