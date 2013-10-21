@@ -41,6 +41,10 @@ html, body {
   background:#999;
 }
 
+.appbody.higher {
+  bottom:0px;
+}
+
 .wrapper-outer {
   position:absolute;
   top:0;
