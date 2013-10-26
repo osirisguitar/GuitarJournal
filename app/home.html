@@ -654,26 +654,28 @@
         </div>
       </div>
     </div>
-    <form class="form-horizontal" ng-show="editMode">
-      <div class="form-group">
-        <label class="control-label">Name</label>
-        <input class="form-control" placeholder="Example: Fender American Stratocaster" type="text" ng-model="instrument.name" ng-disabled="!editMode" />
-      </div>
-      <div class="form-group">
-        <label class="control-label">Type</label>
-        <input class="form-control" placeholder="Example: 6-string electric" type="text" ng-model="instrument.type" ng-disabled="!editMode" />
-      </div>
-      <div class="form-group">
-        <label class="control-label">Description</label>
-        <textarea class="form-control" placeholder="Example: My standard guitar" ng-disabled="!editMode" ng-model="instrument.description"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="control-label">Image</label>
-        <input class="form-control" type="file" id="imagefield" onchange="angular.element(this).scope().setImage(this)" />
-      </div>
-      <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
-      <a class="btn btn-danger" ng-click="delete()" ng-show="editMode && instrument._id">Delete</a>
-    </form>
+    <div class="content-padded">
+      <form class="form-horizontal" ng-show="editMode">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input class="form-control" placeholder="Example: Fender American Stratocaster" type="text" ng-model="instrument.name" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Type</label>
+          <input class="form-control" placeholder="Example: 6-string electric" type="text" ng-model="instrument.type" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Description</label>
+          <textarea class="form-control" placeholder="Example: My standard guitar" ng-disabled="!editMode" ng-model="instrument.description"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Image</label>
+          <input class="form-control" type="file" id="imagefield" onchange="angular.element(this).scope().setImage(this)" />
+        </div>
+        <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
+        <a class="btn btn-danger" ng-click="delete()" ng-show="editMode && instrument._id">Delete</a>
+      </form>
+    </div>
   </script>
 
   </body>
