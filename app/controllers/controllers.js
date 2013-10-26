@@ -274,7 +274,7 @@ function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
 	$scope.pageSettings.pageTitle = "Statistics";
 	$scope.pageSettings.active = "stats";
 	Statistics.getStatsOverview();
-	Statistics.getSessionsPerWeekday();
+	Statistics.getWeekStats();
 
 	Statistics.getMinutesPerDay(30).then(
 		function(minutesPerDay) {
@@ -325,7 +325,7 @@ function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
 
 	$scope.weekdayColors = [ "#bb0000", "#bbbb00", "#00bb00", "#00bbbb", "#0000bb", "#bb00bb", "#000000"];
 
-	Statistics.getWeekStats().then(
+	Statistics.getSessionsPerWeekday().then(
 		function(perWeekday) {
 			$scope.perWeekday = [];
 			for (i = 1; i <= 7; i++) {
