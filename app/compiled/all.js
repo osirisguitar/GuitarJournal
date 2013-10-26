@@ -541,13 +541,38 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
         return input; 
     };
   });
-function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl) {
-	console.log($location);
+function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log) {
 	$scope.pageSettings = {};
 	$rootScope.apiStatus = {};
 	$rootScope.apiStatus.loading = 0;
 	$scope.apiStatus = $rootScope.apiStatus;
 	$scope.allowSimpleLogin = false;
+	$scope.defaultPageSettings = {
+		pageTitle: "",
+		active: null,
+		showBackButton: false,
+		rightButtonText: null,
+		hideNavigation: false,
+		hideTopNavigation: false
+	};
+
+	$scope.showErrorMessage = function(message, error) {
+		growl.showErrorMessage(message);
+		$log.error(message, error); 
+	};
+
+	$scope.showSuccessMessage = function(message) {
+		growl.showErrorMessage(message, { ttl: 4000 });
+		$log.info(message, error); 		
+	};
+
+	$scope.setDefaultPageSettings = function() {
+		for (var prop in $scope.defaultPageSettings) {
+			if ($scope.defaultPageSettings.hasOwnProperty(prop)) {
+				$scope.pageSettings[prop] = $scope.defaultPageSettings[prop];				
+			}
+		}
+	};
 
 	$http.get('auth/allowsimple').success(function(data) {
 		if (data == "true")
@@ -568,7 +593,9 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl) {
 			$rootScope.apiStatus.loading--;
 			$location.path("/login");
 		}
-	}).error(function(data) { console.log("Couldn't check logged in status"); });
+	}).error(function(error) {
+		$scope.showErrorMessage("Error when logging in", error);
+	});
 
 	$rootScope.$watch('loggedIn', function () {
 		if ($rootScope.loggedIn) {
@@ -576,8 +603,8 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl) {
 				.success(function(data) {
 					$scope.profile = data;
 				})
-				.error(function(data){
-					alert("Error when getting profile.");
+				.error(function(error){
+					$scope.showErrorMessage("Error when getting profile", error);
 				});			
 		}
 	});
@@ -588,31 +615,29 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl) {
 	$scope.$watch('Sessions.sessions', function () {
 		if ($rootScope.loggedIn) {
 			$rootScope.sessionsReload = true;
-			
 		}
 	}, true);
 }
 
 function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope) {
+	$scope.setDefaultPageSettings();
 	$scope.pageSettings.hideNavigation = true;
 	$scope.login = function() {
-		console.log("Trying to log in");
 		$http.post("/api/login", {email: $scope.email, password: $scope.password}, $rootScope.httpConfig).success(function(data) {
 			if (data._id) {
 				$rootScope.loggedIn = true;
 				$scope.pageSettings.hideNavigation = false;
 			}
 			$location.path("/");
-		}).error(function(data) { console.log("Could not log in"); });
+		}).error(function(error) { $scope.showErrorMessage("Could not log in", error); });
 	};
 }
 
 function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instruments, Statistics) {
+	$scope.setDefaultPageSettings();
 	$scope.pageSettings.pageTitle = "OSIRIS GUITAR Journal";
 	$scope.pageSettings.active = "home";
-	$scope.pageSettings.showBackButton = false;
-	$scope.pageSettings.rightButtonText = null;
-	$scope.pageSettings.hideNavigation = false;
+
 	$scope.Sessions = Sessions;
 	$scope.Goals = Goals;
 	$scope.Instruments = Instruments;
@@ -622,11 +647,9 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 	Statistics.getWeekStats();
 
 	$scope.$watch("Statistics.statsOverview", function () {
-		console.log("statsOverview reloaded!");
 		$scope.statsOverview = Statistics.statsOverview;
 	});
 	$scope.$watch("Statistics.weekStats", function () {
-		console.log("weekStats reloaded!");
 		$scope.weekStats = Statistics.weekStats;
 	});
 
@@ -637,39 +660,39 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 }
 
 function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments) {
-	$scope.Sessions = Sessions;
-	$scope.Goals = Goals;
-	$scope.Instruments = Instruments;
+	$scope.setDefaultPageSettings();
 	$scope.pageSettings.pageTitle = "Sessions";
 	$scope.pageSettings.active = "sessions";
-	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = "New";
-	$scope.pageSettings.hideNavigation = false;
 	$scope.pageSettings.rightButtonClick = function() {
 		$location.path('/session/');
 	};
+
+	$scope.Sessions = Sessions;
+	$scope.Goals = Goals;
+	$scope.Instruments = Instruments;
 }
 
 function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, Instruments, Statistics, growl) {
-	$scope.Goals = Goals;
-	$scope.Instruments = Instruments;
+	$scope.setDefaultPageSettings();
 	$scope.pageSettings.pageTitle = "Session";
 	$scope.pageSettings.active = "sessions";
 	$scope.pageSettings.showBackButton = true;
 	$scope.pageSettings.rightButtonText = "Edit";
+
+	$scope.Goals = Goals;
+	$scope.Instruments = Instruments;
 	$scope.editMode = false;
-	$scope.pageSettings.hideNavigation = false;
 
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id !== null && $routeParams.id !== "")
 	{
 		Sessions.getSession($routeParams.id, 
 			function(session) {
-				console.log("Got session", session);
 				$scope.session = session;
 			},
 			function(error) {
-				alert("Couldn't get session");
+				$scope.showErrorMessage("Couldn't get session", error);
 			});
 	}
 	else
@@ -703,9 +726,10 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 				$location.path("/sessions/");
 				Statistics.flushStats();
 				growl.addSuccessMessage('Session saved', { ttl:3000 });
+				$scope.editMode = false;
 			},
 			function() {
-				alert("Error saving session");
+				$scope.showErrorMessage("Error saving session");
 			}
 		);
 
@@ -718,30 +742,30 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 				$location.path("/sessions/");
 			},
 			function(error) {
-				alert("Could not delete the session.");
+				$scope.showErrorMessage("Could not delete the session.", error);
 			}
 		);
 	};
 }
 
 function GoalsCtrl($scope, $http, $location, Goals) {
-	$scope.Goals = Goals;
+	$scope.setDefaultPageSettings();
 	$scope.pageSettings.pageTitle = "Goals";
 	$scope.pageSettings.active = "goals";
-	$scope.pageSettings.showBackButton = false;
 	$scope.pageSettings.rightButtonText = "New";
-	$scope.pageSettings.hideNavigation = false;
 	$scope.pageSettings.rightButtonClick = function() {
 		$location.path('/goal/');
 	};
+
+	$scope.Goals = Goals;
 }
 
 function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
+	$scope.setDefaultPageSettings();
 	$scope.pageSettings.pageTitle = "Goal";
 	$scope.pageSettings.active = "goals";
 	$scope.pageSettings.showBackButton = true;
 	$scope.pageSettings.rightButtonText = "Edit";
-	$scope.pageSettings.hideNavigation = false;
 	$scope.editMode = false;
 	$scope.Goals = Goals;
 
@@ -749,7 +773,7 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 	if ($routeParams.id !== null && $routeParams.id !== "") {
 		Goals.getGoal($routeParams.id, function(goal) {
 			$scope.goal = goal;
-		}, function() { alert("Couldn't get goal");});
+		}, function() { $scope.showErrorMessage("Couldn't get goal");});
 	}
 	else {
 		$scope.goal = { date: new Date() };
@@ -776,7 +800,7 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 				$location.path('/goals/');
 			}, 
 			function() {
-				alert("Error saving goal");
+				$scope.showErrorMessage("Error saving goal");
 			});
 	};
 
@@ -786,7 +810,7 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 				$location.path('/goals/');
 			}, 
 			function() {
-				alert("Couldn't delete goal");
+				$scope.showErrorMessage("Couldn't delete goal");
 			});
 	};
 }
@@ -795,26 +819,21 @@ function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
 	$scope.Goals = Goals;	
 	$scope.Statistics = Statistics;
 	$scope.Instruments = Instruments;
+	$scope.setDefaultPageSettings();
+	$scope.pageSettings.pageTitle = "Statistics";
+	$scope.pageSettings.active = "stats";
+	Statistics.getStatsOverview();
+	Statistics.getWeekStats();
 	Statistics.getSessionsPerWeekday();
 	Statistics.getMinutesPerDay(30);
 	Statistics.getSessionsPerWeek(10);
-	$scope.pageSettings.pageTitle = "Statistics";
-	$scope.pageSettings.active = "stats";
-	$scope.pageSettings.showBackButton = false;
-	$scope.pageSettings.rightButtonText = null;
-	$scope.pageSettings.hideNavigation = false;
-	Statistics.getStatsOverview();
-	Statistics.getWeekStats();
 
 	$scope.$watch("Statistics.statsOverview", function () {
-		console.log("statsOverview reloaded!");
 		$scope.statsOverview = Statistics.statsOverview;
 	});
 	$scope.$watch("Statistics.weekStats", function () {
-		console.log("weekStats reloaded!");
 		$scope.weekStats = Statistics.weekStats;
 	});
-
 
 	$scope.$watch("Statistics.minutesPerDay", function() {
 		$scope.last30days = {
@@ -906,7 +925,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 				$scope.instrument = instrument;
 			},
 			function() {
-				alert("Could not load instrument");
+				$scope.showErrorMessage("Could not load instrument");
 			});
 	}
 	else
@@ -946,7 +965,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 				$location.path("/profile/");
 			},
 			function() {
-				alert("Could not save instrument");
+				$scope.showErrorMessage("Could not save instrument");
 			});
 	};
 
@@ -956,7 +975,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 				$location.path("/profile/");
 			},
 			function() {
-				alert("Could not delete instrument");
+				$scope.showErrorMessage("Could not delete instrument");
 			});
 	};
 }
