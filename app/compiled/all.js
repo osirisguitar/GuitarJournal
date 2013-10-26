@@ -617,6 +617,7 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log) {
 			$rootScope.sessionsReload = true;
 		}
 	}, true);
+
 }
 
 function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope) {
@@ -645,13 +646,6 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 	$scope.statsOverview = Statistics.statsOverview;
 	Statistics.getStatsOverview();
 	Statistics.getWeekStats();
-
-	$scope.$watch("Statistics.statsOverview", function () {
-		$scope.statsOverview = Statistics.statsOverview;
-	});
-	$scope.$watch("Statistics.weekStats", function () {
-		$scope.weekStats = Statistics.weekStats;
-	});
 
 	$scope.sessionsThisWeek = function() {
 		var currentWeekday = new Date().getDay();
@@ -823,63 +817,68 @@ function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
 	$scope.pageSettings.pageTitle = "Statistics";
 	$scope.pageSettings.active = "stats";
 	Statistics.getStatsOverview();
-	Statistics.getWeekStats();
 	Statistics.getSessionsPerWeekday();
-	Statistics.getMinutesPerDay(30);
-	Statistics.getSessionsPerWeek(10);
 
-	$scope.$watch("Statistics.statsOverview", function () {
-		$scope.statsOverview = Statistics.statsOverview;
-	});
-	$scope.$watch("Statistics.weekStats", function () {
-		$scope.weekStats = Statistics.weekStats;
-	});
+	Statistics.getMinutesPerDay(30).then(
+		function(minutesPerDay) {
+			$scope.last30days = {
+				labels: Statistics.minutesPerDay.labels,
+				datasets: [ {
+		            fillColor : "#BD934F",
+		            strokeColor : "#f1c40f",
+		            pointColor : "#BD934F",
+		            pointStrokeColor : "#f1c40f",
+		            data : Statistics.minutesPerDay.data
+				} ]
+			};			
+		},
+		function(error) {
+			$scope.showErrorMessage("Could not get minutes per day", error);			
+		}
+	);
 
-	$scope.$watch("Statistics.minutesPerDay", function() {
-		$scope.last30days = {
-			labels: Statistics.minutesPerDay.labels,
-			datasets: [ {
-	            fillColor : "#BD934F",
-	            strokeColor : "#f1c40f",
-	            pointColor : "#BD934F",
-	            pointStrokeColor : "#f1c40f",
-	            data : Statistics.minutesPerDay.data
-			} ]
-		};
-	});
+	Statistics.getSessionsPerWeek(10).then(
+		function(sessionsPerWeek) {
+			$scope.sessionsPerWeek = {
+				labels: sessionsPerWeek.labels,
+				datasets: [{
+		            fillColor : "#BD934F",
+		            strokeColor : "#f1c40f",
+		            pointColor : "#BD934F",
+		            pointStrokeColor : "#f1c40f",
+		            data : sessionsPerWeek.count		
+				}]
+			};
+
+			$scope.minutesPerWeek = {
+				labels: sessionsPerWeek.labels,
+				datasets: [{
+		            fillColor : "#BD934F",
+		            strokeColor : "#f1c40f",
+		            pointColor : "#BD934F",
+		            pointStrokeColor : "#f1c40f",
+		            data : sessionsPerWeek.minutes	
+				}]
+			};			
+		},
+		function(error) {
+			$scope.showErrorMessage("Could not get sessions per week", error);
+		}
+	);
 
 	$scope.weekdayColors = [ "#bb0000", "#bbbb00", "#00bb00", "#00bbbb", "#0000bb", "#bb00bb", "#000000"];
 
-	$scope.$watch("Statistics.perWeekday", function() {
-		$scope.perWeekday = [];
-		for (i = 1; i <= 7; i++) {
-			$scope.perWeekday.push({ value: Statistics.perWeekday[i % 7], color: $scope.weekdayColors[i % 7] });
+	Statistics.getWeekStats().then(
+		function(perWeekday) {
+			$scope.perWeekday = [];
+			for (i = 1; i <= 7; i++) {
+				$scope.perWeekday.push({ value: perWeekday[i % 7], color: $scope.weekdayColors[i % 7] });
+			}
+		},
+		function(error) {
+			$scope.showErrorMessage("Could not get weekday statistics", error);
 		}
-	}, true);
-
-	$scope.$watch("Statistics.sessionsPerWeek", function() {
-		$scope.sessionsPerWeek = {
-			labels: Statistics.sessionsPerWeek.labels,
-			datasets: [{
-	            fillColor : "#BD934F",
-	            strokeColor : "#f1c40f",
-	            pointColor : "#BD934F",
-	            pointStrokeColor : "#f1c40f",
-	            data : Statistics.sessionsPerWeek.count		
-			}]
-		};
-
-		$scope.minutesPerWeek = {
-			labels: Statistics.sessionsPerWeek.labels,
-			datasets: [{
-	            fillColor : "#BD934F",
-	            strokeColor : "#f1c40f",
-	            pointColor : "#BD934F",
-	            pointStrokeColor : "#f1c40f",
-	            data : Statistics.sessionsPerWeek.minutes	
-			}]
-		};
-	}, true);
+	);
 
 	$scope.Math = Math;
 }
@@ -1328,10 +1327,12 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 	})
 	return service;
 });
-GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
+GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	var service = {};
 	service.statsOverview = undefined;
 	service.weekStats = undefined;
+	service.sessionsPerWeek = undefined;
+	service.minutesPerDay = undefined;
 
 	service.getSessionsPerWeekday = function() {
 		$rootScope.apiStatus.loading++;
@@ -1365,90 +1366,116 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 	};
 
 	service.getMinutesPerDay = function(days) {
-		$rootScope.apiStatus.loading++;
-		var url = '/api/statistics/minutesperday/' + days;
-		service.minutesPerDay = {};
-		service.minutesPerDay.labels = [];
-		service.minutesPerDay.data = [];
+		var deferred = $q.defer();
 
-		$http.get(url)
-			.success(function(data) {
-				if (data && data.length && data.length > 0) {
-					var start = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0);
-					var currentDataIndex = 0;
-					var currentDataDate = null;
-					currentDataDate = new Date(data[currentDataIndex]._id.year, data[currentDataIndex]._id.month - 1, data[currentDataIndex]._id.day);
+		if (typeof service.minutesPerDay == undefined || service.minutesPerDay == null || $rootScope.sessionsUpdated) {
+			$rootScope.apiStatus.loading++;
+			var url = '/api/statistics/minutesperday/' + days;
+			service.minutesPerDay = {
+				labels: [],
+				data: []
+			};
 
-					for (i = 29; i >= 0; i--) {
-						var currentDate = new Date(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0).setDate(new Date().getDate() - i));
+			$http.get(url)
+				.success(function(data) {
+					if (data && data.length && data.length > 0) {
+						var start = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0);
+						var currentDataIndex = 0;
+						var currentDataDate = null;
+						currentDataDate = new Date(data[currentDataIndex]._id.year, data[currentDataIndex]._id.month - 1, data[currentDataIndex]._id.day);
 
-						while (currentDataIndex < data.length - 1 && currentDataDate < currentDate) {
-							currentDataIndex++;
-							currentDataDate = new Date(data[currentDataIndex]._id.year, data[currentDataIndex]._id.month - 1, data[currentDataIndex]._id.day);
-						}
+						for (i = 29; i >= 0; i--) {
+							var currentDate = new Date(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), 0, 0, 0).setDate(new Date().getDate() - i));
 
-						if (i % 5 == 0)
-							service.minutesPerDay.labels.push(moment(currentDate).format('MM-DD'));
-						else
-							service.minutesPerDay.labels.push("");
+							while (currentDataIndex < data.length - 1 && currentDataDate < currentDate) {
+								currentDataIndex++;
+								currentDataDate = new Date(data[currentDataIndex]._id.year, data[currentDataIndex]._id.month - 1, data[currentDataIndex]._id.day);
+							}
 
-						if (currentDataIndex < data.length && currentDate - currentDataDate === 0)
-							service.minutesPerDay.data.push(data[currentDataIndex].totalMinutes);
-						else
-							service.minutesPerDay.data.push(0);
-					}						
-				}
+							if (i % 5 == 0)
+								service.minutesPerDay.labels.push(moment(currentDate).format('MM-DD'));
+							else
+								service.minutesPerDay.labels.push("");
 
-				$rootScope.apiStatus.loading--;
-			})
-			.error(function(data, status) {
-				alert("Error when getting sessions");
-				$rootScope.apiStatus.loading--;
-			});							
+							if (currentDataIndex < data.length && currentDate - currentDataDate === 0)
+								service.minutesPerDay.data.push(data[currentDataIndex].totalMinutes);
+							else
+								service.minutesPerDay.data.push(0);
+						}						
+					}
+
+					$rootScope.apiStatus.loading--;
+					deferred.resolve(service.minutesPerDay);
+				})
+				.error(function(error, status) {
+					$rootScope.apiStatus.loading--;
+					deferred.reject(error);
+				});
+		} else {
+			deferred.resolve(service.minutesPerDay);
+		}
+
+		return deferred.promise;					
 	};
 
 	service.getSessionsPerWeek = function (weeks) {
-		$rootScope.apiStatus.loading++;
-		var url = '/api/statistics/perweek/' + weeks;
-		service.sessionsPerWeek = {};
-		service.sessionsPerWeek.labels = [];
-		service.sessionsPerWeek.count = [];
-		service.sessionsPerWeek.minutes = [];
+		var deferred = $q.defer();
 
-		$http.get(url)
-			.success(function(data) {
-				if (data && data.length && data.length > 0) {
-					var currentDataIndex = 0;
+		if (typeof service.sessionsPerWeek == undefined || service.sessionsPerWeek == null || $rootScope.sessionsUpdated) {
+			service.sessionsPerWeek = {
+				labels: [],
+				count: [],
+				minutes: []
+			}
 
-					for (i = 0; i < weeks; i++) {
-						var currentWeek = moment().subtract(moment.duration(weeks - i, 'weeks')).isoWeek();
-						service.sessionsPerWeek.labels.push(currentWeek);
+			$log.log("Getting sessions per week");
 
-						while (currentDataIndex < (data.length - 1) && data[currentDataIndex].week < currentWeek) {
-							currentDataIndex++;
-						}
+			$rootScope.apiStatus.loading++;
+			var url = '/api/statistics/perweek/' + weeks;
 
-						if (data[currentDataIndex].week == currentWeek) {
-							service.sessionsPerWeek.count.push(data[currentDataIndex].count);
-							service.sessionsPerWeek.minutes.push(data[currentDataIndex].minutes);
+			$http.get(url)
+				.success(function(data) {
+					if (data && data.length && data.length > 0) {
+						var currentDataIndex = 0;
 
-						}
-						else {
-							service.sessionsPerWeek.count.push(0);
-							service.sessionsPerWeek.minutes.push(0);
+						for (i = 0; i < weeks; i++) {
+							var currentWeek = moment().subtract(moment.duration(weeks - i, 'weeks')).isoWeek();
+							service.sessionsPerWeek.labels.push(currentWeek);
+
+							while (currentDataIndex < (data.length - 1) && data[currentDataIndex].week < currentWeek) {
+								currentDataIndex++;
+							}
+
+							if (data[currentDataIndex].week == currentWeek) {
+								service.sessionsPerWeek.count.push(data[currentDataIndex].count);
+								service.sessionsPerWeek.minutes.push(data[currentDataIndex].minutes);
+
+							}
+							else {
+								service.sessionsPerWeek.count.push(0);
+								service.sessionsPerWeek.minutes.push(0);
+							}
 						}
 					}
-				}
-				$rootScope.apiStatus.loading--;
-			})
-			.error(function(data, status) {
-				alert("Error when getting sessions");
-				$rootScope.apiStatus.loading--;
-			});							
+					$rootScope.apiStatus.loading--;
+					deferred.resolve(service.sessionsPerWeek);
+				})
+				.error(function(error, status) {
+					$rootScope.apiStatus.loading--;
+					deferred.reject(error);
+				});							
+		}
+		else {
+			deferred.resolve(service.sessionsPerWeek);
+		}
+
+		return deferred.promise;
 	};
 
 	service.getStatsOverview = function () {
-		if (typeof service.statsOverview == undefined || service.statsOverview == null) {
+		var deferred = $q.defer();
+
+		if (typeof service.statsOverview == undefined || service.statsOverview == null || $rootScope.sessionsUpdated) {
 			$rootScope.apiStatus.loading++;
 			$http.get('/api/statistics/overview')
 				.success(function(data) {
@@ -1459,15 +1486,23 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 					var weeks = Math.max(days/7, 1);
 					service.statsOverview.sessionsPerWeek = Math.round(service.statsOverview.totalSessions / weeks * 100)/100;
 					$rootScope.apiStatus.loading--;
+					deferred.resolve(service.statsOverview);
 				})
-				.error(function(data) {
+				.error(function(error) {
 					$rootScope.apiStatus.loading--;
-					alert("Error when getting statistics overview.");
+					deferred.reject(error);
 				});
 		}
+		else {
+			deferred.resolve(service.statsOverview);
+		}
+
+		return deferred.promise;
 	};
 
 	service.getWeekStats = function () {
+		var deferred = q.defer();
+
 		if (typeof service.weekStats == undefined || service.weekStats == null) {
 			$rootScope.apiStatus.loading++;
 			$http.get('/api/statistics/overview/7')
@@ -1479,12 +1514,19 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope) {
 					var weeks = days/7;
 					service.weekStats.sessionsPerWeek = Math.round(service.weekStats.totalSessions / weeks * 100)/100;
 					$rootScope.apiStatus.loading--;
+					deferred.resolve(service.weekStats);
 				})
-				.error(function(data) {
+				.error(function(error) {
 					$rootScope.apiStatus.loading++;
-					alert("Error when getting statistics overview.");
+					deferred.reject(error);
 				});
 		}
+		else
+		{
+			deferred.resolve(service.weekStats);
+		}
+
+		return deferred.promise;
 	}
 
 	service.flushStats = function() {

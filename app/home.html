@@ -391,17 +391,17 @@
       <div class="overview-row">
         <div>
           Sessions/week<br>
-          <span class="large" ng-class="{'trend-up':weekStats.totalSessions > statsOverview.sessionsPerWeek,'trend-down': weekStats.totalSessions < statsOverview.sessionsPerWeek}">{{statsOverview.sessionsPerWeek || "" }}</span>
+          <span class="large" ng-class="{'trend-up':Statistics.weekStats.totalSessions > Statistics.statsOverview.sessionsPerWeek,'trend-down': Statistics.weekStats.totalSessions < Statistics.statsOverview.sessionsPerWeek}">{{Statistics.statsOverview.sessionsPerWeek || "" }}</span>
         </div>
         <div>
           Average duration<br>
-          <span class="large" ng-class="{'trend-up':weekStats.averageLength > statsOverview.averageLength,'trend-down': weekStats.averageLength < statsOverview.averageLength}">{{statsOverview.averageLength | suffix:" min"}}</span>          
+          <span class="large" ng-class="{'trend-up':Statistics.weekStats.averageLength > Statistics.statsOverview.averageLength,'trend-down': Statistics.weekStats.averageLength < Statistics.statsOverview.averageLength}">{{Statistics.statsOverview.averageLength | suffix:" min"}}</span>          
         </div>
       </div>
       <div class="overview-row">
         <div>
           Average rating<br>
-          <span class="large" ng-class="{'trend-up':weekStats.averageRating > statsOverview.averageRating,'trend-down': weekStats.averageRating < statsOverview.averageRating}">{{statsOverview.averageRating || ""}}</span>          
+          <span class="large" ng-class="{'trend-up':Statistics.weekStats.averageRating > Statistics.statsOverview.averageRating,'trend-down': Statistics.weekStats.averageRating < Statistics.statsOverview.averageRating}">{{Statistics.statsOverview.averageRating || ""}}</span>          
         </div>
         <div>
           Active goals<br>
@@ -561,20 +561,20 @@
   </script>
 
   <script id="stats.html" type="text/ng-template">
-    <div class="content-padded" ng-show="statsOverview.totalSessions > 0">
+    <div class="content-padded" ng-show="Statistics.statsOverview.totalSessions > 0">
       <h2>Sessions</h2>
       <div class="fieldLabel">Total sessions:</div>
-      <div class="info">{{statsOverview.totalSessions}}</div>
+      <div class="info">{{Statistics.statsOverview.totalSessions}}</div>
       <div class="fieldLabel">Total time:</div>
-      <div class="info">{{Math.floor(statsOverview.totalLength / 60)}} hours, {{statsOverview.totalLength % 60}} minutes</div>
+      <div class="info">{{Math.floor(Statistics.statsOverview.totalLength / 60)}} hours, {{Statistics.statsOverview.totalLength % 60}} minutes</div>
       <div class="fieldLabel">Average duration:</div>
-      <div class="info">{{statsOverview.averageLength}} minutes</div>
+      <div class="info">{{Statistics.statsOverview.averageLength}} minutes</div>
       <div class="fieldLabel">Average rating:</div>
-      <div class="info">{{statsOverview.averageRating}}</div>
+      <div class="info">{{Statistics.statsOverview.averageRating}}</div>
       <div class="fieldLabel">Sessions per week:</div>
-      <div class="info">{{statsOverview.sessionsPerWeek}}</div>      
+      <div class="info">{{Statistics.statsOverview.sessionsPerWeek}}</div>      
       <div class="fieldLabel">Latest session:</div>
-      <div class="info">{{statsOverview.latestSession | date:'yyyy-MM-dd'}}</div> 
+      <div class="info">{{Statistics.statsOverview.latestSession | date:'yyyy-MM-dd'}}</div> 
     </div>
     <div class="content-padded">
       <h2>Sessions per week</h2>
@@ -613,7 +613,7 @@
       <div class="fieldLabel">Intruments:</div>
       <div class="info">{{Instruments.instruments.length}}</div>
       <!--<div class="label">Most popular:</div>
-      <div class="info">{{getInstrument(statsOverview.mostUsedInstrument).name}}</div>-->
+      <div class="info">{{getInstrument(Statistics.statsOverview.mostUsedInstrument).name}}</div>-->
     </div>
   </script>
 
