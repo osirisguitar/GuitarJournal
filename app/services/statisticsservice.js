@@ -172,7 +172,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	};
 
 	service.getWeekStats = function () {
-		var deferred = q.defer();
+		var deferred = $q.defer();
 
 		if (typeof service.weekStats == undefined || service.weekStats == null) {
 			$rootScope.apiStatus.loading++;
