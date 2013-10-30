@@ -41,6 +41,10 @@
       var addToHomeConfig = {
         message: 'To install this app, add it to you home screen.'
       };
+
+      function loadAuth() {
+        location.href = "/auth/facebook";
+      }
     </script>
     <script>
       if (window.location.hash == '#_=_'){
@@ -376,7 +380,7 @@
     </div>
     <a class="btn btn-default" ng-click="login()" ng-show="allowSimpleLogin">Login</a>
     <div class="facebook-login">
-      <a href="/auth/facebook" target="_self"><img height="40" src="/app/img/facebook.png"></a>
+      <a href="javascript:" onclick="loadAuth()"><img height="40" src="/app/img/facebook.png"></a>
     </div>
   </script>
 
