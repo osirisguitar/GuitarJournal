@@ -80,6 +80,7 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log) {
 function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope) {
 	$scope.setDefaultPageSettings();
 	$scope.pageSettings.hideNavigation = true;
+	$scope.pageSettings.hideTopNavigation = true;
 	$scope.login = function() {
 		$http.post("/api/login", {email: $scope.email, password: $scope.password}, $rootScope.httpConfig).success(function(data) {
 			if (data._id) {

@@ -171,9 +171,9 @@ app.post('/api/login',
 	}
 );
 
-app.post('/api/logout', function(req, res) {
+app.get('/api/logout', function(req, res) {
 	req.logout();
-	res.send(200, "OK");
+	res.redirect("/");
 });
 
 /*app.post('/api/login', function(req, res) {

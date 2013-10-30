@@ -43,11 +43,6 @@
       };
     </script>
     <script>
-      function facebookAuth() {
-        window.location = "/auth/facebook";
-        return false;
-      }
-
       if (window.location.hash == '#_=_'){
         window.location.hash = '';
     }
@@ -252,7 +247,7 @@
   <div id="fb-root"></div>
   <div growl class="growl"></div>
   <script>
-    window.fbAsyncInit = function() {
+    /*window.fbAsyncInit = function() {
       // init the FB JS SDK
       FB.init({
         appId      : '151038621732407',                        // App ID from the app dashboard
@@ -309,7 +304,7 @@
       FB.logout(function (response) {
         console.log(response);
       });
-    }
+    }*/
   </script>
 
   <!-- Make sure all your bars are the first things in your <body> -->
@@ -381,7 +376,7 @@
     </div>
     <a class="btn btn-default" ng-click="login()" ng-show="allowSimpleLogin">Login</a>
     <div class="facebook-login">
-      <a href="/auth/facebook" onclick="facebookAuth();"><img height="40" src="/app/img/facebook.png"></a>
+      <a href="/auth/facebook" target="_self"><img height="40" src="/app/img/facebook.png"></a>
     </div>
   </script>
 
@@ -635,7 +630,7 @@
 
       <a class="btn btn-default" type="button" href="/instrument/">Add Instrument</a>
       <h2>Logout</h2>
-      <a class="btn btn-danger" type="button" ng-click="logout()">Logout</a>
+      <a class="btn btn-danger" type="button" href="/api/logout" target="_self">Logout</a>
     </div>
   </script>
 
