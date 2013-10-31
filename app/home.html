@@ -33,7 +33,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.min.js"></script>
     <script src="/app/compiled/all.js"></script>
     <script>
-      nonbounce("scrollable-content")
+      if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+        nonbounce("scrollable-content")
+      }
     </script>
     <link rel="stylesheet" href="/app/compiled/all.css">
 
