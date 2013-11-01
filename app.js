@@ -46,9 +46,9 @@ passport.use(new LocalStrategy({
 ));
 
 passport.use(new FacebookStrategy({
-		clientID: '151038621732407',
-	    clientSecret: '6a29a4ca71df925e48be56e21b5ec832',
-	    callbackURL: "http://journal.osirisguitar.com/auth/facebook/callback",
+		clientID: process.env.FB_APP_ID,
+	    clientSecret: process.env.FB_APP_SECRET,
+	    callbackURL: process.env.FB_APP_URL + "/auth/facebook/callback",
 	    passReqToCallback: true
   	},
   	function(req, accessToken, refreshToken, profile, done) {
