@@ -749,10 +749,10 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 			"&fb_explicitly_shared=true";
 		$http.post(url, {}, $rootScope.httpConfig)
 			.success(function(response) {
-				$log.log("Success", response);
+				growl.showSuccessMessage("Session shared to Facebook");
 			})
 			.error(function(error) {
-				$log.log("Error", response);
+				growl.showErrorMessage("An error occured when sharing to Facebook", error);
 			});
 	};
 }
