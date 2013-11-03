@@ -36,10 +36,6 @@
       if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
         nonbounce("scrollable-content")
       }
-      else
-      {
-        alert("Regular bounce");
-      }
     </script>
     <link rel="stylesheet" href="/app/compiled/all.css">
 
@@ -489,7 +485,7 @@
       </div>
     </div>
     <div class="facebook-login" ng-show="!editMode">
-      <a href="" onclick="postToFB('{{session._id}}')"><img height="40" src="/app/img/facebook-share.png"></a>
+      <a href="" ng-click="shareToFacebook()"><img height="40" src="/app/img/facebook-share.png"></a>
     </div>
     <div class="content-padded">
       <form class="form-horizontal" ng-show="editMode">

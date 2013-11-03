@@ -65,22 +65,20 @@ passport.use(new FacebookStrategy({
 			    {
 			    	req.session.fbAccessToken = accessToken;
 			    	if (user === null) {
-			    		var newUser = {};
-			    		newUser.facebookId = profile.id;
-			    		newUser.fullName = profile.displayName;
-			    		newUser.username = profile.username;
-			    		users.save(newUser, { safe: true}, function(err, user) {
-			    			db.close();
-			    			if (err)
-			    				return done(err);
-			    			else
-			    				return done(null, user);
-			    		});
+			    		user = {};
 			    	}
-			    	else {
-			    		db.close();
-				      	return done(null, user);			    	
-			    	}
+		    		user.facebookId = profile.id;
+		    		user.fullName = profile.displayName;
+		    		user.username = profile.username;
+		    		user.fbAccessToken = accessToken;
+		    		users.save(user, { safe: true }, function(err, savedUser) {
+		    			console.log("User saved", user);
+		    			db.close();
+		    			if (err)
+		    				return done(err);
+		    			else
+		    				return done(null, user);
+		    		});
 			    }
 	    	});
  		});
@@ -88,6 +86,7 @@ passport.use(new FacebookStrategy({
 ));
 
 passport.serializeUser(function(user, done) {
+	console.log("Serialize", user);
 	done(null, user._id);
 });
 

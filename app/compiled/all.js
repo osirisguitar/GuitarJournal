@@ -587,6 +587,7 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log) {
 		};
 		if (data._id) {
 			$rootScope.loggedIn = true;
+			$rootScope.fbAccessToken = data.fbAccessToken;
 			$rootScope.apiStatus.loading--;
 		}
 		else {
@@ -668,7 +669,7 @@ function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments) {
 	$scope.Instruments = Instruments;
 }
 
-function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, Instruments, Statistics, growl) {
+function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, Sessions, Goals, Instruments, Statistics, growl) {
 	$scope.setDefaultPageSettings();
 	$scope.pageSettings.pageTitle = "Session";
 	$scope.pageSettings.active = "sessions";
@@ -740,6 +741,19 @@ function SessionCtrl($scope, $routeParams, $http, $location, Sessions, Goals, In
 				$scope.showErrorMessage("Could not delete the session.", error);
 			}
 		);
+	};
+
+	$scope.shareToFacebook = function() {
+		var url = "https://graph.facebook.com/me/ogjournal:complete?access_token=" + $rootScope.fbAccessToken + 
+			"&practice_session=http://journal.osirisguitar.com/api/practicesession/" + $scope.session._id +
+			"&fb_explicitly_shared=true";
+		$http.post(url, {}, $rootScope.httpConfig)
+			.success(function(response) {
+				$log.log("Success", response);
+			})
+			.error(function(error) {
+				$log.log("Error", response);
+			});
 	};
 }
 
