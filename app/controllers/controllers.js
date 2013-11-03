@@ -14,13 +14,13 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log) {
 	};
 
 	$scope.showErrorMessage = function(message, error) {
-		growl.showErrorMessage(message);
+		growl.addErrorMessage(message);
 		$log.error(message, error); 
 	};
 
 	$scope.showSuccessMessage = function(message) {
-		growl.showErrorMessage(message, { ttl: 4000 });
-		$log.info(message, error); 		
+		growl.addSuccessMessage(message, { ttl: 4000 });
+		$log.info(message); 	
 	};
 
 	$scope.setDefaultPageSettings = function() {
@@ -126,7 +126,7 @@ function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments) {
 	$scope.Instruments = Instruments;
 }
 
-function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, Sessions, Goals, Instruments, Statistics, growl) {
+function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, Sessions, Goals, Instruments, Statistics) {
 	$scope.setDefaultPageSettings();
 	$scope.pageSettings.pageTitle = "Session";
 	$scope.pageSettings.active = "sessions";
@@ -178,7 +178,7 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 			function() {
 				$location.path("/sessions/");
 				Statistics.flushStats();
-				growl.addSuccessMessage('Session saved', { ttl:3000 });
+				$scope.ShowSuccessMessage('Session saved');
 				$scope.editMode = false;
 			},
 			function() {
