@@ -203,7 +203,7 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 	$scope.shareToFacebook = function() {
 		var url = "https://graph.facebook.com/me/ogjournal:complete?access_token=" + $rootScope.fbAccessToken + 
 			"&practice_session=http://journal.osirisguitar.com/api/practicesession/" + $scope.session._id +
-			"&fb_explicitly_shared=true";
+			"&fb:explicitly_shared=true";
 		$http.post(url, {}, $rootScope.httpConfig)
 			.success(function(response) {
 				$scope.showSuccessMessage("Session shared to Facebook");
