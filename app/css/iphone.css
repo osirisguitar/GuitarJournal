@@ -1,0 +1,53 @@
+html, body {
+  margin:0px;
+  padding:0px;
+  overflow:hidden;
+  height:100%;
+  font-size:14px;
+}
+
+.vflex {
+  display:-webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  -webkit-box-flex:1;       
+}
+
+.scrolling {
+  -webkit-overflow-scrolling: touch;
+  overflow:auto;      
+}
+    
+.appbody {
+  position:absolute;
+  top:43px;
+  bottom:45px;
+  left:0;
+  right:0;
+  background:#999;
+}
+
+.appbody.higher {
+  bottom:0px;
+}
+
+.wrapper-outer {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  background-color:white;  
+}
+    
+.wrapper-inner {
+  background:#fff;
+}
+
+.panel-content {
+  background:#fff;
+  margin-left:10px;
+  margin-right:10px;  
+  margin-bottom:-1px;
+  padding-bottom:20px;
+}

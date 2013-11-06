@@ -1,4 +1,4 @@
-function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log) {
+function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $window) {
 	$scope.pageSettings = {};
 	$rootScope.apiStatus = {};
 	$rootScope.apiStatus.loading = 0;
@@ -12,6 +12,8 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log) {
 		hideNavigation: false,
 		hideTopNavigation: false
 	};
+
+	$scope.iOS = $window.navigator.userAgent.match(/iPhone/i) || $window.navigator.userAgent.match(/iPad/i);
 
 	$scope.showErrorMessage = function(message, error) {
 		growl.addErrorMessage(message);
