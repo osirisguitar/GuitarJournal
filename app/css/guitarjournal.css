@@ -5,11 +5,9 @@ html, body {
   font-size:14px;
 }
 
-body {
-  margin:0px 10px 0px 10px;
-}
-
 .appbody {
+  margin-left:10px;
+  margin-right:10px;
   padding-top:41px;
   padding-bottom:55px;
 }
