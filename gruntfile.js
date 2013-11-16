@@ -73,11 +73,11 @@ module.exports = function(grunt) {
 			      	"http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.min.js"]
 			    },
 			    src: [
-			        /*"home.html",
+			        "home.html",
 			        "compiled/*.js",
 			        "compiled/*.css",
 			        "img/*.png",
-			        "font/**.*"*/
+			        "font/**.*"
 			    ],
 			    dest: "app/manifest.appcache"
 			}
