@@ -628,7 +628,8 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 	$scope.pageSettings.hideNavigation = true;
 	$scope.pageSettings.hideTopNavigation = true;
 	$scope.login = function() {
-		$http.post("/api/login", {email: $scope.email, password: $scope.password}, $rootScope.httpConfig).success(function(data) {
+//		$http.post("/api/login", {email: $scope.email, password: $scope.password}, $rootScope.httpConfig).success(function(data) {
+		$http.get("/api/login", $rootScope.httpConfig).success(function(data) {
 			if (data._id) {
 				$rootScope.loggedIn = true;
 				$scope.pageSettings.hideNavigation = false;
@@ -754,7 +755,7 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 				$scope.showSuccessMessage("Session shared to Facebook");
 			})
 			.error(function(error) {
-				$scope.showErrorMessage("An error occured when sharing to Facebook", error);
+				$scope.showErrorMessage("An error occured when sharing to Facebook: " + error.error.message, error);
 			});
 	};
 }

@@ -165,14 +165,16 @@ app.use('/app', express.static(__dirname + '/app'));
 // Route for static about-site
 app.use('/about', express.static(__dirname + '/about'));
 
-app.post('/api/login',
+app.get('/api/login',
 	passport.authenticate('local'),
 	function (req, res) {
+		res.cookie('userid', user.id, { maxAge: 2592000000 });
 		res.json(req.user);
 	}
 );
 
 app.get('/api/logout', function(req, res) {
+	res.clearCookie('userid');
 	req.logout();
 	res.redirect("/");
 });
