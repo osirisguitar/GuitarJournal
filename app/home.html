@@ -33,6 +33,11 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.min.js"></script>
     <script src="/app/compiled/all.js"></script>
     <script>
+      window.addEventListener('load', function() {
+        FastClick.attach(document.body);
+      }, false);
+    </script>
+    <script>
       if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
         nonbounce("scrollable-content")
       }

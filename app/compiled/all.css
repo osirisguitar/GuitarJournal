@@ -8146,6 +8146,7 @@ header a, header a:hover {
 header a.prev, header a.left {
   left:10px;
   top:11px;
+  z-index:1000;
 }
 
 header a.next, header a.right {
