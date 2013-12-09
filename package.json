@@ -9,7 +9,8 @@
     "passport": "~0.1.16",
     "passport-local": "~0.1.6",
     "passport-facebook": "~0.1.5",
-    "angular-growl": "~0.1.0"
+    "angular-growl": "~0.1.0",
+    "gm": "~1.14.0"
   },
   "engines": {
     "node": "0.10.x",
