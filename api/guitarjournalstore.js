@@ -1,5 +1,5 @@
 var mongoClient = require('mongodb').MongoClient;
-var async = require('async');
+/*var async = require('async');*/
 
 var connectionString = null;
 
