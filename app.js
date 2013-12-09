@@ -125,9 +125,30 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'publish_ac
 // authentication process by attempting to obtain an access token.  If
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
-app.get('/auth/facebook/callback', 
-  passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
+app.get('/auth/facebook/callback', function(req, res, next) {
+	passport.authenticate('facebook', function(err, user, info) {
+		console.log("Getting callback from FB", err, user, info);
+	    if (err) { 
+	    	return next(err); 
+	    }
+	    if (!user) { 
+	    	return res.redirect('/login'); 
+	    }
+	    req.logIn(user, function(err) {
+	    	if (err) { 
+	    		return next(err); 
+	      	}
+	      	var expiration = new Date();
+	      	expiration.setDate(expiration.getDate() + 365);
+	    	res.cookie("hasloggedinwithfb", "true", { expires: expiration });
+	    	console.log("Set FB autologin cookie");
+	    	return res.redirect('/');
+	    });
+	  })(req, res, next);
+});
+/*app.get('/auth/facebook/callback',
+ passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/login' }));*/
 
 // One page app routing, the client-side app
 // handles the internal routing.
@@ -175,6 +196,7 @@ app.get('/api/login',
 
 app.get('/api/logout', function(req, res) {
 	res.clearCookie('userid');
+	res.clearCookie('hasloggedinwithfb');
 	req.logout();
 	res.redirect("/");
 });
@@ -197,11 +219,18 @@ app.get('/api/logout', function(req, res) {
 app.get('/api/loggedin', function(req, res) {
 	if (req.isAuthenticated())
 	{
-		req.user._csrf = req.session._csrf;
+		req.user._csrf = req.csrfToken();
 		res.json(req.user);		
 	}
-	else 
-		res.json({ _csrf: req.session._csrf});
+	else
+	{
+		if (req.cookies.hasloggedinwithfb) {
+			res.json({ _csrf: req.csrfToken(), autoTryFacebook: true });		
+		}
+		else {
+			res.json({ _csrf: req.csrfToken(), autoTryFacebook: false });		
+		}
+	}
 });
 
 function checkLogin(req, res) {

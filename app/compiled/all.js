@@ -1383,7 +1383,12 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 		}
 		else {
 			$rootScope.apiStatus.loading--;
-			$location.path("/login");
+			if (data.autoTryFacebook) {
+				$window.location.href = "/auth/facebook";
+			}
+			else {
+				$location.path("/login");
+			}
 		}
 	}).error(function(error) {
 		$scope.showErrorMessage("Error when logging in", error);
