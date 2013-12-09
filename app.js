@@ -201,21 +201,6 @@ app.get('/api/logout', function(req, res) {
 	res.redirect("/");
 });
 
-/*app.post('/api/login', function(req, res) {
-	MongoClient.connect(mongoConnectionString, function(err, db) {
-		if(err) { return console.dir(err); }
-
-		var users = db.collection('Users');
-		users.findOne({ email: req.body.email }, function(err, user) {
-			if (err)
-				console.log(err);
-			console.log("Logged in user", user);
-			req.session.loggedInUser = user._id;
-			res.json(user);
-		});
-	});
-});*/
-
 app.get('/api/loggedin', function(req, res) {
 	if (req.isAuthenticated())
 	{
