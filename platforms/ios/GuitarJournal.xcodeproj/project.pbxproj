@@ -46,6 +46,7 @@
 		EEEF273CCD904687AD047B5A /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CB97C371E7D544848AA2D03A /* CDVSplashScreen.m */; };
 		7A40D92D018E404894BC3CA3 /* ImageIO.framework in Resources */ = {isa = PBXBuildFile; fileRef = 2CC973E609A14F028B78E2A3 /* ImageIO.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A7280DEADC8E4EA88ED0BEC7 /* AudioToolbox.framework in Resources */ = {isa = PBXBuildFile; fileRef = B819A452DA3E49BCA1CEF979 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		6660B35DFEB344B5B573AF85 /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A05DF6C084D5A9683BFDF /* CDVDevice.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,8 @@
 		77897E69B2CE49E1ABBF59E5 /* CDVSplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVSplashScreen.h"; path = "org.apache.cordova.splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		2CC973E609A14F028B78E2A3 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "ImageIO.framework"; path = "System/Library/Frameworks/ImageIO.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 		B819A452DA3E49BCA1CEF979 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		3F3A05DF6C084D5A9683BFDF /* CDVDevice.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVDevice.m"; path = "org.apache.cordova.device/CDVDevice.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		194282B9FEC04CBAA1EAFE60 /* CDVDevice.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVDevice.h"; path = "org.apache.cordova.device/CDVDevice.h"; sourceTree = "<group>"; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +254,8 @@
 				BB2C8283FB014F7598B68F7B /* CDVNotification.h */,
 				CB97C371E7D544848AA2D03A /* CDVSplashScreen.m */,
 				77897E69B2CE49E1ABBF59E5 /* CDVSplashScreen.h */,
+				3F3A05DF6C084D5A9683BFDF /* CDVDevice.m */,
+				194282B9FEC04CBAA1EAFE60 /* CDVDevice.h */,
 			);
 			name = Plugins;
 			path = "GuitarJournal/Plugins";
@@ -441,6 +446,7 @@
 				B895DD62ABA04701AE2DF496 /* CDVJpegHeaderWriter.m in Sources */,
 				F7A108E61791429B98B6C7F1 /* CDVNotification.m in Sources */,
 				EEEF273CCD904687AD047B5A /* CDVSplashScreen.m in Sources */,
+				6660B35DFEB344B5B573AF85 /* CDVDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

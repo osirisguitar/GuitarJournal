@@ -53,3 +53,7 @@ html, body {
   margin-bottom:-1px;
   padding-bottom:20px;
 }
+
+.appbody, header {
+  margin-top:20px;
+}

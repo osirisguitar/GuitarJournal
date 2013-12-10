@@ -120,7 +120,7 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 	};
 }
 
-function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments) {
+function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments, $window) {
 	$scope.setDefaultPageSettings();
 	$scope.pageSettings.pageTitle = "Sessions";
 	$scope.pageSettings.active = "sessions";
