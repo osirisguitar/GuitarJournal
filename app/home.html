@@ -531,19 +531,19 @@
       <div class="fieldLabel">Latest session:</div>
       <div class="info">{{Statistics.statsOverview.latestSession | date:'yyyy-MM-dd'}}</div> 
     </div>
-    <div class="content-padded">
+    <div class="content-padded diagram">
       <h2>Sessions per week</h2>
       <canvas barchart options="optionsWeek" data="sessionsPerWeek" id="sessionsPerWeek" width="270" height="200"></canvas>    
     </div>
-    <div class="content-padded">
+    <div class="content-padded diagram">
       <h2>Minutes per week</h2>
       <canvas barchart options="optionsWeek" data="minutesPerWeek" id="minutesPerWeek" width="270" height="200"></canvas>    
     </div>
-    <div class="content-padded">
+    <div class="content-padded diagram">
       <h2>Durations last 30 days</h2>
       <canvas barchart options="options30days" data="last30days" id="last30days" width="270" height="200"></canvas>    
     </div>
-    <div class="content-padded">
+    <div class="content-padded diagram">
       <h2>Sessions per weekday</h2>
       <canvas donutchart options="optionsPerWeekday" data="perWeekday" id="perWeekday" width="200" height="200" style="float:left;"></canvas>
       <div style="float:left;margin-top:20px;margin-left:15px;">
