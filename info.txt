@@ -1,0 +1,44 @@
+Useful Information For Submitting Bug Reports and Getting Help
+
+Current Node Version
+
+    v0.10.21
+
+
+Current Cordova CLI Version
+
+    3.2.0-0.4.0
+
+Current Config.xml
+
+    <?xml version='1.0' encoding='utf-8'?>
+<widget id="com.osirisguitar.journal" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>OG Journal</name>
+    <description>
+        A practice journal for musicians.
+    </description>
+    <author email="info@osirisguitar.com" href="http://www.osirisguitar.com">
+        OSIRIS GUITAR
+    </author>
+    <content src="index2.html" />
+    <preference name="DisallowOverscroll" value="true" />
+    <access origin="*" />
+</widget>
+
+
+Currently Installed Platforms
+
+    
+
+    ios
+
+    Xcode 5.0.2
+Build version 5A3005
+
+
+
+
+
+Currently Installed Plugins
+
+    org.apache.cordova.camera,org.apache.cordova.device,org.apache.cordova.dialogs,org.apache.cordova.splashscreen
