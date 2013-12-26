@@ -44,6 +44,12 @@
     </script>
     <link rel="stylesheet" href="/app/compiled/all.css">
     <script type="text/javascript">
+      if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+        document.write('<link rel="stylesheet" href="/app/css/iphone.css">')
+      }
+    </script>
+
+    <script type="text/javascript">
       var addToHomeConfig = {
         message: 'To install this app, add it to you home screen.'
       };
