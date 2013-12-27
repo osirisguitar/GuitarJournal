@@ -37,14 +37,9 @@
         FastClick.attach(document.body);
       }, false);
     </script>
-    <script>
-      if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
-        nonbounce("scrollable-content")
-      }
-    </script>
     <link rel="stylesheet" href="/app/compiled/all.css">
     <script type="text/javascript">
-      if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+      if (navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 7_\d/i)) {
         document.write('<link rel="stylesheet" href="/app/css/iphone.css">')
       }
     </script>
