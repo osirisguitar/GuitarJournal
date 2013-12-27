@@ -341,3 +341,156 @@ Terminating in response to SpringBoard's termination.
 2013-12-27 12:52:55.210 OG Journal[3249:80b] Finished load of: https://m.facebook.com/login/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjdev.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D660009220696560%26ret%3Dlogin
 2013-12-27 12:52:56.372 OG Journal[3249:80b] Resetting plugins due to page load.
 2013-12-27 12:53:07.728 OG Journal[3249:80b] Finished load of: http://jdev.osirisguitar.com/
+2013-12-27 13:17:47.827 OG Journal[5243:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 13:17:47.838 OG Journal[5243:80b] Unlimited access to network resources
+2013-12-27 13:17:47.879 OG Journal[5243:80b] [CDVTimer][splashscreen] 19.591033ms
+2013-12-27 13:17:47.880 OG Journal[5243:80b] [CDVTimer][TotalPluginStartup] 20.150959ms
+2013-12-27 13:17:48.045 OG Journal[5243:80b] Resetting plugins due to page load.
+2013-12-27 13:17:48.071 OG Journal[5243:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 13:17:48.075 OG Journal[5243:80b] Resetting plugins due to page load.
+2013-12-27 13:17:53.017 OG Journal[5243:80b] Finished load of: http://journal.osirisguitar.com/login
+2013-12-27 13:17:54.889 OG Journal[5243:80b] Resetting plugins due to page load.
+2013-12-27 13:17:58.085 OG Journal[5243:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2013-12-27 13:17:58.086 OG Journal[5243:80b] Resetting plugins due to page load.
+2013-12-27 13:17:59.240 OG Journal[5243:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&api_key=151038621732407&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&cancel_uri=http%3A%2F%2Fjournal.osirisguitar.com%2Fauth%2Ffacebook%2Fcallback%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=touch&_rdr
+2013-12-27 13:18:12.230 OG Journal[5243:80b] Resetting plugins due to page load.
+2013-12-27 13:18:13.724 OG Journal[5243:80b] Finished load of: https://m.facebook.com/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&refid=9&_rdr
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFillColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetStrokeColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSaveGState: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFlatness: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextAddPath: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextDrawPath: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextRestoreGState: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSaveGState: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFlatness: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextAddPath: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextDrawPath: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextRestoreGState: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFillColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetStrokeColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFillColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetStrokeColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextGetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextFillRects: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFillColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetStrokeColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextGetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextFillRects: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFillColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetStrokeColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextGetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextFillRects: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
+2013-12-27 13:18:35.803 OG Journal[5243:80b] Resetting plugins due to page load.
+2013-12-27 13:18:36.138 OG Journal[5243:80b] Finished load of: https://m.facebook.com/login/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin
+2013-12-27 13:18:41.799 OG Journal[5243:80b] Resetting plugins due to page load.
+2013-12-27 13:18:42.375 OG Journal[5243:80b] Finished load of: https://m.facebook.com/login/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin
+2013-12-27 13:18:43.152 OG Journal[5243:80b] Resetting plugins due to page load.
+2013-12-27 13:18:47.436 OG Journal[5243:80b] Finished load of: http://journal.osirisguitar.com/
+2013-12-27 13:20:15.782 OG Journal[5803:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 13:20:15.792 OG Journal[5803:80b] Unlimited access to network resources
+2013-12-27 13:20:15.823 OG Journal[5803:80b] [CDVTimer][splashscreen] 9.505987ms
+2013-12-27 13:20:15.823 OG Journal[5803:80b] [CDVTimer][TotalPluginStartup] 10.067046ms
+2013-12-27 13:20:15.992 OG Journal[5803:80b] Resetting plugins due to page load.
+2013-12-27 13:20:16.023 OG Journal[5803:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 13:20:16.026 OG Journal[5803:80b] Resetting plugins due to page load.
+2013-12-27 13:20:17.110 OG Journal[5803:80b] Finished load of: http://jdev.osirisguitar.com/login
+2013-12-27 13:20:20.122 OG Journal[5803:80b] Resetting plugins due to page load.
+2013-12-27 13:20:29.252 OG Journal[5803:80b] Finished load of: http://jdev.osirisguitar.com/
+2013-12-27 16:09:50.887 OG Journal[6886:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 16:09:50.897 OG Journal[6886:80b] Unlimited access to network resources
+2013-12-27 16:09:50.935 OG Journal[6886:80b] [CDVTimer][splashscreen] 13.927996ms
+2013-12-27 16:09:50.935 OG Journal[6886:80b] [CDVTimer][TotalPluginStartup] 14.481008ms
+2013-12-27 16:09:51.108 OG Journal[6886:80b] Resetting plugins due to page load.
+2013-12-27 16:09:51.143 OG Journal[6886:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 16:09:51.147 OG Journal[6886:80b] Resetting plugins due to page load.
+2013-12-27 16:09:51.692 OG Journal[6886:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2013-12-27 16:09:51.696 OG Journal[6886:80b] Resetting plugins due to page load.
+2013-12-27 16:10:03.985 OG Journal[6886:80b] Finished load of: http://jdev.osirisguitar.com/
+2013-12-27 16:23:39.657 OG Journal[8468:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 16:23:39.667 OG Journal[8468:80b] Unlimited access to network resources
+2013-12-27 16:23:39.709 OG Journal[8468:80b] [CDVTimer][splashscreen] 20.310998ms
+2013-12-27 16:23:39.710 OG Journal[8468:80b] [CDVTimer][TotalPluginStartup] 20.898998ms
+2013-12-27 16:23:39.893 OG Journal[8468:80b] Resetting plugins due to page load.
+2013-12-27 16:23:39.917 OG Journal[8468:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 16:23:39.920 OG Journal[8468:80b] Resetting plugins due to page load.
+2013-12-27 16:23:40.677 OG Journal[8468:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2013-12-27 16:23:40.679 OG Journal[8468:80b] Resetting plugins due to page load.
+2013-12-27 16:24:12.812 OG Journal[8468:80b] Finished load of: http://jdev.osirisguitar.com/
+2013-12-27 16:26:16.462 OG Journal[9028:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 16:26:16.471 OG Journal[9028:80b] Unlimited access to network resources
+2013-12-27 16:26:16.502 OG Journal[9028:80b] [CDVTimer][splashscreen] 9.977996ms
+2013-12-27 16:26:16.503 OG Journal[9028:80b] [CDVTimer][TotalPluginStartup] 10.576963ms
+2013-12-27 16:26:16.677 OG Journal[9028:80b] Resetting plugins due to page load.
+2013-12-27 16:26:16.707 OG Journal[9028:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 16:26:16.711 OG Journal[9028:80b] Resetting plugins due to page load.
+2013-12-27 16:26:17.272 OG Journal[9028:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2013-12-27 16:26:17.276 OG Journal[9028:80b] Resetting plugins due to page load.
+2013-12-27 16:26:33.383 OG Journal[9028:80b] Finished load of: http://jdev.osirisguitar.com/
+2013-12-27 16:27:49.849 OG Journal[9528:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 16:27:49.859 OG Journal[9528:80b] Unlimited access to network resources
+2013-12-27 16:27:49.892 OG Journal[9528:80b] [CDVTimer][splashscreen] 11.025012ms
+2013-12-27 16:27:49.893 OG Journal[9528:80b] [CDVTimer][TotalPluginStartup] 11.623025ms
+2013-12-27 16:27:50.079 OG Journal[9528:80b] Resetting plugins due to page load.
+2013-12-27 16:27:50.110 OG Journal[9528:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 16:27:50.113 OG Journal[9528:80b] Resetting plugins due to page load.
+2013-12-27 16:27:50.539 OG Journal[9528:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2013-12-27 16:27:50.543 OG Journal[9528:80b] Resetting plugins due to page load.
+2013-12-27 16:28:00.031 OG Journal[9528:80b] Finished load of: http://jdev.osirisguitar.com/
+2013-12-27 16:31:02.712 OG Journal[10132:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 16:31:02.722 OG Journal[10132:80b] Unlimited access to network resources
+2013-12-27 16:31:02.753 OG Journal[10132:80b] [CDVTimer][splashscreen] 9.495020ms
+2013-12-27 16:31:02.754 OG Journal[10132:80b] [CDVTimer][TotalPluginStartup] 10.038972ms
+2013-12-27 16:31:02.950 OG Journal[10132:80b] Resetting plugins due to page load.
+2013-12-27 16:31:02.979 OG Journal[10132:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 16:31:02.982 OG Journal[10132:80b] Resetting plugins due to page load.
+2013-12-27 16:31:03.406 OG Journal[10132:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2013-12-27 16:31:03.410 OG Journal[10132:80b] Resetting plugins due to page load.
+2013-12-27 16:31:13.006 OG Journal[10132:80b] Finished load of: http://jdev.osirisguitar.com/
+2013-12-27 16:38:54.419 OG Journal[11009:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 16:38:54.430 OG Journal[11009:80b] Unlimited access to network resources
+2013-12-27 16:38:54.462 OG Journal[11009:80b] [CDVTimer][splashscreen] 10.151982ms
+2013-12-27 16:38:54.462 OG Journal[11009:80b] [CDVTimer][TotalPluginStartup] 10.692000ms
+2013-12-27 16:38:54.617 OG Journal[11009:80b] Resetting plugins due to page load.
+2013-12-27 16:38:54.642 OG Journal[11009:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 16:38:54.646 OG Journal[11009:80b] Resetting plugins due to page load.
+2013-12-27 16:38:55.082 OG Journal[11009:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2013-12-27 16:38:55.087 OG Journal[11009:80b] Resetting plugins due to page load.
+2013-12-27 16:39:09.199 OG Journal[11009:80b] Finished load of: http://jdev.osirisguitar.com/
+2013-12-27 16:45:10.379 OG Journal[11809:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 16:45:10.389 OG Journal[11809:80b] Unlimited access to network resources
+2013-12-27 16:45:10.423 OG Journal[11809:80b] [CDVTimer][splashscreen] 13.486981ms
+2013-12-27 16:45:10.423 OG Journal[11809:80b] [CDVTimer][TotalPluginStartup] 14.079988ms
+2013-12-27 16:45:10.613 OG Journal[11809:80b] Resetting plugins due to page load.
+2013-12-27 16:45:10.638 OG Journal[11809:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 16:45:10.643 OG Journal[11809:80b] Resetting plugins due to page load.
+2013-12-27 16:45:11.101 OG Journal[11809:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2013-12-27 16:45:11.106 OG Journal[11809:80b] Resetting plugins due to page load.
+2013-12-27 16:45:22.643 OG Journal[11809:80b] Finished load of: http://jdev.osirisguitar.com/
+2013-12-27 16:46:07.782 OG Journal[12267:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 16:46:07.791 OG Journal[12267:80b] Unlimited access to network resources
+2013-12-27 16:46:07.833 OG Journal[12267:80b] [CDVTimer][splashscreen] 20.141959ms
+2013-12-27 16:46:07.834 OG Journal[12267:80b] [CDVTimer][TotalPluginStartup] 20.712972ms
+2013-12-27 16:46:08.022 OG Journal[12267:80b] Resetting plugins due to page load.
+2013-12-27 16:46:08.046 OG Journal[12267:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 16:46:08.050 OG Journal[12267:80b] Resetting plugins due to page load.
+2013-12-27 16:46:08.524 OG Journal[12267:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2013-12-27 16:46:08.530 OG Journal[12267:80b] Resetting plugins due to page load.
+2013-12-27 16:46:18.173 OG Journal[12267:80b] Finished load of: http://jdev.osirisguitar.com/
+Terminating in response to SpringBoard's termination.
+2013-12-27 16:48:07.211 OG Journal[12791:80b] Multi-tasking -> Device: YES, App: YES
+2013-12-27 16:48:07.220 OG Journal[12791:80b] Unlimited access to network resources
+2013-12-27 16:48:07.252 OG Journal[12791:80b] [CDVTimer][splashscreen] 9.527981ms
+2013-12-27 16:48:07.253 OG Journal[12791:80b] [CDVTimer][TotalPluginStartup] 10.071993ms
+2013-12-27 16:48:07.417 OG Journal[12791:80b] Resetting plugins due to page load.
+2013-12-27 16:48:07.441 OG Journal[12791:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
+2013-12-27 16:48:07.444 OG Journal[12791:80b] Resetting plugins due to page load.
+2013-12-27 16:48:07.859 OG Journal[12791:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2013-12-27 16:48:07.863 OG Journal[12791:80b] Resetting plugins due to page load.
+2013-12-27 16:48:17.371 OG Journal[12791:80b] Finished load of: http://jdev.osirisguitar.com/

@@ -1,0 +1,11 @@
+body, header.navbar.navbar-default.navbar-fixed-top {
+  border-top:20px solid white;
+}
+
+header.navbar.navbar-default.navbar-fixed-top {
+  min-height:63px;
+}
+
+.appbody {
+	margin-top:20px;
+}

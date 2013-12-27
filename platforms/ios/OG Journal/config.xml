@@ -40,6 +40,5 @@
         OSIRIS GUITAR
     </author>
     <content src="index2.html" />
-    <preference name="DisallowOverscroll" value="true" />
     <access origin="*" />
 </widget>

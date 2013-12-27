@@ -35,12 +35,25 @@
     <script>
       window.addEventListener('load', function() {
         FastClick.attach(document.body);
+        if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+          document.getElementById("header").ontouchmove = function(event){
+            event.preventDefault();
+          };
+
+          document.getElementById("footer").ontouchmove = function(event){
+            event.preventDefault();
+          };
+        }
       }, false);
     </script>
     <link rel="stylesheet" href="/app/compiled/all.css">
     <script type="text/javascript">
+      if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+        document.write('<link rel="stylesheet" href="/app/css/iphone.css">')          
+      }
+
       if (navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 7_\d/i)) {
-        document.write('<link rel="stylesheet" href="/app/css/iphone.css">')
+        document.write('<link rel="stylesheet" href="/app/css/iphone7.css">')
       }
     </script>
 
@@ -263,7 +276,7 @@
   <div growl class="growl"></div>
 
   <!-- Make sure all your bars are the first things in your <body> -->
-  <header class="navbar navbar-default navbar-fixed-top" ng-show="!pageSettings.hideTopNavigation">
+  <header id="header" class="navbar navbar-default navbar-fixed-top" ng-show="!pageSettings.hideTopNavigation">
     <a class="prev" href="javascript:history.back();" ng-show="pageSettings.showBackButton">
       Back
     </a>
@@ -276,7 +289,7 @@
       </div>
     </div>
   </header>
-  <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-show="!pageSettings.hideNavigation">
+  <nav id="footer" class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-show="!pageSettings.hideNavigation">
     <a class="{{pageSettings.active == 'home' && 'active' || ''}}" href="/">
       <i class="icon-home icon-2x navicon"></i>
       Home
@@ -303,7 +316,7 @@
   <div class="appbody {{ pageSettings.hideNavigation && 'higher' || '' }}">
     <div class="wrapper-outer vflex scrolling">
       <div class="wrapper-inner vflex scrolling">
-        <div class="panel-content vflex">
+        <div id="scrollable-content" class="panel-content vflex">
           <ng-view ng-animate="view"></ng-view>
         </div>
       </div>
