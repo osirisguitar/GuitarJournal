@@ -425,6 +425,21 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 	};
 
 	$scope.setImage = function(imageField) {
+		var file = imageField.files[0];
+		// MegaPixImage constructor accepts File/Blob object.
+		var mpImg = new MegaPixImage(file);
+
+		// Render resized image into canvas element.
+		var resultCanvas = document.createElement("canvas");
+		mpImg.onrender = function (finalCanvas) {
+			var resultData = finalCanvas.toDataURL("image/jpeg", 0.8);
+			console.log("Final", resultData);
+			$scope.instrument.image = resultData.split(',')[1];
+		}
+		mpImg.render(resultCanvas, { maxWidth: 300, maxHeight: 300 });
+	}
+
+	/*
 		$scope.files = imageField.files;
 		var file = $scope.files[0];
 
@@ -446,13 +461,15 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 			var newWidth = Math.round(this.width * r);
 			var newHeight = Math.round(this.height * r);
 			var canvas = document.createElement("canvas");
+			console.log("Oringal size", this.width, this.height);
+			console.log("New size", newWidth, newHeight);
 			canvas.width = newWidth;
 			canvas.height = newHeight;
 			canvas.getContext("2d").drawImage(this,0,0,newWidth,newHeight);
 			$scope.instrument.image = canvas.toDataURL().split(',')[1];
 		}
 		image.src = "data:image/png;base64," + imageFile;
-	};
+	};*/
 
 	$scope.save = function() {
 		Instruments.saveInstrument($scope.instrument,

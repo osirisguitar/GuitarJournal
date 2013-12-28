@@ -47,7 +47,8 @@ h3
 	height:auto;
 	margin-top:10px;
 	margin-bottom:10px;
-	max-width:100%;
+	max-width:150px;
+	max-height:150px;
 }
 
 #logo {

@@ -44,6 +44,12 @@
             event.preventDefault();
           };
         }
+        window.applicationCache.addEventListener('updateready', function(e) {
+          if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+            // Browser downloaded a new app cache.
+              window.location.reload();
+          }
+        }, false);
       }, false);
     </script>
     <link rel="stylesheet" href="/app/compiled/all.css">
@@ -629,9 +635,6 @@
         <div class="form-group">
           <label class="control-label">Image</label>
           <input class="form-control" type="file" id="imagefield" onchange="angular.element(this).scope().setImage(this)" />
-        </div>
-        <div class="form-group">
-          <a class="btn btn-default" onclick="camera.getPicture(alert, alert)">Camera</a>
         </div>
         <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
         <a class="btn btn-danger" ng-click="delete()" ng-show="editMode && instrument._id">Delete</a>

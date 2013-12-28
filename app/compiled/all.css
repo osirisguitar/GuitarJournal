@@ -7954,6 +7954,7 @@ nav a:hover {
 .list-group-item img {
   line-height:18px;
   max-height:40px;
+  max-width:40px;
   float:left;
   padding-top:4px;
   padding-right:5px;
@@ -8112,6 +8113,8 @@ input[type="checkbox"].form-control {
 .view img {
   float:right;
   padding-left:10px;
+  max-width:75px;
+  max-height:75px;
 }
 
 .view div {
