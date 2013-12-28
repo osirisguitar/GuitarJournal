@@ -43,37 +43,6 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
       });
     $locationProvider.html5Mode(true);
   }])
-  .directive('fileChange', function () {
-      var linker = function ($scope, element, attributes) {
-          // onChange, push the files to $scope.files.
-          element.bind('change', function (event) {
-              var files = event.target.files;
-              $scope.$apply(function () {
-                  for (var i = 0, length = files.length; i < length; i++) {
-                      $scope.files.push(files[i]);
-                  }
-              });
-          });
-      };
-
-      return {
-          restrict: 'A',
-          link: linker
-      };
-  })
-  .directive('file', function() {
-    return {
-      scope: { file: '=' },
-      link: function(scope, el, attrs) {
-          el.bind('change', function(event) {
-              var files = event.target.files;
-              var file = files[0];
-              scope.file = file;
-              scope.$apply();
-          });
-      }
-    };
-  })
   .filter('take', function() {
     return function(input, numItems) {
       if (!input || !input.length)

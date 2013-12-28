@@ -561,8 +561,9 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 				});
 		});
 	};
+	save();
 
-	if (req.body.image) {
+/*	if (req.body.image) {
 		var imagebytes = [];
 		var imageStream = new Buffer(req.body.image, 'base64');
 		imageMagick(imageStream).size(function(err, size) {
@@ -599,7 +600,7 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 					stdout.on('close', function() {
 						var image = Buffer.concat(imagebytes);
 						var imageData = Binary(image);
-						req.body.image = imageData;
+						req.body.image = Binary(imageStream);
 
 						save();
 					});
@@ -610,7 +611,7 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 	else
 	{
 		save();
-	}
+	}*/
 
 
 /*

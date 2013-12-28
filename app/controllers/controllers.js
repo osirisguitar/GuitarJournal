@@ -431,11 +431,27 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 		var reader = new FileReader();
 		reader.onload = (function(selectedFile) {
 		    return function(e) {
-		      $scope.instrument.image = e.target.result.split(',')[1];
+				$scope.resizeImage(e.target.result.split(',')[1]);
 		    };
 
 		})(file);
 		reader.readAsDataURL(file);
+	};
+
+	$scope.resizeImage = function(imageFile) {
+		var image = new Image();
+		image.onload=function() {
+    		var maxBoundary = 200;
+   			var r = maxBoundary / Math.max(this.width,this.height);
+			var newWidth = Math.round(this.width * r);
+			var newHeight = Math.round(this.height * r);
+			var canvas = document.createElement("canvas");
+			canvas.width = newWidth;
+			canvas.height = newHeight;
+			canvas.getContext("2d").drawImage(this,0,0,newWidth,newHeight);
+			$scope.instrument.image = canvas.toDataURL().split(',')[1];
+		}
+		image.src = "data:image/png;base64," + imageFile;
 	};
 
 	$scope.save = function() {

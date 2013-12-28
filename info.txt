@@ -12,7 +12,7 @@ Current Cordova CLI Version
 Current Config.xml
 
     <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.osirisguitar.journal" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.osirisguitar.journal" version="0.8.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>OG Journal</name>
     <description>
         A practice journal for musicians.
@@ -21,7 +21,6 @@ Current Config.xml
         OSIRIS GUITAR
     </author>
     <content src="index2.html" />
-    <preference name="DisallowOverscroll" value="true" />
     <access origin="*" />
 </widget>
 

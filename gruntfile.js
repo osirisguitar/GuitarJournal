@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
 			},
 			javascripts: {
-				src: ['app/libs/**/*.js','app/controllers/*.js','app/services/*.js', 'app/js/nonbounce.js'],
+				src: ['app/libs/**/*.js','app/controllers/*.js','app/services/*.js'],
 				dest: 'app/compiled/all.js'
 			},
 			css: {

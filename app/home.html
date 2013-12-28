@@ -56,12 +56,7 @@
         document.write('<link rel="stylesheet" href="/app/css/iphone7.css">')
       }
     </script>
-
     <script type="text/javascript">
-      var addToHomeConfig = {
-        message: 'To install this app, add it to you home screen.'
-      };
-
       function loadAuth() {
         location.href = "/auth/facebook";
       }
@@ -634,6 +629,9 @@
         <div class="form-group">
           <label class="control-label">Image</label>
           <input class="form-control" type="file" id="imagefield" onchange="angular.element(this).scope().setImage(this)" />
+        </div>
+        <div class="form-group">
+          <a class="btn btn-default" onclick="camera.getPicture(alert, alert)">Camera</a>
         </div>
         <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
         <a class="btn btn-danger" ng-click="delete()" ng-show="editMode && instrument._id">Delete</a>
