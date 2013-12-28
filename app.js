@@ -1,7 +1,7 @@
-require('nodetime').profile({
+/*require('nodetime').profile({
     accountKey: 'fafe6e5e9c7f53864d60e809e821f1ca87521d82', 
     appName: 'OSIRIS GUITAR'
-  });
+  });*/
 var express = require('express');
 var app = express();
 var journalStore = require('./api/guitarjournalstore');
