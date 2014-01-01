@@ -1,7 +1,10 @@
-/*require('nodetime').profile({
-    accountKey: 'fafe6e5e9c7f53864d60e809e821f1ca87521d82', 
-    appName: 'OSIRIS GUITAR'
-  });*/
+if (process.env.USE_NODETIME) {
+	require('nodetime').profile({
+	    accountKey: 'fafe6e5e9c7f53864d60e809e821f1ca87521d82', 
+	    appName: 'OSIRIS GUITAR'
+	  });
+	console.log("Using nodetime");
+}
 var express = require('express');
 var app = express();
 var journalStore = require('./api/guitarjournalstore');
@@ -186,6 +189,9 @@ app.get("/app", function(req, res) {
 
 // Route for app resources like css and javascript
 app.use('/app', express.static(__dirname + '/app'));
+
+// Route for instrument images
+app.use('/api/images', express.static(__dirname + '/api/images'));
 
 // Route for static about-site
 app.use('/about', express.static(__dirname + '/about'));
@@ -548,6 +554,7 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 	}
 	req.body.userId = loggedInUser;
 
+
 	// Local function that saves, needed since the image resize ends in a callback
 	var save = function() {
 		MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -565,7 +572,24 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
 				});
 		});
 	};
-	save();
+
+	if (req.body.image) {
+		var filename = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+    		return v.toString(16);
+		});
+		console.log("saving");
+		fs.writeFile("api/images/" + filename + ".jpg", req.body.image, 'base64', function(err) {
+			if (err)
+				return console.dir(err);
+  			req.body.image = null;
+  			req.body.imageFile = filename;
+			save();
+  		});
+	}
+	else {
+		save();
+	}
 
 /*	if (req.body.image) {
 		var imagebytes = [];
@@ -737,7 +761,7 @@ app.get("/api/practicesession/:id", function(req, res) {
 						'<meta property="fb:app_id" content="151038621732407" />\n' +
 		        		'<meta property="og:title" content="a ' + session.length + ' minute Practice Session" />\n';
 		        		if (instrument) {
-		        			html += '<meta property="og:image" content="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '" />\n';
+		        			html += '<meta property="og:image" content="http://journal.osirisguitar.com/api/images/' + instrument.imageFile + '" />\n';
 		        			html += '<meta property="ogjournal:session_instrument" content="' + instrument.name + '" />';
 		        		}
 		        		html += '<meta property="og:url" content="http://journal.osirisguitar.com/api/practicesession/' + req.params.id + '" />\n' +
@@ -754,10 +778,10 @@ app.get("/api/practicesession/:id", function(req, res) {
 		        		'<div id="wrapper">\n' +
 						'<img src="/about/og-logo.png">\n' +
 						'<div class="content">\n';
-		        		html += '<div style="float:left"><h1>A ' + session.length + ' minute Practice Session</h1>\n' +
+		        		html += '<div class="session"><h1>A ' + session.length + ' minute Practice Session</h1>\n' +
 		        		'<p>';
-		        		if (instrument) {
-							html += '<img style="float:right;padding-left:10px;margin-top:0px;margin-bottom:20px;" src="http://journal.osirisguitar.com/api/practicesessionimage/' + session.instrumentId + '">\n';
+		        		if (instrument && instrument.imageFile) {
+							html += '<img style="float:right;padding-left:10px;margin-top:0px;margin-bottom:20px;" src="http://journal.osirisguitar.com/api/images/' + instrument.imageFile + '.jpg">\n';
 						}
 		        		if (instrument) {
 		        			html += '<b>Instrument:</b> ' + instrument.name + '<br>\n';
@@ -784,12 +808,14 @@ app.get("/api/practicesessionimage/:id", function(req, res) {
 			if (err)
 				return console.dir(err);
 			res.type("image/jpeg");
-			console.log(instrument.image);
-			res.send(instrument.image.buffer);
+			var imageBuffer = new Buffer(instrument.image, "base64");
+			console.log("Sending image");
+			res.send(imageBuffer);
 			db.close();
 		});
 	});
 });
 
 var port = process.env.PORT || 80;
+console.log("Listening to", port);
 app.listen(port);

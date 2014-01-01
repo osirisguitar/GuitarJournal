@@ -79,6 +79,22 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 		}		
 	}
 
+	service.getInstrumentImageUrl = function(instrumentId) {
+		if (!instrumentId)
+			return "";
+		if (service.instruments) {
+			var name = null;
+			var imageUrl = null;
+			service.instruments.some(function (instrument) {
+				if (instrument._id == instrumentId) {
+					imageUrl = "/api/images/" + instrument.imageFile + ".jpg";
+				}
+			});
+
+			return imageUrl;
+		}		
+	}
+
 	service.saveInstrument = function(instrument, successCallback, failureCallback) {
 		$rootScope.apiStatus.loading++;
 

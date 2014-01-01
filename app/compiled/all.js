@@ -889,6 +889,45 @@ if (typeof define !== 'undefined' && define.amd) {
 }
 
 /**
+ * Detecting vertical squash in loaded image.
+ * Fixes a bug which squash image vertically while drawing into canvas for some images.
+ * This is a bug in iOS6 devices. This function from https://github.com/stomita/ios-imagefile-megapixel
+ * 
+ */
+function detectVerticalSquash(img) {
+    var iw = img.naturalWidth, ih = img.naturalHeight;
+    var canvas = document.createElement('canvas');
+    canvas.width = 1;
+    canvas.height = ih;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    var data = ctx.getImageData(0, 0, 1, ih).data;
+    // search image edge pixel position in case it is squashed vertically.
+    var sy = 0;
+    var ey = ih;
+    var py = ih;
+    while (py > sy) {
+        var alpha = data[(py - 1) * 4 + 3];
+        if (alpha === 0) {
+            ey = py;
+        } else {
+            sy = py;
+        }
+        py = (ey + sy) >> 1;
+    }
+    var ratio = (py / ih);
+    return (ratio===0)?1:ratio;
+}
+
+/**
+ * A replacement for context.drawImage
+ * (args are for source and destination).
+ */
+function drawImageIOSFix(ctx, img, sx, sy, sw, sh, dx, dy, dw, dh) {
+    var vertSquashRatio = detectVerticalSquash(img);
+    ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh / vertSquashRatio);
+}
+/**
  * Mega pixel image rendering library for iOS6 Safari
  *
  * Fixes iOS6 Safari's image file rendering issue for large size image (over mega-pixel),
@@ -1399,7 +1438,7 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 			function() {
 				$location.path("/sessions/");
 				Statistics.flushStats();
-				$scope.ShowSuccessMessage('Session saved');
+				$scope.showSuccessMessage('Session saved');
 				$scope.editMode = false;
 			},
 			function() {
@@ -1598,7 +1637,7 @@ function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)
 	};
 }
 
-function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $rootScope)
+function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $rootScope, $timeout)
 {
 	$scope.Instruments = Instruments;
 	$scope.pageSettings.pageTitle = "Instrument";
@@ -1639,17 +1678,89 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 
 	$scope.setImage = function(imageField) {
 		var file = imageField.files[0];
-		// MegaPixImage constructor accepts File/Blob object.
-		var mpImg = new MegaPixImage(file);
+		var destinationSize = 200;
 
-		// Render resized image into canvas element.
-		var resultCanvas = document.createElement("canvas");
-		mpImg.onrender = function (finalCanvas) {
-			var resultData = finalCanvas.toDataURL("image/jpeg", 0.8);
-			console.log("Final", resultData);
-			$scope.instrument.image = resultData.split(',')[1];
-		}
-		mpImg.render(resultCanvas, { maxWidth: 300, maxHeight: 300 });
+		var reader = new FileReader();
+		reader.onload = (function(selectedFile) {
+		    return function(e) {
+		    	var dataUrl = e.target.result;
+		    	var sourceImage = new Image();
+		    	sourceImage.onload = function() {
+		    		var canvas = document.createElement("canvas");
+		    		canvas.width = destinationSize;
+		    		canvas.height = destinationSize;
+		    		var context = canvas.getContext("2d");
+
+		 			var smallestBound = Math.min(sourceImage.naturalWidth, sourceImage.naturalHeight);
+
+		    		var sourceWidth = smallestBound;
+		    		var sourceHeight = smallestBound;
+		    		var sourceX = Math.round((sourceImage.naturalWidth - smallestBound)/2);
+		    		var sourceY = Math.round((sourceImage.naturalHeight - smallestBound)/2);
+		    		var destWidth = destinationSize;
+		    		var destHeight = destinationSize;
+		    		var destX = 0;
+		    		var destY = 0;
+		    		drawImageIOSFix(context, sourceImage, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+		    		var resultData = canvas.toDataURL("image/jpeg", 0.9);
+		    		$scope.instrument.image = resultData.split(',')[1];
+		    	};
+		    	sourceImage.src = dataUrl;
+		    };
+		})(file);
+		reader.readAsDataURL(file);
+
+
+		// MegaPixImage constructor accepts File/Blob object.
+		/*var mpImg = new MegaPixImage(file);
+		var sourceWidth = 0;
+		var sourceHeight = 0;
+		var intermediateSize = 300;
+
+		mpImg.imageLoadListeners.push(function() {
+			// Render resized image into canvas element.
+			var resultCanvas = document.createElement("canvas");
+			mpImg.onrender = function (resizedImage) {
+				var newImage = new Image();
+				newImage.onload = function() {
+					console.log("resizedImage", newImage);
+					console.log("newImage", newImage.naturalWidth, newImage.naturalHeight);
+					var cropCanvas = document.createElement("canvas");
+					var destWidth = 200;
+					var destHeight = 200;
+					var sourceX = Math.round((sourceWidth - intermediateSize) / 2);
+					var sourceY = Math.round((sourceHeight - intermediateSize) / 2);
+					var destX = 0;
+					var destY = 0;
+
+					cropCanvas.width = destWidth;
+					cropCanvas.height = destHeight;
+
+					var context = cropCanvas.getContext('2d');
+					context.drawImage(newImage, sourceX, sourceY, intermediateSize, intermediateSize, destX, destY, destWidth, destHeight);
+
+					var resultData = cropCanvas.toDataURL('image/jpeg', 0.9);
+					console.log("Final image", resultData);
+					$scope.instrument.image = resultData.split(',')[1];					
+				}
+				newImage.src = targetImage.src;
+			}
+			var targetImage = new Image();
+			var largestBound = 0;
+			if (mpImg.srcImage.naturalWidth > mpImg.srcImage.naturalHeight) {
+				largestBound = Math.round(mpImg.srcImage.naturalWidth / (mpImg.srcImage.naturalHeight / intermediateSize));
+				sourceWidth = largestBound;
+				sourceHeight = intermediateSize;
+			}
+			else {
+				largestBound = Math.round(mpImg.srcImage.naturalHeight / (mpImg.srcImage.naturalWidth / intermediateSize));
+				sourceHeight = largestBound;
+				sourceWidth = intermediateSize;
+			}
+			console.log("largestBound", largestBound);
+
+			mpImg.render(targetImage, { maxWidth: largestBound, maxHeight: largestBound });
+		});*/
 	}
 
 	/*
@@ -1695,13 +1806,15 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 	};
 
 	$scope.delete = function() {
+		if (confirm('Are you sure?')) {
 		Instruments.deleteInstrument($scope.instrument._id,
 			function() {
 				$location.path("/profile/");
 			},
 			function() {
 				$scope.showErrorMessage("Could not delete instrument");
-			});
+			});			
+		}
 	};
 }
 
@@ -1902,6 +2015,22 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 			else {
 				return "";				
 			}
+		}		
+	}
+
+	service.getInstrumentImageUrl = function(instrumentId) {
+		if (!instrumentId)
+			return "";
+		if (service.instruments) {
+			var name = null;
+			var imageUrl = null;
+			service.instruments.some(function (instrument) {
+				if (instrument._id == instrumentId) {
+					imageUrl = "/api/images/" + instrument.imageFile + ".jpg";
+				}
+			});
+
+			return imageUrl;
 		}		
 	}
 

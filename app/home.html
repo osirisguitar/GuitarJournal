@@ -388,7 +388,7 @@
     <div>
       <div class="list-group">
         <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions | take:3">
-          <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
+          <img ng-src="{{Instruments.getInstrumentImageUrl(session.instrumentId)}}">
           <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
           {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
          </a>
@@ -397,7 +397,7 @@
       <h2>Instruments</h2>
       <div class="list-group">
         <a class="list-group-item" href="/profile">
-          <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}" ng-repeat="instrument in Instruments.instruments | take:5">
+          <img ng-src="{{Instruments.getInstrumentImageUrl(instrument._id)}}" ng-repeat="instrument in Instruments.instruments">
         </a>
       </div>
     </div>
@@ -406,7 +406,7 @@
   <script id="sessions.html" type="text/ng-template">
     <div class="list-group">
       <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions">
-        <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
+        <img ng-src="{{Instruments.getInstrumentImageUrl(session.instrumentId)}}">
         <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
         {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
        </a>
@@ -419,7 +419,7 @@
   <script id="session.html" type="text/ng-template">
     <div class="content-padded view" ng-show="!editMode">
       <h2>{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
-      <img ng-src="{{Instruments.getInstrumentImageData(session.instrumentId)}}">
+      <img ng-src="{{Instruments.getInstrumentImageUrl(session.instrumentId)}}">
       <div>
         <div>
           <b>Goal</b><br>
@@ -591,7 +591,7 @@
       <h2 class="padded">Instruments</h2>
       <div class="list-group">
         <a class="list-group-item" href="/instrument/{{instrument._id}}" ng-repeat="instrument in Instruments.instruments">
-            <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}">
+            <img ng-src="{{Instruments.getInstrumentImageUrl(instrument._id)}}">
             <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
             {{instrument.description}}
         </a>
@@ -606,7 +606,7 @@
   <script id="instrument.html" type="text/ng-template">
     <div class="content-padded view" ng-show="!editMode">
       <h2>{{instrument.name}}</h2>
-      <img ng-src="{{Instruments.getInstrumentImageData(instrument._id)}}">
+      <img ng-src="{{Instruments.getInstrumentImageUrl(instrument._id)}}">
       <div>
         <div>
           <b>Type</b><br>

@@ -262,8 +262,8 @@ input[type="checkbox"].form-control {
 .view img {
   float:right;
   padding-left:10px;
-  max-width:75px;
-  max-height:75px;
+  max-width:150px;
+  max-height:150px;
 }
 
 .view div {

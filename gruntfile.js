@@ -81,6 +81,23 @@ module.exports = function(grunt) {
 			    ],
 			    dest: "app/manifest.appcache"
 			}
+		},
+		
+		secret: grunt.file.readJSON('secret.json'),
+		
+		sftp: {
+			deploy: {
+			    files: {
+			      "./": ["app.js", "package.json", "Procfile", "about/**", "api/*.js", "api/images/undefined.jpg", "app/*", "app/compiled/*", "app/css/*", "app/font/*", "app/img/*", "app/touch-icons/*"]
+			    },
+			    options: {
+			      path: '/var/journal',
+			      createDirectories: true,
+			      host: '<%= secret.host %>',
+			      username: '<%= secret.username %>',
+			      password: '<%= secret.password %>'
+			    }
+		  	}
 		}
 	});
 
@@ -91,6 +108,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-manifest');
 	grunt.loadNpmTasks('grunt-recess');
+	grunt.loadNpmTasks('grunt-ssh');
 
 	grunt.registerTask('default', ['concat', 'manifest', 'watch']);
+	grunt.registerTask('deploy', ['concat', 'manifest', 'sftp:deploy']);
 };
