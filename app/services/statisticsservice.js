@@ -114,22 +114,32 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 			$rootScope.apiStatus.loading++;
 			var url = '/api/statistics/perweek/' + weeks;
 
+			var findWeekData = function(weekDataArray, year, week) {
+				for (var i = 0; i < weekDataArray.length; i++) {
+					if (weekDataArray[i].year == year && weekDataArray[i].week + 1 == week)
+						return weekDataArray[i];
+				}
+
+				return null;
+			};
+
 			$http.get(url)
 				.success(function(data) {
 					if (data && data.length && data.length > 0) {
 						var currentDataIndex = 0;
 
-						for (i = 0; i < weeks; i++) {
-							var currentWeek = moment().subtract(moment.duration(weeks - i, 'weeks')).isoWeek();
+						$log.log("Iterations", weeks);
+						for (var i = 0; i < weeks; i++) {
+							var currentWeek = moment().subtract(moment.duration(weeks - i - 1, 'weeks')).isoWeek();
+							var currentYear = moment().subtract(moment.duration(weeks - i - 1, 'weeks')).year();
+							$log.log("Iteration", i, "Current week", currentWeek, "Current year", currentYear);
+
 							service.sessionsPerWeek.labels.push(currentWeek);
 
-							while (currentDataIndex < (data.length - 1) && data[currentDataIndex].week < currentWeek) {
-								currentDataIndex++;
-							}
-
-							if (data[currentDataIndex].week == currentWeek) {
-								service.sessionsPerWeek.count.push(data[currentDataIndex].count);
-								service.sessionsPerWeek.minutes.push(data[currentDataIndex].minutes);
+							var currentWeekData = findWeekData(data, currentYear, currentWeek);
+							if (currentWeekData != null) {
+								service.sessionsPerWeek.count.push(currentWeekData.count);
+								service.sessionsPerWeek.minutes.push(currentWeekData.minutes);
 
 							}
 							else {

@@ -37,6 +37,9 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngCookies', 'angles'
         templateUrl: 'profile.html', 
         controller: "ProfileCtrl"
       }).
+      when('/support', {
+        templateUrl: '/app/support.html'
+      }).
       when('/instrument/:id', {
         templateUrl: 'instrument.html', 
         controller: "InstrumentCtrl"

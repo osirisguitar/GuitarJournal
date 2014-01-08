@@ -90,7 +90,6 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 	$scope.pageSettings.hideNavigation = true;
 	$scope.pageSettings.hideTopNavigation = true;
 	$scope.login = function() {
-//		$http.post("/api/login", {email: $scope.email, password: $scope.password}, $rootScope.httpConfig).success(function(data) {
 		$http.get("/api/login", $rootScope.httpConfig).success(function(data) {
 			if (data._id) {
 				$rootScope.loggedIn = true;
@@ -193,19 +192,19 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 				$scope.showErrorMessage("Error saving session");
 			}
 		);
-
-
 	};
 
 	$scope.delete = function() {
-		Sessions.deleteSession($scope.session._id,
-			function() {
-				$location.path("/sessions/");
-			},
-			function(error) {
-				$scope.showErrorMessage("Could not delete the session.", error);
-			}
-		);
+		if (confirm("Are you sure?")) {
+			Sessions.deleteSession($scope.session._id,
+				function() {
+					$location.path("/sessions/");
+				},
+				function(error) {
+					$scope.showErrorMessage("Could not delete the session.", error);
+				}
+			);
+		}
 	};
 
 	$scope.shareToFacebook = function() {
@@ -279,13 +278,15 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 	};
 
 	$scope.delete = function() {
-		Goals.deleteGoal($scope.goal._id,
-			function() {
-				$location.path('/goals/');
-			}, 
-			function() {
-				$scope.showErrorMessage("Couldn't delete goal");
-			});
+		if (confirm('Are you sure?')) {
+			Goals.deleteGoal($scope.goal._id,
+				function() {
+					$location.path('/goals/');
+				}, 
+				function() {
+					$scope.showErrorMessage("Couldn't delete goal");
+				});			
+		}
 	};
 }
 
@@ -363,7 +364,7 @@ function StatsCtrl($scope, $http, Statistics, Goals, Instruments) {
 	$scope.Math = Math;
 }
 
-function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)
+function ProfileCtrl($scope, $rootScope, $http, $location, Instruments, $window)
 {
 	$scope.Instruments = Instruments;
 	$scope.pageSettings.pageTitle = "Profile";
@@ -373,15 +374,9 @@ function ProfileCtrl($scope, $rootScope, $http, $location, Instruments)
 	$scope.pageSettings.hideNavigation = false;
 
 	$scope.logout = function() {
-		fbLogout();
-
-		$http.post('/api/logout', {}, $rootScope.httpConfig)
-			.success(function() {
-				$location.path("/login");
-			})
-			.error(function() {
-				$location.path("/login");
-			});
+		var url = "https://www.facebook.com/logout.php?access_token=" + $rootScope.fbAccessToken +
+			"&confirm=1&next=http://" + $window.location.hostname + "/api/logout";
+		$window.location.href = url;
 	};
 }
 
@@ -457,91 +452,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 		    };
 		})(file);
 		reader.readAsDataURL(file);
-
-
-		// MegaPixImage constructor accepts File/Blob object.
-		/*var mpImg = new MegaPixImage(file);
-		var sourceWidth = 0;
-		var sourceHeight = 0;
-		var intermediateSize = 300;
-
-		mpImg.imageLoadListeners.push(function() {
-			// Render resized image into canvas element.
-			var resultCanvas = document.createElement("canvas");
-			mpImg.onrender = function (resizedImage) {
-				var newImage = new Image();
-				newImage.onload = function() {
-					console.log("resizedImage", newImage);
-					console.log("newImage", newImage.naturalWidth, newImage.naturalHeight);
-					var cropCanvas = document.createElement("canvas");
-					var destWidth = 200;
-					var destHeight = 200;
-					var sourceX = Math.round((sourceWidth - intermediateSize) / 2);
-					var sourceY = Math.round((sourceHeight - intermediateSize) / 2);
-					var destX = 0;
-					var destY = 0;
-
-					cropCanvas.width = destWidth;
-					cropCanvas.height = destHeight;
-
-					var context = cropCanvas.getContext('2d');
-					context.drawImage(newImage, sourceX, sourceY, intermediateSize, intermediateSize, destX, destY, destWidth, destHeight);
-
-					var resultData = cropCanvas.toDataURL('image/jpeg', 0.9);
-					console.log("Final image", resultData);
-					$scope.instrument.image = resultData.split(',')[1];					
-				}
-				newImage.src = targetImage.src;
-			}
-			var targetImage = new Image();
-			var largestBound = 0;
-			if (mpImg.srcImage.naturalWidth > mpImg.srcImage.naturalHeight) {
-				largestBound = Math.round(mpImg.srcImage.naturalWidth / (mpImg.srcImage.naturalHeight / intermediateSize));
-				sourceWidth = largestBound;
-				sourceHeight = intermediateSize;
-			}
-			else {
-				largestBound = Math.round(mpImg.srcImage.naturalHeight / (mpImg.srcImage.naturalWidth / intermediateSize));
-				sourceHeight = largestBound;
-				sourceWidth = intermediateSize;
-			}
-			console.log("largestBound", largestBound);
-
-			mpImg.render(targetImage, { maxWidth: largestBound, maxHeight: largestBound });
-		});*/
 	}
-
-	/*
-		$scope.files = imageField.files;
-		var file = $scope.files[0];
-
-		var reader = new FileReader();
-		reader.onload = (function(selectedFile) {
-		    return function(e) {
-				$scope.resizeImage(e.target.result.split(',')[1]);
-		    };
-
-		})(file);
-		reader.readAsDataURL(file);
-	};
-
-	$scope.resizeImage = function(imageFile) {
-		var image = new Image();
-		image.onload=function() {
-    		var maxBoundary = 200;
-   			var r = maxBoundary / Math.max(this.width,this.height);
-			var newWidth = Math.round(this.width * r);
-			var newHeight = Math.round(this.height * r);
-			var canvas = document.createElement("canvas");
-			console.log("Oringal size", this.width, this.height);
-			console.log("New size", newWidth, newHeight);
-			canvas.width = newWidth;
-			canvas.height = newHeight;
-			canvas.getContext("2d").drawImage(this,0,0,newWidth,newHeight);
-			$scope.instrument.image = canvas.toDataURL().split(',')[1];
-		}
-		image.src = "data:image/png;base64," + imageFile;
-	};*/
 
 	$scope.save = function() {
 		Instruments.saveInstrument($scope.instrument,

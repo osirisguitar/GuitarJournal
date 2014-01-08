@@ -7868,6 +7868,11 @@ h2 {
   clear:left;
 }
 
+h3 {
+  font-size:15px;
+  clear:left;
+}
+
 nav a {
   display:block;
   width:20%;
@@ -7953,8 +7958,8 @@ nav a:hover {
 
 .list-group-item img {
   line-height:18px;
-  max-height:40px;
-  max-width:40px;
+  height:40px;
+  width:40px;
   float:left;
   padding-top:4px;
   padding-right:5px;
@@ -8113,8 +8118,8 @@ input[type="checkbox"].form-control {
 .view img {
   float:right;
   padding-left:10px;
-  max-width:150px;
-  max-height:150px;
+  width:150px;
+  height:150px;
 }
 
 .view div {

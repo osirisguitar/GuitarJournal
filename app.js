@@ -1,4 +1,4 @@
-if (process.env.USE_NODETIME) {
+if (process.env.USE_NODETIME == "true") {
 	require('nodetime').profile({
 	    accountKey: 'fafe6e5e9c7f53864d60e809e821f1ca87521d82', 
 	    appName: 'OSIRIS GUITAR'
@@ -208,6 +208,7 @@ app.get('/api/logout', function(req, res) {
 	res.clearCookie('userid');
 	res.clearCookie('hasloggedinwithfb');
 	req.logout();
+	console.log("Logged out!");
 	res.redirect("/");
 });
 
@@ -366,12 +367,12 @@ app.get("/api/statistics/perweek/:weeks?", ensureAuthenticated, function(req, re
 		var sessions = db.collection('Sessions');
 		sessions.aggregate(
 			{ $match: { userId: loggedInUser } },
-			{ $project: { week: { $week: "$date" }, length: 1 }},
-			{ $group: { _id: "$week" , count: { $sum: 1 }, minutes: { $sum: "$length" } } },
-			{ $project: { _id: 0, week: "$_id", count: 1, minutes: 1 } },
-			{ $sort: { week: -1 } },
+			{ $project: { week: { $week: "$date" }, year: { $year: "$date" }, length: 1 }},
+			{ $group: { _id: { week: "$week", year: "$year" }, count: { $sum: 1 }, minutes: { $sum: "$length" } } },
+			{ $project: { _id: 0, week: "$_id.week", year: "$_id.year", count: 1, minutes: 1 } },
+			{ $sort: { year: -1, week: -1 } },
 			{ $limit: Number(req.params.weeks) },
-			{ $sort: { week: 1 } },
+			{ $sort: { year: 1, week: 1 } },
 			function(err, aggregate) {
 				if (err) {
 					console.log("Error", err);
@@ -761,7 +762,7 @@ app.get("/api/practicesession/:id", function(req, res) {
 						'<meta property="fb:app_id" content="151038621732407" />\n' +
 		        		'<meta property="og:title" content="a ' + session.length + ' minute Practice Session" />\n';
 		        		if (instrument) {
-		        			html += '<meta property="og:image" content="http://journal.osirisguitar.com/api/images/' + instrument.imageFile + '" />\n';
+		        			html += '<meta property="og:image" content="http://journal.osirisguitar.com/api/images/' + instrument.imageFile + '.jpg" />\n';
 		        			html += '<meta property="ogjournal:session_instrument" content="' + instrument.name + '" />';
 		        		}
 		        		html += '<meta property="og:url" content="http://journal.osirisguitar.com/api/practicesession/' + req.params.id + '" />\n' +
