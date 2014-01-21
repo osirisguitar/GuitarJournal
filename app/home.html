@@ -29,8 +29,10 @@
     <!-- iPhone 5 -->
     <!--<link rel="apple-touch-startup-image" href="http://www.example.com/mobile/images/apple-startup-iPhone-Tall-RETINA.jpg"  media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">-->
 
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-cookies.min.js"></script>
     <script src="/app/compiled/all.js"></script>
     <script>
       window.addEventListener('load', function() {
@@ -47,6 +49,7 @@
         window.applicationCache.addEventListener('updateready', function(e) {
           if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
             // Browser downloaded a new app cache.
+              //window.applicationCache.swapCache();
               window.location.reload();
           }
         }, false);
@@ -318,7 +321,7 @@
     <div class="wrapper-outer vflex scrolling">
       <div class="wrapper-inner vflex scrolling">
         <div id="scrollable-content" class="panel-content vflex">
-          <ng-view ng-animate="view"></ng-view>
+            <ng-view class="view-animate"></ng-view>
         </div>
       </div>
     </div>
@@ -540,44 +543,46 @@
       <div class="fieldLabel">Latest session:</div>
       <div class="info">{{Statistics.statsOverview.latestSession | date:'yyyy-MM-dd'}}</div> 
     </div>
-    <div class="content-padded diagram">
-      <h2>Sessions per week</h2>
-      <canvas barchart options="optionsWeek" data="sessionsPerWeek" id="sessionsPerWeek" width="270" height="200"></canvas>    
-    </div>
-    <div class="content-padded diagram">
-      <h2>Minutes per week</h2>
-      <canvas barchart options="optionsWeek" data="minutesPerWeek" id="minutesPerWeek" width="270" height="200"></canvas>    
-    </div>
-    <div class="content-padded diagram">
-      <h2>Durations last 30 days</h2>
-      <canvas barchart options="options30days" data="last30days" id="last30days" width="270" height="200"></canvas>    
-    </div>
-    <div class="content-padded diagram">
-      <h2>Sessions per weekday</h2>
-      <canvas donutchart options="optionsPerWeekday" data="perWeekday" id="perWeekday" width="200" height="200" style="float:left;"></canvas>
-      <div style="float:left;margin-top:20px;margin-left:15px;">
-        <div><span style="color:{{weekdayColors[1]}}">&#9724;</span> Mon</div>
-        <div><span style="color:{{weekdayColors[2]}}">&#9724;</span> Tue</div>
-        <div><span style="color:{{weekdayColors[3]}}">&#9724;</span> Wed</div>
-        <div><span style="color:{{weekdayColors[4]}}">&#9724;</span> Thu</div>
-        <div><span style="color:{{weekdayColors[5]}}">&#9724;</span> Fri</div>
-        <div><span style="color:{{weekdayColors[6]}}">&#9724;</span> Sat</div>
-        <div><span style="color:{{weekdayColors[0]}}">&#9724;</span> Sun</div>
-      </div>   
-    </div>
-    <div class="content-padded">
-      <h2>Goals</h2>
-      <div class="fieldLabel">Active goals:</div>
-      <div class="info">{{Goals.getActiveGoals().length}}</div>
-      <div class="fieldLabel">Completed goals:</div>
-      <div class="info">{{Goals.goals.length - Goals.getActiveGoals().length}}</div>
-    </div>
-    <div class="content-padded">
-      <h2>Instruments</h2>
-      <div class="fieldLabel">Intruments:</div>
-      <div class="info">{{Instruments.instruments.length}}</div>
-      <!--<div class="label">Most popular:</div>
-      <div class="info">{{getInstrument(Statistics.statsOverview.mostUsedInstrument).name}}</div>-->
+    <div style="">
+      <div class="content-padded diagram">
+        <h2>Sessions per week</h2>
+        <canvas barchart options="optionsWeek" data="sessionsPerWeek" id="sessionsPerWeek" width="270" height="200"></canvas>    
+      </div>
+      <div class="content-padded diagram">
+        <h2>Minutes per week</h2>
+        <canvas barchart options="optionsWeek" data="minutesPerWeek" id="minutesPerWeek" width="270" height="200"></canvas>    
+      </div>
+      <div class="content-padded diagram">
+        <h2>Durations last 30 days</h2>
+        <canvas barchart options="options30days" data="last30days" id="last30days" width="270" height="200"></canvas>    
+      </div>
+      <div class="content-padded diagram">
+        <h2>Sessions per weekday</h2>
+        <canvas donutchart options="optionsPerWeekday" data="perWeekday" id="perWeekday" width="200" height="200" style="float:left;"></canvas>
+        <div style="float:left;margin-top:20px;margin-left:15px;">
+          <div><span style="color:{{weekdayColors[1]}}">&#9724;</span> Mon</div>
+          <div><span style="color:{{weekdayColors[2]}}">&#9724;</span> Tue</div>
+          <div><span style="color:{{weekdayColors[3]}}">&#9724;</span> Wed</div>
+          <div><span style="color:{{weekdayColors[4]}}">&#9724;</span> Thu</div>
+          <div><span style="color:{{weekdayColors[5]}}">&#9724;</span> Fri</div>
+          <div><span style="color:{{weekdayColors[6]}}">&#9724;</span> Sat</div>
+          <div><span style="color:{{weekdayColors[0]}}">&#9724;</span> Sun</div>
+        </div>   
+      </div>
+      <div class="content-padded">
+        <h2>Goals</h2>
+        <div class="fieldLabel">Active goals:</div>
+        <div class="info">{{Goals.getActiveGoals().length}}</div>
+        <div class="fieldLabel">Completed goals:</div>
+        <div class="info">{{Goals.goals.length - Goals.getActiveGoals().length}}</div>
+      </div>
+      <div class="content-padded">
+        <h2>Instruments</h2>
+        <div class="fieldLabel">Intruments:</div>
+        <div class="info">{{Instruments.instruments.length}}</div>
+        <!--<div class="label">Most popular:</div>
+        <div class="info">{{getInstrument(Statistics.statsOverview.mostUsedInstrument).name}}</div>-->
+      </div>
     </div>
   </script>
 
@@ -602,7 +607,7 @@
       <a class="btn btn-danger" type="button" ng-click="logout()" target="_self">Logout</a>
       <h2>Support</h2>
       <p>
-        <a class="btn btn-success" type="button" href="/support">Support</a>
+        <a class="btn btn-success" type="button" href="http://www.osirisguitar.com/journalsupport#external">Support</a>
       </p>
     </div>
   </script>

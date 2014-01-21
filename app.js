@@ -3,7 +3,9 @@ if (process.env.USE_NODETIME == "true") {
 	    accountKey: 'fafe6e5e9c7f53864d60e809e821f1ca87521d82', 
 	    appName: 'OSIRIS GUITAR'
 	  });
-	console.log("Using nodetime");
+	
+	require('newrelic');
+	console.log("Using production logging");
 }
 var express = require('express');
 var app = express();
@@ -123,6 +125,13 @@ app.get('/auth/allowsimple', function(req, res) {
 		res.send(false);
 });
 
+app.get("/api/sessiontest", function(req, res) {
+	if (req.session.created == null)
+		req.session.created = new Date();
+
+	res.json({"session": req.session, "port": process.env.PORT });
+});
+
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback
@@ -190,8 +199,11 @@ app.get("/app", function(req, res) {
 // Route for app resources like css and javascript
 app.use('/app', express.static(__dirname + '/app'));
 
+// Admin
+app.use('/admin', express.static(__dirname + '/admin'));
+
 // Route for instrument images
-app.use('/api/images', express.static(__dirname + '/api/images'));
+app.use('/api/images', express.static(__dirname + '/api/images', { maxAge: 2592000000 }));
 
 // Route for static about-site
 app.use('/about', express.static(__dirname + '/about'));
@@ -816,6 +828,24 @@ app.get("/api/practicesessionimage/:id", function(req, res) {
 		});
 	});
 });
+
+app.get("/api/users", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
+
+	console.log("Checking user");
+
+	if (loggedInUser != "512684441ea176ca050002b7") {
+		res.status(401).send("You are not authorized to use this resource");
+		return;
+	}
+	else {
+
+		
+		res.json("OK");
+	}
+});
+
+
 
 var port = process.env.PORT || 80;
 console.log("Listening to", port);

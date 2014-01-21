@@ -144,6 +144,8 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 	$scope.Instruments = Instruments;
 	$scope.editMode = false;
 
+	$log.log("Session ctrl", $routeParams.id);
+
 	// If id is provided, get session, from memory or DB.
 	if ($routeParams.id !== null && $routeParams.id !== "")
 	{

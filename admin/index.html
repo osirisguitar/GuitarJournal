@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="admin">
+<head>
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+
+  <!-- App LESS -->
+  <link href="css/app.less" type="text/css" rel="stylesheet/less">
+  <base href="/admin/" />
+</head>
+<body>
+
+  <!-- Livereload script for development only (stripped during dist build) -->
+  <!--script src="http://localhost:35729/livereload.js" data-build="exclude"></script-->
+
+  <!-- JS from Bower components -->
+  <script src="bower_components/less/dist/less-1.5.1.js" data-build="exclude"></script>
+  <script src="bower_components/angular/angular.min.js"></script>
+  <script src="bower_components/angular-route/angular-route.min.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/moment/min/moment.min.js"></script>
+
+  <!-- Main App JS -->
+  <script src="js/setup.js"></script>
+
+  <!-- Service JS -->
+  <!-- Add New Service JS Above --> 
+
+  <!-- Model JS -->
+  <!-- Add New Model JS Above --> 
+
+  <!-- Directive JS -->
+  <!-- Add New Directive JS Above -->
+
+  <!-- Filter JS -->
+  <!-- Add New Filter JS Above -->
+
+  <!-- Partial JS -->
+  <!-- Add New Partial JS Above -->
+  <script id="home.html" type="text/ng-template">
+    <a href="users.html">Users</a>
+  </script>
+
+  <div ui-view>
+  </div>
+  
+</body>
+</html>

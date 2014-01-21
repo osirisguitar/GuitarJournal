@@ -88,7 +88,7 @@ module.exports = function(grunt) {
 		sftp: {
 			deploy: {
 			    files: {
-			      "./": ["app.js", "package.json", "Procfile", "about/**", "api/*.js", "api/images/undefined.jpg", "app/*", "app/compiled/*", "app/css/*", "app/font/*", "app/img/*", "app/touch-icons/*"]
+			      "./": ["app.js", "newrelic.js", "package.json", "Procfile", "about/**", "api/*.js", "api/images/undefined.jpg", "app/*", "app/compiled/*", "app/css/*", "app/font/*", "app/img/*", "app/touch-icons/*"]
 			    },
 			    options: {
 			      path: '/var/journal',
