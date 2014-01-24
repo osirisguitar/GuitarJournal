@@ -144,10 +144,8 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 	$scope.Instruments = Instruments;
 	$scope.editMode = false;
 
-	$log.log("Session ctrl", $routeParams.id);
-
 	// If id is provided, get session, from memory or DB.
-	if ($routeParams.id !== null && $routeParams.id !== "")
+	if ($routeParams.id)
 	{
 		Sessions.getSession($routeParams.id, 
 			function(session) {
@@ -245,7 +243,7 @@ function GoalCtrl($scope, $routeParams, $http, $location, Goals) {
 	$scope.Goals = Goals;
 
 	// If id is provided, get session, from memory or DB.
-	if ($routeParams.id !== null && $routeParams.id !== "") {
+	if ($routeParams.id) {
 		Goals.getGoal($routeParams.id, function(goal) {
 			$scope.goal = goal;
 		}, function() { $scope.showErrorMessage("Couldn't get goal");});
@@ -394,7 +392,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 	$scope._csrf = $rootScope.csrf;
 
 	// If id is provided, get session, from memory or DB.
-	if ($routeParams.id !== null && $routeParams.id !== "")
+	if ($routeParams.id)
 	{
 		Instruments.getInstrument($routeParams.id,
 			function(instrument) {

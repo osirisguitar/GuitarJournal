@@ -28,10 +28,12 @@ express.static.mime.define({'application/font-woff': ['woff']});
 journalStore.setConnectionString(mongoConnectionString);
 
 process.on('uncaughtException', function(err) {
+	console.log("uncaughtException!");
 	console.log(err);
 });
 
 process.on('error', function(err) {
+	console.log("error!");
 	console.log(err);
 });
 
@@ -47,7 +49,6 @@ passport.use(new LocalStrategy({
 	    passwordField: 'password'
 	},
   	function(username, password, done) {
-  		console.log("Passport logging in", username, password);
   		journalStore.checkLogin(username, password, function(err, user) {
   			return done(err, user);
   		});
@@ -81,7 +82,6 @@ passport.use(new FacebookStrategy({
 		    		user.username = profile.username;
 		    		user.fbAccessToken = accessToken;
 		    		users.save(user, { safe: true }, function(err, savedUser) {
-		    			console.log("User saved", user);
 		    			db.close();
 		    			if (err)
 		    				return done(err);
@@ -157,7 +157,6 @@ app.get('/auth/facebook/callback', function(req, res, next) {
 	      	var expiration = new Date();
 	      	expiration.setDate(expiration.getDate() + 365);
 	    	res.cookie("hasloggedinwithfb", "true", { expires: expiration });
-	    	console.log("Set FB autologin cookie");
 	    	return res.redirect('/');
 	    });
 	  })(req, res, next);

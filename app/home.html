@@ -321,7 +321,9 @@
     <div class="wrapper-outer vflex scrolling">
       <div class="wrapper-inner vflex scrolling">
         <div id="scrollable-content" class="panel-content vflex">
-            <ng-view class="view-animate"></ng-view>
+            <div route-animation-manager>
+              <ng-view class="view-animate"></ng-view>
+            </div>
         </div>
       </div>
     </div>
