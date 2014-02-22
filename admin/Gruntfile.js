@@ -19,12 +19,16 @@ module.exports = function (grunt) {
       }
     },
     watch: {
-      main: {
-        options: {
-            livereload: true
-        },
+      options: {
+          livereload: false
+      },
+      server: {
         files: ['js/**/*','css/**/*','img/**/*','partial/**/*','service/**/*','filter/**/*','directive/**/*','index.html'],
-        tasks: ['jshint']
+        tasks: []
+      },
+      test: {
+        files: ['js/**/*','partial/**/*.js','service/**/*.js','filter/**/*.js','directive/**/*.js','index.html','test/unit/**/*'],
+        tasks: ['test']
       }
     },
     jshint: {
@@ -63,11 +67,7 @@ module.exports = function (grunt) {
       main: {
         files: [
           {src: ['index.html'], dest: 'dist/'},
-          {src: ['img/**'], dest: 'dist/'},
-          {src: ['bower_components/angular-ui/build/angular-ui-ieshiv.js'], dest: 'dist/'},
-          {src: ['bower_components/font-awesome/build/assets/font-awesome/font/**'], dest: 'dist/',filter:'isFile',expand:true},
-          // {src: ['bower_components/select2/*.png','bower_components/select2/*.gif'], dest:'dist/css/',flatten:true,expand:true},
-          {src: ['bower_components/angular-mocks/angular-mocks.js'], dest: 'dist/'}
+          {src: ['img/**'], dest: 'dist/'}
         ]
       }
     },
@@ -155,11 +155,11 @@ module.exports = function (grunt) {
         }]
       }
     },
-    jasmine: {
-      unit: {
-        src: ['<%= dom_munger.data.appjs %>','bower_components/angular-mocks/angular-mocks.js'],
+    mocha: {
+      test: {
+        src: ['test/unit/*.html'],
         options: {
-          specs: 'test/unit/**/*.js'
+          run: true
         }
       }
     }
@@ -177,11 +177,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-mocha');
 
-  grunt.registerTask('build',['jshint','clean:before','less','dom_munger:readcss','dom_munger:readscripts','ngtemplates','cssmin','concat','ngmin','uglify','copy','dom_munger:removecss','dom_munger:addcss','dom_munger:removescripts','dom_munger:addscript','htmlmin','imagemin','clean:after']);
-  grunt.registerTask('server', ['jshint','connect', 'watch']);
-  grunt.registerTask('test',['dom_munger:readscripts','jasmine'])
+  grunt.registerTask('build',['clean:before','less','dom_munger:readcss','dom_munger:readscripts','ngtemplates','cssmin','concat','ngmin','uglify','copy','dom_munger:removecss','dom_munger:addcss','dom_munger:removescripts','dom_munger:addscript','htmlmin','imagemin','clean:after']);
+  grunt.registerTask('test',['jshint', 'mocha']);
+  grunt.registerTask('server', ['connect']);
+  grunt.registerTask('default', ['test', 'server', 'watch']);
 };

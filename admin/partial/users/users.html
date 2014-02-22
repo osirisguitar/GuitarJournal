@@ -1,0 +1,30 @@
+<div class="span12" ng-controller="UsersCtrl">
+	<h1>{{users.length}} users</h1>
+	<ul class="list-group users">
+	  <li class="list-group-item" ng-repeat="user in users" ng-controller="UserCtrl">
+	  	<a href="#" ng-click="showUserDetails(user._id)">{{user.fullName}}</a>
+	  	<div class="panel panel-default" ng-show="showDetails">
+		  <div class="panel-body">
+		  	<div>
+		  		Email: {{userDetails.user.email}}
+		  	</div>
+		  	<div>
+		  		<a href="#" ng-click="showSessions = !showSessions">{{ userDetails.sessions.length }} Sessions</a>
+			  	<table class="table" ng-show="showSessions">
+			  		<thead>
+			  			<th>Date</th>
+			  			<th>Duration</th>
+			  			<th>Instrument</th>
+			  		</thead>
+			  		<tr ng-repeat="session in userDetails.sessions">
+			  			<td>{{session.date | date:'yyyy-MM-dd' }}</td>
+			  			<td>{{session.length}}</td>
+			  			<td>{{session.instrumentId}}</td>
+			  		</tr>
+			  	</table>
+			</div>
+		  </div>
+		</div>
+	  </li>
+	</ul>
+</div>

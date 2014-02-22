@@ -24,6 +24,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngRoute', 'ngCookies
         data: {
           animationConf: {
             session: "slideright",
+            "session/:id": "slideright", 
             goals: "slideright",
             stats: "slideright",
             profile: "slideright",
@@ -61,6 +62,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngRoute', 'ngCookies
         data: {
           animationConf: {
             goal: "slideright",
+            "goal/:id": "slideright", 
             stats: "slideright",
             profile: "slideright",
             fallback: "slideleft"
@@ -105,6 +107,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngRoute', 'ngCookies
         data: {
           animationConf: {
             instrument: "slideright",
+            "instrument/:id": "slideright",
             fallback: "slideleft"
           }
         }

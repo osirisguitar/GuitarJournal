@@ -1013,6 +1013,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngRoute', 'ngCookies
         data: {
           animationConf: {
             session: "slideright",
+            "session/:id": "slideright", 
             goals: "slideright",
             stats: "slideright",
             profile: "slideright",
@@ -1050,6 +1051,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngRoute', 'ngCookies
         data: {
           animationConf: {
             goal: "slideright",
+            "goal/:id": "slideright", 
             stats: "slideright",
             profile: "slideright",
             fallback: "slideleft"
@@ -1094,6 +1096,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngRoute', 'ngCookies
         data: {
           animationConf: {
             instrument: "slideright",
+            "instrument/:id": "slideright",
             fallback: "slideleft"
           }
         }
@@ -1157,13 +1160,13 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 
 	$scope.iOS = $window.navigator.userAgent.match(/iPhone/i) || $window.navigator.userAgent.match(/iPad/i);
 
-	$scope.showErrorMessage = function(message, error) {
+	$rootScope.showErrorMessage = function(message, error) {
 		growl.addErrorMessage(message);
 		$log.error(message, error); 
 	};
 
-	$scope.showSuccessMessage = function(message) {
-		growl.addSuccessMessage(message, { ttl: 4000 });
+	$rootScope.showSuccessMessage = function(message) {
+		growl.addSuccessMessage(message, { ttl: 2000 });
 		$log.info(message); 	
 	};
 
@@ -1291,7 +1294,9 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 	{
 		Sessions.getSession($routeParams.id, 
 			function(session) {
+				console.log("Session: ", session);
 				$scope.session = session;
+				$scope.session.date = new Date(Date.parse($scope.session.date)).toISOString().substring(0, 10);
 			},
 			function(error) {
 				$scope.showErrorMessage("Couldn't get session", error);
@@ -1299,7 +1304,7 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 	}
 	else
 	{
-		$scope.session = { date: new Date() };
+		$scope.session = { date: new Date().toISOString().substring(0, 10) };
 		$scope.editMode = true;
 	}
 
@@ -1323,6 +1328,8 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 
 	$scope.save = function()
 	{
+		$scope.session.date = moment($scope.session.date).toDate();
+
 		Sessions.saveSession($scope.session, 
 			function() {
 				$location.path("/sessions/");
@@ -1353,11 +1360,14 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 		var url = "https://graph.facebook.com/me/ogjournal:complete?access_token=" + $rootScope.fbAccessToken + 
 			"&practice_session=http://journal.osirisguitar.com/api/practicesession/" + $scope.session._id +
 			"&fb:explicitly_shared=true";
+		$rootScope.apiStatus.loading++;
 		$http.post(url, {}, $rootScope.httpConfig)
 			.success(function(response) {
+				$rootScope.apiStatus.loading--;
 				$scope.showSuccessMessage("Session shared to Facebook");
 			})
 			.error(function(error) {
+				$rootScope.apiStatus.loading--;
 				$scope.showErrorMessage("An error occured when sharing to Facebook: " + error.error.message, error);
 			});
 	};
@@ -1619,7 +1629,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 	};
 }
 
-GuitarJournalApp.factory('Goals', function($http, $rootScope) {
+GuitarJournalApp.factory('Goals', function($http, $rootScope, Statistics) {
 	var service = {};
 
 	service.goals = undefined;
@@ -1632,7 +1642,7 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 				$rootScope.apiStatus.loading--;
 			})
 			.error(function(data) {
-				alert("Error when getting sessions.");
+				$rootScope.showErrorMessage("Error when getting sessions.");
 				$rootScope.apiStatus.loading--;
 			});							
 	}
@@ -1688,6 +1698,8 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 				service.getGoals();
 				$rootScope.apiStatus.loading--;
 
+				Statistics.flushStats();
+
 				if (successCallback)
 					successCallback();
 			})
@@ -1704,6 +1716,8 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 			.success(function(data){
 				service.getGoals();
 				$rootScope.apiStatus.loading--;
+
+				Statistics.flushStats();
 
 				if (successCallback)
 					successCallback();
@@ -1738,7 +1752,7 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 
 	return service;
 });
-GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
+GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) {
 	var service = {};
 
 	service.instruments = undefined;
@@ -1751,7 +1765,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 				$rootScope.apiStatus.loading--;
 			})
 			.error(function(data) {
-				alert("Error when getting instruments.");
+				$rootScope.showErrorMessage("Error when getting instruments.");
 				$rootScope.apiStatus.loading--;
 			});							
 	}
@@ -1844,6 +1858,8 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 				service.getInstruments();
 				$rootScope.apiStatus.loading--;
 
+				Statistics.flushStats();
+
 				if (successCallback)
 					successCallback();
 			})
@@ -1861,6 +1877,9 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 			.success(function(data){
 				service.getInstruments();
 				$rootScope.apiStatus.loading--;
+
+				Statistics.flushStats();
+
 				if (successCallback)
 					successCallback();
 			})
@@ -1880,7 +1899,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 
 	return service;
 });
-GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
+GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics) {
 	var service = {};
 	service.sessions = undefined;
 
@@ -1900,13 +1919,12 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 				$rootScope.apiStatus.loading--;
 			})
 			.error(function(data, status) {
-				alert("Error when getting sessions");
+				$rootScope.showErrorMessage("Error when getting sessions");
 				$rootScope.apiStatus.loading--;
 			});							
 	}
 
 	service.getSession = function(sessionId, successCallback, failureCallback) {
-		console.log("Getting session");
 		if (service.sessions) {
 			// First, try to find session in the loaded array
 			for (i = 0; i < service.sessions.length; i++)
@@ -1945,6 +1963,8 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 				service.getSessions();
 				$rootScope.apiStatus.loading--;
 
+				Statistics.flushStats();
+
 				if (successCallback)
 					successCallback();
 			})
@@ -1963,6 +1983,8 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope) {
 			.success(function(data){
 				service.getSessions();
 				$rootScope.apiStatus.loading--;
+
+				Statistics.flushStats();
 
 				if (successCallback)
 					successCallback();
@@ -1994,7 +2016,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	service.getSessionsPerWeekday = function() {
 		var deferred = $q.defer();
 
-		if (typeof service.perWeekday == undefined || service.perWeekday == null || $rootScope.sessionsUpdated) {
+		if (typeof service.perWeekday == undefined || service.perWeekday == null) {
 			$rootScope.apiStatus.loading++;
 			var url = '/api/statistics/perweekday';
 			service.perWeekday = [];
@@ -2034,7 +2056,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	service.getMinutesPerDay = function(days) {
 		var deferred = $q.defer();
 
-		if (typeof service.minutesPerDay == undefined || service.minutesPerDay == null || $rootScope.sessionsUpdated) {
+		if (typeof service.minutesPerDay == undefined || service.minutesPerDay == null) {
 			$rootScope.apiStatus.loading++;
 			var url = '/api/statistics/minutesperday/' + days;
 			service.minutesPerDay = {
@@ -2087,14 +2109,12 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	service.getSessionsPerWeek = function (weeks) {
 		var deferred = $q.defer();
 
-		if (typeof service.sessionsPerWeek == undefined || service.sessionsPerWeek == null || $rootScope.sessionsUpdated) {
+		if (typeof service.sessionsPerWeek == undefined || service.sessionsPerWeek == null) {
 			service.sessionsPerWeek = {
 				labels: [],
 				count: [],
 				minutes: []
 			}
-
-			$log.log("Getting sessions per week");
 
 			$rootScope.apiStatus.loading++;
 			var url = '/api/statistics/perweek/' + weeks;
@@ -2113,11 +2133,9 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 					if (data && data.length && data.length > 0) {
 						var currentDataIndex = 0;
 
-						$log.log("Iterations", weeks);
 						for (var i = 0; i < weeks; i++) {
 							var currentWeek = moment().subtract(moment.duration(weeks - i - 1, 'weeks')).isoWeek();
 							var currentYear = moment().subtract(moment.duration(weeks - i - 1, 'weeks')).year();
-							$log.log("Iteration", i, "Current week", currentWeek, "Current year", currentYear);
 
 							service.sessionsPerWeek.labels.push(currentWeek);
 
@@ -2151,7 +2169,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	service.getStatsOverview = function () {
 		var deferred = $q.defer();
 
-		if (typeof service.statsOverview == undefined || service.statsOverview == null || $rootScope.sessionsUpdated) {
+		if (typeof service.statsOverview == undefined || service.statsOverview == null) {
 			$rootScope.apiStatus.loading++;
 			$http.get('/api/statistics/overview')
 				.success(function(data) {
@@ -2208,6 +2226,9 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	service.flushStats = function() {
 		service.statsOverview = undefined;
 		service.weekStats = undefined;
+		service.sessionsPerWeek = undefined;
+		service.minutesPerDay = undefined;
+		service.perWeekday = undefined;
 	}
 
 	return service;

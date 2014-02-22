@@ -7872,7 +7872,7 @@ h3 {
   font-size:15px;
   clear:left;
 }
-
+ 
 nav a {
   display:block;
   width:20%;
@@ -7918,23 +7918,31 @@ nav a:hover {
 .slideleft .view-animate.ng-enter {
   position:relative;
   -webkit-transition: all 0.2s ease-out;
+  -webkit-transform: rotateY(90deg);
+  transform: rotateY(90deg);
   transition: all 0.2s ease-out;
   left:100%;
 }
 
 .slideleft .view-animate.ng-enter.ng-enter-active {
   left:0;
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
 }
 
 .slideright .view-animate.ng-enter {
   position:relative;
   -webkit-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
+  -webkit-transform: rotateY(90deg);
+  transform: rotateY(90deg);
   left:-100%;
 }
 
 .slideright .view-animate.ng-enter.ng-enter-active {
   left:0;
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
 }
 
 .navbar-default {

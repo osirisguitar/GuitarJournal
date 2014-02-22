@@ -15,13 +15,13 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 
 	$scope.iOS = $window.navigator.userAgent.match(/iPhone/i) || $window.navigator.userAgent.match(/iPad/i);
 
-	$scope.showErrorMessage = function(message, error) {
+	$rootScope.showErrorMessage = function(message, error) {
 		growl.addErrorMessage(message);
 		$log.error(message, error); 
 	};
 
-	$scope.showSuccessMessage = function(message) {
-		growl.addSuccessMessage(message, { ttl: 4000 });
+	$rootScope.showSuccessMessage = function(message) {
+		growl.addSuccessMessage(message, { ttl: 2000 });
 		$log.info(message); 	
 	};
 
@@ -149,7 +149,9 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 	{
 		Sessions.getSession($routeParams.id, 
 			function(session) {
+				console.log("Session: ", session);
 				$scope.session = session;
+				$scope.session.date = new Date(Date.parse($scope.session.date)).toISOString().substring(0, 10);
 			},
 			function(error) {
 				$scope.showErrorMessage("Couldn't get session", error);
@@ -157,7 +159,7 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 	}
 	else
 	{
-		$scope.session = { date: new Date() };
+		$scope.session = { date: new Date().toISOString().substring(0, 10) };
 		$scope.editMode = true;
 	}
 
@@ -181,6 +183,8 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 
 	$scope.save = function()
 	{
+		$scope.session.date = moment($scope.session.date).toDate();
+
 		Sessions.saveSession($scope.session, 
 			function() {
 				$location.path("/sessions/");
@@ -211,11 +215,14 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 		var url = "https://graph.facebook.com/me/ogjournal:complete?access_token=" + $rootScope.fbAccessToken + 
 			"&practice_session=http://journal.osirisguitar.com/api/practicesession/" + $scope.session._id +
 			"&fb:explicitly_shared=true";
+		$rootScope.apiStatus.loading++;
 		$http.post(url, {}, $rootScope.httpConfig)
 			.success(function(response) {
+				$rootScope.apiStatus.loading--;
 				$scope.showSuccessMessage("Session shared to Facebook");
 			})
 			.error(function(error) {
+				$rootScope.apiStatus.loading--;
 				$scope.showErrorMessage("An error occured when sharing to Facebook: " + error.error.message, error);
 			});
 	};

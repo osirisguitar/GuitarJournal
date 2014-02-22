@@ -1,4 +1,4 @@
-GuitarJournalApp.factory('Goals', function($http, $rootScope) {
+GuitarJournalApp.factory('Goals', function($http, $rootScope, Statistics) {
 	var service = {};
 
 	service.goals = undefined;
@@ -11,7 +11,7 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 				$rootScope.apiStatus.loading--;
 			})
 			.error(function(data) {
-				alert("Error when getting sessions.");
+				$rootScope.showErrorMessage("Error when getting sessions.");
 				$rootScope.apiStatus.loading--;
 			});							
 	}
@@ -67,6 +67,8 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 				service.getGoals();
 				$rootScope.apiStatus.loading--;
 
+				Statistics.flushStats();
+
 				if (successCallback)
 					successCallback();
 			})
@@ -83,6 +85,8 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope) {
 			.success(function(data){
 				service.getGoals();
 				$rootScope.apiStatus.loading--;
+
+				Statistics.flushStats();
 
 				if (successCallback)
 					successCallback();

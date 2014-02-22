@@ -1,4 +1,4 @@
-GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
+GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) {
 	var service = {};
 
 	service.instruments = undefined;
@@ -11,7 +11,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 				$rootScope.apiStatus.loading--;
 			})
 			.error(function(data) {
-				alert("Error when getting instruments.");
+				$rootScope.showErrorMessage("Error when getting instruments.");
 				$rootScope.apiStatus.loading--;
 			});							
 	}
@@ -104,6 +104,8 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 				service.getInstruments();
 				$rootScope.apiStatus.loading--;
 
+				Statistics.flushStats();
+
 				if (successCallback)
 					successCallback();
 			})
@@ -121,6 +123,9 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope) {
 			.success(function(data){
 				service.getInstruments();
 				$rootScope.apiStatus.loading--;
+
+				Statistics.flushStats();
+
 				if (successCallback)
 					successCallback();
 			})

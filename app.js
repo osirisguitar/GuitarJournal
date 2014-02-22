@@ -199,7 +199,7 @@ app.get("/app", function(req, res) {
 app.use('/app', express.static(__dirname + '/app'));
 
 // Admin
-app.use('/admin', express.static(__dirname + '/admin'));
+app.use('/admin', express.static(__dirname + '/admin/dist'));
 
 // Route for instrument images
 app.use('/api/images', express.static(__dirname + '/api/images', { maxAge: 2592000000 }));
@@ -838,12 +838,62 @@ app.get("/api/users", ensureAuthenticated, function(req, res) {
 		return;
 	}
 	else {
-
-		
-		res.json("OK");
+		MongoClient.connect(mongoConnectionString, function(err, db) {
+			if (err)
+				return console.error(err);
+			db.collection("Users").find().toArray(function(err, users) {
+				if (err)
+					return console.error(err);
+				res.json(users);
+				db.close();
+			});
+		});
 	}
 });
 
+app.get("/api/user-objects/:id", ensureAuthenticated, function(req, res) {
+	var loggedInUser = req.user._id;
+
+	console.log("Checking user");
+
+	if (loggedInUser != "512684441ea176ca050002b7") {
+		res.status(401).send("You are not authorized to use this resource");
+		return;
+	}
+	else {
+		var userId = ObjectID(req.params.id);
+		console.log("userId", userId);
+		var returnData = {};
+
+		MongoClient.connect(mongoConnectionString, function(err, db) {
+			if (err)
+				return console.error(err);
+			db.collection("Users").findOne({ _id: userId }, function(err, user) {
+				if (err)
+					return console.error(err);
+				returnData.user = user;
+				db.collection("Sessions").find({ userId: userId }).toArray(function(err, sessions) {
+				 	if (err)
+				 		return console.error(err);
+				 	returnData.sessions = sessions;
+
+					db.collection("Instruments").find({ userId: userId }).toArray(function(err, instruments) {
+					 	if (err)
+					 		return console.error(err);
+					 	returnData.instruments = instruments;
+	
+						db.collection("Goals").find({ userId: userId }).toArray(function(err, goals) {
+							returnData.goals = goals;
+
+							res.json(returnData);
+							db.close();
+						});
+					});
+				})
+			});
+		});
+	}
+});
 
 
 var port = process.env.PORT || 80;
