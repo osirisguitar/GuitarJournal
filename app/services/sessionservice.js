@@ -64,8 +64,12 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics) {
 
 				Statistics.flushStats();
 
+				var savedSession = session;
+				if (data != 1)
+					savedSession = data;
+
 				if (successCallback)
-					successCallback();
+					successCallback(savedSession);
 			})
 			.error(function(data) { 
 				$rootScope.apiStatus.loading--;

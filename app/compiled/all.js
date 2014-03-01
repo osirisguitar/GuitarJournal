@@ -1309,8 +1309,7 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 	$scope.editMode = false;
 
 	// If id is provided, get session, from memory or DB.
-	if ($routeParams.id)
-	{
+	if ($routeParams.id) {
 		Sessions.getSession($routeParams.id, 
 			function(session) {
 				console.log("Session: ", session);
@@ -1320,9 +1319,7 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 			function(error) {
 				$scope.showErrorMessage("Couldn't get session", error);
 			});
-	}
-	else
-	{
+	} else {
 		$scope.session = { date: new Date().toISOString().substring(0, 10) };
 		$scope.editMode = true;
 	}
@@ -1345,16 +1342,16 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 		}
 	});
 
-	$scope.save = function()
-	{
+	$scope.save = function() {
 		$scope.session.date = moment($scope.session.date).toDate();
 
 		Sessions.saveSession($scope.session, 
-			function() {
-				$location.path("/sessions/");
+			function(savedSession) {
+				//$location.path("/session/" + savedSession._id);
 				Statistics.flushStats();
 				$scope.showSuccessMessage('Session saved');
 				$scope.editMode = false;
+				$scope.session = savedSession;
 			},
 			function() {
 				$scope.showErrorMessage("Error saving session");
@@ -1987,8 +1984,12 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics) {
 
 				Statistics.flushStats();
 
+				var savedSession = session;
+				if (data != 1)
+					savedSession = data;
+
 				if (successCallback)
-					successCallback();
+					successCallback(savedSession);
 			})
 			.error(function(data) { 
 				$rootScope.apiStatus.loading--;
