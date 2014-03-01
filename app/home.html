@@ -630,7 +630,7 @@
       </div>
     </div>
     <div class="content-padded">
-      <form class="form-horizontal" ng-show="editMode">
+      <form class="form-horizontal" ng-show="editMode" ng-class="{ imageChanged: imageChanged }">
         <div class="form-group">
           <label class="control-label">Name</label>
           <input class="form-control" placeholder="Example: Fender American Stratocaster" type="text" ng-model="instrument.name" ng-disabled="!editMode" />

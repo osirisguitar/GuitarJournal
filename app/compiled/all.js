@@ -1572,6 +1572,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 	};
 
 	$scope.setImage = function(imageField) {
+		$scope.imageChanged = true;
 		var file = imageField.files[0];
 		var destinationSize = 200;
 
@@ -1604,6 +1605,8 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 		    };
 		})(file);
 		reader.readAsDataURL(file);
+		$scope.imageChanged = true;
+		$scope.$apply();
 	}
 
 	$scope.save = function() {
