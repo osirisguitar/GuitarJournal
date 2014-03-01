@@ -33,6 +33,25 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 		}
 	};
 
+	var showSpinnerInterval = null;
+	$scope.showSpinner = false;
+	$scope.$watch("apiStatus.loading", function () {
+		if ($scope.apiStatus.loading == 0) {
+			$scope.apiStatus.showSpinner = false;
+
+			if (showSpinnerInterval) {
+				clearInterval(showSpinnerInterval);
+				showSpinnerInterval = null;
+			}
+		} else {
+			if (showSpinnerInterval == null) {
+				showSpinnerInterval = setInterval(function () {
+					$scope.apiStatus.showSpinner = true;
+				}, 500);
+			}			
+		}
+	});
+
 	$http.get('auth/allowsimple').success(function(data) {
 		if (data == "true")
 			$scope.allowSimpleLogin = true;
