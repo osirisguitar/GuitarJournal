@@ -1,4 +1,5 @@
 describe('HomeCtrl', function () {
+  /* jshint expr:true */
 
   var scope, ctrl;
   var statistics;

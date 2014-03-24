@@ -1,4 +1,5 @@
 describe('InstrumentService', function () {
+	/* jshint expr:true */
 	var http, rootScope, mockStatistics, instruments;
 
 	var mockInstruments = [
@@ -98,11 +99,12 @@ describe('InstrumentService', function () {
 		instruments.getInstruments = realGetInstruments;
 	});
 
-	xit("should call getInstruments when user is logged in", function() {
+	it("should call getInstruments when user is logged in", function() {
 		var realGetInstruments = instruments.getInstruments;
 		instruments.getInstruments = sinon.stub();
 
 		rootScope.loggedIn = true;
+		rootScope.$apply();
 		expect(instruments.getInstruments).calledOnce;
 		instruments.getInstruments = realGetInstruments;
 	});

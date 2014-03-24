@@ -1,4 +1,6 @@
 describe('GoalService', function () {
+	/* jshint expr:true */
+
 	var http, rootScope, mockStatistics, goals;
 
 	var mockGoals = [
@@ -96,6 +98,16 @@ describe('GoalService', function () {
 
 		expect(goals.getGoals).calledOnce;
 
+		goals.getGoals = realGetGoals;
+	});
+
+	it("should call getGoals when user is logged in", function() {
+		var realGetGoals = goals.getGoals;
+		goals.getGoals = sinon.stub();
+
+		rootScope.loggedIn = true;
+		rootScope.$apply();
+		expect(goals.getGoals).calledOnce;
 		goals.getGoals = realGetGoals;
 	});
 });
