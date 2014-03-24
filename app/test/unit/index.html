@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Guitar Journal - Mocha Tests</title>
+  <link rel="stylesheet" href="../../../node_modules/mocha/mocha.css" />
+</head>
+<body>
+
+  <div id="mocha"></div>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-cookies.js"></script>
+
+
+  <!-- Test libraries -->
+  <script src="../../../node_modules/mocha/mocha.js"></script>
+  <script>mocha.setup('bdd');</script>
+  <script src="../../../node_modules/chai/chai.js"></script>
+  <script>var expect = chai.expect;</script>
+  <script src="../../../node_modules/sinon-chai/lib/sinon-chai.js"></script>
+  <script src="../../../node_modules/sinon/pkg/sinon.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-mocks.js"></script>
+
+  <!-- Code files -->
+
+  <!-- Main App JS -->
+    <script src="../../compiled/all.js"></script>
+
+  <!-- Service JS -->
+  <!-- Add New Service JS Above --> 
+
+  <!-- Model JS -->
+  <!-- Add New Model JS Above --> 
+
+  <!-- Directive JS -->
+  <!-- Add New Directive JS Above -->
+
+  <!-- Filter JS -->
+  <!-- Add New Filter JS Above -->
+
+  <!-- Partial JS -->
+  <!-- Add New Partial JS Above -->
+
+
+  <!-- Test files -->
+
+  <!-- Service Test JS -->
+  <script src="services/instrumentservice.test.js"></script>
+  <script src="services/goalservice.test.js"></script>
+  <!-- Add New Service Test JS Above --> 
+
+  <!-- Model Test JS -->
+  <!-- Add New Model Test JS Above --> 
+
+  <!-- Directive Test JS -->
+  <!-- Add New Directive Test JS Above -->
+
+  <!-- Filter Test JS -->
+  <!-- Add New Filter Test JS Above -->
+
+  <!-- Partial Test JS -->
+  <script src="controllers/homectrl.test.js"></script>
+  <!-- Add New Partial Test JS Above -->
+
+  <!-- run mocha after all test are loaded -->
+  <script type="text/javascript" charset="utf-8">
+    // Only tests run in real browser, injected script run if options.run == true
+    if (navigator.userAgent.indexOf('PhantomJS') < 0) {
+      mocha.run();
+    }
+  </script>
+  
+</body>
+</html>
