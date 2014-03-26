@@ -35,8 +35,9 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 
 	var showSpinnerInterval = null;
 	$scope.showSpinner = false;
+	var spinnerDelay = 0;
 	$scope.$watch("apiStatus.loading", function () {
-		if ($scope.apiStatus.loading == 0) {
+		if ($scope.apiStatus.loading === 0) {
 			$scope.apiStatus.showSpinner = false;
 
 			if (showSpinnerInterval) {
@@ -44,10 +45,11 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 				showSpinnerInterval = null;
 			}
 		} else {
-			if (showSpinnerInterval == null) {
+			if (showSpinnerInterval === null) {
 				showSpinnerInterval = setInterval(function () {
 					$scope.apiStatus.showSpinner = true;
-				}, 500);
+					spinnerDelay = 500;
+				}, spinnerDelay);
 			}			
 		}
 	});
@@ -131,11 +133,6 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 	$scope.statsOverview = Statistics.statsOverview;
 	Statistics.getStatsOverview();
 	Statistics.getWeekStats();
-
-	$scope.sessionsThisWeek = function() {
-		var currentWeekday = new Date().getDay();
-		return 2;
-	};
 }
 
 function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments, $window) {
@@ -478,7 +475,7 @@ function InstrumentCtrl($scope, $http, $location, $routeParams, Instruments, $ro
 		reader.readAsDataURL(file);
 		$scope.imageChanged = true;
 		$scope.$apply();
-	}
+	};
 
 	$scope.save = function() {
 		Instruments.saveInstrument($scope.instrument,

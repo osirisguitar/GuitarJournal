@@ -19,7 +19,7 @@ exports.checkLogin = function (username, password, callback) {
 			db.close();
     	});
 	});
-}
+};
 
 // Returns 10 sessions of a user, starting from skipCount. Callback must accept
 // two parameters: err, data
@@ -36,4 +36,4 @@ exports.getSessions = function(userId, skipCount, callback) {
 			db.close();
 		});
 	});
-}
+};

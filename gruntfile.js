@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		jshint: {
 			// define the files to lint
-			files: ['gruntfile.js', 'app/controllers/*.js', 'app/services.js', 'app.js', '/app/app.js'],
+			files: ['gruntfile.js', 'app/controllers/*.js', 'app/services/*.js', 'app.js', 'app/app.js', 'api/*.js', 'app/test/**/*.js'],
 			// configure JSHint (documented at http://www.jshint.com/docs/)
 			options: {
 				// more options here if you want to override JSHint defaults
@@ -12,8 +12,9 @@ module.exports = function(grunt) {
 					jQuery: true,
 					console: true,
 					module: true,
-				}
-			}
+				},
+				reporter: require("jshint-stylish")
+			},
 		},
 
 		concat: {
@@ -27,6 +28,18 @@ module.exports = function(grunt) {
 			css: {
 				src: ['app/css/flatly.css','app/css/font-awesome.min.css', 'app/libs/**/*.css', 'app/css/guitarjournal.css'],
 				dest: 'app/compiled/all.css'
+			}
+		},
+
+		mocha: {
+			test: {
+				src: ['app/test/unit/*.html'],
+				options: {
+					run: true,
+					log: true,
+					logErrors: true,
+					reporter: "Spec"
+				}
 			}
 		},
 
@@ -110,7 +123,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-manifest');
 	grunt.loadNpmTasks('grunt-recess');
 	grunt.loadNpmTasks('grunt-ssh');
+	grunt.loadNpmTasks('grunt-mocha');
 
-	grunt.registerTask('default', ['concat', 'manifest', 'watch']);
-	grunt.registerTask('deploy', ['concat', 'manifest', 'sftp:deploy']);
+
+	grunt.registerTask('test', ['jshint', 'mocha']);
+	grunt.registerTask('default', ['jshint', 'concat', 'manifest', 'mocha', 'watch']);
+	grunt.registerTask('deploy', ['jshint', 'concat', 'manifest', 'mocha', 'sftp:deploy']);
 };

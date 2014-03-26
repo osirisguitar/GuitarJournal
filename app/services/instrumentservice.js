@@ -13,8 +13,8 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) 
 			.error(function(data) {
 				$rootScope.showErrorMessage("Error when getting instruments.");
 				$rootScope.apiStatus.loading--;
-			});							
-	}
+			});
+	};
 
 	service.getInstrument = function(instrumentId, successCallback, failureCallback) {
 		if (service.instruments) {
@@ -43,7 +43,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) 
 					failureCallback(data);
 				});
 		}
-	}
+	};
 
 	service.getInstrumentName = function(instrumentId) {
 		if (service.instruments) {
@@ -56,7 +56,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) 
 
 			return name;
 		}
-	}
+	};
 
 	service.getInstrumentImageData = function(instrumentId) {
 		if (!instrumentId)
@@ -77,7 +77,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) 
 				return "";				
 			}
 		}		
-	}
+	};
 
 	service.getInstrumentImageUrl = function(instrumentId) {
 		if (!instrumentId)
@@ -93,7 +93,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) 
 
 			return imageUrl;
 		}		
-	}
+	};
 
 	service.saveInstrument = function(instrument, successCallback, failureCallback) {
 		$rootScope.apiStatus.loading++;
@@ -115,7 +115,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) 
 				if (failureCallback)
 					failureCallback();
 			});
-	}
+	};
 
 	service.deleteInstrument = function(instrumentId, successCallback, failureCallback) {
 		$rootScope.apiStatus.loading++;
@@ -135,7 +135,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) 
 					failureCallback();
 			});
 
-	}
+	};
 
 	$rootScope.$watch('loggedIn', function() {
 		if ($rootScope.loggedIn) {

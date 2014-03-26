@@ -207,13 +207,21 @@ header a.next, header a.right {
   width:58%;
 }
 
-textarea.form-control, input[type="text"].form-control, input[type="number"].form-control, input[type="date"].form-control, select.form-control {
+textarea.form-control, input[type="text"].form-control, input[type="number"].form-control, input[type="date"].form-control, input[type="time"].form-control, select.form-control {
   -webkit-box-shadow:none;
   box-shadow:none;
   -webkit-appearance:none;
   height:34px;
 }
 
+/*input[type="date"].form-control {
+  width:35%;
+}
+
+input[type="time"].form-control {
+  width:23%;
+}
+*/
 textarea.form-control {
   height:70px;
 }

@@ -458,8 +458,12 @@
           <input class="form-control" type="date" ng-model="session.date" ng-disabled="!editMode" />
         </div>
         <div class="form-group">
-          <label class="control-label">Duration (min)</label>
-          <input class="form-control" placeholder="Example: 60" type="number" ng-model="session.length" ng-disabled="!editMode" />
+          <label class="control-label">Start time</label>
+          <input class="form-control" type="time" ng-model="session.startTime" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">End time</label>
+          <input class="form-control" type="time" ng-model="session.endTime" ng-disabled="!editMode" />
         </div>
         <div class="form-group">
           <label class="control-label">Goal</label>

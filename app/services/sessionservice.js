@@ -21,7 +21,7 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics) {
 				$rootScope.showErrorMessage("Error when getting sessions");
 				$rootScope.apiStatus.loading--;
 			});							
-	}
+	};
 
 	service.getSession = function(sessionId, successCallback, failureCallback) {
 		if (service.sessions) {
@@ -52,7 +52,7 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics) {
 					failureCallback(data);
 				});
 		}
-	}
+	};
 
 	service.saveSession = function(session, successCallback, failureCallback) {
 		$rootScope.apiStatus.loading++;
@@ -77,7 +77,7 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics) {
 				if (failureCallback)
 					failureCallback();
 			});
-	}
+	};
 
 	service.deleteSession = function(sessionId, successCallback, failureCallback) {
 		$rootScope.apiStatus.loading++;
@@ -99,12 +99,12 @@ GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics) {
 					failureCallback();
 			});
 
-	}
+	};
 
 	$rootScope.$watch('loggedIn', function() {
 		if ($rootScope.loggedIn) {
 			service.getSessions();
 		}
-	})
+	});
 	return service;
 });

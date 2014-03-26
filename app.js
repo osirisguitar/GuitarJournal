@@ -126,7 +126,7 @@ app.get('/auth/allowsimple', function(req, res) {
 });
 
 app.get("/api/sessiontest", function(req, res) {
-	if (req.session.created == null)
+	if (!req.session.created)
 		req.session.created = new Date();
 
 	res.json({"session": req.session, "port": process.env.PORT });
@@ -889,7 +889,7 @@ app.get("/api/user-objects/:id", ensureAuthenticated, function(req, res) {
 							db.close();
 						});
 					});
-				})
+				});
 			});
 		});
 	}

@@ -14,7 +14,7 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope, Statistics) {
 				$rootScope.showErrorMessage("Error when getting sessions.");
 				$rootScope.apiStatus.loading--;
 			});							
-	}
+	};
 
 	service.getGoal = function(goalId, successCallback, failureCallback) {
 		if (service.goals) {
@@ -43,7 +43,7 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope, Statistics) {
 					failureCallback(data);
 				});
 		}
-	}
+	};
 
 	service.getGoalTitle = function(goalId) {
 		if (service.goals) {
@@ -57,7 +57,7 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope, Statistics) {
 
 			return title;
 		}
-	}
+	};
 
 	service.saveGoal = function(goal, successCallback, failureCallback) {
 		$rootScope.apiStatus.loading++;
@@ -77,7 +77,7 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope, Statistics) {
 				if (failureCallback)
 					failureCallback();
 			});
-	}
+	};
 
 	service.deleteGoal = function(goalId, successCallback, failureCallback) {
 		$rootScope.apiStatus.loading++;
@@ -98,7 +98,7 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope, Statistics) {
 					failureCallback();
 			});
 
-	}
+	};
 
 	service.getActiveGoals = function() {
 		if (service.goals) {
@@ -111,7 +111,7 @@ GuitarJournalApp.factory('Goals', function($http, $rootScope, Statistics) {
 		}
 		else 
 			return [];
-	}
+	};
 
 	$rootScope.$watch('loggedIn', function() {
 		if ($rootScope.loggedIn) {

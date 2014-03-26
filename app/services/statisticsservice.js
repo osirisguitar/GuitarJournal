@@ -9,7 +9,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	service.getSessionsPerWeekday = function() {
 		var deferred = $q.defer();
 
-		if (typeof service.perWeekday == undefined || service.perWeekday == null) {
+		if (!service.perWeekday) {
 			$rootScope.apiStatus.loading++;
 			var url = '/api/statistics/perweekday';
 			service.perWeekday = [];
@@ -49,7 +49,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	service.getMinutesPerDay = function(days) {
 		var deferred = $q.defer();
 
-		if (typeof service.minutesPerDay == undefined || service.minutesPerDay == null) {
+		if (!service.minutesPerDay) {
 			$rootScope.apiStatus.loading++;
 			var url = '/api/statistics/minutesperday/' + days;
 			service.minutesPerDay = {
@@ -73,7 +73,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 								currentDataDate = new Date(data[currentDataIndex]._id.year, data[currentDataIndex]._id.month - 1, data[currentDataIndex]._id.day);
 							}
 
-							if (i % 5 == 0)
+							if (i % 5 === 0)
 								service.minutesPerDay.labels.push(moment(currentDate).format('MM-DD'));
 							else
 								service.minutesPerDay.labels.push("");
@@ -102,12 +102,12 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	service.getSessionsPerWeek = function (weeks) {
 		var deferred = $q.defer();
 
-		if (typeof service.sessionsPerWeek == undefined || service.sessionsPerWeek == null) {
+		if (!service.sessionsPerWeek) {
 			service.sessionsPerWeek = {
 				labels: [],
 				count: [],
 				minutes: []
-			}
+			};
 
 			$rootScope.apiStatus.loading++;
 			var url = '/api/statistics/perweek/' + weeks;
@@ -133,7 +133,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 							service.sessionsPerWeek.labels.push(currentWeek);
 
 							var currentWeekData = findWeekData(data, currentYear, currentWeek);
-							if (currentWeekData != null) {
+							if (currentWeekData !== null) {
 								service.sessionsPerWeek.count.push(currentWeekData.count);
 								service.sessionsPerWeek.minutes.push(currentWeekData.minutes);
 
@@ -162,7 +162,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	service.getStatsOverview = function () {
 		var deferred = $q.defer();
 
-		if (typeof service.statsOverview == undefined || service.statsOverview == null) {
+		if (!service.statsOverview) {
 			$rootScope.apiStatus.loading++;
 			$http.get('/api/statistics/overview')
 				.success(function(data) {
@@ -190,7 +190,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 	service.getWeekStats = function () {
 		var deferred = $q.defer();
 
-		if (typeof service.weekStats == undefined || service.weekStats == null) {
+		if (!service.weekStats) {
 			$rootScope.apiStatus.loading++;
 			$http.get('/api/statistics/overview/7')
 				.success(function(data) {
@@ -214,7 +214,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 		}
 
 		return deferred.promise;
-	}
+	};
 
 	service.flushStats = function() {
 		service.statsOverview = undefined;
@@ -222,7 +222,7 @@ GuitarJournalApp.factory('Statistics', function($http, $rootScope, $q, $log) {
 		service.sessionsPerWeek = undefined;
 		service.minutesPerDay = undefined;
 		service.perWeekday = undefined;
-	}
+	};
 
 	return service;
 });
