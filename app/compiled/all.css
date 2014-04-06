@@ -8065,6 +8065,11 @@ textarea.form-control, input[type="text"].form-control, input[type="number"].for
   height:34px;
 }
 
+.login input[type="email"].form-control, .login input[type="password"].form-control {
+  width:100%;
+  margin-bottom:5px;
+}
+
 /*input[type="date"].form-control {
   width:35%;
 }

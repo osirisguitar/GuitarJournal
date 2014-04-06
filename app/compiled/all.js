@@ -1278,11 +1278,6 @@ function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instrum
 	$scope.statsOverview = Statistics.statsOverview;
 	Statistics.getStatsOverview();
 	Statistics.getWeekStats();
-
-	$scope.sessionsThisWeek = function() {
-		var currentWeekday = new Date().getDay();
-		return 2;
-	};
 }
 
 function SessionsCtrl($scope, $http, $location, Sessions, Goals, Instruments, $window) {
@@ -1788,7 +1783,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) 
 			.error(function(data) {
 				$rootScope.showErrorMessage("Error when getting instruments.");
 				$rootScope.apiStatus.loading--;
-			});							
+			});
 	};
 
 	service.getInstrument = function(instrumentId, successCallback, failureCallback) {
