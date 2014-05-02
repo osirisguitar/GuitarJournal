@@ -10,6 +10,9 @@ describe('LoginCtrl', function () {
     path: sinon.stub()
   };
 
+  var email = "test@user.com";
+  var password = "1234";
+
   beforeEach(function () {
     module('GuitarJournalApp');
     inject(function ($rootScope, $controller, $httpBackend) {
@@ -34,7 +37,9 @@ describe('LoginCtrl', function () {
   });
 
   it('should redirect to / on successful login', function () {
-    http.expectGET('/api/login').respond(user);
+    scope.email = email;
+    scope.password = password;
+    http.expectGET('/api/login?email=' + email + '&password=' + password).respond(user);
     scope.login();
     http.flush();
     expect(rootScope.loggedIn).to.equal(true);
@@ -42,7 +47,9 @@ describe('LoginCtrl', function () {
   });
 
   it('should show an error message on failed login and not redirect', function() {
-    http.expectGET('/api/login').respond(401);
+    scope.email = email;
+    scope.password = password;
+    http.expectGET('/api/login?email=' + email + '&password=' + password).respond(401);
     scope.login();
     http.flush();
     expect(rootScope.loggedIn).to.not.exist;

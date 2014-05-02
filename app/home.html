@@ -345,8 +345,15 @@
                           </div>
                         </div>
                         <div class="login">
-                          <button type="button" class="btn btn-primary" ng-click="login()">Sign up</button>
+                          <button type="button" class="btn btn-primary" ng-click="showSignUp = !showSignUp">Sign up</button>
+                          <div class="well" ng-show="showSignUp">
+                                <input class="form-control" ng-model="signupEmail" placeholder="email (required)" type="email" />
+                                <input class="form-control" type="password" placeholder="password (required)" ng-model="signupPassword" />
+                                <input class="form-control" type="text" placeholder="username" ng-model="signupUsername" />
+                                <input class="form-control" type="text" placeholder="full name" ng-model="signupFullName" />                                
+                              <button class="btn btn-success btn-sm" ng-click="signUp()" ng-show="allowSimpleLogin">Sign up</a>
                           </div>
+                        </div>
                         <div class="facebook-login">
                           <p ng-show="false">
                             Get started right away by logging in with your Facebook account. This app will use your name and email address to create an account, never give the information away to anyone else and only post things to your timeline when you choose.
@@ -449,7 +456,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="facebook-login" ng-show="!editMode">
+                          <div class="facebook-login" ng-show="!editMode && fbAccessToken">
                             <a href="" ng-click="shareToFacebook()"><img height="40" src="/app/img/facebook-share.png"></a>
                           </div>
                           <div class="content-padded">

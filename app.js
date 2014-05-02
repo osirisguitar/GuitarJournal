@@ -49,7 +49,9 @@ passport.use(new LocalStrategy({
 	    passwordField: 'password'
 	},
   	function(username, password, done) {
+  		console.log("Local strategy login", username, password);
   		journalStore.checkLogin(username, password, function(err, user) {
+  			console.log("Checklogin callback", err, user);
   			return done(err, user);
   		});
  	}
@@ -210,7 +212,7 @@ app.use('/about', express.static(__dirname + '/about'));
 app.get('/api/login',
 	passport.authenticate('local'),
 	function (req, res) {
-		res.cookie('userid', user.id, { maxAge: 2592000000 });
+		res.cookie('userid', req.user._id, { maxAge: 2592000000 });
 		res.json(req.user);
 	}
 );
@@ -223,14 +225,29 @@ app.get('/api/logout', function(req, res) {
 	res.redirect("/");
 });
 
+app.post('/api/signup', function(req, res) {
+	console.log("Signing up with", req.body);
+
+	journalStore.checkIfUserExists(req.body.email, function(err, user) {
+		if (err) {
+			console.error(err);
+		}
+
+		if (user) {
+			res.send(500, { message: "User already exists" });
+		} else {
+			journalStore.createUser(req.body, function(err, user){
+				
+			});
+		}
+	});
+});
+
 app.get('/api/loggedin', function(req, res) {
-	if (req.isAuthenticated())
-	{
+	if (req.isAuthenticated()) {
 		req.user._csrf = req.csrfToken();
 		res.json(req.user);		
-	}
-	else
-	{
+	} else {
 		if (req.cookies.hasloggedinwithfb) {
 			res.json({ _csrf: req.csrfToken(), autoTryFacebook: true });		
 		}

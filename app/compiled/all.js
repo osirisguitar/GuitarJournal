@@ -1255,14 +1255,31 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 	$scope.setDefaultPageSettings();
 	$scope.pageSettings.hideNavigation = true;
 	$scope.pageSettings.hideTopNavigation = true;
+
 	$scope.login = function() {
-		$http.get("/api/login", $rootScope.httpConfig).success(function(data) {
+		$http.get("/api/login?email=" + $scope.email + "&password=" + $scope.password, $rootScope.httpConfig).success(function(data) {
 			if (data._id) {
 				$rootScope.loggedIn = true;
 				$scope.pageSettings.hideNavigation = false;
 			}
 			$location.path("/");
 		}).error(function(error) { $scope.showErrorMessage("Could not log in", error); });
+	};
+
+	$scope.signUp = function() {
+		console.log($scope.signupEmail, $scope.signupPassword);
+		if ($scope.signupEmail && $scope.signupPassword) {
+			$http.post("/api/signup", 
+				{ email: $scope.signupEmail, password: $scope.signupPassword, username: $scope.signupUsername, fullName: $scope.signupFullName },
+				$rootScope.httpConfig
+			).success(function(data) {
+				$location.path = "/";
+			}).error(function(err) {
+				$scope.showErrorMessage(err.message, err);
+			});
+		} else {
+			$scope.showErrorMessage("Email (correctly formed) and password are reuquired");
+		}
 	};
 }
 
@@ -1539,9 +1556,13 @@ function ProfileCtrl($scope, $rootScope, $http, $location, Instruments, $window)
 	$scope.pageSettings.hideNavigation = false;
 
 	$scope.logout = function() {
-		var url = "https://www.facebook.com/logout.php?access_token=" + $rootScope.fbAccessToken +
-			"&confirm=1&next=http://" + $window.location.hostname + "/api/logout";
-		$window.location.href = url;
+		if ($rootScope.fbAccessToken) {
+			var url = "https://www.facebook.com/logout.php?access_token=" + $rootScope.fbAccessToken +
+				"&confirm=1&next=http://" + $window.location.hostname + "/api/logout";
+			$window.location.href = url;
+		} else {
+			$window.location.href = "/api/logout";
+		}
 	};
 }
 
