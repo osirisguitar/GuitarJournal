@@ -28,8 +28,15 @@ express.static.mime.define({'application/font-woff': ['woff']});
 journalStore.setConnectionString(mongoConnectionString);
 
 process.on('uncaughtException', function(err) {
-	console.log("uncaughtException!");
-	console.log(err);
+	var stacktrace;
+
+	if (err && err.stack) {
+		stacktrace = err.stack;
+	} else {
+		stacktrace = new Error().stack;
+	}
+
+	console.error(err, stacktrace);
 });
 
 process.on('error', function(err) {
@@ -236,8 +243,8 @@ app.post('/api/signup', function(req, res) {
 		if (user) {
 			res.send(500, { message: "User already exists" });
 		} else {
-			journalStore.createUser(req.body, function(err, user){
-				
+			journalStore.createUser(req.body, function(err, user) {
+				res.json(user);
 			});
 		}
 	});

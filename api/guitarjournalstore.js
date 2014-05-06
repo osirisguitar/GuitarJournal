@@ -15,7 +15,6 @@ module.exports = {
 			if (err) { return done(err); }
 
 			var passwordHash = cryptoHelper.createPasswordHash(password);
-			console.log("hash", passwordHash);
 
 			var users = db.collection('Users');
 			users.findOne({ email: username, password: passwordHash }, function(err, user) {
@@ -44,7 +43,7 @@ module.exports = {
 			user.password = cryptoHelper.createPasswordHash(user.password);
 
 			var users = db.collection('Users');
-			collection.save(req.body, { safe:true }, function(err, savedUser) {
+			users.save(user, { safe:true }, function(err, savedUser) {
 				db.close();
 				callback(err, savedUser);
 			});
