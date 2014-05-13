@@ -128,7 +128,12 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 				{ email: $scope.signupEmail, password: $scope.signupPassword, username: $scope.signupUsername, fullName: $scope.signupFullName },
 				$rootScope.httpConfig
 			).success(function(data) {
-				$location.path = "/";
+				if (data._id) {
+					$scope.email = $scope.signupEmail;
+					$scope.password = $scope.signupPassword;
+					return $scope.login();
+				}
+				$location.path("/");
 			}).error(function(err) {
 				$scope.showErrorMessage(err.message, err);
 			});

@@ -244,6 +244,7 @@ app.post('/api/signup', function(req, res) {
 			res.send(500, { message: "User already exists" });
 		} else {
 			journalStore.createUser(req.body, function(err, user) {
+				//res.redirect('/api/login?email=' + req.body.email + '&password=' + req.body.password);
 				res.json(user);
 			});
 		}
@@ -475,6 +476,8 @@ app.delete("/api/session/:id", ensureAuthenticated, function(req, res) {
 app.post("/api/sessions", ensureAuthenticated, function(req, res) {
 	var loggedInUser = req.user._id;
 	req.body.userId = req.user._id;
+
+	console.log("/api/sessions: authed", loggedInUser, req.body.userId);
 
 	if (req.body._id) {
 		req.body._id = ObjectID(req.body._id);
