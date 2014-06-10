@@ -141,6 +141,19 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 			$scope.showErrorMessage("Email (correctly formed) and password are reuquired");
 		}
 	};
+
+	$scope.forgotPassword = function() {
+		if (!$scope.email) {
+			$scope.showErrorMessage("Input your email in the login email field and repress the button to have a new password sent to you.");
+		} else {
+			$http.post("/api/forgotpassword", {}, $rootScope.httpConfig)
+				.success(function(data) {
+					$scope.showSuccessMessage("A new password has been generated and sent to you by email.");
+				}).error(function(err) {
+					$scope.showErrorMessage("An error occurred when generating a new password");
+				});
+		}
+	};
 }
 
 function HomeCtrl($scope, $http, $location, $rootScope, Sessions, Goals, Instruments, Statistics) {
