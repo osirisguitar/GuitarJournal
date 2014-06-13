@@ -355,6 +355,10 @@
   </script>
 
   <script id="home.html" type="text/ng-template">
+    <div id="initialLoader" ng-show="!loggedIn">
+      <img src="/app/img/og-logo.png"><br>
+      INITIALIZING...
+    </div>
     <div class="content-padded overview" ng-show="Sessions.sessions.length > 0">
       <h2>{{profile.fullName}}</h2>
       <div class="overview-row">
@@ -378,7 +382,7 @@
         </div>
       </div>
     </div>
-    <div ng-cloak class="content-padded" ng-show="Goals.getActiveGoals().length == 0 || !Instruments.instruments || Instruments.instruments.length == 0 || !Sessions.sessions || Sessions.sessions.length == 0">
+    <div ng-cloak class="content-padded" ng-show="apiStatus.loading == 0 && (Goals.getActiveGoals().length == 0 || !Instruments.instruments || Instruments.instruments.length == 0 || !Sessions.sessions || Sessions.sessions.length == 0)">
       <h2>Get started!</h2>
       1. Add a goal <span ng-show="Goals.getActiveGoals().length > 0" class="complete">&#x2713;</span><br>
       <a href="/goal/" class="btn btn-success" role="button" ng-show="Goals.getActiveGoals().length == 0">Add goal</a>
