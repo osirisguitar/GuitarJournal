@@ -1145,6 +1145,7 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngRoute', 'ngCookies
   });
 function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $window, $timeout) {
 	$scope.pageSettings = {};
+	$scope.location = $location;
 	$rootScope.apiStatus = {};
 	$rootScope.apiStatus.loading = 0;
 	$scope.apiStatus = $rootScope.apiStatus;
@@ -1157,6 +1158,10 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 		hideNavigation: false,
 		hideTopNavigation: false
 	};
+
+	$rootScope.$on('$routeChangeSuccess', function(event, data) {
+		console.log('route', data);
+	});
 
 	$scope.iOS = $window.navigator.userAgent.match(/iPhone/i) || $window.navigator.userAgent.match(/iPad/i);
 
