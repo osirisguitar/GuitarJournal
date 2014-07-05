@@ -1,4 +1,4 @@
-GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics) {
+GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics, $window) {
 	var service = {};
 	service.sessions = undefined;
 

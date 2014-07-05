@@ -12,7 +12,8 @@
     "angular-growl": "~0.1.0",
     "gm": "~1.14.0",
     "nodetime": "~0.8.15",
-    "newrelic": "~1.3.0"
+    "newrelic": "~1.3.0",
+    "moment": "~2.7.0"
   },
   "engines": {
     "node": "0.10.x",

@@ -1923,7 +1923,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) 
 
 	return service;
 });
-GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics) {
+GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics, $window) {
 	var service = {};
 	service.sessions = undefined;
 
