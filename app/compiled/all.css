@@ -7438,6 +7438,142 @@ input[type="color"]:focus,
 .affix {
   position: fixed;
 }
+#floatingCirclesG{
+  position:relative;
+  width:128px;
+  height:128px;
+  -moz-transform:scale(0.6);
+  -webkit-transform:scale(0.6);
+  -o-transform:scale(0.6);
+  -ms-transform:scale(0.6);
+  transform:scale(0.6);
+}
+
+.f_circleG{
+  position:absolute;
+  background-color:#000000;
+  height:23px;
+  width:23px;
+  -moz-border-radius:12px;
+  -moz-animation-name:f_fadeG;
+  -moz-animation-duration:1.04s;
+  -moz-animation-iteration-count:infinite;
+  -moz-animation-direction:linear;
+  -webkit-border-radius:12px;
+  -webkit-animation-name:f_fadeG;
+  -webkit-animation-duration:1.04s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-direction:linear;
+  -o-border-radius:12px;
+  -o-animation-name:f_fadeG;
+  -o-animation-duration:1.04s;
+  -o-animation-iteration-count:infinite;
+  -o-animation-direction:linear;
+  -ms-border-radius:12px;
+  -ms-animation-name:f_fadeG;
+  -ms-animation-duration:1.04s;
+  -ms-animation-iteration-count:infinite;
+  -ms-animation-direction:linear;
+  border-radius:12px;
+  animation-name:f_fadeG;
+  animation-duration:1.04s;
+  animation-iteration-count:infinite;
+  animation-direction:linear;
+}
+
+#frotateG_01{
+  left:0;
+  top:52px;
+  -moz-animation-delay:0.39s;
+  -webkit-animation-delay:0.39s;
+  -o-animation-delay:0.39s;
+  -ms-animation-delay:0.39s;
+  animation-delay:0.39s;
+}
+
+#frotateG_02{
+  left:15px;
+  top:15px;
+  -moz-animation-delay:0.52s;
+  -webkit-animation-delay:0.52s;
+  -o-animation-delay:0.52s;
+  -ms-animation-delay:0.52s;
+  animation-delay:0.52s;
+}
+
+#frotateG_03{
+  left:52px;
+  top:0;
+  -moz-animation-delay:0.65s;
+  -webkit-animation-delay:0.65s;
+  -o-animation-delay:0.65s;
+  -ms-animation-delay:0.65s;
+  animation-delay:0.65s;
+}
+
+#frotateG_04{
+  right:15px;
+  top:15px;
+  -moz-animation-delay:0.78s;
+  -webkit-animation-delay:0.78s;
+  -o-animation-delay:0.78s;
+  -ms-animation-delay:0.78s;
+  animation-delay:0.78s;
+}
+
+#frotateG_05{
+  right:0;
+  top:52px;
+  -moz-animation-delay:0.91s;
+  -webkit-animation-delay:0.91s;
+  -o-animation-delay:0.91s;
+  -ms-animation-delay:0.91s;
+  animation-delay:0.91s;
+}
+
+#frotateG_06{
+  right:15px;
+  bottom:15px;
+  -moz-animation-delay:1.04s;
+  -webkit-animation-delay:1.04s;
+  -o-animation-delay:1.04s;
+  -ms-animation-delay:1.04s;
+  animation-delay:1.04s;
+}
+
+#frotateG_07{
+  left:52px;
+  bottom:0;
+  -moz-animation-delay:1.17s;
+  -webkit-animation-delay:1.17s;
+  -o-animation-delay:1.17s;
+  -ms-animation-delay:1.17s;
+  animation-delay:1.17s;
+}
+
+#frotateG_08{
+  left:15px;
+  bottom:15px;
+  -moz-animation-delay:1.3s;
+  -webkit-animation-delay:1.3s;
+  -o-animation-delay:1.3s;
+  -ms-animation-delay:1.3s;
+  animation-delay:1.3s;
+}
+
+@-moz-keyframes f_fadeG{
+  0%{
+    background-color:#FFFFFF}
+
+    100%{
+      background-color:#000000}
+
+}
+
+#floatingCirclesG {
+  margin:auto;
+}
+
 @font-face{font-family:'FontAwesome';src:url('../font/fontawesome-webfont.eot?v=3.2.1');src:url('../font/fontawesome-webfont.eot?#iefix&v=3.2.1') format('embedded-opentype'),url('../font/fontawesome-webfont.woff?v=3.2.1') format('woff'),url('../font/fontawesome-webfont.ttf?v=3.2.1') format('truetype'),url('../font/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1') format('svg');font-weight:normal;font-style:normal;}[class^="icon-"],[class*=" icon-"]{font-family:FontAwesome;font-weight:normal;font-style:normal;text-decoration:inherit;-webkit-font-smoothing:antialiased;*margin-right:.3em;}
 [class^="icon-"]:before,[class*=" icon-"]:before{text-decoration:inherit;display:inline-block;speak:none;}
 .icon-large:before{vertical-align:-10%;font-size:1.3333333333333333em;}
@@ -8172,7 +8308,7 @@ input[type="checkbox"].form-control {
   height:30px;
 }
 
-#spinner {  
+#spinner, #initialLoader {  
     width:100%;
     height:100%;
     background-color:black;
@@ -8180,6 +8316,20 @@ input[type="checkbox"].form-control {
     opacity:0.8;
     position:fixed;
     padding-top:150px;
+}
+
+#initialLoader {
+  opacity:1;
+  z-index:2000;
+  color:white;
+  top:0;
+  left:0;
+  text-align:center;
+}
+
+#initialLoader img {
+  width:50%;
+  padding-bottom:30px;
 }
 
 .complete {

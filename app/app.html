@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html ng-app="GuitarJournalApp" manifest="/app/manifest.appcache">
+<head>
+  <!-- Fix for broken routing in angular 1.1.5 -->
+  <base href="/" />
+  <meta charset="utf-8">
+  <title>OG Journal</title>
+
+  <!-- Sets initial viewport load and disables zooming  -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+
+  <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <!-- Set Apple icons for when prototype is saved to home screen -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/app/touch-icons/og-114.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/app/touch-icons/og-72.png">
+  <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/app/touch-icons/og-57.png">
+
+  <!-- iPhone -->
+  <link href="/app/img/splash.png" media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 1)" rel="apple-touch-startup-image">
+  <!-- iPhone 5 -->
+  <link href="/app/img/splash-640x1096.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" rel="apple-touch-startup-image">
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-cookies.min.js"></script>
+  <script src="/app/compiled/all.js"></script>
+  <script>
+    window.addEventListener('load', function() {
+      FastClick.attach(document.body);
+      if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+        document.getElementById("header").ontouchmove = function(event){
+          event.preventDefault();
+        };
+
+        document.getElementById("footer").ontouchmove = function(event){
+          event.preventDefault();
+        };
+      }
+      window.applicationCache.addEventListener('updateready', function(e) {
+        if (window.applicationCache.status == window.applicationCache.UPDATEREADY) {
+            // Browser downloaded a new app cache.
+              //window.applicationCache.swapCache();
+              window.location.reload();
+            }
+          }, false);
+    }, false);
+  </script>
+  <link rel="stylesheet" href="/app/compiled/all.css">
+  <script type="text/javascript">
+    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i)) {
+      document.write('<link rel="stylesheet" href="/app/css/iphone.css">')          
+    }
+
+    if (navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 7_\d/i)) {
+      document.write('<link rel="stylesheet" href="/app/css/iphone7.css">')
+    }
+  </script>
+  <script type="text/javascript">
+    function loadAuth() {
+      location.href = "/auth/facebook";
+    }
+
+    function goFB() {
+      location.href = "http://m.facebook.com";
+    }
+  </script>
+  <script>
+    if (window.location.hash == '#_=_'){
+      window.location.hash = '';
+    }
+  </script>
+  <style>
+    #floatingCirclesG{
+      position:relative;
+      width:128px;
+      height:128px;
+      -moz-transform:scale(0.6);
+      -webkit-transform:scale(0.6);
+      -o-transform:scale(0.6);
+      -ms-transform:scale(0.6);
+      transform:scale(0.6);
+    }
+
+    .f_circleG{
+      position:absolute;
+      background-color:#000000;
+      height:23px;
+      width:23px;
+      -moz-border-radius:12px;
+      -moz-animation-name:f_fadeG;
+      -moz-animation-duration:1.04s;
+      -moz-animation-iteration-count:infinite;
+      -moz-animation-direction:linear;
+      -webkit-border-radius:12px;
+      -webkit-animation-name:f_fadeG;
+      -webkit-animation-duration:1.04s;
+      -webkit-animation-iteration-count:infinite;
+      -webkit-animation-direction:linear;
+      -o-border-radius:12px;
+      -o-animation-name:f_fadeG;
+      -o-animation-duration:1.04s;
+      -o-animation-iteration-count:infinite;
+      -o-animation-direction:linear;
+      -ms-border-radius:12px;
+      -ms-animation-name:f_fadeG;
+      -ms-animation-duration:1.04s;
+      -ms-animation-iteration-count:infinite;
+      -ms-animation-direction:linear;
+      border-radius:12px;
+      animation-name:f_fadeG;
+      animation-duration:1.04s;
+      animation-iteration-count:infinite;
+      animation-direction:linear;
+    }
+
+    #frotateG_01{
+      left:0;
+      top:52px;
+      -moz-animation-delay:0.39s;
+      -webkit-animation-delay:0.39s;
+      -o-animation-delay:0.39s;
+      -ms-animation-delay:0.39s;
+      animation-delay:0.39s;
+    }
+
+    #frotateG_02{
+      left:15px;
+      top:15px;
+      -moz-animation-delay:0.52s;
+      -webkit-animation-delay:0.52s;
+      -o-animation-delay:0.52s;
+      -ms-animation-delay:0.52s;
+      animation-delay:0.52s;
+    }
+
+    #frotateG_03{
+      left:52px;
+      top:0;
+      -moz-animation-delay:0.65s;
+      -webkit-animation-delay:0.65s;
+      -o-animation-delay:0.65s;
+      -ms-animation-delay:0.65s;
+      animation-delay:0.65s;
+    }
+
+    #frotateG_04{
+      right:15px;
+      top:15px;
+      -moz-animation-delay:0.78s;
+      -webkit-animation-delay:0.78s;
+      -o-animation-delay:0.78s;
+      -ms-animation-delay:0.78s;
+      animation-delay:0.78s;
+    }
+
+    #frotateG_05{
+      right:0;
+      top:52px;
+      -moz-animation-delay:0.91s;
+      -webkit-animation-delay:0.91s;
+      -o-animation-delay:0.91s;
+      -ms-animation-delay:0.91s;
+      animation-delay:0.91s;
+    }
+
+    #frotateG_06{
+      right:15px;
+      bottom:15px;
+      -moz-animation-delay:1.04s;
+      -webkit-animation-delay:1.04s;
+      -o-animation-delay:1.04s;
+      -ms-animation-delay:1.04s;
+      animation-delay:1.04s;
+    }
+
+    #frotateG_07{
+      left:52px;
+      bottom:0;
+      -moz-animation-delay:1.17s;
+      -webkit-animation-delay:1.17s;
+      -o-animation-delay:1.17s;
+      -ms-animation-delay:1.17s;
+      animation-delay:1.17s;
+    }
+
+    #frotateG_08{
+      left:15px;
+      bottom:15px;
+      -moz-animation-delay:1.3s;
+      -webkit-animation-delay:1.3s;
+      -o-animation-delay:1.3s;
+      -ms-animation-delay:1.3s;
+      animation-delay:1.3s;
+    }
+
+    @-moz-keyframes f_fadeG{
+      0%{
+        background-color:#FFFFFF}
+
+        100%{
+          background-color:#000000}
+
+<<<<<<< HEAD
+        }
+=======
+      }
+      </style>
+      <style>
+      #floatingCirclesG {
+        margin:auto;
+      }
+      </style>
+  </head>
+  <body ng-controller="AppCtrl">
+    <div id="initialLoader" ng-show="!loggedIn && location.path() != '/login'">
+      <img src="/app/img/og-logo.png"><br>
+      INITIALIZING...
+    </div>
+
+
+  <div id="spinner" ng-show="apiStatus.showSpinner">
+    <div id="floatingCirclesG">
+    <div class="f_circleG" id="frotateG_01">
+    </div>
+    <div class="f_circleG" id="frotateG_02">
+    </div>
+    <div class="f_circleG" id="frotateG_03">
+    </div>
+    <div class="f_circleG" id="frotateG_04">
+    </div>
+    <div class="f_circleG" id="frotateG_05">
+    </div>
+    <div class="f_circleG" id="frotateG_06">
+    </div>
+    <div class="f_circleG" id="frotateG_07">
+    </div>
+    <div class="f_circleG" id="frotateG_08">
+    </div>
+    </div>
+  </div>
+  <div id="fb-root"></div>
+  <div growl class="growl"></div>
+
+  <!-- Make sure all your bars are the first things in your <body> -->
+  <header id="header" class="navbar navbar-default navbar-fixed-top" ng-show="!pageSettings.hideTopNavigation">
+    <a class="prev" href="javascript:history.back();" ng-show="pageSettings.showBackButton">
+      Back
+    </a>
+    <a class="right" ng-show="pageSettings.rightButtonText != null" ng-click="pageSettings.rightButtonClick()">
+      {{pageSettings.rightButtonText}}
+    </a>
+    <div class="container">
+      <div class="navbar-header">
+        <h1 class="navbar-brand">{{pageSettings.pageTitle}}</h1>
+        {{ currentRoute }}
+      </div>
+    </div>
+  </header>
+  <nav id="footer" class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-show="!pageSettings.hideNavigation">
+    <a class="{{pageSettings.active == 'home' && 'active' || ''}}" href="/">
+      <i class="icon-home icon-2x navicon"></i>
+      Home
+    </a>
+    <a href="/sessions" class="{{pageSettings.active == 'sessions' && 'active' || ''}}">
+      <i class="icon-list-ul icon-2x navicon"></i>
+      Sessions
+    </a>
+    <a href="/goals" class="{{pageSettings.active == 'goals' && 'active' || ''}}">
+      <i class="icon-trophy icon-2x navicon"></i>
+      Goals
+    </a>
+    <a href="/stats" class="{{pageSettings.active == 'stats' && 'active' || ''}}">
+      <i class="icon-bar-chart icon-2x navicon"></i>
+      Stats
+    </a>
+    <a href="/profile" class="{{pageSettings.active == 'profile' && 'active' || ''}}">
+      <i class="icon-user icon-2x navicon"></i>
+      Profile
+    </a>
+  </nav>
+
+  <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+  <div class="appbody {{ pageSettings.hideNavigation && 'higher' || '' }}">
+    <div class="wrapper-outer vflex scrolling">
+      <div class="wrapper-inner vflex scrolling">
+        <div id="scrollable-content" class="panel-content vflex">
+            <div route-animation-manager>
+              <ng-view class="view-animate"></ng-view>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script id="login.html" type="text/ng-template">
+    <div id="login-logo">
+      <img src="/app/img/og-logo.png">
+    </div>
+    <div class="content-padded">
+      <h2>Welcome to the OSIRIS GUITAR Journal</h2>
+      <p>
+      Get started right away by logging in with your Facebook account. This app will use your name and email address to create an account, never give the information away to anyone else and only post things to your timeline when you choose.</p>
+    </div>
+    <div class="input-group" ng-show="allowSimpleLogin">
+      <div class="input-row">
+        <label>Email</label>
+        <input ng-model="email" type="email"/>
+      </div>
+      <div class="input-row">
+        <label>Password</label>
+        <input type="password" ng-model="password" />
+      </div>
+    </div>
+    <a class="btn btn-default" ng-click="login()" ng-show="allowSimpleLogin">Login</a>
+    <div class="facebook-login">
+      <a href="javascript:" onclick="loadAuth()"><img height="40" src="/app/img/facebook.png"></a>
+    </div>
+  </script>
+
+  <script id="home.html" type="text/ng-template">
+    <div class="content-padded overview" ng-show="Sessions.sessions.length > 0">
+      <h2>{{profile.fullName}}</h2>
+      <div class="overview-row">
+        <div>
+          Sessions/week<br>
+          <span class="large" ng-class="{'trend-up':Statistics.weekStats.totalSessions > Statistics.statsOverview.sessionsPerWeek,'trend-down': Statistics.weekStats.totalSessions < Statistics.statsOverview.sessionsPerWeek}">{{Statistics.statsOverview.sessionsPerWeek || "" }}</span>
+        </div>
+        <div>
+          Average duration<br>
+          <span class="large" ng-class="{'trend-up':Statistics.weekStats.averageLength > Statistics.statsOverview.averageLength,'trend-down': Statistics.weekStats.averageLength < Statistics.statsOverview.averageLength}">{{Statistics.statsOverview.averageLength | suffix:" min"}}</span>          
+        </div>
+      </div>
+      <div class="overview-row">
+        <div>
+          Average rating<br>
+          <span class="large" ng-class="{'trend-up':Statistics.weekStats.averageRating > Statistics.statsOverview.averageRating,'trend-down': Statistics.weekStats.averageRating < Statistics.statsOverview.averageRating}">{{Statistics.statsOverview.averageRating || ""}}</span>          
+        </div>
+        <div>
+          Active goals<br>
+          <span class="large">{{Goals.getActiveGoals().length}}</span>
+        </div>
+      </div>
+    </div>
+    <div ng-cloak class="content-padded" style="display:none" ng-show="apiStatus.loading == 0 && (Goals.getActiveGoals().length === 0 || !Instruments.instruments || Instruments.instruments.length === 0 || !Sessions.sessions || Sessions.sessions.length === 0)">
+      <h2>Get started!</h2>
+      1. Add a goal <span ng-show="Goals.getActiveGoals().length > 0" class="complete">&#x2713;</span><br>
+      <a href="/goal/" class="btn btn-success" role="button" ng-show="Goals.getActiveGoals().length == 0">Add goal</a>
+      2. Add an instrument <span ng-show="Instruments.instruments && Instruments.instruments.length > 0" class="complete">&#x2713;</span><br>
+      <a href="/instrument/" ng-show="!Instruments.instruments || Instruments.instruments.length == 0" class="btn btn-success" role="button">Add instrument</a>
+      3. Log a practice session <span ng-show="Sessions.sessions && Sessions.sessions.length > 0" class="complete">&#x2713;</span><br>
+      <a href="/session/" ng-show="!Sessions.sessions || Sessions.sessions.length == 0" class="btn btn-success" role="button">New session</a>
+    </div>
+    <div class="content-padded" ng-show="Sessions.sessions">
+      <h2>Latest sessions</h2>
+    </div>
+    <div ng-show="Sessions.sessions">
+      <div class="list-group">
+        <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions | take:3">
+          <img ng-src="{{Instruments.getInstrumentImageUrl(session.instrumentId)}}">
+          <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
+          {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
+         </a>
+       </div>
+      <a href="/session/" type="button" class="btn btn-default">New Session</a>
+      <h2>Instruments</h2>
+      <div class="list-group">
+        <a class="list-group-item" href="/profile">
+          <img ng-src="{{Instruments.getInstrumentImageUrl(instrument._id)}}" ng-repeat="instrument in Instruments.instruments">
+        </a>
+      </div>
+    </div>
+  </script>
+
+  <script id="sessions.html" type="text/ng-template">
+    <div class="list-group">
+      <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions">
+        <img ng-src="{{Instruments.getInstrumentImageUrl(session.instrumentId)}}">
+        <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
+        {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
+       </a>
+    </div>
+    <div class="content-padded">
+      <a class="btn btn-default" type="button" ng-click="Sessions.getSessions(true)">Load more</a>
+    </div>
+  </script>
+
+  <script id="session.html" type="text/ng-template">
+    <div class="content-padded view" ng-show="!editMode">
+      <h2>{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
+      <img ng-src="{{Instruments.getInstrumentImageUrl(session.instrumentId)}}">
+      <div>
+        <div>
+          <b>Goal</b><br>
+          {{Goals.getGoalTitle(session.goalId)}} {{session.goalContribution}}
+        </div>
+        <div>
+          <b>Other gear</b><br>
+          {{session.gear}}
+        </div>
+        <div>
+          <b>Rating</b><br>
+          {{session.rating}}
+        </div>
+        <div>
+          <b>Location</b><br>
+          {{session.location}}
+        </div>
+        <div>
+          <b>Notes</b><br>
+          {{session.notes}}
+        </div>
+      </div>
+    </div>
+    <div class="facebook-login" ng-show="!editMode">
+      <a href="" ng-click="shareToFacebook()"><img height="40" src="/app/img/facebook-share.png"></a>
+    </div>
+    <div class="content-padded">
+      <form class="form-horizontal" ng-show="editMode">
+        <div class="form-group">
+          <label class="control-label">Date</label>
+          <input class="form-control" type="date" ng-model="session.date" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Start time</label>
+          <input class="form-control" type="time" ng-model="session.startTime" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">End time</label>
+          <input class="form-control" type="time" ng-model="session.endTime" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Goal</label>
+          <select class="form-control" ng-model="session.goalId" ng-disabled="!editMode">
+            <option ng-repeat="goal in Goals.goals" value="{{goal._id}}" ng-selected="session.goalId == goal._id">{{goal.title}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Instrument</label>
+          <select class="form-control" ng-model="session.instrumentId" ng-disabled="!editMode">
+            <option ng-repeat="instrument in Instruments.instruments" value="{{instrument._id}}" ng-selected="session.instrumentId == instrument._id">{{instrument.name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Other gear</label>
+          <input class="form-control" placeholder="Example: AmpKit, DAW" type="text" ng-model="session.gear" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Rating</label>
+          <input class="form-control" placeholder="Your own rating (1-5)" type="number" ng-model="session.rating" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Location</label>
+          <input class="form-control" placeholder="Example: Home studio" type="text" ng-model="session.location" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Notes</label>
+          <textarea class="form-control" placeholder="General notes (never shared)" ng-disabled="!editMode" ng-model="session.notes"></textarea>
+        </div>
+        <a class="btn btn-success" type="button" ng-click="save()" ng-show="editMode">Save</a>
+        <a class="btn btn-danger" type="button" ng-click="delete()" ng-show="editMode && session._id">Delete</a>
+      </form>
+    </div>
+  </script>
+
+  <script id="goals.html" type="text/ng-template">
+    <div class="list-group">
+      <a href="/goal/{{goal._id}}" class="list-group-item {{goal.completed && 'completed' || ''}}" ng-repeat="goal in Goals.goals">
+          <strong>{{goal.title}}</strong><br>
+          {{goal.description}}
+      </a>
+    </div>
+  </script>
+  
+  <script id="goal.html" type="text/ng-template">
+    <div class="content-padded" ng-show="!editMode">
+      <h2>{{goal.title}} ({{goal.complete && '' || 'not ' }}complete)</h2>
+      {{goal.description}}
+    </div>
+    <div class="content-padded">
+      <form class="form-horizontal" ng-show="editMode">
+        <div class="form-group">
+          <label class="control-label">Title</label>
+          <input class="form-control" placeholder="Example: Record new song" type="text" ng-model="goal.title" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Description</label>
+          <textarea class="form-control" placeholder="Example: Record and arrange tracks for new song" ng-disabled="!editMode" ng-model="goal.description"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Completed</label>
+          <input class="form-control" type="checkbox" ng-model="goal.completed" ng-change="goal.completionDate = getDate()" ng-disabled="!editMode" />
+        </div>
+        <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
+        <a class="btn btn-danger" ng-click="delete()" ng-show="editMode && goal._id">Delete</a>
+      </form>
+    </div>
+  </script>
+
+  <script id="stats.html" type="text/ng-template">
+    <div class="content-padded" ng-show="Statistics.statsOverview.totalSessions > 0">
+      <h2>Sessions</h2>
+      <div class="fieldLabel">Total sessions:</div>
+      <div class="info">{{Statistics.statsOverview.totalSessions}}</div>
+      <div class="fieldLabel">Total time:</div>
+      <div class="info">{{Math.floor(Statistics.statsOverview.totalLength / 60)}} hours, {{Statistics.statsOverview.totalLength % 60}} minutes</div>
+      <div class="fieldLabel">Average duration:</div>
+      <div class="info">{{Statistics.statsOverview.averageLength}} minutes</div>
+      <div class="fieldLabel">Average rating:</div>
+      <div class="info">{{Statistics.statsOverview.averageRating}}</div>
+      <div class="fieldLabel">Sessions per week:</div>
+      <div class="info">{{Statistics.statsOverview.sessionsPerWeek}}</div>      
+      <div class="fieldLabel">Latest session:</div>
+      <div class="info">{{Statistics.statsOverview.latestSession | date:'yyyy-MM-dd'}}</div> 
+    </div>
+    <div style="">
+      <div class="content-padded diagram">
+        <h2>Sessions per week</h2>
+        <canvas barchart options="optionsWeek" data="sessionsPerWeek" id="sessionsPerWeek" width="270" height="200"></canvas>    
+      </div>
+      <div class="content-padded diagram">
+        <h2>Minutes per week</h2>
+        <canvas barchart options="optionsWeek" data="minutesPerWeek" id="minutesPerWeek" width="270" height="200"></canvas>    
+      </div>
+      <div class="content-padded diagram">
+        <h2>Durations last 30 days</h2>
+        <canvas barchart options="options30days" data="last30days" id="last30days" width="270" height="200"></canvas>    
+      </div>
+      <div class="content-padded diagram">
+        <h2>Sessions per weekday</h2>
+        <canvas donutchart options="optionsPerWeekday" data="perWeekday" id="perWeekday" width="200" height="200" style="float:left;"></canvas>
+        <div style="float:left;margin-top:20px;margin-left:15px;">
+          <div><span style="color:{{weekdayColors[1]}}">&#9724;</span> Mon</div>
+          <div><span style="color:{{weekdayColors[2]}}">&#9724;</span> Tue</div>
+          <div><span style="color:{{weekdayColors[3]}}">&#9724;</span> Wed</div>
+          <div><span style="color:{{weekdayColors[4]}}">&#9724;</span> Thu</div>
+          <div><span style="color:{{weekdayColors[5]}}">&#9724;</span> Fri</div>
+          <div><span style="color:{{weekdayColors[6]}}">&#9724;</span> Sat</div>
+          <div><span style="color:{{weekdayColors[0]}}">&#9724;</span> Sun</div>
+        </div>   
+      </div>
+      <div class="content-padded">
+        <h2>Goals</h2>
+        <div class="fieldLabel">Active goals:</div>
+        <div class="info">{{Goals.getActiveGoals().length}}</div>
+        <div class="fieldLabel">Completed goals:</div>
+        <div class="info">{{Goals.goals.length - Goals.getActiveGoals().length}}</div>
+      </div>
+      <div class="content-padded">
+        <h2>Instruments</h2>
+        <div class="fieldLabel">Intruments:</div>
+        <div class="info">{{Instruments.instruments.length}}</div>
+        <!--<div class="label">Most popular:</div>
+        <div class="info">{{getInstrument(Statistics.statsOverview.mostUsedInstrument).name}}</div>-->
+      </div>
+    </div>
+  </script>
+
+  <script id="profile.html" type="text/ng-template">
+    <div class="content-padded">
+      <h2>Profile</h2>
+      <div class="fieldLabel">Username:</div>
+      <div class="info">{{profile.username}}</div>
+      <div class="fieldLabel">Email:</div>
+      <div class="info">{{profile.email}}</div>
+      <h2 class="padded">Instruments</h2>
+      <div class="list-group">
+        <a class="list-group-item" href="/instrument/{{instrument._id}}" ng-repeat="instrument in Instruments.instruments">
+            <img ng-src="{{Instruments.getInstrumentImageUrl(instrument._id)}}">
+            <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
+            {{instrument.description}}
+        </a>
+      </div>
+
+      <a class="btn btn-default" type="button" href="/instrument/">Add Instrument</a>
+      <h2>Logout</h2>
+      <a class="btn btn-danger" type="button" ng-click="logout()" target="_self">Logout</a>
+      <h2>Support</h2>
+      <p>
+        <a class="btn btn-success" type="button" href="http://www.osirisguitar.com/journalsupport#external">Support</a>
+      </p>
+    </div>
+  </script>
+
+  <script id="instrument.html" type="text/ng-template">
+    <div class="content-padded view" ng-show="!editMode">
+      <h2>{{instrument.name}}</h2>
+      <img ng-src="{{Instruments.getInstrumentImageUrl(instrument._id)}}">
+      <div>
+        <div>
+          <b>Type</b><br>
+          {{instrument.type}}
+        </div>
+        <div>
+          <b>Description</b><br>
+          {{instrument.description}}
+        </div>
+      </div>
+    </div>
+    <div class="content-padded">
+      <form class="form-horizontal" ng-show="editMode" ng-class="{ imageChanged: imageChanged }">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input class="form-control" placeholder="Example: Fender American Stratocaster" type="text" ng-model="instrument.name" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Type</label>
+          <input class="form-control" placeholder="Example: 6-string electric" type="text" ng-model="instrument.type" ng-disabled="!editMode" />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Description</label>
+          <textarea class="form-control" placeholder="Example: My standard guitar" ng-disabled="!editMode" ng-model="instrument.description"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="control-label">Image</label>
+          <input class="form-control" type="file" id="imagefield" onchange="angular.element(this).scope().setImage(this)" />
+        </div>
+        <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
+        <a class="btn btn-danger" ng-click="delete()" ng-show="editMode && instrument._id">Delete</a>
+      </form>
+    </div>
+  </script>
+>>>>>>> master
+
+        @-webkit-keyframes f_fadeG{
+          0%{
+            background-color:#FFFFFF}
+
+            100%{
+              background-color:#000000}
+
+            }
+
+            @-o-keyframes f_fadeG{
+              0%{
+                background-color:#FFFFFF}
+
+                100%{
+                  background-color:#000000}
+
+                }
+
+                @-ms-keyframes f_fadeG{
+                  0%{
+                    background-color:#FFFFFF}
+
+                    100%{
+                      background-color:#000000}
+
+                    }
+
+                    @keyframes f_fadeG{
+                      0%{
+                        background-color:#FFFFFF}
+
+                        100%{
+                          background-color:#000000}
+
+                        }
+                      </style>
+                      <style>
+                        #floatingCirclesG {
+                          margin:auto;
+                        }
+                      </style>
+                    </head>
+                    <body ng-controller="AppCtrl">
+
+                      <div id="spinner" ng-show="apiStatus.showSpinner">
+                        <div id="floatingCirclesG">
+                          <div class="f_circleG" id="frotateG_01">
+                          </div>
+                          <div class="f_circleG" id="frotateG_02">
+                          </div>
+                          <div class="f_circleG" id="frotateG_03">
+                          </div>
+                          <div class="f_circleG" id="frotateG_04">
+                          </div>
+                          <div class="f_circleG" id="frotateG_05">
+                          </div>
+                          <div class="f_circleG" id="frotateG_06">
+                          </div>
+                          <div class="f_circleG" id="frotateG_07">
+                          </div>
+                          <div class="f_circleG" id="frotateG_08">
+                          </div>
+                        </div>
+                      </div>
+                      <div id="fb-root"></div>
+                      <div growl class="growl"></div>
+
+                      <!-- Make sure all your bars are the first things in your <body> -->
+                      <header id="header" class="navbar navbar-default navbar-fixed-top" ng-show="!pageSettings.hideTopNavigation">
+                        <a class="prev" href="javascript:history.back();" ng-show="pageSettings.showBackButton">
+                          Back
+                        </a>
+                        <a class="right" ng-show="pageSettings.rightButtonText != null" ng-click="pageSettings.rightButtonClick()">
+                          {{pageSettings.rightButtonText}}
+                        </a>
+                        <div class="container">
+                          <div class="navbar-header">
+                            <h1 class="navbar-brand">{{pageSettings.pageTitle}}</h1>
+                          </div>
+                        </div>
+                      </header>
+                      <nav id="footer" class="navbar navbar-default navbar-fixed-bottom" role="navigation" ng-show="!pageSettings.hideNavigation">
+                        <a class="{{pageSettings.active == 'home' && 'active' || ''}}" href="/">
+                          <i class="icon-home icon-2x navicon"></i>
+                          Home
+                        </a>
+                        <a href="/sessions" class="{{pageSettings.active == 'sessions' && 'active' || ''}}">
+                          <i class="icon-list-ul icon-2x navicon"></i>
+                          Sessions
+                        </a>
+                        <a href="/goals" class="{{pageSettings.active == 'goals' && 'active' || ''}}">
+                          <i class="icon-trophy icon-2x navicon"></i>
+                          Goals
+                        </a>
+                        <a href="/stats" class="{{pageSettings.active == 'stats' && 'active' || ''}}">
+                          <i class="icon-bar-chart icon-2x navicon"></i>
+                          Stats
+                        </a>
+                        <a href="/profile" class="{{pageSettings.active == 'profile' && 'active' || ''}}">
+                          <i class="icon-user icon-2x navicon"></i>
+                          Profile
+                        </a>
+                      </nav>
+
+                      <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
+                      <div class="appbody {{ pageSettings.hideNavigation && 'higher' || '' }}">
+                        <div class="wrapper-outer vflex scrolling">
+                          <div class="wrapper-inner vflex scrolling">
+                            <div id="scrollable-content" class="panel-content vflex">
+                              <div route-animation-manager>
+                                <ng-view class="view-animate"></ng-view>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <script id="login.html" type="text/ng-template">
+                        <div id="login-logo">
+                          <img src="/app/img/og-logo.png">
+                        </div>
+                        <div class="content-padded">
+                          <h2>Log and share your progress</h2>
+                        </div>
+                        <div class="login">
+                          <button type="button" class="btn btn-info" ng-click="showLogin = !showLogin">Log in</button>
+                          <div class="well" ng-show="showLogin">
+                                <input class="form-control" ng-model="email" placeholder="email" type="email"/>
+                                <input class="form-control" type="password" placeholder="password" ng-model="password" />
+                            <button class="btn btn-success btn-sm" ng-click="login()" ng-show="allowSimpleLogin">Login</a>
+                            <button class="btn btn-info btn-sm" ng-click="forgotPassword()" ng-show="allowSimpleLogin">Forgot Password</a>
+                          </div>
+                        </div>
+                        <div class="login">
+                          <button type="button" class="btn btn-primary" ng-click="showSignUp = !showSignUp">Sign up</button>
+                          <div class="well" ng-show="showSignUp">
+                                <input class="form-control" ng-model="signupEmail" placeholder="email (required)" type="email" />
+                                <input class="form-control" type="password" placeholder="password (required)" ng-model="signupPassword" />
+                                <input class="form-control" type="text" placeholder="username" ng-model="signupUsername" />
+                                <input class="form-control" type="text" placeholder="full name" ng-model="signupFullName" />                                
+                              <button class="btn btn-success btn-sm" ng-click="signUp()" ng-show="allowSimpleLogin">Sign up</a>
+                          </div>
+                        </div>
+                        <div class="facebook-login">
+                          <p ng-show="false">
+                            Get started right away by logging in with your Facebook account. This app will use your name and email address to create an account, never give the information away to anyone else and only post things to your timeline when you choose.
+                          </p>              
+                          <a href="javascript:" onclick="loadAuth()"><img height="40" src="/app/img/facebook.png"></a>
+                        </div>
+                      </script>
+
+                        <script id="home.html" type="text/ng-template">
+                          <div class="content-padded overview" ng-show="Sessions.sessions.length > 0">
+                            <h2>{{profile.fullName}}</h2>
+                            <div class="overview-row">
+                              <div>
+                                Sessions/week<br>
+                                <span class="large" ng-class="{'trend-up':Statistics.weekStats.totalSessions > Statistics.statsOverview.sessionsPerWeek,'trend-down': Statistics.weekStats.totalSessions < Statistics.statsOverview.sessionsPerWeek}">{{Statistics.statsOverview.sessionsPerWeek || "" }}</span>
+                              </div>
+                              <div>
+                                Average duration<br>
+                                <span class="large" ng-class="{'trend-up':Statistics.weekStats.averageLength > Statistics.statsOverview.averageLength,'trend-down': Statistics.weekStats.averageLength < Statistics.statsOverview.averageLength}">{{Statistics.statsOverview.averageLength | suffix:" min"}}</span>          
+                              </div>
+                            </div>
+                            <div class="overview-row">
+                              <div>
+                                Average rating<br>
+                                <span class="large" ng-class="{'trend-up':Statistics.weekStats.averageRating > Statistics.statsOverview.averageRating,'trend-down': Statistics.weekStats.averageRating < Statistics.statsOverview.averageRating}">{{Statistics.statsOverview.averageRating || ""}}</span>          
+                              </div>
+                              <div>
+                                Active goals<br>
+                                <span class="large">{{Goals.getActiveGoals().length}}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div ng-cloak class="content-padded" ng-show="Goals.getActiveGoals().length == 0 || !Instruments.instruments || Instruments.instruments.length == 0 || !Sessions.sessions || Sessions.sessions.length == 0">
+                            <h2>Get started!</h2>
+                            1. Add a goal <span ng-show="Goals.getActiveGoals().length > 0" class="complete">&#x2713;</span><br>
+                            <a href="/goal/" class="btn btn-success" role="button" ng-show="Goals.getActiveGoals().length == 0">Add goal</a>
+                            2. Add an instrument <span ng-show="Instruments.instruments && Instruments.instruments.length > 0" class="complete">&#x2713;</span><br>
+                            <a href="/instrument/" ng-show="!Instruments.instruments || Instruments.instruments.length == 0" class="btn btn-success" role="button">Add instrument</a>
+                            3. Log a practice session <span ng-show="Sessions.sessions && Sessions.sessions.length > 0" class="complete">&#x2713;</span><br>
+                            <a href="/session/" ng-show="!Sessions.sessions || Sessions.sessions.length == 0" class="btn btn-success" role="button">New session</a>
+                          </div>
+                          <div class="content-padded">
+                            <h2>Latest sessions</h2>
+                          </div>
+                          <div>
+                            <div class="list-group">
+                              <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions | take:3">
+                                <img ng-src="{{Instruments.getInstrumentImageUrl(session.instrumentId)}}">
+                                <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
+                                {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
+                              </a>
+                            </div>
+                            <a href="/session/" type="button" class="btn btn-default">New Session</a>
+                            <h2>Instruments</h2>
+                            <div class="list-group">
+                              <a class="list-group-item" href="/profile">
+                                <img ng-src="{{Instruments.getInstrumentImageUrl(instrument._id)}}" ng-repeat="instrument in Instruments.instruments">
+                              </a>
+                            </div>
+                          </div>
+                        </script>
+
+                        <script id="sessions.html" type="text/ng-template">
+                          <div class="list-group">
+                            <a class="list-group-item" href="/session/{{session._id}}" ng-repeat="session in Sessions.sessions">
+                              <img ng-src="{{Instruments.getInstrumentImageUrl(session.instrumentId)}}">
+                              <strong>{{session.date | date:'yyyy-MM-dd'}}: {{session.length}} min. {{getInstrumentName(session.instrumentId)}}</strong><br>
+                              {{session.goalId && Goals.getGoalTitle(session.goalId) + " " || ""}}{{session.location && " (" + session.location + ") "  || ""}}
+                            </a>
+                          </div>
+                          <div class="content-padded">
+                            <a class="btn btn-default" type="button" ng-click="Sessions.getSessions(true)">Load more</a>
+                          </div>
+                        </script>
+
+                        <script id="session.html" type="text/ng-template">
+                          <div class="content-padded view" ng-show="!editMode">
+                            <h2>{{session.date | date:'yyyy-MM-dd'}}, {{session.length}} minutes</h2>
+                            <img ng-src="{{Instruments.getInstrumentImageUrl(session.instrumentId)}}">
+                            <div>
+                              <div>
+                                <b>Goal</b><br>
+                                {{Goals.getGoalTitle(session.goalId)}} {{session.goalContribution}}
+                              </div>
+                              <div>
+                                <b>Other gear</b><br>
+                                {{session.gear}}
+                              </div>
+                              <div>
+                                <b>Rating</b><br>
+                                {{session.rating}}
+                              </div>
+                              <div>
+                                <b>Location</b><br>
+                                {{session.location}}
+                              </div>
+                              <div>
+                                <b>Notes</b><br>
+                                {{session.notes}}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="facebook-login" ng-show="!editMode && fbAccessToken">
+                            <a href="" ng-click="shareToFacebook()"><img height="40" src="/app/img/facebook-share.png"></a>
+                          </div>
+                          <div class="content-padded">
+                            <form class="form-horizontal" ng-show="editMode">
+                              <div class="form-group">
+                                <label class="control-label">Date</label>
+                                <input class="form-control" type="date" ng-model="session.date" ng-disabled="!editMode" />
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Start time</label>
+                                <input class="form-control" type="time" ng-model="session.startTime" ng-disabled="!editMode" />
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">End time</label>
+                                <input class="form-control" type="time" ng-model="session.endTime" ng-disabled="!editMode" />
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Goal</label>
+                                <select class="form-control" ng-model="session.goalId" ng-disabled="!editMode">
+                                  <option ng-repeat="goal in Goals.goals" value="{{goal._id}}" ng-selected="session.goalId == goal._id">{{goal.title}}</option>
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Instrument</label>
+                                <select class="form-control" ng-model="session.instrumentId" ng-disabled="!editMode">
+                                  <option ng-repeat="instrument in Instruments.instruments" value="{{instrument._id}}" ng-selected="session.instrumentId == instrument._id">{{instrument.name}}</option>
+                                </select>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Other gear</label>
+                                <input class="form-control" placeholder="Example: AmpKit, DAW" type="text" ng-model="session.gear" ng-disabled="!editMode" />
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Rating</label>
+                                <input class="form-control" placeholder="Your own rating (1-5)" type="number" ng-model="session.rating" ng-disabled="!editMode" />
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Location</label>
+                                <input class="form-control" placeholder="Example: Home studio" type="text" ng-model="session.location" ng-disabled="!editMode" />
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Notes</label>
+                                <textarea class="form-control" placeholder="General notes (never shared)" ng-disabled="!editMode" ng-model="session.notes"></textarea>
+                              </div>
+                              <a class="btn btn-success" type="button" ng-click="save()" ng-show="editMode">Save</a>
+                              <a class="btn btn-danger" type="button" ng-click="delete()" ng-show="editMode && session._id">Delete</a>
+                            </form>
+                          </div>
+                        </script>
+
+                        <script id="goals.html" type="text/ng-template">
+                          <div class="list-group">
+                            <a href="/goal/{{goal._id}}" class="list-group-item {{goal.completed && 'completed' || ''}}" ng-repeat="goal in Goals.goals">
+                              <strong>{{goal.title}}</strong><br>
+                              {{goal.description}}
+                            </a>
+                          </div>
+                        </script>
+
+                        <script id="goal.html" type="text/ng-template">
+                          <div class="content-padded" ng-show="!editMode">
+                            <h2>{{goal.title}} ({{goal.complete && '' || 'not ' }}complete)</h2>
+                            {{goal.description}}
+                          </div>
+                          <div class="content-padded">
+                            <form class="form-horizontal" ng-show="editMode">
+                              <div class="form-group">
+                                <label class="control-label">Title</label>
+                                <input class="form-control" placeholder="Example: Record new song" type="text" ng-model="goal.title" ng-disabled="!editMode" />
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Description</label>
+                                <textarea class="form-control" placeholder="Example: Record and arrange tracks for new song" ng-disabled="!editMode" ng-model="goal.description"></textarea>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Completed</label>
+                                <input class="form-control" type="checkbox" ng-model="goal.completed" ng-change="goal.completionDate = getDate()" ng-disabled="!editMode" />
+                              </div>
+                              <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
+                              <a class="btn btn-danger" ng-click="delete()" ng-show="editMode && goal._id">Delete</a>
+                            </form>
+                          </div>
+                        </script>
+
+                        <script id="stats.html" type="text/ng-template">
+                          <div class="content-padded" ng-show="Statistics.statsOverview.totalSessions > 0">
+                            <h2>Sessions</h2>
+                            <div class="fieldLabel">Total sessions:</div>
+                            <div class="info">{{Statistics.statsOverview.totalSessions}}</div>
+                            <div class="fieldLabel">Total time:</div>
+                            <div class="info">{{Math.floor(Statistics.statsOverview.totalLength / 60)}} hours, {{Statistics.statsOverview.totalLength % 60}} minutes</div>
+                            <div class="fieldLabel">Average duration:</div>
+                            <div class="info">{{Statistics.statsOverview.averageLength}} minutes</div>
+                            <div class="fieldLabel">Average rating:</div>
+                            <div class="info">{{Statistics.statsOverview.averageRating}}</div>
+                            <div class="fieldLabel">Sessions per week:</div>
+                            <div class="info">{{Statistics.statsOverview.sessionsPerWeek}}</div>      
+                            <div class="fieldLabel">Latest session:</div>
+                            <div class="info">{{Statistics.statsOverview.latestSession | date:'yyyy-MM-dd'}}</div> 
+                          </div>
+                          <div style="">
+                            <div class="content-padded diagram">
+                              <h2>Sessions per week</h2>
+                              <canvas barchart options="optionsWeek" data="sessionsPerWeek" id="sessionsPerWeek" width="270" height="200"></canvas>    
+                            </div>
+                            <div class="content-padded diagram">
+                              <h2>Minutes per week</h2>
+                              <canvas barchart options="optionsWeek" data="minutesPerWeek" id="minutesPerWeek" width="270" height="200"></canvas>    
+                            </div>
+                            <div class="content-padded diagram">
+                              <h2>Durations last 30 days</h2>
+                              <canvas barchart options="options30days" data="last30days" id="last30days" width="270" height="200"></canvas>    
+                            </div>
+                            <div class="content-padded diagram">
+                              <h2>Sessions per weekday</h2>
+                              <canvas donutchart options="optionsPerWeekday" data="perWeekday" id="perWeekday" width="200" height="200" style="float:left;"></canvas>
+                              <div style="float:left;margin-top:20px;margin-left:15px;">
+                                <div><span style="color:{{weekdayColors[1]}}">&#9724;</span> Mon</div>
+                                <div><span style="color:{{weekdayColors[2]}}">&#9724;</span> Tue</div>
+                                <div><span style="color:{{weekdayColors[3]}}">&#9724;</span> Wed</div>
+                                <div><span style="color:{{weekdayColors[4]}}">&#9724;</span> Thu</div>
+                                <div><span style="color:{{weekdayColors[5]}}">&#9724;</span> Fri</div>
+                                <div><span style="color:{{weekdayColors[6]}}">&#9724;</span> Sat</div>
+                                <div><span style="color:{{weekdayColors[0]}}">&#9724;</span> Sun</div>
+                              </div>   
+                            </div>
+                            <div class="content-padded">
+                              <h2>Goals</h2>
+                              <div class="fieldLabel">Active goals:</div>
+                              <div class="info">{{Goals.getActiveGoals().length}}</div>
+                              <div class="fieldLabel">Completed goals:</div>
+                              <div class="info">{{Goals.goals.length - Goals.getActiveGoals().length}}</div>
+                            </div>
+                            <div class="content-padded">
+                              <h2>Instruments</h2>
+                              <div class="fieldLabel">Intruments:</div>
+                              <div class="info">{{Instruments.instruments.length}}</div>
+                              <!--<div class="label">Most popular:</div>
+                              <div class="info">{{getInstrument(Statistics.statsOverview.mostUsedInstrument).name}}</div>-->
+                            </div>
+                          </div>
+                        </script>
+
+                        <script id="profile.html" type="text/ng-template">
+                          <div class="content-padded">
+                            <h2>Profile</h2>
+                            <div class="fieldLabel">Username:</div>
+                            <div class="info">{{profile.username}}</div>
+                            <div class="fieldLabel">Email:</div>
+                            <div class="info">{{profile.email}}</div>
+                            <h2 class="padded">Instruments</h2>
+                            <div class="list-group">
+                              <a class="list-group-item" href="/instrument/{{instrument._id}}" ng-repeat="instrument in Instruments.instruments">
+                                <img ng-src="{{Instruments.getInstrumentImageUrl(instrument._id)}}">
+                                <strong>{{instrument.name}} ({{instrument.type}})</strong><br>
+                                {{instrument.description}}
+                              </a>
+                            </div>
+
+                            <a class="btn btn-default" type="button" href="/instrument/">Add Instrument</a>
+                            <h2>Logout</h2>
+                            <a class="btn btn-danger" type="button" ng-click="logout()" target="_self">Logout</a>
+                            <h2>Support</h2>
+                            <p>
+                              <a class="btn btn-success" type="button" href="http://www.osirisguitar.com/journalsupport#external">Support</a>
+                            </p>
+                          </div>
+                        </script>
+
+                        <script id="instrument.html" type="text/ng-template">
+                          <div class="content-padded view" ng-show="!editMode">
+                            <h2>{{instrument.name}}</h2>
+                            <img ng-src="{{Instruments.getInstrumentImageUrl(instrument._id)}}">
+                            <div>
+                              <div>
+                                <b>Type</b><br>
+                                {{instrument.type}}
+                              </div>
+                              <div>
+                                <b>Description</b><br>
+                                {{instrument.description}}
+                              </div>
+                            </div>
+                          </div>
+                          <div class="content-padded">
+                            <form class="form-horizontal" ng-show="editMode" ng-class="{ imageChanged: imageChanged }">
+                              <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input class="form-control" placeholder="Example: Fender American Stratocaster" type="text" ng-model="instrument.name" ng-disabled="!editMode" />
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Type</label>
+                                <input class="form-control" placeholder="Example: 6-string electric" type="text" ng-model="instrument.type" ng-disabled="!editMode" />
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Description</label>
+                                <textarea class="form-control" placeholder="Example: My standard guitar" ng-disabled="!editMode" ng-model="instrument.description"></textarea>
+                              </div>
+                              <div class="form-group">
+                                <label class="control-label">Image</label>
+                                <input class="form-control" type="file" id="imagefield" onchange="angular.element(this).scope().setImage(this)" />
+                              </div>
+                              <a class="btn btn-success" ng-click="save()" ng-show="editMode">Save</a>
+                              <a class="btn btn-danger" ng-click="delete()" ng-show="editMode && instrument._id">Delete</a>
+                            </form>
+                          </div>
+                        </script>
+
+                      </body>
+                      </html>

@@ -23,6 +23,7 @@ var crypto = require("crypto");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var moment = require("moment");
 
 express.static.mime.define({'application/font-woff': ['woff']});
 journalStore.setConnectionString(mongoConnectionString);
@@ -490,6 +491,16 @@ app.post("/api/sessions", ensureAuthenticated, function(req, res) {
 	}
 	if (req.body.date) {
 		req.body.date = new Date(req.body.date);
+	}
+	if (req.body.startTime && req.body.endTime) {
+		var start = moment(req.body.startDate);
+		start.hour(req.body.startTime.split(":")[0]);
+		start.minute(req.body.startTime.split(":")[1]);
+		var end = moment(req.body.startDate);
+		end.hour(req.body.endTime.split(":")[0]);
+		end.minute(req.body.endTime.split(":")[1]);
+
+		req.body.length = Math.round(moment.duration(end - start) / 60000);
 	}
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }

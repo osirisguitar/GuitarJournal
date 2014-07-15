@@ -1143,8 +1143,9 @@ var GuitarJournalApp = angular.module('GuitarJournalApp', ['ngRoute', 'ngCookies
         return input; 
     };
   });
-function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $window) {
+function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $window, $timeout) {
 	$scope.pageSettings = {};
+	$scope.location = $location;
 	$rootScope.apiStatus = {};
 	$rootScope.apiStatus.loading = 0;
 	$scope.apiStatus = $rootScope.apiStatus;
@@ -1157,6 +1158,10 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 		hideNavigation: false,
 		hideTopNavigation: false
 	};
+
+	$rootScope.$on('$routeChangeSuccess', function(event, data) {
+		console.log('route', data);
+	});
 
 	$scope.iOS = $window.navigator.userAgent.match(/iPhone/i) || $window.navigator.userAgent.match(/iPad/i);
 
@@ -1205,25 +1210,28 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 	});
 
 	$http.get('/api/loggedin').success(function(data) {
-		$rootScope.apiStatus.loading++;
-		$rootScope.csrf = data._csrf;
-		$rootScope.httpConfig = {
-			headers: { "X-CSRF-Token": $rootScope.csrf }
-		};
-		if (data._id) {
-			$rootScope.loggedIn = true;
-			$rootScope.fbAccessToken = data.fbAccessToken;
-			$rootScope.apiStatus.loading--;
-		}
-		else {
-			$rootScope.apiStatus.loading--;
-			if (data.autoTryFacebook) {
-				$window.location.href = "/auth/facebook";
+		$timeout(function() {
+			$rootScope.apiStatus.loading++;
+			$rootScope.csrf = data._csrf;
+			$rootScope.httpConfig = {
+				headers: { "X-CSRF-Token": $rootScope.csrf }
+			};
+			if (data._id) {
+				$rootScope.loggedIn = true;
+				$rootScope.fbAccessToken = data.fbAccessToken;
+				$rootScope.apiStatus.loading--;
 			}
 			else {
-				$location.path("/login");
+				$rootScope.apiStatus.loading--;
+				if (data.autoTryFacebook) {
+					$window.location.href = "/auth/facebook";
+				}
+				else {
+					$location.path("/login");
+				}
 			}
-		}
+
+		}, 3000);
 	}).error(function(error) {
 		$scope.showErrorMessage("Error when logging in", error);
 	});
@@ -1954,7 +1962,7 @@ GuitarJournalApp.factory('Instruments', function($http, $rootScope, Statistics) 
 
 	return service;
 });
-GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics) {
+GuitarJournalApp.factory('Sessions', function($http, $rootScope, Statistics, $window) {
 	var service = {};
 	service.sessions = undefined;
 

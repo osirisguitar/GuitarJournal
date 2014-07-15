@@ -321,7 +321,7 @@ input[type="checkbox"].form-control {
   height:30px;
 }
 
-#spinner {  
+#spinner, #initialLoader {  
     width:100%;
     height:100%;
     background-color:black;
@@ -329,6 +329,20 @@ input[type="checkbox"].form-control {
     opacity:0.8;
     position:fixed;
     padding-top:150px;
+}
+
+#initialLoader {
+  opacity:1;
+  z-index:2000;
+  color:white;
+  top:0;
+  left:0;
+  text-align:center;
+}
+
+#initialLoader img {
+  width:50%;
+  padding-bottom:30px;
 }
 
 .complete {
