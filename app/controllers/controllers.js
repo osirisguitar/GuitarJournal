@@ -118,7 +118,7 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 				$scope.pageSettings.hideNavigation = false;
 			}
 			$location.path("/");
-		}).error(function(error) { $scope.showErrorMessage("Could not log in", error); });
+		}).error(function(error) { $scope.showErrorMessage("Wrong email or password, please try again", error); });
 	};
 
 	$scope.signUp = function() {
