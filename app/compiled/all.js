@@ -1222,6 +1222,7 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 				$rootScope.apiStatus.loading--;
 			}
 			else {
+				console.log("Not logged in, trying to autologin with FB");
 				$rootScope.apiStatus.loading--;
 				if (data.autoTryFacebook) {
 					$window.location.href = "/auth/facebook";

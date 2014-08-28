@@ -82,8 +82,12 @@ module.exports = function(grunt) {
 			      preferOnline: false,
 			      timestamp: true,
 			      hash: false,
-			      cache: ["http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js",
-			      	"http://ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular-cookies.min.js"]
+			      cache: [
+					"http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js",
+  					"http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.min.js",
+					"http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js",
+					"http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-cookies.min.js"
+			      ]
 			    },
 			    src: [
 			        "home.html",
