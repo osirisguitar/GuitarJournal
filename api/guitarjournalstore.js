@@ -29,6 +29,7 @@ module.exports = {
 			if (err) { return done(err); }
 
 			var users = db.collection('Users');
+			console.log('Checking user', username);
 			users.findOne({ email: username }, function(err, user) {
 				callback(err, user);
 				db.close();

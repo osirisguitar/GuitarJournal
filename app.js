@@ -9,6 +9,10 @@ if (process.env.USE_NODETIME == "true") {
 }
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session = require('cookie-session');
+var csrf = require('csurf');
 var journalStore = require('./api/guitarjournalstore');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
@@ -45,10 +49,10 @@ process.on('error', function(err) {
 	console.log(err);
 });
 
-app.use(express.cookieParser('hejpa'));
-app.use(express.cookieSession({ secret: 'mongoVoldemort' }));
-app.use(express.csrf());
-app.use(express.bodyParser());
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(session({ key: 'GuitarJournal', secret: 'mongoVoldemort', cookie: { secure: true } }));
+app.use(csrf());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -109,6 +113,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
+	console.log('Trying to deserialize', id);
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return done(err); }
 
@@ -151,21 +156,26 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'publish_ac
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 app.get('/auth/facebook/callback', function(req, res, next) {
-	passport.authenticate('facebook', function(err, user, info) {
-		console.log("Getting callback from FB", err, user, info);
+	passport.authenticate('facebook', { failureRedirect: "/login" }, function(err, user, info) {
+		console.log("Getting callback from FB", info);
 	    if (err) { 
+	    	console.log("Login error", err);
 	    	return next(err); 
 	    }
 	    if (!user) { 
+	    	console.log("No user");
 	    	return res.redirect('/login'); 
 	    }
 	    req.logIn(user, function(err) {
+	    	console.log("Logging in user");
 	    	if (err) { 
+	    		console.log("Error logging user in", err);
 	    		return next(err); 
 	      	}
 	      	var expiration = new Date();
 	      	expiration.setDate(expiration.getDate() + 365);
 	    	res.cookie("hasloggedinwithfb", "true", { expires: expiration });
+	    	console.log('Cookies', res.cookies);
 	    	return res.redirect('/');
 	    });
 	  })(req, res, next);
@@ -233,8 +243,6 @@ app.get('/api/logout', function(req, res) {
 });
 
 app.post('/api/signup', function(req, res) {
-	console.log("Signing up with", req.body);
-
 	journalStore.checkIfUserExists(req.body.email, function(err, user) {
 		if (err) {
 			console.error(err);
@@ -252,6 +260,7 @@ app.post('/api/signup', function(req, res) {
 });
 
 app.get('/api/loggedin', function(req, res) {
+	console.log('isAuthenticated', req.isAuthenticated());
 	if (req.isAuthenticated()) {
 		req.user._csrf = req.csrfToken();
 		res.json(req.user);		

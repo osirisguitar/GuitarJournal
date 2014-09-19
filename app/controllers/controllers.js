@@ -65,29 +65,27 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 	});
 
 	$http.get('/api/loggedin').success(function(data) {
-		$timeout(function() {
-			$rootScope.apiStatus.loading++;
-			$rootScope.csrf = data._csrf;
-			$rootScope.httpConfig = {
-				headers: { "X-CSRF-Token": $rootScope.csrf }
-			};
-			if (data._id) {
-				$rootScope.loggedIn = true;
-				$rootScope.fbAccessToken = data.fbAccessToken;
-				$rootScope.apiStatus.loading--;
+		console.log('Returned from /api/loggedin', data);
+		$rootScope.apiStatus.loading++;
+		$rootScope.csrf = data._csrf;
+		$rootScope.httpConfig = {
+			headers: { "X-CSRF-Token": $rootScope.csrf }
+		};
+		if (data._id) {
+			$rootScope.loggedIn = true;
+			$rootScope.fbAccessToken = data.fbAccessToken;
+			$rootScope.apiStatus.loading--;
+		}
+		else {
+			$rootScope.apiStatus.loading--;
+			if (data.autoTryFacebook) {
+				console.log("Trying facebook");
+				$window.location.href = "/auth/facebook";
 			}
 			else {
-				console.log("Not logged in, trying to autologin with FB");
-				$rootScope.apiStatus.loading--;
-				if (data.autoTryFacebook) {
-					$window.location.href = "/auth/facebook";
-				}
-				else {
-					$location.path("/login");
-				}
+				$location.path("/login");
 			}
-
-		}, 3000);
+		}
 	}).error(function(error) {
 		$scope.showErrorMessage("Error when logging in", error);
 	});
