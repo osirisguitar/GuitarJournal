@@ -268,6 +268,9 @@ app.get("/api/sessions/:skip?", ensureAuthenticated, function(req, res) {
 app.get("/api/statistics/overview/:days?", ensureAuthenticated, function(req, res) {
 	var loggedInUser = req.user._id;
 
+	console.log('Request to', process.env.PORT);
+
+
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
@@ -537,6 +540,9 @@ app.delete("/api/goal/:id", ensureAuthenticated, function(req, res) {
 
 app.get("/api/profile", ensureAuthenticated, function(req, res) {
 	var loggedInUser = req.user._id;
+
+	console.log('Request to', process.env.PORT);
+
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
 		if(err) { return console.dir(err); }
@@ -551,6 +557,8 @@ app.get("/api/profile", ensureAuthenticated, function(req, res) {
 
 app.get("/api/instruments", ensureAuthenticated, function(req, res) {
 	var loggedInUser = req.user._id;
+
+	console.log('Request to', process.env.PORT);
 
 	// Connect to the db
 	MongoClient.connect(mongoConnectionString, function(err, db) {
