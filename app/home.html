@@ -61,14 +61,14 @@
       document.write('<link rel="stylesheet" href="/app/css/iphone.css">')          
     }
 
-    if (navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 7_\d/i)) {
-      document.write('<link rel="stylesheet" href="/app/css/iphone7.css">')
-    }
-  </script>
-  <script type="text/javascript">
-    function loadAuth() {
-      location.href = "/auth/facebook";
-    }
+      if (navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 7_\d/i) || navigator.userAgent.match(/(iPad|iPhone);.*CPU.*OS 8_\d/i)) {
+        document.write('<link rel="stylesheet" href="/app/css/iphone7.css">')
+      }
+    </script>
+    <script type="text/javascript">
+      function loadAuth() {
+        location.href = "/auth/facebook";
+      }
 
     function goFB() {
       location.href = "http://m.facebook.com";
