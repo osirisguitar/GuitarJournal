@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		jshint: {
 			// define the files to lint
-			files: ['gruntfile.js', 'app/controllers/*.js', 'app/services/*.js', 'app.js', 'app/app.js', 'api/*.js', 'app/test/**/*.js'],
+			files: ['gruntfile.js', 'app/controllers/*.js', 'app/services/*.js', 'app.js', 'app/app.js', 'api/**/*.js', 'app/test/**/*.js'],
 			// configure JSHint (documented at http://www.jshint.com/docs/)
 			options: {
 				// more options here if you want to override JSHint defaults
@@ -12,6 +12,12 @@ module.exports = function(grunt) {
 					jQuery: true,
 					console: true,
 					module: true,
+					describe: true,
+					xdescribe: true,
+					beforeEach: true,
+					afterEach: true,
+					it: true,
+					xit: true
 				},
 				reporter: require("jshint-stylish")
 			},
@@ -32,8 +38,20 @@ module.exports = function(grunt) {
 		},
 
 		mocha: {
-			test: {
+			testapp: {
 				src: ['app/test/unit/*.html'],
+				options: {
+					run: true,
+					log: true,
+					logErrors: true,
+					reporter: "Spec"
+				}
+			}
+		},
+
+		mochaTest: {
+			testapi: {
+				src: ['api/test/unit/**/*.js'],
 				options: {
 					run: true,
 					log: true,
@@ -128,9 +146,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-recess');
 	grunt.loadNpmTasks('grunt-ssh');
 	grunt.loadNpmTasks('grunt-mocha');
+	grunt.loadNpmTasks('grunt-mocha-test');
 
 
-	grunt.registerTask('test', ['jshint', 'mocha']);
+	grunt.registerTask('test', ['jshint', 'mocha', 'mochaTest']);
 	grunt.registerTask('default', ['jshint', 'concat', 'manifest', 'mocha', 'watch']);
 	grunt.registerTask('deploy', ['jshint', 'concat', 'manifest', 'mocha', 'sftp:deploy']);
 };
