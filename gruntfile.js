@@ -150,6 +150,6 @@ module.exports = function(grunt) {
 
 
 	grunt.registerTask('test', ['jshint', 'mocha', 'mochaTest']);
-	grunt.registerTask('default', ['jshint', 'concat', 'manifest', 'mocha', 'watch']);
-	grunt.registerTask('deploy', ['jshint', 'concat', 'manifest', 'mocha', 'sftp:deploy']);
+	grunt.registerTask('default', ['jshint', 'concat', 'manifest', 'mocha', 'mochaTest', 'watch']);
+	grunt.registerTask('deploy', ['jshint', 'concat', 'manifest', 'mocha', 'mochaTest', 'sftp:deploy']);
 };
