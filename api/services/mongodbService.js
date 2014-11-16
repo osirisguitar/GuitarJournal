@@ -7,7 +7,7 @@ var mongoDBConnection = null;
 
 module.exports = {
   init: function(connectionString, connectedCallback) {
-    mongoDBConnection = mongoClient.createConnection(function(err, connection) {
+    mongoClient.connect(connectionString, function(err, connection) {
       if (err) {
         console.log("Could not connect to MongoDB", err);
       } else {

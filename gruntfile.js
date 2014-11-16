@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 				// more options here if you want to override JSHint defaults
 				smarttabs:true,
 				"-W099": true,
+				node: true,
 				globals: {
 					jQuery: true,
 					console: true,

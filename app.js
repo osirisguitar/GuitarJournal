@@ -31,6 +31,7 @@ var moment = require("moment");
 var mongodbService = require('./api/services/mongodbService');
 var journalStore = require('./api/guitarjournalstore');
 var sessionRoutes = require('./api/routes/sessionRoutes');
+var statisticsRoutes = require('./api/routes/statisticsRoutes');
 
 express.static.mime.define({'application/font-woff': ['woff']});
 
@@ -288,88 +289,12 @@ function checkLogin(req, res) {
 
 // API stuff
 app.get("/api/sessions/:skip?", ensureAuthenticated, sessionRoutes.getSessions);
+app.post("/api/sessions", ensureAuthenticated, sessionRoutes.saveSession);
+app.get("/api/session/:id", ensureAuthenticated, sessionRoutes.getSession);
+app.delete("/api/session/:id", ensureAuthenticated, sessionRoutes.deleteSession);
+app.get("/api/statistics/overview/:days?", ensureAuthenticated, statisticsRoutes.getOverview);
 
-app.get("/api/statistics/overview/:days?", ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
 
-  console.log('Request to', process.env.PORT);
-
-
-  // Connect to the db
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var sessions = db.collection('Sessions');
-    var results = {};
-    var match = { userId: loggedInUser };
-    if (req.params.days) {
-      var daysAgo = new Date();
-      daysAgo.setDate(daysAgo.getDate() - req.params.days);
-      match.date = { $gte: daysAgo };
-    }
-
-    sessions.find(match).count(function(error, count) {
-        // Do what you need the count for here.
-        results.totalSessions = count;
-        sessions.aggregate([
-          {
-            $match: match
-          },
-          {
-            $group: {
-              _id: "$userId",
-              averageLength: { $avg: "$length" },
-              totalLength: { $sum: "$length" },
-              averageRating: { $avg: "$rating" },
-              firstSession: { $min: "$date" },
-              latestSession: { $max: "$date" }
-            }
-          }
-        ], function(err, agg) { 
-          if (err) {
-            console.log(err);
-            res.json();
-            db.close();
-            return;
-          }
-          if (agg && agg.length > 0) {
-            results.averageLength = Math.round(agg[0].averageLength);
-            results.totalLength = agg[0].totalLength;
-            results.averageRating = Math.round(agg[0].averageRating*100)/100;
-            results.firstSession = agg[0].firstSession;
-            results.latestSession = agg[0].latestSession;             
-          }
-          sessions.aggregate([
-          {
-            $match: match
-          },
-          {
-            $group: 
-            {
-              _id: '$instrumentId', 
-              numUses: { $sum: 1 }
-            }
-          },
-        {
-            $sort: { numUses: -1 }
-          }],
-          function (err, agg) {
-            if (err) {
-              console.log(err);
-              res.json();
-              db.close();
-              return;             
-            }
-            if (agg && agg.length > 0) {
-              results.mostUsedInstrument = agg[0]._id;
-            }
-            db.close();
-            res.json(results);
-          });
-        });
-    });
-  });
-});
 
 app.get("/api/statistics/perweekday", ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
@@ -444,74 +369,6 @@ app.get("/api/statistics/minutesperday/:days?", ensureAuthenticated, function(re
         res.json(aggregate);
       }
     );
-  });
-});
-
-
-app.get("/api/session/:id", ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-  // Connect to the db
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var collection = db.collection('Sessions');
-    collection.findOne({ _id: ObjectID(req.params.id), userId: loggedInUser }, function(err, item) {
-      db.close();
-      res.json(item);
-    });
-  });
-});
-
-app.delete("/api/session/:id", ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-  // Connect to the db
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var collection = db.collection('Sessions');
-    collection.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
-      db.close();
-      res.json(item);
-    });
-  });
-});
-
-app.post("/api/sessions", ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-  req.body.userId = req.user._id;
-
-  console.log("/api/sessions: authed", loggedInUser, req.body.userId);
-
-  if (req.body._id) {
-    req.body._id = ObjectID(req.body._id);
-  }
-  if (req.body.goalId) {
-    req.body.goalId = ObjectID(req.body.goalId);    
-  }
-  if (req.body.instrumentId) {
-    req.body.instrumentId = ObjectID(req.body.instrumentId);
-  }
-  if (req.body.date) {
-    req.body.date = new Date(req.body.date);
-  }
-  if (req.body.startTime && req.body.endTime) {
-    var start = moment(req.body.startDate);
-    start.hour(req.body.startTime.split(":")[0]);
-    start.minute(req.body.startTime.split(":")[1]);
-    var end = moment(req.body.startDate);
-    end.hour(req.body.endTime.split(":")[0]);
-    end.minute(req.body.endTime.split(":")[1]);
-
-    req.body.length = Math.round(moment.duration(end - start) / 60000);
-  }
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var collection = db.collection('Sessions');
-    collection.save(req.body, {safe:true}, function(err, savedSession) {
-      db.close();
-      res.json(savedSession);
-    });
   });
 });
 
