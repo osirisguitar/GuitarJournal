@@ -5,12 +5,24 @@ var ObjectID = require('mongodb').ObjectID;
 var moment = require('moment');
 
 module.exports = {
-  // Returns 10 sessions of a user, starting from skipCount. Callback must accept
-  // two parameters: err, data
+  /**
+   * Gets (a maximum of) 10 sessions for a user.
+   *
+   * @param userId - ObjectID of a user
+   * @param skipCount - how many sessions to skip
+   * @param callback - called with (error, sessions)
+   */
   getSessions: function(userId, skipCount, callback) {
     mongoDB.collection('Sessions').find({ "userId": userId }).sort({ date: -1 }).skip(skipCount).limit(10).toArray(callback);
   },
 
+  /**
+   * Gets a session for a user
+   *
+   * @param userId - user id in ObjectID format
+   * @param sessionId - session id in string format
+   * @param callback - called with (error, session)
+   */
   getSession: function(userId, sessionId, callback) {
     mongoDB.collection('Sessions').findOne({ _id: new ObjectID(sessionId), userId: userId }, callback);
   },

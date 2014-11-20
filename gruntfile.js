@@ -65,7 +65,11 @@ module.exports = function(grunt) {
 		watch: {
 			jsandcss: {
 				files: ['app/controllers/*.js','app/services/*.js','app/libs/**/*.js', 'app/js/*.js', 'app/css/flatly.css','app/css/font-awesome.min.css', 'app/css/guitarjournal.css', 'app/libs/**/*.css'],
-				tasks: ['concat']
+				tasks: ['concat', 'test', 'mochaTest']
+			},
+			tests: {
+				files: ['app/tests/**/.js','api/tests/**/*.js'],
+				tasks: ['test', 'mochaTest']
 			},
 			less: {
 				files: ['app/css/*.less'],
