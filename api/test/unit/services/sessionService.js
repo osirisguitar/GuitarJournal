@@ -122,7 +122,7 @@ describe('sessionsService', function() {
         endTime: '12:00'
       };
 
-      collection.save = sinon.stub().yields(null, sessions[0]);
+      collection.save = sinon.stub().yields(null, { "nInserted": 1 });
     });
 
     it('calls save on sessions', function() {
@@ -136,19 +136,43 @@ describe('sessionsService', function() {
           startTime: session.startTime,
           endTime: session.endTime,
           length: 120
-        });
+        }, { safe: true });
       });
     });
 
     it('returns a result from saving', function() {
       sessionsService.saveSession(123, session, function(err, result) {
         expect(err).to.not.exist;
-        expect(result).to.eql({ id: 123 });
+        expect(result).to.eql({ "nInserted": 1 });
       });
     });
   });
 
   describe('deleteSession', function() {
-    
+    var session;
+
+    beforeEach(function() {
+      session = {
+        _id: '5465241dc29dbfa356000001'
+      };
+
+      collection.remove = sinon.stub().yields(null, { "nRemoved": 1 });
+    });
+
+    it('calls remove on sessions', function() {
+      sessionsService.deleteSession(123, session._id, function() {
+        expect(collection.remove).calledOnce.calledWith({
+          _id: new ObjectID(session._id),
+          userId: 123
+        }, 1);
+      });
+    }); 
+
+    it('returns a result from deleting', function() {
+      sessionsService.deleteSession(123, session._id, function(err, result) {
+        expect(err).to.not.exist;
+        expect(result).to.eql({ "nRemoved": 1 });
+      });
+    }); 
   });
 });

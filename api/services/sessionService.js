@@ -27,6 +27,13 @@ module.exports = {
     mongoDB.collection('Sessions').findOne({ _id: new ObjectID(sessionId), userId: userId }, callback);
   },
 
+  /**
+   * Saves a session for a user
+   *
+   * @param userId - user id in ObjectID format
+   * @param session - session object
+   * @param callback - called with (error, result)
+   */
   saveSession: function(userId, session, callback) {
     session.userId = userId;
 
@@ -56,6 +63,13 @@ module.exports = {
     mongoDB.collection('Sessions').save(session, {safe:true}, callback);
   },
 
+  /**
+   * Deletes a session for a user
+   *
+   * @param userId - user id in ObjectID format
+   * @param sessionId - session id in string format
+   * @param callback - called with (error, result)
+   */
   deleteSession: function(userId, sessionId, callback) {
     mongoDB.collection('Sessions').remove({ _id: new ObjectID(sessionId), userId: userId }, 1, callback);
   }
