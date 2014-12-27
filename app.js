@@ -293,33 +293,7 @@ app.post("/api/sessions", ensureAuthenticated, sessionRoutes.saveSession);
 app.get("/api/session/:id", ensureAuthenticated, sessionRoutes.getSession);
 app.delete("/api/session/:id", ensureAuthenticated, sessionRoutes.deleteSession);
 app.get("/api/statistics/overview/:days?", ensureAuthenticated, statisticsRoutes.getOverview);
-
-
-
-app.get("/api/statistics/perweekday", ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-
-  // Connect to the db
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var sessions = db.collection('Sessions');
-    sessions.aggregate(
-      { $match: { userId: loggedInUser } },
-      { $project: { weekDay: { $dayOfWeek: "$date" } }},
-      { $group: { _id: "$weekDay" , sessionCount: { $sum: 1 } } },
-      { $project: { _id: 0, weekDay: { $subtract: ["$_id", 1] }, sessionCount: 1 }},
-      { $sort: { weekDay: 1 } },
-      function(err, aggregate) {
-        if (err) {
-          console.log(err);
-        }
-        db.close();
-        res.json(aggregate);
-      }
-    );
-  });
-});
+app.get("/api/statistics/perweekday", ensureAuthenticated, statisticsRoutes.getPerWeekday);
 
 app.get("/api/statistics/perweek/:weeks?", ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;

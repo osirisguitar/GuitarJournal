@@ -13,36 +13,14 @@ describe('statisticsService', function() {
   var collection = {
     find: null,
     count: null,
-    aggregate: null/*,
-    limit: null,
-    toArray: null*/
+    aggregate: null
   };
-  var aggregate1;
-  var aggregate2;
   var statisticsService;
 
   beforeEach(function() {
-    aggregate1 = [{
-      averageLength: 111,
-      totalLength: 2222,
-      averageRating: 3.1415,
-      firstSession: new Date(1974, 6, 26),
-      latestSession: new Date(2000, 1, 1)
-    }];
-
-    aggregate2 = [{
-      _id: 1,
-      numUses: 42
-    }];
-
     collection.find = sinon.stub().returns(collection);
     collection.count = sinon.stub().yields(null, 1337);
     collection.aggregate = sinon.stub();
-    //collection.limit = sinon.stub().returns(collection);
-    //collection.toArray = sinon.stub().yields(null, sessions);*/
-
-    collection.aggregate.onFirstCall().yields(null, aggregate1);
-    collection.aggregate.onSecondCall().yields(null, aggregate2);
 
     mongoDB = {
       collection: sinon.stub().returns(collection)
@@ -54,6 +32,27 @@ describe('statisticsService', function() {
   });
 
   describe('getOverview', function() {
+    var aggregate1;
+    var aggregate2;
+
+    beforeEach(function() {
+      aggregate1 = [{
+        averageLength: 111,
+        totalLength: 2222,
+        averageRating: 3.1415,
+        firstSession: new Date(1974, 6, 26),
+        latestSession: new Date(2000, 1, 1)
+      }];
+
+      aggregate2 = [{
+        _id: 1,
+        numUses: 42
+      }];
+
+      collection.aggregate.onFirstCall().yields(null, aggregate1);
+      collection.aggregate.onSecondCall().yields(null, aggregate2);
+    });
+
     it('gets the sessions collection from Mongo DB', function(done) {
       statisticsService.getOverview(123, 4, function() {
         expect(mongoDB.collection).calledOnce;
@@ -69,7 +68,7 @@ describe('statisticsService', function() {
        });
     });
 
-    it('returns statistics', function(done) {
+    it('returns statistics overview', function(done) {
       statisticsService.getOverview(123, 4, function(err, results) {
         expect(collection.aggregate).calledTwice;
         expect(err).to.be.null;
@@ -85,6 +84,41 @@ describe('statisticsService', function() {
         expect(results).to.eql(stats);
         done();
        });
+    });
+  });
+
+  describe('getPerWeekday', function () {
+    var aggregate;
+
+    beforeEach(function() {
+      aggregate = [
+        {
+          sessionCount: 2,
+          weekDay: 0
+        },
+        {
+          sessionCount: 3,
+          weekDay: 4
+        }
+      ];
+
+      collection.aggregate.onFirstCall().yields(null, aggregate);
+    });
+
+    it('gets the session collection from Mongo DB', function (done) {
+      statisticsService.getPerWeekday(123, function() {
+        expect(mongoDB.collection).calledOnce;
+        expect(mongoDB.collection).calledWith('Sessions');
+        done();
+       });      
+    });
+
+    it('returns statistics per weekday', function (done) {
+      statisticsService.getPerWeekday(123, function(err, results) {
+        expect(collection.aggregate).calledOnce;
+        expect(results).to.eql(aggregate);
+        done();
+      });
     });
   });
 });

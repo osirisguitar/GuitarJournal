@@ -1,7 +1,7 @@
 'use strict';
 
 var mongoDB = require('./mongodbService');
-var ObjectID = require('mongodb').ObjectID;
+//var ObjectID = require('mongodb').ObjectID;
 
 module.exports = {
   getOverview: function(userId, numDays, callback) {
@@ -23,12 +23,12 @@ module.exports = {
           },
           {
             $group: {
-              _id: "$userId",
-              averageLength: { $avg: "$length" },
-              totalLength: { $sum: "$length" },
-              averageRating: { $avg: "$rating" },
-              firstSession: { $min: "$date" },
-              latestSession: { $max: "$date" }
+              _id: '$userId',
+              averageLength: { $avg: '$length' },
+              totalLength: { $sum: '$length' },
+              averageRating: { $avg: '$rating' },
+              firstSession: { $min: '$date' },
+              latestSession: { $max: '$date' }
             }
           }
         ], 
@@ -74,5 +74,17 @@ module.exports = {
           });
         });
       });
+  },
+
+  getPerWeekday: function(userId, callback) {
+    var sessions = mongoDB.collection('Sessions');
+    sessions.aggregate(
+      { $match: { userId: userId } },
+      { $project: { weekDay: { $dayOfWeek: '$date' } }},
+      { $group: { _id: '$weekDay' , sessionCount: { $sum: 1 } } },
+      { $project: { _id: 0, weekDay: { $subtract: ['$_id', 1] }, sessionCount: 1 }},
+      { $sort: { weekDay: 1 } },
+      callback
+    );
   }
 };
