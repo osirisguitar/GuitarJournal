@@ -86,5 +86,30 @@ module.exports = {
       { $sort: { weekDay: 1 } },
       callback
     );
+  },
+
+  getPerWeek: function(userId, numWeeks, callback) {
+    var sessions = mongoDB.collection('Sessions');
+    sessions.aggregate(
+      { $match: { userId: userId } },
+      { $project: { week: { $week: '$date' }, year: { $year: '$date' }, length: 1 }},
+      { $group: { _id: { week: '$week', year: '$year' }, count: { $sum: 1 }, minutes: { $sum: '$length' } } },
+      { $project: { _id: 0, week: '$_id.week', year: '$_id.year', count: 1, minutes: 1 } },
+      { $sort: { year: -1, week: -1 } },
+      { $limit: Number(numWeeks) },
+      { $sort: { year: 1, week: 1 } },
+      callback
+    );
+  },
+
+  getMinutesPerDay: function(userId, date, callback) {
+    var sessions = mongoDB.collection('Sessions');
+    sessions.aggregate(
+      { $match: { userId: userId, date: { $gte: date } } },/*
+      { $project: { weekDay: { $dayOfWeek: '$date' } }},*/
+      { $group: { _id: { year: { $year: '$date' }, month: { $month: '$date' }, day: { $dayOfMonth: '$date' } }, totalMinutes: { $sum: '$length' } } },
+      { $sort: { _id: 1 } },
+      callback
+    );
   }
 };

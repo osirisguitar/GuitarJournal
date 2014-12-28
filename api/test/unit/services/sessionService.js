@@ -10,7 +10,7 @@ var ObjectID = require('mongodb').ObjectID;
 
 chai.use(require('sinon-chai'));
 
-describe('sessionsService', function() {
+describe('sessionService', function() {
   var mongoDB;
   var collection = {
     find: null,

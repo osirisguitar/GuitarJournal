@@ -1,11 +1,11 @@
-if (process.env.USE_NODETIME == "true") {
+if (process.env.USE_NODETIME === 'true') {
   require('nodetime').profile({
       accountKey: 'fafe6e5e9c7f53864d60e809e821f1ca87521d82', 
       appName: 'OSIRIS GUITAR'
     });
   
   require('newrelic');
-  console.log("Using production logging");
+  console.log('Using production logging');
 }
 var express = require('express');
 var app = express();
@@ -15,23 +15,21 @@ var session = require('cookie-session');
 var csrf = require('csurf');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
-var GridStore = require('mongodb').GridStore;
 var Binary = require('mongodb').Binary;
 var mongoConnectionString = process.env.GITARRMONGO;
-console.log("Connecting to ", mongoConnectionString);
-var fs = require("fs");
-var gm = require("gm");
+console.log('Connecting to ', mongoConnectionString);
+var fs = require('fs');
+var gm = require('gm');
 var imageMagick = gm.subClass({ imageMagick: true });
-var crypto = require("crypto");
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-var moment = require("moment");
 
 var mongodbService = require('./api/services/mongodbService');
 var journalStore = require('./api/guitarjournalstore');
 var sessionRoutes = require('./api/routes/sessionRoutes');
 var statisticsRoutes = require('./api/routes/statisticsRoutes');
+var goalRoutes = require('./api/routes/goalRoutes');
 
 express.static.mime.define({'application/font-woff': ['woff']});
 
@@ -48,7 +46,7 @@ process.on('uncaughtException', function(err) {
 });
 
 process.on('error', function(err) {
-  console.log("error!");
+  console.log('error!');
   console.log(err);
 });
 
@@ -64,9 +62,9 @@ passport.use(new LocalStrategy({
       passwordField: 'password'
   },
     function(username, password, done) {
-      console.log("Local strategy login", username, password);
+      console.log('Local strategy login', username, password);
       journalStore.checkLogin(username, password, function(err, user) {
-        console.log("Checklogin callback", err, user);
+        console.log('Checklogin callback', err, user);
         return done(err, user);
       });
   }
@@ -75,7 +73,7 @@ passport.use(new LocalStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FB_APP_ID,
       clientSecret: process.env.FB_APP_SECRET,
-      callbackURL: process.env.FB_APP_URL + "/auth/facebook/callback",
+      callbackURL: process.env.FB_APP_URL + '/auth/facebook/callback',
       passReqToCallback: true
     },
     function(req, accessToken, refreshToken, profile, done) {
@@ -121,7 +119,7 @@ passport.deserializeUser(function(id, done) {
     if(err) { return done(err); }
 
     var users = db.collection('Users');
-    users.findOne({ _id: ObjectID(id) }, function(err, user) {
+    users.findOne({ _id: new ObjectID(id) }, function(err, user) {
       db.close();
       done(err, user);
       });
@@ -142,11 +140,11 @@ app.get('/auth/allowsimple', function(req, res) {
     res.send(false);
 });
 
-app.get("/api/sessiontest", function(req, res) {
+app.get('/api/sessiontest', function(req, res) {
   if (!req.session.created)
     req.session.created = new Date();
 
-  res.json({"session": req.session, "port": process.env.PORT });
+  res.json({'session': req.session, 'port': process.env.PORT });
 });
 
 // Redirect the user to Facebook for authentication.  When complete,
@@ -159,25 +157,25 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'publish_ac
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 app.get('/auth/facebook/callback', function(req, res, next) {
-  passport.authenticate('facebook', { failureRedirect: "/login" }, function(err, user, info) {
-    console.log("Getting callback from FB", info);
+  passport.authenticate('facebook', { failureRedirect: '/login' }, function(err, user, info) {
+    console.log('Getting callback from FB', info);
       if (err) { 
-        console.log("Login error", err);
+        console.log('Login error', err);
         return next(err); 
       }
       if (!user) { 
-        console.log("No user");
+        console.log('No user');
         return res.redirect('/login'); 
       }
       req.logIn(user, function(err) {
-        console.log("Logging in user");
+        console.log('Logging in user');
         if (err) { 
-          console.log("Error logging user in", err);
+          console.log('Error logging user in', err);
           return next(err); 
           }
           var expiration = new Date();
           expiration.setDate(expiration.getDate() + 365);
-        res.cookie("hasloggedinwithfb", "true", { expires: expiration });
+        res.cookie('hasloggedinwithfb', 'true', { expires: expiration });
         console.log('Cookies', res.cookies);
         return res.redirect('/');
       });
@@ -189,32 +187,32 @@ app.get('/auth/facebook/callback', function(req, res, next) {
 
 // One page app routing, the client-side app
 // handles the internal routing.
-app.get("/", function(req, res) {
-  res.sendfile(__dirname + "/app/home.html");
+app.get('/', function(req, res) {
+  res.sendfile(__dirname + '/app/home.html');
 });
-app.get("/about", function(req, res) {
-  res.sendfile(__dirname + "/about/about.html");
+app.get('/about', function(req, res) {
+  res.sendfile(__dirname + '/about/about.html');
 });
-app.get("/login*", function(req, res) {
-  res.sendfile(__dirname + "/app/home.html");
+app.get('/login*', function(req, res) {
+  res.sendfile(__dirname + '/app/home.html');
 });
-app.get("/session*", function(req, res) {
-  res.sendfile(__dirname + "/app/home.html");
+app.get('/session*', function(req, res) {
+  res.sendfile(__dirname + '/app/home.html');
 });
-app.get("/goal*", function(req, res) {
-  res.sendfile(__dirname + "/app/home.html");
+app.get('/goal*', function(req, res) {
+  res.sendfile(__dirname + '/app/home.html');
 });
-app.get("/profile*", function(req, res) {
-  res.sendfile(__dirname + "/app/home.html");
+app.get('/profile*', function(req, res) {
+  res.sendfile(__dirname + '/app/home.html');
 });
-app.get("/stats*", function(req, res) {
-  res.sendfile(__dirname + "/app/home.html");
+app.get('/stats*', function(req, res) {
+  res.sendfile(__dirname + '/app/home.html');
 });
-app.get("/instrument*", function(req, res) {
-  res.sendfile(__dirname + "/app/home.html");
+app.get('/instrument*', function(req, res) {
+  res.sendfile(__dirname + '/app/home.html');
 });
-app.get("/app", function(req, res) {
-  res.sendfile(__dirname + "/app/home.html");
+app.get('/app', function(req, res) {
+  res.sendfile(__dirname + '/app/home.html');
 });
 
 // Route for app resources like css and javascript
@@ -241,8 +239,7 @@ app.get('/api/logout', function(req, res) {
   res.clearCookie('userid');
   res.clearCookie('hasloggedinwithfb');
   req.logout();
-  console.log("Logged out!");
-  res.redirect("/");
+  res.redirect('/');
 });
 
 app.post('/api/signup', function(req, res) {
@@ -252,7 +249,7 @@ app.post('/api/signup', function(req, res) {
     }
 
     if (user) {
-      res.send(500, { message: "User already exists" });
+      res.send(500, { message: 'User already exists' });
     } else {
       journalStore.createUser(req.body, function(err, user) {
         //res.redirect('/api/login?email=' + req.body.email + '&password=' + req.body.password);
@@ -277,125 +274,34 @@ app.get('/api/loggedin', function(req, res) {
   }
 });
 
-function checkLogin(req, res) {
+/*function checkLogin(req, res) {
   if (!req.session.loggedInUser)
   {
-    res.send("401", "Not logged in");
+    res.send('401', 'Not logged in');
     return null;
   }
   else
     return ObjectID(req.session.loggedInUser);
-}
+}*/
 
-// API stuff
-app.get("/api/sessions/:skip?", ensureAuthenticated, sessionRoutes.getSessions);
-app.post("/api/sessions", ensureAuthenticated, sessionRoutes.saveSession);
-app.get("/api/session/:id", ensureAuthenticated, sessionRoutes.getSession);
-app.delete("/api/session/:id", ensureAuthenticated, sessionRoutes.deleteSession);
-app.get("/api/statistics/overview/:days?", ensureAuthenticated, statisticsRoutes.getOverview);
-app.get("/api/statistics/perweekday", ensureAuthenticated, statisticsRoutes.getPerWeekday);
+// Session routes
+app.get('/api/sessions/:skip?', ensureAuthenticated, sessionRoutes.getSessions);
+app.post('/api/sessions', ensureAuthenticated, sessionRoutes.saveSession);
+app.get('/api/session/:id', ensureAuthenticated, sessionRoutes.getSession);
+app.delete('/api/session/:id', ensureAuthenticated, sessionRoutes.deleteSession);
 
-app.get("/api/statistics/perweek/:weeks?", ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
+// Statistics routes
+app.get('/api/statistics/overview/:days?', ensureAuthenticated, statisticsRoutes.getOverview);
+app.get('/api/statistics/perweekday', ensureAuthenticated, statisticsRoutes.getPerWeekday);
+app.get('/api/statistics/perweek/:weeks?', ensureAuthenticated, statisticsRoutes.getPerWeek);
+app.get('/api/statistics/minutesperday/:days?', ensureAuthenticated, statisticsRoutes.getMinutesPerDay);
 
-  // Connect to the db
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
+// Goal routes
+app.get('/api/goals', ensureAuthenticated, goalRoutes.getGoals);
+app.post('/api/goals', ensureAuthenticated, goalRoutes.saveGoal);
+app.delete('/api/goal/:id', ensureAuthenticated, goalRoutes.deleteGoal);
 
-    var sessions = db.collection('Sessions');
-    sessions.aggregate(
-      { $match: { userId: loggedInUser } },
-      { $project: { week: { $week: "$date" }, year: { $year: "$date" }, length: 1 }},
-      { $group: { _id: { week: "$week", year: "$year" }, count: { $sum: 1 }, minutes: { $sum: "$length" } } },
-      { $project: { _id: 0, week: "$_id.week", year: "$_id.year", count: 1, minutes: 1 } },
-      { $sort: { year: -1, week: -1 } },
-      { $limit: Number(req.params.weeks) },
-      { $sort: { year: 1, week: 1 } },
-      function(err, aggregate) {
-        if (err) {
-          console.log("Error", err);
-        }
-
-        db.close();
-        res.json(aggregate);
-      }
-    );
-  });
-});
-
-app.get("/api/statistics/minutesperday/:days?", ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-  var date = new Date();
-  date = new Date(date.setDate(date.getDate() - req.params.days)); // Is this REALLY the easiest way?
-
-  // Connect to the db
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var sessions = db.collection('Sessions');
-    sessions.aggregate(
-      { $match: { userId: loggedInUser, date: { $gte: date } } },/*
-      { $project: { weekDay: { $dayOfWeek: "$date" } }},*/
-      { $group: { _id: { year: { $year: "$date" }, month: { $month: "$date" }, day: { $dayOfMonth: "$date" } }, totalMinutes: { $sum: "$length" } } },
-      { $sort: { _id: 1 } },
-      function(err, aggregate) {
-        db.close();
-        res.json(aggregate);
-      }
-    );
-  });
-});
-
-app.get("/api/goals", ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-
-  // Connect to the db
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var collection = db.collection('Goals');
-    collection.find({ "userId": loggedInUser }).sort({ completionDate: 1, title: 1 }).toArray(function(err, items) {
-      if (err) {
-        return (err);
-      }
-      db.close();
-      res.json(items);
-    });
-  });
-});
-
-app.post("/api/goals", ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-  if (req.body._id) {
-    req.body._id = ObjectID(req.body._id);
-  }
-  req.body.userId = loggedInUser;
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var collection = db.collection('Goals');
-    collection.save(req.body, {safe:true}, function(err, savedSession) {
-      db.close();
-      res.json(savedSession);
-    });
-  });
-});
-
-app.delete("/api/goal/:id", ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-  // Connect to the db
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var goals = db.collection('Goals');
-    goals.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
-      db.close();
-      res.json(item);
-    });
-  });
-});
-
-app.get("/api/profile", ensureAuthenticated, function(req, res) {
+app.get('/api/profile', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
 
   console.log('Request to', process.env.PORT);
@@ -412,7 +318,7 @@ app.get("/api/profile", ensureAuthenticated, function(req, res) {
   });
 });
 
-app.get("/api/instruments", ensureAuthenticated, function(req, res) {
+app.get('/api/instruments', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
 
   console.log('Request to', process.env.PORT);
@@ -422,7 +328,7 @@ app.get("/api/instruments", ensureAuthenticated, function(req, res) {
     if(err) { return console.dir(err); }
 
     var instruments = db.collection('Instruments');
-    instruments.find({ "userId": loggedInUser }).toArray(function(err, items) {
+    instruments.find({ 'userId': loggedInUser }).toArray(function(err, items) {
       if (err)
       {
         console.log(err);
@@ -434,7 +340,7 @@ app.get("/api/instruments", ensureAuthenticated, function(req, res) {
   });
 });
 
-app.post("/api/instruments", ensureAuthenticated, function(req, res) {
+app.post('/api/instruments', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
   var instrumentId;
   if (req.body._id) {
@@ -451,7 +357,7 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
         .save(req.body, { safe:true }, function(err, updatedInstrument) {
           if (err) {
             console.log(err);
-            res.send(500, "Could not set image for instrument");
+            res.send(500, 'Could not set image for instrument');
           }
 
           res.json(updatedInstrument);
@@ -466,8 +372,8 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
         var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
         return v.toString(16);
     });
-    console.log("saving");
-    fs.writeFile("api/images/" + filename + ".jpg", req.body.image, 'base64', function(err) {
+    console.log('saving');
+    fs.writeFile('api/images/' + filename + '.jpg', req.body.image, 'base64', function(err) {
       if (err)
         return console.dir(err);
         req.body.image = null;
@@ -550,7 +456,7 @@ app.post("/api/instruments", ensureAuthenticated, function(req, res) {
   });*/
 });
 
-app.post("/api/instrument/:id/setimage", ensureAuthenticated, function(req, res) {
+app.post('/api/instrument/:id/setimage', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
   var imagebytes = [];
   if (req.params.id)
@@ -595,7 +501,7 @@ app.post("/api/instrument/:id/setimage", ensureAuthenticated, function(req, res)
               .update({ _id: req.params.id, userId: loggedInUser }, { $set: { image: imageData } }, { safe:true }, function(err, updatedInstrument) {
                 if (err) {
                   console.log(err);
-                  res.send(500, "Could not set image for instrument");
+                  res.send(500, 'Could not set image for instrument');
                 }
 
                 res.set('Content-Type', 'image/jpeg');
@@ -609,7 +515,7 @@ app.post("/api/instrument/:id/setimage", ensureAuthenticated, function(req, res)
   });
 });
 
-app.delete("/api/instrument/:id", ensureAuthenticated, function(req, res) {
+app.delete('/api/instrument/:id', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
 
   // Connect to the db
@@ -624,7 +530,7 @@ app.delete("/api/instrument/:id", ensureAuthenticated, function(req, res) {
   });
 });
 
-app.get("/api/practicesession/:id", function(req, res) {
+app.get('/api/practicesession/:id', function(req, res) {
   MongoClient.connect(mongoConnectionString, function(err, db) {
     if(err) { return console.dir(err); }
 
@@ -635,7 +541,7 @@ app.get("/api/practicesession/:id", function(req, res) {
         if (err)
           console.dir(err);
         else
-          console.log("Instrument", session.instrumentId);
+          console.log('Instrument', session.instrumentId);
         var goals = db.collection('Goals');
         goals.findOne({ _id: session.goalId }, function(err, goal) {
           if (err)
@@ -687,7 +593,7 @@ app.get("/api/practicesession/:id", function(req, res) {
   });
 });
 
-app.get("/api/practicesessionimage/:id", function(req, res) {
+app.get('/api/practicesessionimage/:id', function(req, res) {
   MongoClient.connect(mongoConnectionString, function(err, db) {
     if(err) { return console.dir(err); }
 
@@ -695,29 +601,29 @@ app.get("/api/practicesessionimage/:id", function(req, res) {
     instruments.findOne({ _id: ObjectID(req.params.id) }, function(err, instrument) {
       if (err)
         return console.dir(err);
-      res.type("image/jpeg");
-      var imageBuffer = new Buffer(instrument.image, "base64");
-      console.log("Sending image");
+      res.type('image/jpeg');
+      var imageBuffer = new Buffer(instrument.image, 'base64');
+      console.log('Sending image');
       res.send(imageBuffer);
       db.close();
     });
   });
 });
 
-app.get("/api/users", ensureAuthenticated, function(req, res) {
+app.get('/api/users', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
 
-  console.log("Checking user");
+  console.log('Checking user');
 
-  if (loggedInUser != "512684441ea176ca050002b7") {
-    res.status(401).send("You are not authorized to use this resource");
+  if (loggedInUser != '512684441ea176ca050002b7') {
+    res.status(401).send('You are not authorized to use this resource');
     return;
   }
   else {
     MongoClient.connect(mongoConnectionString, function(err, db) {
       if (err)
         return console.error(err);
-      db.collection("Users").find().toArray(function(err, users) {
+      db.collection('Users').find().toArray(function(err, users) {
         if (err)
           return console.error(err);
         res.json(users);
@@ -727,38 +633,38 @@ app.get("/api/users", ensureAuthenticated, function(req, res) {
   }
 });
 
-app.get("/api/user-objects/:id", ensureAuthenticated, function(req, res) {
+app.get('/api/user-objects/:id', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
 
-  console.log("Checking user");
+  console.log('Checking user');
 
-  if (loggedInUser != "512684441ea176ca050002b7") {
-    res.status(401).send("You are not authorized to use this resource");
+  if (loggedInUser != '512684441ea176ca050002b7') {
+    res.status(401).send('You are not authorized to use this resource');
     return;
   }
   else {
     var userId = ObjectID(req.params.id);
-    console.log("userId", userId);
+    console.log('userId', userId);
     var returnData = {};
 
     MongoClient.connect(mongoConnectionString, function(err, db) {
       if (err)
         return console.error(err);
-      db.collection("Users").findOne({ _id: userId }, function(err, user) {
+      db.collection('Users').findOne({ _id: userId }, function(err, user) {
         if (err)
           return console.error(err);
         returnData.user = user;
-        db.collection("Sessions").find({ userId: userId }).toArray(function(err, sessions) {
+        db.collection('Sessions').find({ userId: userId }).toArray(function(err, sessions) {
           if (err)
             return console.error(err);
           returnData.sessions = sessions;
 
-          db.collection("Instruments").find({ userId: userId }).toArray(function(err, instruments) {
+          db.collection('Instruments').find({ userId: userId }).toArray(function(err, instruments) {
             if (err)
               return console.error(err);
             returnData.instruments = instruments;
   
-            db.collection("Goals").find({ userId: userId }).toArray(function(err, goals) {
+            db.collection('Goals').find({ userId: userId }).toArray(function(err, goals) {
               returnData.goals = goals;
 
               res.json(returnData);
@@ -774,7 +680,7 @@ app.get("/api/user-objects/:id", ensureAuthenticated, function(req, res) {
 journalStore.setConnectionString(mongoConnectionString);
 mongodbService.init(mongoConnectionString, function() {
 	var port = process.env.PORT || 80;
-	console.log("Listening to", port);
+	console.log('Listening to', port);
 	app.listen(port);	
 });
 

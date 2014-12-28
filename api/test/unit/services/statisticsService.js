@@ -121,4 +121,80 @@ describe('statisticsService', function() {
       });
     });
   });
+
+  describe('getPerWeek', function () {
+    var aggregate;
+
+    beforeEach(function() {
+      aggregate = [{
+          count: 1,
+          minutes: 0,
+          week: 45,
+          year: 2014
+        }, {
+          count: 2,
+          minutes: 206,
+          week: 51,
+          year: 2014
+        }];
+
+      collection.aggregate.onFirstCall().yields(null, aggregate);
+    });
+
+    it('gets the session collection from Mongo DB', function (done) {
+      statisticsService.getPerWeek(123, 5, function() {
+        expect(mongoDB.collection).calledOnce;
+        expect(mongoDB.collection).calledWith('Sessions');
+        done();
+       });      
+    });
+
+    it('returns statistics per week', function (done) {
+      statisticsService.getPerWeek(123, 5, function(err, results) {
+        expect(collection.aggregate).calledOnce;
+        expect(results).to.eql(aggregate);
+        done();
+      });
+    });
+  });
+
+  describe('getMinutesPerDay', function () {
+    var aggregate;
+
+    beforeEach(function() {
+      aggregate = [{
+        _id: {
+          year: 2014,
+          month: 12,
+          day: 26
+        },
+        totalMinutes: 135
+      },{
+        _id: {
+          year: 2014,
+          month: 12,
+          day: 27
+        },
+        totalMinutes: 71
+      }];
+
+      collection.aggregate.onFirstCall().yields(null, aggregate);
+    });
+
+    it('gets the session collection from Mongo DB', function (done) {
+      statisticsService.getMinutesPerDay(123, new Date(), function() {
+        expect(mongoDB.collection).calledOnce;
+        expect(mongoDB.collection).calledWith('Sessions');
+        done();
+       });      
+    });
+
+    it('returns minutes per day', function (done) {
+      statisticsService.getMinutesPerDay(123, new Date(), function(err, results) {
+        expect(collection.aggregate).calledOnce;
+        expect(results).to.eql(aggregate);
+        done();
+      });
+    });
+  });
 });
