@@ -16,13 +16,11 @@ var csrf = require('csurf');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
 var mongoConnectionString = process.env.GITARRMONGO;
-console.log('Connecting to ', mongoConnectionString);
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 var mongodbService = require('./api/services/mongodbService');
-var journalStore = require('./api/guitarjournalstore');
 var sessionRoutes = require('./api/routes/sessionRoutes');
 var statisticsRoutes = require('./api/routes/statisticsRoutes');
 var goalRoutes = require('./api/routes/goalRoutes');
@@ -390,7 +388,6 @@ app.get('/api/user-objects/:id', ensureAuthenticated, function(req, res) {
   }
 });
 
-journalStore.setConnectionString(mongoConnectionString);
 mongodbService.init(mongoConnectionString, function() {
 	var port = process.env.PORT || 80;
 	console.log('Listening to', port);
