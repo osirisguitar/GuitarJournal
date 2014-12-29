@@ -15,12 +15,8 @@ var session = require('cookie-session');
 var csrf = require('csurf');
 var MongoClient = require('mongodb').MongoClient;
 var ObjectID = require('mongodb').ObjectID;
-var Binary = require('mongodb').Binary;
 var mongoConnectionString = process.env.GITARRMONGO;
 console.log('Connecting to ', mongoConnectionString);
-var fs = require('fs');
-var gm = require('gm');
-var imageMagick = gm.subClass({ imageMagick: true });
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -30,6 +26,8 @@ var journalStore = require('./api/guitarjournalstore');
 var sessionRoutes = require('./api/routes/sessionRoutes');
 var statisticsRoutes = require('./api/routes/statisticsRoutes');
 var goalRoutes = require('./api/routes/goalRoutes');
+var instrumentRoutes = require('./api/routes/instrumentRoutes');
+var practiceSessionRoutes = require('./api/routes/practiceSessionRoutes');
 
 express.static.mime.define({'application/font-woff': ['woff']});
 
@@ -140,12 +138,12 @@ app.get('/auth/allowsimple', function(req, res) {
     res.send(false);
 });
 
-app.get('/api/sessiontest', function(req, res) {
+/*app.get('/api/sessiontest', function(req, res) {
   if (!req.session.created)
     req.session.created = new Date();
 
   res.json({'session': req.session, 'port': process.env.PORT });
-});
+});*/
 
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
@@ -284,23 +282,6 @@ app.get('/api/loggedin', function(req, res) {
     return ObjectID(req.session.loggedInUser);
 }*/
 
-// Session routes
-app.get('/api/sessions/:skip?', ensureAuthenticated, sessionRoutes.getSessions);
-app.post('/api/sessions', ensureAuthenticated, sessionRoutes.saveSession);
-app.get('/api/session/:id', ensureAuthenticated, sessionRoutes.getSession);
-app.delete('/api/session/:id', ensureAuthenticated, sessionRoutes.deleteSession);
-
-// Statistics routes
-app.get('/api/statistics/overview/:days?', ensureAuthenticated, statisticsRoutes.getOverview);
-app.get('/api/statistics/perweekday', ensureAuthenticated, statisticsRoutes.getPerWeekday);
-app.get('/api/statistics/perweek/:weeks?', ensureAuthenticated, statisticsRoutes.getPerWeek);
-app.get('/api/statistics/minutesperday/:days?', ensureAuthenticated, statisticsRoutes.getMinutesPerDay);
-
-// Goal routes
-app.get('/api/goals', ensureAuthenticated, goalRoutes.getGoals);
-app.post('/api/goals', ensureAuthenticated, goalRoutes.saveGoal);
-app.delete('/api/goal/:id', ensureAuthenticated, goalRoutes.deleteGoal);
-
 app.get('/api/profile', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
 
@@ -318,304 +299,38 @@ app.get('/api/profile', ensureAuthenticated, function(req, res) {
   });
 });
 
-app.get('/api/instruments', ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
+// Session routes
+app.get('/api/sessions/:skip?', ensureAuthenticated, sessionRoutes.getSessions);
+app.post('/api/sessions', ensureAuthenticated, sessionRoutes.saveSession);
+app.get('/api/session/:id', ensureAuthenticated, sessionRoutes.getSession);
+app.delete('/api/session/:id', ensureAuthenticated, sessionRoutes.deleteSession);
 
-  console.log('Request to', process.env.PORT);
+// Statistics routes
+app.get('/api/statistics/overview/:days?', ensureAuthenticated, statisticsRoutes.getOverview);
+app.get('/api/statistics/perweekday', ensureAuthenticated, statisticsRoutes.getPerWeekday);
+app.get('/api/statistics/perweek/:weeks?', ensureAuthenticated, statisticsRoutes.getPerWeek);
+app.get('/api/statistics/minutesperday/:days?', ensureAuthenticated, statisticsRoutes.getMinutesPerDay);
 
-  // Connect to the db
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
+// Goal routes
+app.get('/api/goals', ensureAuthenticated, goalRoutes.getGoals);
+app.post('/api/goals', ensureAuthenticated, goalRoutes.saveGoal);
+app.delete('/api/goal/:id', ensureAuthenticated, goalRoutes.deleteGoal);
 
-    var instruments = db.collection('Instruments');
-    instruments.find({ 'userId': loggedInUser }).toArray(function(err, items) {
-      if (err)
-      {
-        console.log(err);
-        return (err);
-      }
-      db.close();
-      res.json(items);
-    });
-  });
-});
+// Instrument routes
+app.get('/api/instruments', ensureAuthenticated, instrumentRoutes.getInstruments);
+app.post('/api/instruments', ensureAuthenticated, instrumentRoutes.saveInstrument);
+app.delete('/api/instrument/:id', ensureAuthenticated, instrumentRoutes.deleteInstrument);
 
-app.post('/api/instruments', ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-  var instrumentId;
-  if (req.body._id) {
-    req.body._id = ObjectID(req.body._id);
-  }
-  req.body.userId = loggedInUser;
-
-
-  // Local function that saves, needed since the image resize ends in a callback
-  var save = function() {
-    MongoClient.connect(mongoConnectionString, function(err, db) {
-      if(err) { return console.dir(err); }
-      db.collection('Instruments')
-        .save(req.body, { safe:true }, function(err, updatedInstrument) {
-          if (err) {
-            console.log(err);
-            res.send(500, 'Could not set image for instrument');
-          }
-
-          res.json(updatedInstrument);
-          db.close();
-          return;
-        });
-    });
-  };
-
-  if (req.body.image) {
-    var filename = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
-        return v.toString(16);
-    });
-    console.log('saving');
-    fs.writeFile('api/images/' + filename + '.jpg', req.body.image, 'base64', function(err) {
-      if (err)
-        return console.dir(err);
-        req.body.image = null;
-        req.body.imageFile = filename;
-      save();
-      });
-  }
-  else {
-    save();
-  }
-
-/*  if (req.body.image) {
-    var imagebytes = [];
-    var imageStream = new Buffer(req.body.image, 'base64');
-    imageMagick(imageStream).size(function(err, size) {
-      if (err)
-        console.log(err);
-      var width = size.width;
-      var height = size.height;
-
-      var targetWidth = 75;
-      var targetHeight = 75;
-      var cropX = 0;
-      var cropY = 0;
-
-      if (width > height) {
-        targetWidth = Math.round(width * 75 / height);
-        cropX = Math.round((targetWidth - targetHeight)/2);
-      }
-      else {
-        targetHeight = Math.round(height * 75 / width);
-        cropY = Math.round((targetHeight - targetWidth)/2);     
-      }
-
-      imageMagick(imageStream)
-        .resize(targetWidth, targetHeight)
-        .crop(75, 75, cropX, cropY)
-        .autoOrient()
-        .stream(function (err, stdout, stderr) {
-          if (err) console.log(err);
-
-          stdout.on('data', function(data) {
-            imagebytes.push(data);
-          });
-
-          stdout.on('close', function() {
-            var image = Buffer.concat(imagebytes);
-            var imageData = Binary(image);
-            req.body.image = Binary(imageStream);
-
-            save();
-          });
-        });
-    });
-
-  }
-  else
-  {
-    save();
-  }*/
-
-
-/*
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var instruments = db.collection('Instruments');
-    if (instrumentId) {
-      instruments.update({ _id: instrumentId }, { $set: req.body }, {safe:true}, function(err, updatedInstrument) {
-        if (err) console.log(err);
-        res.json(updatedInstrument);
-      });
-    }
-    else {
-      instruments.save(req.body, {safe:true}, function(err, insertedInstrument) {
-        if (err) console.log(err);
-        res.json(insertedInstrument);
-      });
-    }
-  });*/
-});
-
-app.post('/api/instrument/:id/setimage', ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-  var imagebytes = [];
-  if (req.params.id)
-    req.params.id = ObjectID(req.params.id);
-
-  imageMagick(req.files.imagefile.path).size(function(err, size) {
-    var width = size.width;
-    var height = size.height;
-
-    var targetWidth = 75;
-    var targetHeight = 75;
-    var cropX = 0;
-    var cropY = 0;
-
-    if (width > height) {
-      targetWidth = Math.round(width * 75 / height);
-      cropX = Math.round((targetWidth - targetHeight)/2);
-    }
-    else {
-      targetHeight = Math.round(height * 75 / width);
-      cropY = Math.round((targetHeight - targetWidth)/2);     
-    }
-
-    imageMagick(req.files.imagefile.path)
-      .resize(targetWidth, targetHeight)
-      .crop(75, 75, cropX, cropY)
-      .autoOrient()
-      .stream(function (err, stdout, stderr) {
-        if (err) console.log(err);
-
-        stdout.on('data', function(data) {
-          imagebytes.push(data);
-        });
-
-        stdout.on('close', function() {
-          var image = Buffer.concat(imagebytes);
-          var imageData = Binary(image);
-
-          MongoClient.connect(mongoConnectionString, function(err, db) {
-            if(err) { return console.dir(err); }
-            db.collection('Instruments')
-              .update({ _id: req.params.id, userId: loggedInUser }, { $set: { image: imageData } }, { safe:true }, function(err, updatedInstrument) {
-                if (err) {
-                  console.log(err);
-                  res.send(500, 'Could not set image for instrument');
-                }
-
-                res.set('Content-Type', 'image/jpeg');
-                res.send(image);
-                db.close();
-                return;
-              });
-          });
-        });
-      });
-  });
-});
-
-app.delete('/api/instrument/:id', ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-
-  // Connect to the db
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var instruments = db.collection('Instruments');
-    instruments.remove({ _id: ObjectID(req.params.id), userId: loggedInUser }, 1, function(err, item) {
-      res.json(item);
-      db.close();
-    });
-  });
-});
-
-app.get('/api/practicesession/:id', function(req, res) {
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var sessions = db.collection('Sessions');
-    sessions.findOne({ _id: ObjectID(req.params.id) }, function(err, session) {
-      var instruments = db.collection('Instruments');
-      instruments.findOne({ _id: session.instrumentId }, function(err, instrument) {
-        if (err)
-          console.dir(err);
-        else
-          console.log('Instrument', session.instrumentId);
-        var goals = db.collection('Goals');
-        goals.findOne({ _id: session.goalId }, function(err, goal) {
-          if (err)
-            console.dir(err);
-          var html = '<html>' +
-            '<style>body { font-family:Arial,Helvetica; }</style>' +
-            '<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# ogjournal: http://ogp.me/ns/fb/ogjournal#">\n' +
-            '<link rel="stylesheet" href="/about/style.css">\n' +
-            '<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile%3A700&#038;subset=latin%2Clatin-ext&#038;ver=All" type="text/css" media="all" />\n' +
-            '<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">\n' +
-            '<meta property="fb:app_id" content="151038621732407" />\n' +
-                '<meta property="og:title" content="a ' + session.length + ' minute Practice Session" />\n';
-                if (instrument) {
-                  html += '<meta property="og:image" content="http://journal.osirisguitar.com/api/images/' + instrument.imageFile + '.jpg" />\n';
-                  html += '<meta property="ogjournal:session_instrument" content="' + instrument.name + '" />';
-                }
-                html += '<meta property="og:url" content="http://journal.osirisguitar.com/api/practicesession/' + req.params.id + '" />\n' +
-                /*'<meta property="fb:explicitly_shared" content="true"/>\n' + */
-                '<meta property="og:type" content="ogjournal:practice_session" />\n';
-                if (session.length)
-                  html += '<meta property="ogjournal:session_length" content="' + session.length + '" />\n';
-                if (session.rating)
-                  html += '<meta property="ogjournal:session_rating" content="' + session.rating + '" />\n';              
-                if (goal) {
-                  html += '<meta property="ogjournal:session_goal" content="' + goal.title + '" />\n';
-                }
-                html += '</head><body>' +
-                '<div id="wrapper">\n' +
-            '<img src="/about/og-logo.png">\n' +
-            '<div class="content">\n';
-                html += '<div class="session"><h1>A ' + session.length + ' minute Practice Session</h1>\n' +
-                '<p>';
-                if (instrument && instrument.imageFile) {
-              html += '<img style="float:right;padding-left:10px;margin-top:0px;margin-bottom:20px;" src="http://journal.osirisguitar.com/api/images/' + instrument.imageFile + '.jpg">\n';
-            }
-                if (instrument) {
-                  html += '<b>Instrument:</b> ' + instrument.name + '<br>\n';
-                }
-                if (goal)
-                  html += '<b>Goal:</b> ' + goal.title + '<br>\n';
-                if (session.rating)
-                  html += '<b>Rating:</b> ' + session.rating + '<br>\n';
-                html += '</p></div><div class="about">Read more about the OSIRIS GUITAR Journal and <a href="/about">get your own account</a></div></div></div></body>';
-          res.send(html);
-          db.close();
-        });
-      });
-    });
-  });
-});
-
-app.get('/api/practicesessionimage/:id', function(req, res) {
-  MongoClient.connect(mongoConnectionString, function(err, db) {
-    if(err) { return console.dir(err); }
-
-    var instruments = db.collection('Instruments');
-    instruments.findOne({ _id: ObjectID(req.params.id) }, function(err, instrument) {
-      if (err)
-        return console.dir(err);
-      res.type('image/jpeg');
-      var imageBuffer = new Buffer(instrument.image, 'base64');
-      console.log('Sending image');
-      res.send(imageBuffer);
-      db.close();
-    });
-  });
-});
+// Practice session (public) routes
+app.get('/api/practicesession/:id', practiceSessionRoutes.getPracticeSession);
+app.get('/api/practicesessionimage/:id', practiceSessionRoutes.getPracticeSessionImage);
 
 app.get('/api/users', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
 
   console.log('Checking user');
 
-  if (loggedInUser != '512684441ea176ca050002b7') {
+  if (loggedInUser !== '512684441ea176ca050002b7') {
     res.status(401).send('You are not authorized to use this resource');
     return;
   }
@@ -636,14 +351,12 @@ app.get('/api/users', ensureAuthenticated, function(req, res) {
 app.get('/api/user-objects/:id', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
 
-  console.log('Checking user');
-
-  if (loggedInUser != '512684441ea176ca050002b7') {
+  if (loggedInUser !== '512684441ea176ca050002b7') {
     res.status(401).send('You are not authorized to use this resource');
     return;
   }
   else {
-    var userId = ObjectID(req.params.id);
+    var userId = new ObjectID(req.params.id);
     console.log('userId', userId);
     var returnData = {};
 

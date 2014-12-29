@@ -9,7 +9,7 @@ var proxyquire = require('proxyquire');
 
 chai.use(require('sinon-chai'));
 
-describe('goalService', function() {
+describe('instrumentService', function() {
   var mongoDB;
   var collection = {
     find: null,
@@ -18,11 +18,11 @@ describe('goalService', function() {
     limit: null,
     toArray: null
   };
-  var goals;
-  var goalService;
+  var instruments;
+  var instrumentService;
 
   beforeEach(function() {
-    goals = [{
+    instruments = [{
       id: 123
     }];
 
@@ -35,90 +35,79 @@ describe('goalService', function() {
       collection: sinon.stub().returns(collection)
     };
 
-    goalService = proxyquire(process.cwd() + '/api/services/goalService', {
+    instrumentService = proxyquire(process.cwd() + '/api/services/instrumentService', {
       './mongodbService': mongoDB
     });
   });
 
-  describe('getGoals', function() {
+  describe('getInstruments', function() {
     beforeEach(function() {
-      collection.toArray = sinon.stub().yields(null, goals);
+      collection.toArray = sinon.stub().yields(null, instruments);
     });
 
-    it('gets the goals collection from Mongo DB', function(done) {
-      goalService.getGoals(123, function() {
+    it('gets the instruments collection from Mongo DB', function(done) {
+      instrumentService.getInstruments(123, function() {
         expect(mongoDB.collection).calledOnce;
-        expect(mongoDB.collection).calledWith('Goals');
+        expect(mongoDB.collection).calledWith('Instruments');
         done();
        });
     });
 
-    it('calls find by user id on goals', function(done) {
-      goalService.getGoals(123, function() {
+    it('calls find by user id on instruments', function(done) {
+      instrumentService.getInstruments(123, function() {
         expect(collection.find).calledOnce.calledWith({ userId: 123 });
         done();
       });
     });
 
-    it('sorts the goals by completion date and title', function(done) {
-      goalService.getGoals(123, function() {
-        expect(collection.sort).calledOnce.calledWith({ completionDate: 1, title: 1 });
-        done();
-      });    
-    });
-
-    it('returns an array of goals', function(done) {
-      goalService.getGoals(123, function(err, items) {
-        expect(items).to.eql(goals);
+    it('returns an array of instruments', function(done) {
+      instrumentService.getInstruments(123, function(err, items) {
+        expect(items).to.eql(instruments);
         done();
       });    
     });      
   });
 
-  describe('saveSession', function() {
-    var goal;
+  describe('saveInstrument', function() {
+    var instrument;
 
     beforeEach(function() {
-      goal = {
-        _id: '54a016166f69b6ae11000001',
+      instrument = {
+        _id: '545b64d49025e20000000001',
         userId: 123,
-        date: new Date(10000),
-        title: 'Fix unit tests',
-        description: 'Unit hest',
-        completed: true,
-        completionDate: new Date(20000)
+        name: 'Gurka',
+        type: '6-string',
+        description: 'A gurk'
       };
 
       collection.save = sinon.stub().yields(null, { 'nInserted': 1 });
     });
 
     it('calls save on goals', function() {
-      goalService.saveGoal(123, goal, function() {
+      instrumentService.saveInstrument(123, instrument, function() {
         expect(collection.save).calledOnce.calledWith({ 
-          _id: '54a016166f69b6ae11000001', 
+          _id: '545b64d49025e20000000001', 
           userId: 123,
-          date: new Date(10000),
-          title: 'Fix unit tests',
-          description: 'Unit hest',
-          completed: true,
-          completionDate: new Date(20000)
+          name: 'Gurka',
+          type: '6-string',
+          description: 'A gurk'
         }, { safe: true });
       });
     });
 
     it('returns a result from saving', function() {
-      goalService.saveGoal(123, goal, function(err, result) {
+      instrumentService.saveInstrument(123, instrument, function(err, result) {
         expect(err).to.not.exist;
         expect(result).to.eql({ 'nInserted': 1 });
       });
     });
   });
 
-  describe('deleteGoal', function() {
-    var goal;
+  describe('deleteInstrument', function() {
+    var instrument;
 
     beforeEach(function() {
-      goal = {
+      instrument = {
         _id: '5465241dc29dbfa356000001'
       };
 
@@ -126,16 +115,16 @@ describe('goalService', function() {
     });
 
     it('calls remove on goals', function() {
-      goalService.deleteGoal(123, goal._id, function() {
+      instrumentService.deleteInstrument(123, instrument._id, function() {
         expect(collection.remove).calledOnce.calledWith({
-          _id: goal._id,
+          _id: instrument._id,
           userId: 123
         }, 1);
       });
     }); 
 
     it('returns a result from deleting', function() {
-      goalService.deleteGoal(123, goal._id, function(err, result) {
+      instrumentService.deleteInstrument(123, instrument._id, function(err, result) {
         expect(err).to.not.exist;
         expect(result).to.eql({ 'nRemoved': 1 });
       });
