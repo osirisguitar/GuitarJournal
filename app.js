@@ -26,6 +26,7 @@ var statisticsRoutes = require('./api/routes/statisticsRoutes');
 var goalRoutes = require('./api/routes/goalRoutes');
 var instrumentRoutes = require('./api/routes/instrumentRoutes');
 var practiceSessionRoutes = require('./api/routes/practiceSessionRoutes');
+var authenticationRoutes = require('./api/routes/authenticationRoutes');
 
 express.static.mime.define({'application/font-woff': ['woff']});
 
@@ -223,13 +224,7 @@ app.use('/api/images', express.static(__dirname + '/api/images', { maxAge: 25920
 // Route for static about-site
 app.use('/about', express.static(__dirname + '/about'));
 
-app.get('/api/login',
-  passport.authenticate('local'),
-  function (req, res) {
-    res.cookie('userid', req.user._id, { maxAge: 2592000000 });
-    res.json(req.user);
-  }
-);
+app.get('/api/login', passport.authenticate('local'), authenticationRoutes.login);
 
 app.get('/api/logout', function(req, res) {
   res.clearCookie('userid');
