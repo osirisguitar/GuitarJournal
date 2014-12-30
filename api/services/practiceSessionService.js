@@ -2,7 +2,6 @@
 /* jshint maxcomplexity: 10 */
 
 var mongoDB = require('./mongodbService');
-var fs = require('fs');
 
 module.exports = {
   getPracticeSession: function(sessionId, callback) {

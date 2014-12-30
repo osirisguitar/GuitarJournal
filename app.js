@@ -27,6 +27,8 @@ var goalRoutes = require('./api/routes/goalRoutes');
 var instrumentRoutes = require('./api/routes/instrumentRoutes');
 var practiceSessionRoutes = require('./api/routes/practiceSessionRoutes');
 var authenticationRoutes = require('./api/routes/authenticationRoutes');
+var authenticationService = require('./api/services/authenticationService');
+var adminRoutes = require('./api/routes/adminRoutes');
 
 express.static.mime.define({'application/font-woff': ['woff']});
 
@@ -60,7 +62,7 @@ passport.use(new LocalStrategy({
   },
     function(username, password, done) {
       console.log('Local strategy login', username, password);
-      journalStore.checkLogin(username, password, function(err, user) {
+      authenticationService.checkLogin(username, password, function(err, user) {
         console.log('Checklogin callback', err, user);
         return done(err, user);
       });
@@ -130,20 +132,6 @@ function ensureAuthenticated(req, res, next) {
   res.redirect('/login');
 }
 
-app.get('/auth/allowsimple', function(req, res) {
-  if (process.env.ALLOWSIMPLELOGIN)
-    res.send(true);
-  else
-    res.send(false);
-});
-
-/*app.get('/api/sessiontest', function(req, res) {
-  if (!req.session.created)
-    req.session.created = new Date();
-
-  res.json({'session': req.session, 'port': process.env.PORT });
-});*/
-
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
 //     /auth/facebook/callback
@@ -178,9 +166,6 @@ app.get('/auth/facebook/callback', function(req, res, next) {
       });
     })(req, res, next);
 });
-/*app.get('/auth/facebook/callback',
- passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));*/
 
 // One page app routing, the client-side app
 // handles the internal routing.
@@ -225,60 +210,13 @@ app.use('/api/images', express.static(__dirname + '/api/images', { maxAge: 25920
 app.use('/about', express.static(__dirname + '/about'));
 
 app.get('/api/login', passport.authenticate('local'), authenticationRoutes.login);
-
-app.get('/api/logout', function(req, res) {
-  res.clearCookie('userid');
-  res.clearCookie('hasloggedinwithfb');
-  req.logout();
-  res.redirect('/');
-});
-
-app.post('/api/signup', function(req, res) {
-  journalStore.checkIfUserExists(req.body.email, function(err, user) {
-    if (err) {
-      console.error(err);
-    }
-
-    if (user) {
-      res.send(500, { message: 'User already exists' });
-    } else {
-      journalStore.createUser(req.body, function(err, user) {
-        //res.redirect('/api/login?email=' + req.body.email + '&password=' + req.body.password);
-        res.json(user);
-      });
-    }
-  });
-});
-
-app.get('/api/loggedin', function(req, res) {
-  console.log('isAuthenticated', req.isAuthenticated());
-  if (req.isAuthenticated()) {
-    req.user._csrf = req.csrfToken();
-    res.json(req.user);   
-  } else {
-    if (req.cookies.hasloggedinwithfb) {
-      res.json({ _csrf: req.csrfToken(), autoTryFacebook: true });    
-    }
-    else {
-      res.json({ _csrf: req.csrfToken(), autoTryFacebook: false });   
-    }
-  }
-});
-
-/*function checkLogin(req, res) {
-  if (!req.session.loggedInUser)
-  {
-    res.send('401', 'Not logged in');
-    return null;
-  }
-  else
-    return ObjectID(req.session.loggedInUser);
-}*/
+app.get('/api/logout', authenticationRoutes.logout);
+app.get('/auth/allowsimple', authenticationRoutes.allowSimpleLogin);
+app.post('/api/signup', authenticationRoutes.signup);
+app.get('/api/loggedin', authenticationRoutes.loggedIn);
 
 app.get('/api/profile', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;
-
-  console.log('Request to', process.env.PORT);
 
   // Connect to the db
   MongoClient.connect(mongoConnectionString, function(err, db) {
@@ -318,70 +256,9 @@ app.delete('/api/instrument/:id', ensureAuthenticated, instrumentRoutes.deleteIn
 app.get('/api/practicesession/:id', practiceSessionRoutes.getPracticeSession);
 app.get('/api/practicesessionimage/:id', practiceSessionRoutes.getPracticeSessionImage);
 
-app.get('/api/users', ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-
-  console.log('Checking user');
-
-  if (loggedInUser !== '512684441ea176ca050002b7') {
-    res.status(401).send('You are not authorized to use this resource');
-    return;
-  }
-  else {
-    MongoClient.connect(mongoConnectionString, function(err, db) {
-      if (err)
-        return console.error(err);
-      db.collection('Users').find().toArray(function(err, users) {
-        if (err)
-          return console.error(err);
-        res.json(users);
-        db.close();
-      });
-    });
-  }
-});
-
-app.get('/api/user-objects/:id', ensureAuthenticated, function(req, res) {
-  var loggedInUser = req.user._id;
-
-  if (loggedInUser !== '512684441ea176ca050002b7') {
-    res.status(401).send('You are not authorized to use this resource');
-    return;
-  }
-  else {
-    var userId = new ObjectID(req.params.id);
-    console.log('userId', userId);
-    var returnData = {};
-
-    MongoClient.connect(mongoConnectionString, function(err, db) {
-      if (err)
-        return console.error(err);
-      db.collection('Users').findOne({ _id: userId }, function(err, user) {
-        if (err)
-          return console.error(err);
-        returnData.user = user;
-        db.collection('Sessions').find({ userId: userId }).toArray(function(err, sessions) {
-          if (err)
-            return console.error(err);
-          returnData.sessions = sessions;
-
-          db.collection('Instruments').find({ userId: userId }).toArray(function(err, instruments) {
-            if (err)
-              return console.error(err);
-            returnData.instruments = instruments;
-  
-            db.collection('Goals').find({ userId: userId }).toArray(function(err, goals) {
-              returnData.goals = goals;
-
-              res.json(returnData);
-              db.close();
-            });
-          });
-        });
-      });
-    });
-  }
-});
+// Admin routes
+app.get('/api/users', ensureAuthenticated, adminRoutes.getUsers);
+app.get('/api/user-objects/:id', adminRoutes.getUserObjects);
 
 mongodbService.init(mongoConnectionString, function() {
 	var port = process.env.PORT || 80;
