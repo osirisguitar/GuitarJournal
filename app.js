@@ -61,9 +61,7 @@ passport.use(new LocalStrategy({
       passwordField: 'password'
   },
     function(username, password, done) {
-      console.log('Local strategy login', username, password);
       authenticationService.checkLogin(username, password, function(err, user) {
-        console.log('Checklogin callback', err, user);
         return done(err, user);
       });
   }
@@ -113,7 +111,6 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  console.log('Trying to deserialize', id);
   MongoClient.connect(mongoConnectionString, function(err, db) {
     if(err) { return done(err); }
 
@@ -143,25 +140,22 @@ app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'publish_ac
 // authentication has failed.
 app.get('/auth/facebook/callback', function(req, res, next) {
   passport.authenticate('facebook', { failureRedirect: '/login' }, function(err, user, info) {
-    console.log('Getting callback from FB', info);
       if (err) { 
-        console.log('Login error', err);
+        console.error('Login error', err);
         return next(err); 
       }
       if (!user) { 
-        console.log('No user');
+        console.error('No user');
         return res.redirect('/login'); 
       }
       req.logIn(user, function(err) {
-        console.log('Logging in user');
         if (err) { 
-          console.log('Error logging user in', err);
+          console.error('Error logging user in', err);
           return next(err); 
           }
           var expiration = new Date();
           expiration.setDate(expiration.getDate() + 365);
         res.cookie('hasloggedinwithfb', 'true', { expires: expiration });
-        console.log('Cookies', res.cookies);
         return res.redirect('/');
       });
     })(req, res, next);
@@ -214,6 +208,8 @@ app.get('/api/logout', authenticationRoutes.logout);
 app.get('/auth/allowsimple', authenticationRoutes.allowSimpleLogin);
 app.post('/api/signup', authenticationRoutes.signup);
 app.get('/api/loggedin', authenticationRoutes.loggedIn);
+app.post('/api/forgotpassword', authenticationRoutes.sendPasswordReminder);
+app.post('/api/setpassword', authenticationRoutes.setPassword);
 
 app.get('/api/profile', ensureAuthenticated, function(req, res) {
   var loggedInUser = req.user._id;

@@ -14,10 +14,6 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 		hideTopNavigation: false
 	};
 
-	$rootScope.$on('$routeChangeSuccess', function(event, data) {
-		console.log('route', data);
-	});
-
 	$scope.iOS = $window.navigator.userAgent.match(/iPhone/i) || $window.navigator.userAgent.match(/iPad/i);
 
 	$rootScope.showErrorMessage = function(message, error) {
@@ -65,7 +61,6 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 	});
 
 	$http.get('/api/loggedin').success(function(data) {
-		console.log('Returned from /api/loggedin', data);
 		$rootScope.apiStatus.loading++;
 		$rootScope.csrf = data._csrf;
 		$rootScope.httpConfig = {
@@ -79,7 +74,6 @@ function AppCtrl($scope, $http, $location, Sessions, $rootScope, growl, $log, $w
 		else {
 			$rootScope.apiStatus.loading--;
 			if (data.autoTryFacebook) {
-				console.log("Trying facebook");
 				$window.location.href = "/auth/facebook";
 			}
 			else {
@@ -129,7 +123,6 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 	};
 
 	$scope.signUp = function() {
-		console.log($scope.signupEmail, $scope.signupPassword);
 		if ($scope.signupEmail && $scope.signupPassword) {
 			$http.post("/api/signup", 
 				{ email: $scope.signupEmail, password: $scope.signupPassword, username: $scope.signupUsername, fullName: $scope.signupFullName },
@@ -153,11 +146,11 @@ function LoginCtrl($scope, $http, $location, $cookies, $cookieStore, $rootScope)
 		if (!$scope.email) {
 			$scope.showErrorMessage("Input your email in the login email field and repress the button to have a new password sent to you.");
 		} else {
-			$http.post("/api/forgotpassword", {}, $rootScope.httpConfig)
+			$http.post("/api/forgotpassword", { email: $scope.email }, $rootScope.httpConfig)
 				.success(function(data) {
 					$scope.showSuccessMessage("A new password has been generated and sent to you by email.");
 				}).error(function(err) {
-					$scope.showErrorMessage("An error occurred when generating a new password");
+					$scope.showErrorMessage("An error occurred when generating a new password: " + err.message);
 				});
 		}
 	};
@@ -206,7 +199,6 @@ function SessionCtrl($scope, $rootScope, $routeParams, $http, $location, $log, S
 	if ($routeParams.id) {
 		Sessions.getSession($routeParams.id, 
 			function(session) {
-				console.log("Session: ", session);
 				$scope.session = session;
 				$scope.session.date = new Date(Date.parse($scope.session.date)).toISOString().substring(0, 10);
 			},
@@ -443,6 +435,17 @@ function ProfileCtrl($scope, $rootScope, $http, $location, Instruments, $window)
 		} else {
 			$window.location.href = "/api/logout";
 		}
+	};
+
+	$scope.setPassword = function() {
+		$http.post("/api/setPassword", 
+			{ password: $scope.password },
+			$rootScope.httpConfig
+		).success(function() {
+			$scope.showSuccessMessage('Your password has been updated');
+		}).error(function(err) {
+			$scope.showErrorMessage(err.message);
+		});		
 	};
 }
 

@@ -621,6 +621,11 @@
                                   </div>
 
                                   <a class="btn btn-default" type="button" href="/instrument/">Add Instrument</a>
+                                  <div ng-show="!profile.facebookId">
+                                  <h2>Change Password</h2>
+                                    <input class="form-control wide" placeholder="New password" type="password" ng-model="password" />
+                                    <a class="btn btn-success" type="button" ng-click="setPassword()" ng-show="password">Set new password</a>
+                                  </div>
                                   <h2>Logout</h2>
                                   <a class="btn btn-danger" type="button" ng-click="logout()" target="_self">Logout</a>
                                   <h2>Support</h2>

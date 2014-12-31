@@ -16,5 +16,9 @@ module.exports = {
 		var digest = this.createPasswordHash(password);
 
 		return digest === passwordHash;
+	},
+
+	createRandomPassword: function(numCharacters) {
+		return Math.random().toString(36).slice(-numCharacters);
 	}
 };

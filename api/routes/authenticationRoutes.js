@@ -50,5 +50,25 @@ module.exports = {
         });
       }
     });
+  },
+
+  setPassword: function(req, res) {
+    authenticationService.setPassword(req.user._id, req.body.password, function(err) {
+      if (err) {
+        res.send(500, { message: err.message });
+      } else {
+        res.json({ message: 'Password changed' });
+      }
+    });
+  },
+
+  sendPasswordReminder: function(req, res) {
+    authenticationService.sendPasswordReminder(req.body.email, function(err) {
+      if (err) {
+        res.send(500, { message: err.message });
+      } else {
+        res.json({ message: 'Reminder sent' });
+      }
+    });
   }
 };

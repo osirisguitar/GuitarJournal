@@ -8207,6 +8207,11 @@ textarea.form-control, input[type="text"].form-control, input[type="number"].for
   height:43px;
 }
 
+.form-control.wide {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
 .login .btn {
   margin-bottom:10px;
 }

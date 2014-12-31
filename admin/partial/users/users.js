@@ -14,9 +14,7 @@ angular.module('admin').controller('UserCtrl', function ($scope, $http) {
   		$scope.showDetails = !$scope.showDetails;
   	} else {
 	  $http.get('/api/user-objects/' + userId).success(function(data) {
-      console.log("http done");
 	  	$scope.userDetails = data;
-      console.log("UserDetails: ", $scope.userDetails);
 	  	$scope.showDetails = true;
 	  });
   	}
