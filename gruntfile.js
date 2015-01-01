@@ -123,7 +123,7 @@ module.exports = function(grunt) {
 			}
 		},
 		
-		secret: grunt.file.readJSON('secret.json'),
+		secret: grunt.file.exists('secret.json') ? grunt.file.readJSON('secret.json') : '',
 		
 		sftp: {
 			deploy: {
