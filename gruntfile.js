@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 					run: true,
 					log: true,
 					logErrors: true,
-					reporter: "Spec"
+					reporter: 'Spec'
 				}
 			}
 		},
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 					run: true,
 					log: true,
 					logErrors: true,
-					reporter: "Spec"
+					reporter: 'spec'
 				}
 			}
 		},
