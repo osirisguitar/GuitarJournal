@@ -279,3 +279,47 @@ To disable web storage backup to iCloud, set the BackupWebStorage preference to 
 2015-03-20 15:23:26.464 OG Journal[87474:4867007] Finished load of: http://localhost:5000/login
 2015-03-20 15:23:27.648 OG Journal[87474:4867007] Resetting plugins due to page load.
 2015-03-20 15:23:29.299 OG Journal[87474:4867007] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:27:19.975 OG Journal[87474:4867007] Resetting plugins due to page load.
+2015-03-20 15:27:23.233 OG Journal[87474:4867007] Finished load of: http://jdev.osirisguitar.com/login
+2015-03-20 15:27:53.934 OG Journal[87474:4867007] Resetting plugins due to page load.
+2015-03-20 15:27:54.041 OG Journal[87474:4867007] Finished load of: http://jdev.osirisguitar.com/login
+2015-03-20 15:32:51.310 OG Journal[88310:4874407] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:32:51.310 OG Journal[88310:4874407] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:32:51.311 OG Journal[88310:4874407] Unlimited access to network resources
+2015-03-20 15:32:51.313 OG Journal[88310:4874407] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:32:51.384 OG Journal[88310:4874407] [CDVTimer][splashscreen] 9.916961ms
+2015-03-20 15:32:51.385 OG Journal[88310:4874407] [CDVTimer][statusbar] 1.156032ms
+2015-03-20 15:32:51.385 OG Journal[88310:4874407] [CDVTimer][TotalPluginStartup] 11.285007ms
+2015-03-20 15:32:51.429 OG Journal[88310:4874407] Resetting plugins due to page load.
+2015-03-20 15:32:51.445 OG Journal[88310:4874407] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/EC23398C-A11D-41A8-AA84-9C904A8CE6EF/OG%20Journal.app/www/index2.html
+2015-03-20 15:32:51.450 OG Journal[88310:4874407] Resetting plugins due to page load.
+2015-03-20 15:32:56.209 OG Journal[88310:4874407] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
+2015-03-20 15:32:56.209 OG Journal[88310:4874407] Resetting plugins due to page load.
+2015-03-20 15:32:56.925 OG Journal[88310:4874407] Finished load of: http://www.osirisguitar.com/
+2015-03-20 15:33:04.738 OG Journal[88399:4874864] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:33:04.739 OG Journal[88399:4874864] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:33:04.740 OG Journal[88399:4874864] Unlimited access to network resources
+2015-03-20 15:33:04.742 OG Journal[88399:4874864] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:33:04.812 OG Journal[88399:4874864] [CDVTimer][splashscreen] 10.137975ms
+2015-03-20 15:33:04.814 OG Journal[88399:4874864] [CDVTimer][statusbar] 1.239002ms
+2015-03-20 15:33:04.814 OG Journal[88399:4874864] [CDVTimer][TotalPluginStartup] 11.584044ms
+2015-03-20 15:33:04.856 OG Journal[88399:4874864] Resetting plugins due to page load.
+2015-03-20 15:33:04.871 OG Journal[88399:4874864] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/CC723605-7494-4EC8-BC89-1793648500CC/OG%20Journal.app/www/index2.html
+2015-03-20 15:33:04.875 OG Journal[88399:4874864] Resetting plugins due to page load.
+2015-03-20 15:33:06.183 OG Journal[88399:4874864] Finished load of: http://journal.osirisguitar.com/login
+2015-03-20 15:33:08.648 OG Journal[88399:4874864] Resetting plugins due to page load.
+2015-03-20 15:33:10.693 OG Journal[88399:4874864] Finished load of: http://journal.osirisguitar.com/
