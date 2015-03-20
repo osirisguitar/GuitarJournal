@@ -29,6 +29,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins/org.apache.cordova.device/www/device.js",
+        "id": "org.apache.cordova.device.device",
+        "clobbers": [
+            "device"
+        ]
+    },
+    {
         "file": "plugins/org.apache.cordova.dialogs/www/notification.js",
         "id": "org.apache.cordova.dialogs.notification",
         "merges": [
@@ -43,11 +50,21 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/org.apache.cordova.device/www/device.js",
-        "id": "org.apache.cordova.device.device",
+        "file": "plugins/org.apache.cordova.statusbar/www/statusbar.js",
+        "id": "org.apache.cordova.statusbar.statusbar",
         "clobbers": [
-            "device"
+            "window.StatusBar"
         ]
     }
-]
+];
+module.exports.metadata = 
+// TOP OF METADATA
+{
+    "org.apache.cordova.camera": "0.2.5",
+    "org.apache.cordova.device": "0.2.5",
+    "org.apache.cordova.dialogs": "0.2.4",
+    "org.apache.cordova.splashscreen": "0.2.5",
+    "org.apache.cordova.statusbar": "0.1.10"
+}
+// BOTTOM OF METADATA
 });

@@ -9,4 +9,8 @@
     </author>
     <content src="index2.html" />
     <access origin="*" />
+    <engine name="ios" version="3.8.0" />
+    <preference name="StatusBarOverlaysWebview" value="false" />
+    <preference name="StatusBarStyle" value="darkcontent" />
+    <preference name="DisallowOverscroll" value="true" />
 </widget>

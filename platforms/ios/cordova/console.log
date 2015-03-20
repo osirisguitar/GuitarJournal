@@ -1,817 +1,281 @@
-2013-12-08 13:35:05.129 GuitarJournal[29462:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-08 13:35:05.159 GuitarJournal[29462:80b] Unlimited access to network resources
-2013-12-08 13:35:05.162 GuitarJournal[29462:80b] ERROR: Start Page at 'www/index2.ßhtml' was not found.
-2013-12-08 13:35:05.197 GuitarJournal[29462:80b] [CDVTimer][splashscreen] 13.244987ms
-2013-12-08 13:35:05.198 GuitarJournal[29462:80b] [CDVTimer][TotalPluginStartup] 13.781011ms
-2013-12-08 13:35:05.460 GuitarJournal[29462:80b] Resetting plugins due to page load.
-2013-12-08 13:35:05.490 GuitarJournal[29462:80b] Finished load of: about:blank
-2013-12-08 13:35:44.090 GuitarJournal[29771:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-08 13:35:44.100 GuitarJournal[29771:80b] Unlimited access to network resources
-2013-12-08 13:35:44.145 GuitarJournal[29771:80b] [CDVTimer][splashscreen] 20.922959ms
-2013-12-08 13:35:44.145 GuitarJournal[29771:80b] [CDVTimer][TotalPluginStartup] 21.575034ms
-2013-12-08 13:35:44.331 GuitarJournal[29771:80b] Resetting plugins due to page load.
-2013-12-08 13:35:44.357 GuitarJournal[29771:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-08 13:35:44.362 GuitarJournal[29771:80b] Resetting plugins due to page load.
-2013-12-08 13:35:45.117 GuitarJournal[29771:80b] Finished load of: http://journal.osirisguitar.com/login
-2013-12-08 13:35:58.892 GuitarJournal[29771:80b] Resetting plugins due to page load.
-2013-12-08 13:35:59.886 GuitarJournal[29771:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-08 13:35:59.887 GuitarJournal[29771:80b] Resetting plugins due to page load.
-2013-12-08 13:36:00.529 GuitarJournal[29771:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&api_key=151038621732407&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&cancel_uri=http%3A%2F%2Fjournal.osirisguitar.com%2Fauth%2Ffacebook%2Fcallback%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=touch&_rdr
-2013-12-08 13:36:34.290 GuitarJournal[29771:80b] Resetting plugins due to page load.
-2013-12-08 13:36:35.067 GuitarJournal[29771:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&refsrc=https%3A%2F%2Fm.facebook.com%2Flogin.php&refid=9&e=1348028&email=anders%40b&signup_layout=layout%7Clower_subdued_button%7C%7Cs_btn%7Cspecial%7C%7Cl_btn%7Cconfirm%7C%7Csignupinstr%7C%7Clogininstr%7C%7Cst%7Ccreate%7C%7Claunched_Jan9&li=omekUmInkjUUNBw3F_qcxa1j&_rdr
-2013-12-08 13:36:35.205 GuitarJournal[29771:80b] Resetting plugins due to page load.
-2013-12-08 13:36:35.683 GuitarJournal[29771:80b] Finished load of: http://m.facebook.com/l.php?u=http%3A%2F%2Fitunes.apple.com%2Fapp%2Ffacebook%2Fid284882215%3Frefsrc%3Dhttps%253A%252F%252Fm.facebook.com%252Flogin.php&h=nAQF6VLsz
-2013-12-08 13:36:35.685 GuitarJournal[29771:80b] Resetting plugins due to page load.
-2013-12-08 13:36:35.904 GuitarJournal[29771:80b] Failed to load webpage with error: The URL can’t be shown
-2013-12-08 13:37:47.780 GuitarJournal[30196:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-08 13:37:47.790 GuitarJournal[30196:80b] Unlimited access to network resources
-2013-12-08 13:37:47.823 GuitarJournal[30196:80b] [CDVTimer][splashscreen] 10.125041ms
-2013-12-08 13:37:47.824 GuitarJournal[30196:80b] [CDVTimer][TotalPluginStartup] 10.703027ms
-2013-12-08 13:37:48.044 GuitarJournal[30196:80b] Resetting plugins due to page load.
-2013-12-08 13:37:48.074 GuitarJournal[30196:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-08 13:37:48.079 GuitarJournal[30196:80b] Resetting plugins due to page load.
-2013-12-08 13:37:48.690 GuitarJournal[30196:80b] Finished load of: http://journal.osirisguitar.com/login
-2013-12-08 13:37:50.550 GuitarJournal[30196:80b] Resetting plugins due to page load.
-2013-12-08 13:37:51.987 GuitarJournal[30196:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&api_key=151038621732407&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&cancel_uri=http%3A%2F%2Fjournal.osirisguitar.com%2Fauth%2Ffacebook%2Fcallback%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=touch&_rdr
-2013-12-08 13:38:03.237 GuitarJournal[30196:80b] Resetting plugins due to page load.
-2013-12-08 13:38:04.690 GuitarJournal[30196:80b] Finished load of: https://m.facebook.com/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&refid=9&_rdr
-2013-12-08 13:38:35.653 GuitarJournal[30196:80b] Resetting plugins due to page load.
-2013-12-08 13:38:36.352 GuitarJournal[30196:80b] Finished load of: https://m.facebook.com/login/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin
-2013-12-08 13:38:37.901 GuitarJournal[30196:80b] Resetting plugins due to page load.
-2013-12-08 13:38:47.270 GuitarJournal[30196:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-09 18:35:03.264 GuitarJournal[40417:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-09 18:35:03.277 GuitarJournal[40417:80b] Unlimited access to network resources
-2013-12-09 18:35:03.512 GuitarJournal[40417:80b] [CDVTimer][splashscreen] 78.032017ms
-2013-12-09 18:35:03.515 GuitarJournal[40417:80b] [CDVTimer][TotalPluginStartup] 80.826998ms
-2013-12-09 18:35:03.730 GuitarJournal[40417:80b] Resetting plugins due to page load.
-2013-12-09 18:35:03.774 GuitarJournal[40417:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-09 18:36:40.726 GuitarJournal[40998:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-09 18:36:40.735 GuitarJournal[40998:80b] Unlimited access to network resources
-2013-12-09 18:36:40.768 GuitarJournal[40998:80b] [CDVTimer][splashscreen] 10.280013ms
-2013-12-09 18:36:40.769 GuitarJournal[40998:80b] [CDVTimer][TotalPluginStartup] 11.162996ms
-2013-12-09 18:36:40.976 GuitarJournal[40998:80b] Resetting plugins due to page load.
-2013-12-09 18:36:41.007 GuitarJournal[40998:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-09 18:40:23.405 GuitarJournal[42599:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-09 18:40:23.415 GuitarJournal[42599:80b] Unlimited access to network resources
-2013-12-09 18:40:23.450 GuitarJournal[42599:80b] [CDVTimer][splashscreen] 10.309994ms
-2013-12-09 18:40:23.451 GuitarJournal[42599:80b] [CDVTimer][TotalPluginStartup] 11.231959ms
-2013-12-09 18:40:23.679 GuitarJournal[42599:80b] Resetting plugins due to page load.
-2013-12-09 18:40:23.710 GuitarJournal[42599:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-09 18:42:13.565 GuitarJournal[43190:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-09 18:42:13.575 GuitarJournal[43190:80b] Unlimited access to network resources
-2013-12-09 18:42:13.610 GuitarJournal[43190:80b] [CDVTimer][splashscreen] 10.815024ms
-2013-12-09 18:42:13.611 GuitarJournal[43190:80b] [CDVTimer][TotalPluginStartup] 11.842966ms
-2013-12-09 18:42:13.791 GuitarJournal[43190:80b] Resetting plugins due to page load.
-2013-12-09 18:42:13.822 GuitarJournal[43190:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-09 18:43:42.626 GuitarJournal[43759:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-09 18:43:42.636 GuitarJournal[43759:80b] Unlimited access to network resources
-2013-12-09 18:43:42.670 GuitarJournal[43759:80b] [CDVTimer][splashscreen] 11.085033ms
-2013-12-09 18:43:42.671 GuitarJournal[43759:80b] [CDVTimer][TotalPluginStartup] 11.690021ms
-2013-12-09 18:43:42.883 GuitarJournal[43759:80b] Resetting plugins due to page load.
-2013-12-09 18:43:47.441 GuitarJournal[43759:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-09 18:44:53.554 GuitarJournal[44307:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-09 18:44:53.565 GuitarJournal[44307:80b] Unlimited access to network resources
-2013-12-09 18:44:53.597 GuitarJournal[44307:80b] [CDVTimer][splashscreen] 9.729028ms
-2013-12-09 18:44:53.598 GuitarJournal[44307:80b] [CDVTimer][TotalPluginStartup] 10.292053ms
-2013-12-09 18:44:53.764 GuitarJournal[44307:80b] Resetting plugins due to page load.
-2013-12-09 18:44:53.790 GuitarJournal[44307:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-09 18:46:53.289 GuitarJournal[44703:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-09 18:46:53.299 GuitarJournal[44703:80b] Unlimited access to network resources
-2013-12-09 18:46:53.334 GuitarJournal[44703:80b] [CDVTimer][splashscreen] 12.131989ms
-2013-12-09 18:46:53.334 GuitarJournal[44703:80b] [CDVTimer][TotalPluginStartup] 12.720048ms
-2013-12-09 18:46:53.525 GuitarJournal[44703:80b] Resetting plugins due to page load.
-2013-12-09 18:46:53.556 GuitarJournal[44703:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-09 18:46:53.561 GuitarJournal[44703:80b] Resetting plugins due to page load.
-2013-12-09 18:46:54.121 GuitarJournal[44703:80b] Finished load of: http://journal.osirisguitar.com/login
-2013-12-09 18:47:02.921 GuitarJournal[44703:80b] Resetting plugins due to page load.
-2013-12-09 18:47:08.647 GuitarJournal[44703:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-09 18:53:39.808 GuitarJournal[45606:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-09 18:53:39.817 GuitarJournal[45606:80b] Unlimited access to network resources
-2013-12-09 18:53:39.849 GuitarJournal[45606:80b] [CDVTimer][splashscreen] 9.526968ms
-2013-12-09 18:53:39.850 GuitarJournal[45606:80b] [CDVTimer][TotalPluginStartup] 10.086000ms
-2013-12-09 18:53:40.038 GuitarJournal[45606:80b] Resetting plugins due to page load.
-2013-12-09 18:53:40.066 GuitarJournal[45606:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-09 18:53:40.071 GuitarJournal[45606:80b] Resetting plugins due to page load.
-2013-12-09 18:53:40.486 GuitarJournal[45606:80b] Finished load of: http://journal.osirisguitar.com/login
-2013-12-10 16:53:48.226 GuitarJournal[79304:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 16:53:48.242 GuitarJournal[79304:80b] Unlimited access to network resources
-2013-12-10 16:53:48.482 GuitarJournal[79304:80b] [CDVTimer][splashscreen] 58.979988ms
-2013-12-10 16:53:48.483 GuitarJournal[79304:80b] [CDVTimer][TotalPluginStartup] 59.525013ms
-2013-12-10 16:53:48.734 GuitarJournal[79304:80b] Resetting plugins due to page load.
-2013-12-10 16:53:48.803 GuitarJournal[79304:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 16:53:48.808 GuitarJournal[79304:80b] Resetting plugins due to page load.
-2013-12-10 16:53:49.952 GuitarJournal[79304:80b] Finished load of: http://journal.osirisguitar.com/login
-2013-12-10 16:53:54.971 GuitarJournal[79304:80b] Resetting plugins due to page load.
-2013-12-10 16:53:56.849 GuitarJournal[79304:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 16:54:28.291 GuitarJournal[79708:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 16:54:28.303 GuitarJournal[79708:80b] Unlimited access to network resources
-2013-12-10 16:54:28.338 GuitarJournal[79708:80b] [CDVTimer][splashscreen] 10.453045ms
-2013-12-10 16:54:28.339 GuitarJournal[79708:80b] [CDVTimer][TotalPluginStartup] 11.403978ms
-2013-12-10 16:54:28.517 GuitarJournal[79708:80b] Resetting plugins due to page load.
-2013-12-10 16:54:28.552 GuitarJournal[79708:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 16:54:28.556 GuitarJournal[79708:80b] Resetting plugins due to page load.
-2013-12-10 16:54:29.655 GuitarJournal[79708:80b] Finished load of: http://journal.osirisguitar.com/login
-2013-12-10 16:54:30.949 GuitarJournal[79708:80b] Resetting plugins due to page load.
-2013-12-10 16:54:33.411 GuitarJournal[79708:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 16:56:45.587 GuitarJournal[80530:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 16:56:45.598 GuitarJournal[80530:80b] Unlimited access to network resources
-2013-12-10 16:56:45.631 GuitarJournal[80530:80b] [CDVTimer][splashscreen] 10.779023ms
-2013-12-10 16:56:45.633 GuitarJournal[80530:80b] [CDVTimer][TotalPluginStartup] 12.071967ms
-2013-12-10 16:56:45.818 GuitarJournal[80530:80b] Resetting plugins due to page load.
-2013-12-10 16:56:45.848 GuitarJournal[80530:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 16:56:45.852 GuitarJournal[80530:80b] Resetting plugins due to page load.
-2013-12-10 16:56:46.537 GuitarJournal[80530:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-10 16:56:46.540 GuitarJournal[80530:80b] Resetting plugins due to page load.
-2013-12-10 16:56:48.602 GuitarJournal[80530:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 16:57:10.871 GuitarJournal[80916:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 16:57:10.881 GuitarJournal[80916:80b] Unlimited access to network resources
-2013-12-10 16:57:10.913 GuitarJournal[80916:80b] [CDVTimer][splashscreen] 9.815991ms
-2013-12-10 16:57:10.913 GuitarJournal[80916:80b] [CDVTimer][TotalPluginStartup] 10.414004ms
-2013-12-10 16:57:11.091 GuitarJournal[80916:80b] Resetting plugins due to page load.
-2013-12-10 16:57:11.119 GuitarJournal[80916:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 16:57:11.123 GuitarJournal[80916:80b] Resetting plugins due to page load.
-2013-12-10 16:57:11.765 GuitarJournal[80916:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-10 16:57:11.768 GuitarJournal[80916:80b] Resetting plugins due to page load.
-2013-12-10 16:57:14.232 GuitarJournal[80916:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 17:02:05.499 GuitarJournal[81890:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 17:02:05.508 GuitarJournal[81890:80b] Unlimited access to network resources
-2013-12-10 17:02:05.544 GuitarJournal[81890:80b] [CDVTimer][splashscreen] 10.711968ms
-2013-12-10 17:02:05.544 GuitarJournal[81890:80b] [CDVTimer][TotalPluginStartup] 11.268973ms
-2013-12-10 17:02:05.711 GuitarJournal[81890:80b] Resetting plugins due to page load.
-2013-12-10 17:02:05.741 GuitarJournal[81890:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 17:02:05.744 GuitarJournal[81890:80b] Resetting plugins due to page load.
-2013-12-10 17:02:06.408 GuitarJournal[81890:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-10 17:02:06.410 GuitarJournal[81890:80b] Resetting plugins due to page load.
-2013-12-10 17:02:08.574 GuitarJournal[81890:80b] Finished load of: http://journal.osirisguitar.com/
-Terminating in response to SpringBoard's termination.
-2013-12-10 17:02:53.726 GuitarJournal[82304:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 17:02:53.736 GuitarJournal[82304:80b] Unlimited access to network resources
-2013-12-10 17:02:53.770 GuitarJournal[82304:80b] [CDVTimer][splashscreen] 12.094021ms
-2013-12-10 17:02:53.770 GuitarJournal[82304:80b] [CDVTimer][TotalPluginStartup] 12.644947ms
-2013-12-10 17:02:53.942 GuitarJournal[82304:80b] Resetting plugins due to page load.
-2013-12-10 17:02:53.965 GuitarJournal[82304:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 17:02:53.969 GuitarJournal[82304:80b] Resetting plugins due to page load.
-2013-12-10 17:02:55.637 GuitarJournal[82304:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-10 17:02:55.638 GuitarJournal[82304:80b] Resetting plugins due to page load.
-2013-12-10 17:02:58.252 GuitarJournal[82304:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 17:04:27.378 GuitarJournal[83077:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 17:04:27.388 GuitarJournal[83077:80b] Unlimited access to network resources
-2013-12-10 17:04:27.421 GuitarJournal[83077:80b] [CDVTimer][splashscreen] 11.005998ms
-2013-12-10 17:04:27.422 GuitarJournal[83077:80b] [CDVTimer][TotalPluginStartup] 11.564016ms
-2013-12-10 17:04:27.606 GuitarJournal[83077:80b] Resetting plugins due to page load.
-2013-12-10 17:04:27.632 GuitarJournal[83077:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 17:04:27.636 GuitarJournal[83077:80b] Resetting plugins due to page load.
-2013-12-10 17:04:29.410 GuitarJournal[83077:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 17:04:29.860 GuitarJournal[83077:80b] Resetting plugins due to page load.
-2013-12-10 17:04:31.699 GuitarJournal[83077:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 17:05:30.477 GuitarJournal[83509:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 17:05:30.487 GuitarJournal[83509:80b] Unlimited access to network resources
-2013-12-10 17:05:30.524 GuitarJournal[83509:80b] [CDVTimer][splashscreen] 14.434993ms
-2013-12-10 17:05:30.524 GuitarJournal[83509:80b] [CDVTimer][TotalPluginStartup] 14.985979ms
-2013-12-10 17:05:30.711 GuitarJournal[83509:80b] Resetting plugins due to page load.
-2013-12-10 17:05:30.735 GuitarJournal[83509:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 17:05:30.738 GuitarJournal[83509:80b] Resetting plugins due to page load.
-2013-12-10 17:05:31.344 GuitarJournal[83509:80b] Finished load of: http://jdev.osirisguitar.com/login
-2013-12-10 17:05:33.193 GuitarJournal[83509:80b] Resetting plugins due to page load.
-2013-12-10 17:05:36.058 GuitarJournal[83509:80b] Finished load of: http://journal.osirisguitar.com/
-Terminating in response to SpringBoard's termination.
-2013-12-10 17:08:55.953 GuitarJournal[84402:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 17:08:55.962 GuitarJournal[84402:80b] Unlimited access to network resources
-2013-12-10 17:08:55.993 GuitarJournal[84402:80b] [CDVTimer][splashscreen] 9.742975ms
-2013-12-10 17:08:55.994 GuitarJournal[84402:80b] [CDVTimer][TotalPluginStartup] 10.317028ms
-2013-12-10 17:08:56.162 GuitarJournal[84402:80b] Resetting plugins due to page load.
-2013-12-10 17:08:56.186 GuitarJournal[84402:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 17:08:56.190 GuitarJournal[84402:80b] Resetting plugins due to page load.
-2013-12-10 17:08:56.593 GuitarJournal[84402:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-10 17:08:56.597 GuitarJournal[84402:80b] Resetting plugins due to page load.
-2013-12-10 17:09:04.708 GuitarJournal[84402:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 18:08:41.108 GuitarJournal[86641:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 18:08:41.118 GuitarJournal[86641:80b] Unlimited access to network resources
-2013-12-10 18:08:41.148 GuitarJournal[86641:80b] [CDVTimer][splashscreen] 9.446025ms
-2013-12-10 18:08:41.148 GuitarJournal[86641:80b] [CDVTimer][TotalPluginStartup] 10.013998ms
-2013-12-10 18:08:41.332 GuitarJournal[86641:80b] Resetting plugins due to page load.
-2013-12-10 18:08:41.358 GuitarJournal[86641:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 18:08:41.362 GuitarJournal[86641:80b] Resetting plugins due to page load.
-2013-12-10 18:08:41.851 GuitarJournal[86641:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-10 18:08:41.853 GuitarJournal[86641:80b] Resetting plugins due to page load.
-2013-12-10 18:08:47.383 GuitarJournal[86641:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 18:12:03.601 GuitarJournal[87526:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 18:12:03.610 GuitarJournal[87526:80b] Unlimited access to network resources
-2013-12-10 18:12:03.644 GuitarJournal[87526:80b] [CDVTimer][splashscreen] 12.031019ms
-2013-12-10 18:12:03.645 GuitarJournal[87526:80b] [CDVTimer][TotalPluginStartup] 12.575984ms
-2013-12-10 18:12:03.810 GuitarJournal[87526:80b] Resetting plugins due to page load.
-2013-12-10 18:12:03.834 GuitarJournal[87526:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 18:12:03.839 GuitarJournal[87526:80b] Resetting plugins due to page load.
-2013-12-10 18:12:04.357 GuitarJournal[87526:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-10 18:12:04.359 GuitarJournal[87526:80b] Resetting plugins due to page load.
-2013-12-10 18:13:46.126 GuitarJournal[87526:3f03] void SendDelegateMessage(NSInvocation *): delegate (webView:runJavaScriptAlertPanelWithMessage:initiatedByFrame:) failed to return after waiting 10 seconds. main run loop mode: kCFRunLoopDefaultMode
-2013-12-10 18:13:46.130 GuitarJournal[87526:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 21:07:08.384 GuitarJournal[92444:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 21:07:08.394 GuitarJournal[92444:80b] Unlimited access to network resources
-2013-12-10 21:07:08.424 GuitarJournal[92444:80b] [CDVTimer][splashscreen] 10.086000ms
-2013-12-10 21:07:08.425 GuitarJournal[92444:80b] [CDVTimer][TotalPluginStartup] 10.921955ms
-2013-12-10 21:07:08.616 GuitarJournal[92444:80b] Resetting plugins due to page load.
-2013-12-10 21:07:08.642 GuitarJournal[92444:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 21:07:08.646 GuitarJournal[92444:80b] Resetting plugins due to page load.
-2013-12-10 21:07:09.150 GuitarJournal[92444:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-10 21:07:09.154 GuitarJournal[92444:80b] Resetting plugins due to page load.
-2013-12-10 21:07:17.173 GuitarJournal[92444:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 22:22:19.515 GuitarJournal[97642:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 22:22:19.525 GuitarJournal[97642:80b] Unlimited access to network resources
-2013-12-10 22:22:19.558 GuitarJournal[97642:80b] [CDVTimer][splashscreen] 10.882974ms
-2013-12-10 22:22:19.559 GuitarJournal[97642:80b] [CDVTimer][TotalPluginStartup] 11.772990ms
-2013-12-10 22:22:19.730 GuitarJournal[97642:80b] Resetting plugins due to page load.
-2013-12-10 22:22:19.756 GuitarJournal[97642:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/265A7608-DD7A-45C8-8B6E-BD0B65ACFEFD/GuitarJournal.app/www/index2.html
-2013-12-10 22:22:19.762 GuitarJournal[97642:80b] Resetting plugins due to page load.
-2013-12-10 22:22:20.205 GuitarJournal[97642:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-10 22:22:20.209 GuitarJournal[97642:80b] Resetting plugins due to page load.
-2013-12-10 22:22:28.154 GuitarJournal[97642:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-10 22:24:02.482 GuitarJournal[98801:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-10 22:24:02.494 GuitarJournal[98801:80b] Unlimited access to network resources
-2013-12-10 22:24:02.528 GuitarJournal[98801:80b] [CDVTimer][splashscreen] 10.708988ms
-2013-12-10 22:24:02.529 GuitarJournal[98801:80b] [CDVTimer][TotalPluginStartup] 11.403024ms
-2013-12-10 22:24:02.727 GuitarJournal[98801:80b] Resetting plugins due to page load.
-2013-12-10 22:24:02.771 GuitarJournal[98801:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/520B8665-E680-4FB2-A245-F5C02FF70429/GuitarJournal.app/www/index2.html
-2013-12-10 22:24:02.776 GuitarJournal[98801:80b] Resetting plugins due to page load.
-2013-12-10 22:24:03.364 GuitarJournal[98801:80b] Finished load of: http://journal.osirisguitar.com/login
-2013-12-11 22:42:03.599 GuitarJournal[3044:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-11 22:42:03.610 GuitarJournal[3044:80b] Unlimited access to network resources
-2013-12-11 22:42:03.661 GuitarJournal[3044:80b] [CDVTimer][splashscreen] 20.379007ms
-2013-12-11 22:42:03.661 GuitarJournal[3044:80b] [CDVTimer][TotalPluginStartup] 20.927012ms
-2013-12-11 22:42:03.869 GuitarJournal[3044:80b] Resetting plugins due to page load.
-2013-12-11 22:42:03.903 GuitarJournal[3044:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/520B8665-E680-4FB2-A245-F5C02FF70429/GuitarJournal.app/www/index2.html
-2013-12-11 22:42:03.908 GuitarJournal[3044:80b] Resetting plugins due to page load.
-2013-12-11 22:42:04.511 GuitarJournal[3044:80b] Finished load of: http://journal.osirisguitar.com/login
-2013-12-11 22:42:08.129 GuitarJournal[3044:80b] Resetting plugins due to page load.
-2013-12-11 22:42:09.129 GuitarJournal[3044:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-11 22:42:09.130 GuitarJournal[3044:80b] Resetting plugins due to page load.
-2013-12-11 22:42:09.810 GuitarJournal[3044:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&api_key=151038621732407&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&cancel_uri=http%3A%2F%2Fjournal.osirisguitar.com%2Fauth%2Ffacebook%2Fcallback%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=touch&_rdr
-2013-12-11 22:42:21.871 GuitarJournal[3044:80b] Resetting plugins due to page load.
-2013-12-11 22:42:23.841 GuitarJournal[3044:80b] Finished load of: https://m.facebook.com/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&refid=9&_rdr
-2013-12-11 22:43:12.752 GuitarJournal[3044:80b] Resetting plugins due to page load.
-2013-12-11 22:43:13.297 GuitarJournal[3044:80b] Finished load of: https://m.facebook.com/login/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin
-2013-12-11 22:43:14.294 GuitarJournal[3044:80b] Resetting plugins due to page load.
-2013-12-11 22:43:24.134 GuitarJournal[3044:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-11 22:55:18.194 GuitarJournal[4724:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-11 22:55:18.204 GuitarJournal[4724:80b] Unlimited access to network resources
-2013-12-11 22:55:18.239 GuitarJournal[4724:80b] [CDVTimer][splashscreen] 11.232972ms
-2013-12-11 22:55:18.240 GuitarJournal[4724:80b] [CDVTimer][TotalPluginStartup] 11.795044ms
-2013-12-11 22:55:18.446 GuitarJournal[4724:80b] Resetting plugins due to page load.
-2013-12-11 22:55:18.473 GuitarJournal[4724:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3-64/Applications/EB591A6A-4F09-4E74-8A41-602A36DD50BE/GuitarJournal.app/www/index2.html
-2013-12-11 22:55:18.478 GuitarJournal[4724:80b] Resetting plugins due to page load.
-2013-12-11 22:55:19.002 GuitarJournal[4724:80b] Finished load of: http://journal.osirisguitar.com/login
-2013-12-11 22:55:24.118 GuitarJournal[4724:80b] Resetting plugins due to page load.
-2013-12-11 22:55:24.972 GuitarJournal[4724:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-11 22:55:24.973 GuitarJournal[4724:80b] Resetting plugins due to page load.
-2013-12-11 22:55:25.280 GuitarJournal[4724:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&api_key=151038621732407&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&cancel_uri=http%3A%2F%2Fjournal.osirisguitar.com%2Fauth%2Ffacebook%2Fcallback%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=touch&_rdr
-2013-12-11 22:55:35.555 GuitarJournal[4724:80b] Resetting plugins due to page load.
-2013-12-11 22:55:36.319 GuitarJournal[4724:80b] Finished load of: https://m.facebook.com/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&refid=9&_rdr
-2013-12-11 22:55:57.431 GuitarJournal[4724:80b] Resetting plugins due to page load.
-2013-12-11 22:55:57.682 GuitarJournal[4724:80b] Finished load of: https://m.facebook.com/login/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin
-2013-12-11 22:56:00.108 GuitarJournal[4724:80b] Resetting plugins due to page load.
-2013-12-11 22:56:07.126 GuitarJournal[4724:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-25 14:03:09.888 GuitarJournal[2946:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-25 14:03:09.917 GuitarJournal[2946:80b] Unlimited access to network resources
-2013-12-25 14:03:10.130 GuitarJournal[2946:80b] [CDVTimer][splashscreen] 57.739973ms
-2013-12-25 14:03:10.130 GuitarJournal[2946:80b] [CDVTimer][TotalPluginStartup] 58.299959ms
-2013-12-25 14:03:10.319 GuitarJournal[2946:80b] Resetting plugins due to page load.
-2013-12-25 14:03:10.367 GuitarJournal[2946:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/520B8665-E680-4FB2-A245-F5C02FF70429/GuitarJournal.app/www/index2.html
-2013-12-25 14:03:10.371 GuitarJournal[2946:80b] Resetting plugins due to page load.
-2013-12-25 14:03:10.946 GuitarJournal[2946:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-25 14:03:10.950 GuitarJournal[2946:80b] Resetting plugins due to page load.
-2013-12-25 14:03:15.279 GuitarJournal[2946:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&api_key=151038621732407&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&cancel_uri=http%3A%2F%2Fjournal.osirisguitar.com%2Fauth%2Ffacebook%2Fcallback%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=touch&_rdr
-2013-12-25 14:06:55.441 GuitarJournal[2946:80b] Resetting plugins due to page load.
-2013-12-25 14:07:06.329 GuitarJournal[2946:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-25 14:16:08.376 GuitarJournal[4455:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-25 14:16:08.386 GuitarJournal[4455:80b] Unlimited access to network resources
-2013-12-25 14:16:08.421 GuitarJournal[4455:80b] [CDVTimer][splashscreen] 10.718048ms
-2013-12-25 14:16:08.422 GuitarJournal[4455:80b] [CDVTimer][TotalPluginStartup] 11.318982ms
-2013-12-25 14:16:08.614 GuitarJournal[4455:80b] Resetting plugins due to page load.
-2013-12-25 14:16:08.654 GuitarJournal[4455:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/520B8665-E680-4FB2-A245-F5C02FF70429/GuitarJournal.app/www/index2.html
-2013-12-25 14:16:08.658 GuitarJournal[4455:80b] Resetting plugins due to page load.
-2013-12-25 14:16:09.044 GuitarJournal[4455:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-25 14:16:09.051 GuitarJournal[4455:80b] Resetting plugins due to page load.
-2013-12-25 14:16:18.665 GuitarJournal[4455:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-25 14:17:09.228 GuitarJournal[4455:80b] Received memory warning.
-2013-12-25 14:17:48.016 GuitarJournal[4975:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-25 14:17:48.025 GuitarJournal[4975:80b] Unlimited access to network resources
-2013-12-25 14:17:48.058 GuitarJournal[4975:80b] [CDVTimer][splashscreen] 9.983003ms
-2013-12-25 14:17:48.059 GuitarJournal[4975:80b] [CDVTimer][TotalPluginStartup] 10.544002ms
-2013-12-25 14:17:48.231 GuitarJournal[4975:80b] Resetting plugins due to page load.
-2013-12-25 14:17:48.272 GuitarJournal[4975:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/520B8665-E680-4FB2-A245-F5C02FF70429/GuitarJournal.app/www/index2.html
-2013-12-25 14:17:48.275 GuitarJournal[4975:80b] Resetting plugins due to page load.
-2013-12-25 14:17:48.637 GuitarJournal[4975:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-25 14:17:48.641 GuitarJournal[4975:80b] Resetting plugins due to page load.
-2013-12-25 14:17:57.617 GuitarJournal[4975:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-25 14:21:52.499 GuitarJournal[5975:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-25 14:21:52.510 GuitarJournal[5975:80b] Unlimited access to network resources
-2013-12-25 14:21:52.559 GuitarJournal[5975:80b] [CDVTimer][splashscreen] 22.644043ms
-2013-12-25 14:21:52.560 GuitarJournal[5975:80b] [CDVTimer][TotalPluginStartup] 23.295999ms
-2013-12-25 14:21:52.721 GuitarJournal[5975:80b] Resetting plugins due to page load.
-2013-12-25 14:21:52.749 GuitarJournal[5975:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/520B8665-E680-4FB2-A245-F5C02FF70429/GuitarJournal.app/www/index2.html
-2013-12-25 14:21:52.752 GuitarJournal[5975:80b] Resetting plugins due to page load.
-2013-12-25 14:21:53.235 GuitarJournal[5975:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-25 14:21:53.237 GuitarJournal[5975:80b] Resetting plugins due to page load.
-2013-12-25 14:22:02.625 GuitarJournal[5975:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-27 12:27:48.746 OG Journal[2168:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 12:27:48.774 OG Journal[2168:80b] Unlimited access to network resources
-2013-12-27 12:27:48.811 OG Journal[2168:80b] [CDVTimer][splashscreen] 15.363991ms
-2013-12-27 12:27:48.811 OG Journal[2168:80b] [CDVTimer][TotalPluginStartup] 15.907943ms
-2013-12-27 12:27:49.010 OG Journal[2168:80b] Resetting plugins due to page load.
-2013-12-27 12:27:49.040 OG Journal[2168:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/A83911D1-BFEB-4B0A-8BD6-F78D9D9DD21C/OG%20Journal.app/www/index2.html
-2013-12-27 12:27:49.044 OG Journal[2168:80b] Resetting plugins due to page load.
-2013-12-27 12:27:50.114 OG Journal[2168:80b] Finished load of: http://jdev.osirisguitar.com/login
-2013-12-27 12:51:40.376 OG Journal[2168:80b] Resetting plugins due to page load.
-2013-12-27 12:51:40.390 OG Journal[2168:80b] Failed to load webpage with error: The Internet connection appears to be offline.
-2013-12-27 12:52:14.748 OG Journal[3249:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 12:52:14.757 OG Journal[3249:80b] Unlimited access to network resources
-2013-12-27 12:52:14.799 OG Journal[3249:80b] [CDVTimer][splashscreen] 19.945979ms
-2013-12-27 12:52:14.799 OG Journal[3249:80b] [CDVTimer][TotalPluginStartup] 20.507038ms
-2013-12-27 12:52:15.013 OG Journal[3249:80b] Resetting plugins due to page load.
-2013-12-27 12:52:15.040 OG Journal[3249:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/A83911D1-BFEB-4B0A-8BD6-F78D9D9DD21C/OG%20Journal.app/www/index2.html
-2013-12-27 12:52:15.044 OG Journal[3249:80b] Resetting plugins due to page load.
-2013-12-27 12:52:15.955 OG Journal[3249:80b] Finished load of: http://jdev.osirisguitar.com/login
-2013-12-27 12:52:20.244 OG Journal[3249:80b] Resetting plugins due to page load.
-2013-12-27 12:52:22.398 OG Journal[3249:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 12:52:22.398 OG Journal[3249:80b] Resetting plugins due to page load.
-2013-12-27 12:52:23.363 OG Journal[3249:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&api_key=660009220696560&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjdev.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D660009220696560%26ret%3Dlogin&cancel_uri=http%3A%2F%2Fjdev.osirisguitar.com%2Fauth%2Ffacebook%2Fcallback%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=touch&_rdr
-2013-12-27 12:52:37.739 OG Journal[3249:80b] Resetting plugins due to page load.
-2013-12-27 12:52:42.211 OG Journal[3249:80b] Finished load of: https://m.facebook.com/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjdev.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D660009220696560%26ret%3Dlogin&refid=9&_rdr
-2013-12-27 12:52:53.709 OG Journal[3249:80b] Resetting plugins due to page load.
-2013-12-27 12:52:55.210 OG Journal[3249:80b] Finished load of: https://m.facebook.com/login/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjdev.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D660009220696560%26ret%3Dlogin
-2013-12-27 12:52:56.372 OG Journal[3249:80b] Resetting plugins due to page load.
-2013-12-27 12:53:07.728 OG Journal[3249:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 13:17:47.827 OG Journal[5243:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 13:17:47.838 OG Journal[5243:80b] Unlimited access to network resources
-2013-12-27 13:17:47.879 OG Journal[5243:80b] [CDVTimer][splashscreen] 19.591033ms
-2013-12-27 13:17:47.880 OG Journal[5243:80b] [CDVTimer][TotalPluginStartup] 20.150959ms
-2013-12-27 13:17:48.045 OG Journal[5243:80b] Resetting plugins due to page load.
-2013-12-27 13:17:48.071 OG Journal[5243:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 13:17:48.075 OG Journal[5243:80b] Resetting plugins due to page load.
-2013-12-27 13:17:53.017 OG Journal[5243:80b] Finished load of: http://journal.osirisguitar.com/login
-2013-12-27 13:17:54.889 OG Journal[5243:80b] Resetting plugins due to page load.
-2013-12-27 13:17:58.085 OG Journal[5243:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 13:17:58.086 OG Journal[5243:80b] Resetting plugins due to page load.
-2013-12-27 13:17:59.240 OG Journal[5243:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&api_key=151038621732407&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&cancel_uri=http%3A%2F%2Fjournal.osirisguitar.com%2Fauth%2Ffacebook%2Fcallback%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=touch&_rdr
-2013-12-27 13:18:12.230 OG Journal[5243:80b] Resetting plugins due to page load.
-2013-12-27 13:18:13.724 OG Journal[5243:80b] Finished load of: https://m.facebook.com/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin&refid=9&_rdr
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFillColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetStrokeColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSaveGState: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFlatness: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextAddPath: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextDrawPath: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextRestoreGState: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSaveGState: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFlatness: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextAddPath: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextDrawPath: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextRestoreGState: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFillColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetStrokeColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFillColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetStrokeColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextGetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextFillRects: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFillColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetStrokeColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextGetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextFillRects: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetFillColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetStrokeColorWithColor: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextGetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextFillRects: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-Dec 27 13:18:25 Anderss-MacBook-Air.local OG Journal[5243] <Error>: CGContextSetBlendMode: invalid context 0x0. This is a serious error. This application, or a library it uses, is using an invalid context  and is thereby contributing to an overall degradation of system stability and reliability. This notice is a courtesy: please fix this problem. It will become a fatal error in an upcoming update.
-2013-12-27 13:18:35.803 OG Journal[5243:80b] Resetting plugins due to page load.
-2013-12-27 13:18:36.138 OG Journal[5243:80b] Finished load of: https://m.facebook.com/login/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin
-2013-12-27 13:18:41.799 OG Journal[5243:80b] Resetting plugins due to page load.
-2013-12-27 13:18:42.375 OG Journal[5243:80b] Finished load of: https://m.facebook.com/login/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjournal.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D151038621732407%26ret%3Dlogin
-2013-12-27 13:18:43.152 OG Journal[5243:80b] Resetting plugins due to page load.
-2013-12-27 13:18:47.436 OG Journal[5243:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-27 13:20:15.782 OG Journal[5803:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 13:20:15.792 OG Journal[5803:80b] Unlimited access to network resources
-2013-12-27 13:20:15.823 OG Journal[5803:80b] [CDVTimer][splashscreen] 9.505987ms
-2013-12-27 13:20:15.823 OG Journal[5803:80b] [CDVTimer][TotalPluginStartup] 10.067046ms
-2013-12-27 13:20:15.992 OG Journal[5803:80b] Resetting plugins due to page load.
-2013-12-27 13:20:16.023 OG Journal[5803:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 13:20:16.026 OG Journal[5803:80b] Resetting plugins due to page load.
-2013-12-27 13:20:17.110 OG Journal[5803:80b] Finished load of: http://jdev.osirisguitar.com/login
-2013-12-27 13:20:20.122 OG Journal[5803:80b] Resetting plugins due to page load.
-2013-12-27 13:20:29.252 OG Journal[5803:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 16:09:50.887 OG Journal[6886:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 16:09:50.897 OG Journal[6886:80b] Unlimited access to network resources
-2013-12-27 16:09:50.935 OG Journal[6886:80b] [CDVTimer][splashscreen] 13.927996ms
-2013-12-27 16:09:50.935 OG Journal[6886:80b] [CDVTimer][TotalPluginStartup] 14.481008ms
-2013-12-27 16:09:51.108 OG Journal[6886:80b] Resetting plugins due to page load.
-2013-12-27 16:09:51.143 OG Journal[6886:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 16:09:51.147 OG Journal[6886:80b] Resetting plugins due to page load.
-2013-12-27 16:09:51.692 OG Journal[6886:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 16:09:51.696 OG Journal[6886:80b] Resetting plugins due to page load.
-2013-12-27 16:10:03.985 OG Journal[6886:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 16:23:39.657 OG Journal[8468:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 16:23:39.667 OG Journal[8468:80b] Unlimited access to network resources
-2013-12-27 16:23:39.709 OG Journal[8468:80b] [CDVTimer][splashscreen] 20.310998ms
-2013-12-27 16:23:39.710 OG Journal[8468:80b] [CDVTimer][TotalPluginStartup] 20.898998ms
-2013-12-27 16:23:39.893 OG Journal[8468:80b] Resetting plugins due to page load.
-2013-12-27 16:23:39.917 OG Journal[8468:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 16:23:39.920 OG Journal[8468:80b] Resetting plugins due to page load.
-2013-12-27 16:23:40.677 OG Journal[8468:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 16:23:40.679 OG Journal[8468:80b] Resetting plugins due to page load.
-2013-12-27 16:24:12.812 OG Journal[8468:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 16:26:16.462 OG Journal[9028:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 16:26:16.471 OG Journal[9028:80b] Unlimited access to network resources
-2013-12-27 16:26:16.502 OG Journal[9028:80b] [CDVTimer][splashscreen] 9.977996ms
-2013-12-27 16:26:16.503 OG Journal[9028:80b] [CDVTimer][TotalPluginStartup] 10.576963ms
-2013-12-27 16:26:16.677 OG Journal[9028:80b] Resetting plugins due to page load.
-2013-12-27 16:26:16.707 OG Journal[9028:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 16:26:16.711 OG Journal[9028:80b] Resetting plugins due to page load.
-2013-12-27 16:26:17.272 OG Journal[9028:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 16:26:17.276 OG Journal[9028:80b] Resetting plugins due to page load.
-2013-12-27 16:26:33.383 OG Journal[9028:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 16:27:49.849 OG Journal[9528:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 16:27:49.859 OG Journal[9528:80b] Unlimited access to network resources
-2013-12-27 16:27:49.892 OG Journal[9528:80b] [CDVTimer][splashscreen] 11.025012ms
-2013-12-27 16:27:49.893 OG Journal[9528:80b] [CDVTimer][TotalPluginStartup] 11.623025ms
-2013-12-27 16:27:50.079 OG Journal[9528:80b] Resetting plugins due to page load.
-2013-12-27 16:27:50.110 OG Journal[9528:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 16:27:50.113 OG Journal[9528:80b] Resetting plugins due to page load.
-2013-12-27 16:27:50.539 OG Journal[9528:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 16:27:50.543 OG Journal[9528:80b] Resetting plugins due to page load.
-2013-12-27 16:28:00.031 OG Journal[9528:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 16:31:02.712 OG Journal[10132:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 16:31:02.722 OG Journal[10132:80b] Unlimited access to network resources
-2013-12-27 16:31:02.753 OG Journal[10132:80b] [CDVTimer][splashscreen] 9.495020ms
-2013-12-27 16:31:02.754 OG Journal[10132:80b] [CDVTimer][TotalPluginStartup] 10.038972ms
-2013-12-27 16:31:02.950 OG Journal[10132:80b] Resetting plugins due to page load.
-2013-12-27 16:31:02.979 OG Journal[10132:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 16:31:02.982 OG Journal[10132:80b] Resetting plugins due to page load.
-2013-12-27 16:31:03.406 OG Journal[10132:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 16:31:03.410 OG Journal[10132:80b] Resetting plugins due to page load.
-2013-12-27 16:31:13.006 OG Journal[10132:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 16:38:54.419 OG Journal[11009:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 16:38:54.430 OG Journal[11009:80b] Unlimited access to network resources
-2013-12-27 16:38:54.462 OG Journal[11009:80b] [CDVTimer][splashscreen] 10.151982ms
-2013-12-27 16:38:54.462 OG Journal[11009:80b] [CDVTimer][TotalPluginStartup] 10.692000ms
-2013-12-27 16:38:54.617 OG Journal[11009:80b] Resetting plugins due to page load.
-2013-12-27 16:38:54.642 OG Journal[11009:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 16:38:54.646 OG Journal[11009:80b] Resetting plugins due to page load.
-2013-12-27 16:38:55.082 OG Journal[11009:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 16:38:55.087 OG Journal[11009:80b] Resetting plugins due to page load.
-2013-12-27 16:39:09.199 OG Journal[11009:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 16:45:10.379 OG Journal[11809:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 16:45:10.389 OG Journal[11809:80b] Unlimited access to network resources
-2013-12-27 16:45:10.423 OG Journal[11809:80b] [CDVTimer][splashscreen] 13.486981ms
-2013-12-27 16:45:10.423 OG Journal[11809:80b] [CDVTimer][TotalPluginStartup] 14.079988ms
-2013-12-27 16:45:10.613 OG Journal[11809:80b] Resetting plugins due to page load.
-2013-12-27 16:45:10.638 OG Journal[11809:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 16:45:10.643 OG Journal[11809:80b] Resetting plugins due to page load.
-2013-12-27 16:45:11.101 OG Journal[11809:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 16:45:11.106 OG Journal[11809:80b] Resetting plugins due to page load.
-2013-12-27 16:45:22.643 OG Journal[11809:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 16:46:07.782 OG Journal[12267:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 16:46:07.791 OG Journal[12267:80b] Unlimited access to network resources
-2013-12-27 16:46:07.833 OG Journal[12267:80b] [CDVTimer][splashscreen] 20.141959ms
-2013-12-27 16:46:07.834 OG Journal[12267:80b] [CDVTimer][TotalPluginStartup] 20.712972ms
-2013-12-27 16:46:08.022 OG Journal[12267:80b] Resetting plugins due to page load.
-2013-12-27 16:46:08.046 OG Journal[12267:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 16:46:08.050 OG Journal[12267:80b] Resetting plugins due to page load.
-2013-12-27 16:46:08.524 OG Journal[12267:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 16:46:08.530 OG Journal[12267:80b] Resetting plugins due to page load.
-2013-12-27 16:46:18.173 OG Journal[12267:80b] Finished load of: http://jdev.osirisguitar.com/
-Terminating in response to SpringBoard's termination.
-2013-12-27 16:48:07.211 OG Journal[12791:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 16:48:07.220 OG Journal[12791:80b] Unlimited access to network resources
-2013-12-27 16:48:07.252 OG Journal[12791:80b] [CDVTimer][splashscreen] 9.527981ms
-2013-12-27 16:48:07.253 OG Journal[12791:80b] [CDVTimer][TotalPluginStartup] 10.071993ms
-2013-12-27 16:48:07.417 OG Journal[12791:80b] Resetting plugins due to page load.
-2013-12-27 16:48:07.441 OG Journal[12791:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/27C2810E-F3C6-45B9-9F2D-05DE039E9216/OG%20Journal.app/www/index2.html
-2013-12-27 16:48:07.444 OG Journal[12791:80b] Resetting plugins due to page load.
-2013-12-27 16:48:07.859 OG Journal[12791:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 16:48:07.863 OG Journal[12791:80b] Resetting plugins due to page load.
-2013-12-27 16:48:17.371 OG Journal[12791:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 18:24:32.308 OG Journal[20583:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 18:24:32.318 OG Journal[20583:80b] Unlimited access to network resources
-2013-12-27 18:24:32.355 OG Journal[20583:80b] [CDVTimer][splashscreen] 13.606012ms
-2013-12-27 18:24:32.355 OG Journal[20583:80b] [CDVTimer][TotalPluginStartup] 14.141023ms
-2013-12-27 18:24:32.521 OG Journal[20583:80b] Resetting plugins due to page load.
-2013-12-27 18:24:32.545 OG Journal[20583:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/2DF27D3C-4CD9-4503-AF79-0EE15346E5C1/OG%20Journal.app/www/index2.html
-2013-12-27 18:24:32.549 OG Journal[20583:80b] Resetting plugins due to page load.
-2013-12-27 18:24:33.425 OG Journal[20583:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 18:24:33.429 OG Journal[20583:80b] Resetting plugins due to page load.
-2013-12-27 18:24:43.146 OG Journal[20583:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-27 22:50:11.982 OG Journal[23587:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 22:50:11.991 OG Journal[23587:80b] Unlimited access to network resources
-2013-12-27 22:50:12.033 OG Journal[23587:80b] [CDVTimer][splashscreen] 16.877949ms
-2013-12-27 22:50:12.033 OG Journal[23587:80b] [CDVTimer][TotalPluginStartup] 17.459989ms
-2013-12-27 22:50:12.202 OG Journal[23587:80b] Resetting plugins due to page load.
-2013-12-27 22:50:12.240 OG Journal[23587:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/2DF27D3C-4CD9-4503-AF79-0EE15346E5C1/OG%20Journal.app/www/index2.html
-2013-12-27 22:50:12.244 OG Journal[23587:80b] Resetting plugins due to page load.
-2013-12-27 22:50:13.165 OG Journal[23587:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 22:50:13.168 OG Journal[23587:80b] Resetting plugins due to page load.
-2013-12-27 22:50:17.924 OG Journal[23587:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-27 22:53:59.478 OG Journal[24205:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 22:53:59.488 OG Journal[24205:80b] Unlimited access to network resources
-2013-12-27 22:53:59.519 OG Journal[24205:80b] [CDVTimer][splashscreen] 9.768963ms
-2013-12-27 22:53:59.520 OG Journal[24205:80b] [CDVTimer][TotalPluginStartup] 10.318041ms
-2013-12-27 22:53:59.706 OG Journal[24205:80b] Resetting plugins due to page load.
-2013-12-27 22:53:59.729 OG Journal[24205:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/2DF27D3C-4CD9-4503-AF79-0EE15346E5C1/OG%20Journal.app/www/index2.html
-2013-12-27 22:53:59.733 OG Journal[24205:80b] Resetting plugins due to page load.
-2013-12-27 22:54:01.039 OG Journal[24205:80b] Finished load of: http://jdev.osirisguitar.com/login
-2013-12-27 22:57:54.000 OG Journal[24205:80b] Resetting plugins due to page load.
-2013-12-27 22:58:02.957 OG Journal[24205:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-27 23:02:43.970 OG Journal[25125:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-27 23:02:43.979 OG Journal[25125:80b] Unlimited access to network resources
-2013-12-27 23:02:44.010 OG Journal[25125:80b] [CDVTimer][splashscreen] 9.818971ms
-2013-12-27 23:02:44.011 OG Journal[25125:80b] [CDVTimer][TotalPluginStartup] 10.402977ms
-2013-12-27 23:02:44.188 OG Journal[25125:80b] Resetting plugins due to page load.
-2013-12-27 23:02:44.212 OG Journal[25125:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/2DF27D3C-4CD9-4503-AF79-0EE15346E5C1/OG%20Journal.app/www/index2.html
-2013-12-27 23:02:44.215 OG Journal[25125:80b] Resetting plugins due to page load.
-2013-12-27 23:02:44.670 OG Journal[25125:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-27 23:02:44.673 OG Journal[25125:80b] Resetting plugins due to page load.
-2013-12-27 23:02:55.082 OG Journal[25125:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-28 00:08:19.601 OG Journal[26474:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-28 00:08:19.611 OG Journal[26474:80b] Unlimited access to network resources
-2013-12-28 00:08:19.643 OG Journal[26474:80b] [CDVTimer][splashscreen] 9.844959ms
-2013-12-28 00:08:19.643 OG Journal[26474:80b] [CDVTimer][TotalPluginStartup] 10.444999ms
-2013-12-28 00:08:19.813 OG Journal[26474:80b] Resetting plugins due to page load.
-2013-12-28 00:08:19.840 OG Journal[26474:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/2DF27D3C-4CD9-4503-AF79-0EE15346E5C1/OG%20Journal.app/www/index2.html
-2013-12-28 00:08:19.844 OG Journal[26474:80b] Resetting plugins due to page load.
-2013-12-28 00:08:20.355 OG Journal[26474:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-28 00:08:20.359 OG Journal[26474:80b] Resetting plugins due to page load.
-2013-12-28 00:08:31.807 OG Journal[26474:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-28 00:11:01.298 OG Journal[26474:80b] Resetting plugins due to page load.
-2013-12-28 00:11:03.800 OG Journal[26474:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-28 00:11:03.810 OG Journal[26474:80b] Resetting plugins due to page load.
-2013-12-28 00:11:08.241 OG Journal[26474:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-28 00:12:54.278 OG Journal[26474:80b] Resetting plugins due to page load.
-2013-12-28 00:12:59.804 OG Journal[26474:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-30 23:34:18.498 OG Journal[73852:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-30 23:34:18.526 OG Journal[73852:80b] Unlimited access to network resources
-2013-12-30 23:34:18.567 OG Journal[73852:80b] [CDVTimer][splashscreen] 14.279008ms
-2013-12-30 23:34:18.568 OG Journal[73852:80b] [CDVTimer][TotalPluginStartup] 14.831007ms
-2013-12-30 23:34:18.744 OG Journal[73852:80b] Resetting plugins due to page load.
-2013-12-30 23:34:18.781 OG Journal[73852:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/2DF27D3C-4CD9-4503-AF79-0EE15346E5C1/OG%20Journal.app/www/index2.html
-2013-12-30 23:34:18.785 OG Journal[73852:80b] Resetting plugins due to page load.
-2013-12-30 23:34:19.648 OG Journal[73852:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-30 23:34:19.652 OG Journal[73852:80b] Resetting plugins due to page load.
-2013-12-30 23:34:23.168 OG Journal[73852:80b] Finished load of: http://journal.osirisguitar.com/
-2013-12-30 23:38:17.526 OG Journal[74481:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-30 23:38:17.536 OG Journal[74481:80b] Unlimited access to network resources
-2013-12-30 23:38:17.568 OG Journal[74481:80b] [CDVTimer][splashscreen] 9.716034ms
-2013-12-30 23:38:17.568 OG Journal[74481:80b] [CDVTimer][TotalPluginStartup] 10.273993ms
-2013-12-30 23:38:17.759 OG Journal[74481:80b] Resetting plugins due to page load.
-2013-12-30 23:38:17.788 OG Journal[74481:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/2DF27D3C-4CD9-4503-AF79-0EE15346E5C1/OG%20Journal.app/www/index2.html
-2013-12-30 23:38:17.792 OG Journal[74481:80b] Resetting plugins due to page load.
-2013-12-30 23:38:18.247 OG Journal[74481:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-30 23:38:18.251 OG Journal[74481:80b] Resetting plugins due to page load.
-2013-12-30 23:38:29.109 OG Journal[74481:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-30 23:39:40.417 OG Journal[74945:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-30 23:39:40.427 OG Journal[74945:80b] Unlimited access to network resources
-2013-12-30 23:39:40.465 OG Journal[74945:80b] [CDVTimer][splashscreen] 10.181010ms
-2013-12-30 23:39:40.465 OG Journal[74945:80b] [CDVTimer][TotalPluginStartup] 10.743976ms
-2013-12-30 23:39:40.643 OG Journal[74945:80b] Resetting plugins due to page load.
-2013-12-30 23:39:40.669 OG Journal[74945:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/2DF27D3C-4CD9-4503-AF79-0EE15346E5C1/OG%20Journal.app/www/index2.html
-2013-12-30 23:39:40.673 OG Journal[74945:80b] Resetting plugins due to page load.
-2013-12-30 23:39:41.067 OG Journal[74945:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-30 23:39:41.069 OG Journal[74945:80b] Resetting plugins due to page load.
-2013-12-30 23:39:49.802 OG Journal[74945:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-30 23:43:08.206 OG Journal[75858:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-30 23:43:08.216 OG Journal[75858:80b] Unlimited access to network resources
-2013-12-30 23:43:08.248 OG Journal[75858:80b] [CDVTimer][splashscreen] 9.558976ms
-2013-12-30 23:43:08.248 OG Journal[75858:80b] [CDVTimer][TotalPluginStartup] 10.158002ms
-2013-12-30 23:43:08.439 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:43:08.471 OG Journal[75858:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6460E3FB-0C65-40E9-9D4D-F8504D0EC4BE/OG%20Journal.app/www/index2.html
-2013-12-30 23:43:08.475 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:43:09.963 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/login
-2013-12-30 23:43:19.038 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:43:21.259 OG Journal[75858:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-30 23:43:21.259 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:43:22.440 OG Journal[75858:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&api_key=660009220696560&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjdev.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D660009220696560%26ret%3Dlogin&cancel_uri=http%3A%2F%2Fjdev.osirisguitar.com%2Fauth%2Ffacebook%2Fcallback%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=touch&_rdr
-2013-12-30 23:43:47.226 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:43:48.445 OG Journal[75858:80b] Finished load of: https://m.facebook.com/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjdev.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D660009220696560%26ret%3Dlogin&refid=9&_rdr
-2013-12-30 23:44:08.597 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:44:09.225 OG Journal[75858:80b] Finished load of: https://m.facebook.com/login/checkpoint/?next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjdev.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D660009220696560%26ret%3Dlogin
-2013-12-30 23:44:10.703 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:44:22.199 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-30 23:47:55.044 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:48:02.795 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-30 23:49:45.204 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:49:53.960 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-30 23:49:58.388 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:50:06.228 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-30 23:50:14.644 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:50:22.442 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-30 23:52:25.787 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:52:29.971 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-30 23:55:55.617 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:55:59.820 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-30 23:56:32.009 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-30 23:56:36.075 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:02:11.133 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:02:15.391 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:02:49.553 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:02:53.728 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:05:33.719 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:06:12.055 OG Journal[75858:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-31 00:06:12.056 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:06:16.145 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-31 00:11:52.389 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:11:56.531 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-31 00:12:28.845 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:12:33.008 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:14:27.078 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:14:31.334 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:15:05.055 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:15:09.398 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:17:54.820 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:17:58.951 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:18:32.709 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:18:36.954 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:20:12.219 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:20:16.427 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:20:50.480 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:20:54.615 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:24:01.329 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:24:05.492 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:24:40.153 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:24:44.254 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:26:04.009 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:26:08.216 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:26:42.389 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:26:47.248 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:28:21.841 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:28:25.955 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:28:59.905 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:29:04.083 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:31:05.069 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:31:09.223 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:31:52.509 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:31:56.666 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-31 00:35:19.733 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:35:23.899 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-31 00:39:13.739 OG Journal[75858:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-31 00:42:51.833 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:42:56.045 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:44:46.130 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:44:50.312 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:45:24.573 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:45:28.714 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 00:47:35.225 OG Journal[75858:80b] Resetting plugins due to page load.
-2013-12-31 00:47:39.397 OG Journal[75858:80b] Finished load of: http://jdev.osirisguitar.com/instrument/5156a3742b4d6d0200000001
-2013-12-31 14:04:11.460 OG Journal[84394:80b] Multi-tasking -> Device: YES, App: YES
-2013-12-31 14:04:11.469 OG Journal[84394:80b] Unlimited access to network resources
-2013-12-31 14:04:11.507 OG Journal[84394:80b] [CDVTimer][splashscreen] 14.137030ms
-2013-12-31 14:04:11.507 OG Journal[84394:80b] [CDVTimer][TotalPluginStartup] 14.665961ms
-2013-12-31 14:04:11.676 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:04:11.730 OG Journal[84394:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6460E3FB-0C65-40E9-9D4D-F8504D0EC4BE/OG%20Journal.app/www/index2.html
-2013-12-31 14:04:11.740 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:04:12.720 OG Journal[84394:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-31 14:04:12.724 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:04:32.036 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/
-2013-12-31 14:06:01.233 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:06:05.228 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-31 14:09:52.589 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:09:58.481 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-31 14:10:42.049 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:10:46.190 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2013-12-31 14:12:00.202 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:12:00.217 OG Journal[84394:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-31 14:12:00.218 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:12:00.221 OG Journal[84394:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-31 14:12:00.221 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:12:00.244 OG Journal[84394:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-31 14:12:00.245 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:12:00.249 OG Journal[84394:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-31 14:12:00.250 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:12:00.255 OG Journal[84394:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2013-12-31 14:12:00.255 OG Journal[84394:80b] Resetting plugins due to page load.
-2013-12-31 14:12:04.487 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2014-01-01 11:49:17.819 OG Journal[84394:80b] Resetting plugins due to page load.
-2014-01-01 11:49:22.014 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2014-01-01 11:50:03.185 OG Journal[84394:80b] Resetting plugins due to page load.
-2014-01-01 11:50:07.276 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2014-01-01 16:01:56.556 OG Journal[84394:80b] Resetting plugins due to page load.
-2014-01-01 16:02:00.685 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2014-01-01 16:02:33.363 OG Journal[84394:80b] Resetting plugins due to page load.
-2014-01-01 16:02:37.515 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/profile
-2014-01-01 16:04:15.208 OG Journal[84394:80b] Resetting plugins due to page load.
-2014-01-01 16:04:18.095 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/login
-2014-01-01 16:04:21.518 OG Journal[84394:80b] Resetting plugins due to page load.
-2014-01-01 16:04:23.536 OG Journal[84394:80b] Finished load of: https://m.facebook.com/login.php?skip_api_login=1&api_key=660009220696560&signed_next=1&next=https%3A%2F%2Fm.facebook.com%2Fdialog%2Foauth%3Fredirect_uri%3Dhttp%253A%252F%252Fjdev.osirisguitar.com%252Fauth%252Ffacebook%252Fcallback%26scope%3Dpublish_actions%26response_type%3Dcode%26type%3Dweb_server%26client_id%3D660009220696560%26ret%3Dlogin&cancel_uri=http%3A%2F%2Fjdev.osirisguitar.com%2Fauth%2Ffacebook%2Fcallback%3Ferror%3Daccess_denied%26error_code%3D200%26error_description%3DPermissions%2Berror%26error_reason%3Duser_denied%23_%3D_&display=touch&_rdr
-2014-01-01 16:04:46.331 OG Journal[84394:80b] Resetting plugins due to page load.
-2014-01-01 16:04:54.749 OG Journal[84394:80b] Finished load of: http://jdev.osirisguitar.com/
-Terminating in response to SpringBoard's termination.
-2014-01-01 18:02:43.559 OG Journal[98639:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-01 18:02:43.573 OG Journal[98639:80b] Unlimited access to network resources
-2014-01-01 18:02:43.686 OG Journal[98639:80b] [CDVTimer][splashscreen] 53.654015ms
-2014-01-01 18:02:43.687 OG Journal[98639:80b] [CDVTimer][TotalPluginStartup] 54.214001ms
-2014-01-01 18:02:43.859 OG Journal[98639:80b] Resetting plugins due to page load.
-2014-01-01 18:02:43.900 OG Journal[98639:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6460E3FB-0C65-40E9-9D4D-F8504D0EC4BE/OG%20Journal.app/www/index2.html
-2014-01-01 18:02:43.904 OG Journal[98639:80b] Resetting plugins due to page load.
-2014-01-01 18:02:44.499 OG Journal[98639:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2014-01-01 18:02:44.503 OG Journal[98639:80b] Resetting plugins due to page load.
-2014-01-01 18:02:53.872 OG Journal[98639:80b] Finished load of: http://jdev.osirisguitar.com/
-2014-01-01 18:03:37.998 OG Journal[98639:80b] Resetting plugins due to page load.
-2014-01-01 18:03:42.003 OG Journal[98639:80b] Finished load of: http://jdev.osirisguitar.com/
-2014-01-01 18:11:14.087 OG Journal[99843:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-01 18:11:14.097 OG Journal[99843:80b] Unlimited access to network resources
-2014-01-01 18:11:14.129 OG Journal[99843:80b] [CDVTimer][splashscreen] 9.535015ms
-2014-01-01 18:11:14.130 OG Journal[99843:80b] [CDVTimer][TotalPluginStartup] 10.109961ms
-2014-01-01 18:11:14.301 OG Journal[99843:80b] Resetting plugins due to page load.
-2014-01-01 18:11:14.325 OG Journal[99843:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6460E3FB-0C65-40E9-9D4D-F8504D0EC4BE/OG%20Journal.app/www/index2.html
-2014-01-01 18:11:14.328 OG Journal[99843:80b] Resetting plugins due to page load.
-2014-01-01 18:11:22.717 OG Journal[99843:80b] Finished load of: http://journal.osirisguitar.com/login
-2014-01-01 18:12:05.515 OG Journal[99843:80b] Resetting plugins due to page load.
-2014-01-01 18:12:13.986 OG Journal[99843:80b] Finished load of: http://journal.osirisguitar.com/
-Terminating in response to SpringBoard's termination.
-2014-01-01 18:14:39.471 OG Journal[637:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-01 18:14:39.481 OG Journal[637:80b] Unlimited access to network resources
-2014-01-01 18:14:39.513 OG Journal[637:80b] [CDVTimer][splashscreen] 10.065973ms
-2014-01-01 18:14:39.513 OG Journal[637:80b] [CDVTimer][TotalPluginStartup] 10.614991ms
-2014-01-01 18:14:39.712 OG Journal[637:80b] Resetting plugins due to page load.
-2014-01-01 18:14:39.736 OG Journal[637:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6460E3FB-0C65-40E9-9D4D-F8504D0EC4BE/OG%20Journal.app/www/index2.html
-2014-01-01 18:14:39.741 OG Journal[637:80b] Resetting plugins due to page load.
-2014-01-01 18:14:40.678 OG Journal[637:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2014-01-01 18:14:40.681 OG Journal[637:80b] Resetting plugins due to page load.
-2014-01-01 18:14:45.185 OG Journal[637:80b] Finished load of: http://journal.osirisguitar.com/
-2014-01-02 21:14:27.449 OG Journal[5225:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-02 21:14:27.459 OG Journal[5225:80b] Unlimited access to network resources
-2014-01-02 21:14:27.499 OG Journal[5225:80b] [CDVTimer][splashscreen] 13.687015ms
-2014-01-02 21:14:27.499 OG Journal[5225:80b] [CDVTimer][TotalPluginStartup] 14.216006ms
-2014-01-02 21:14:27.683 OG Journal[5225:80b] Resetting plugins due to page load.
-2014-01-02 21:14:27.720 OG Journal[5225:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6460E3FB-0C65-40E9-9D4D-F8504D0EC4BE/OG%20Journal.app/www/index2.html
-2014-01-02 21:14:27.724 OG Journal[5225:80b] Resetting plugins due to page load.
-2014-01-02 21:14:28.269 OG Journal[5225:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2014-01-02 21:14:28.273 OG Journal[5225:80b] Resetting plugins due to page load.
-2014-01-02 21:14:38.439 OG Journal[5225:80b] Finished load of: http://jdev.osirisguitar.com/
-2014-01-02 21:14:48.729 OG Journal[5225:80b] CDVWebViewDelegate: Navigation started when state=1
-2014-01-02 21:14:48.730 OG Journal[5225:80b] Failed to load webpage with error: CDVWebViewDelegate: Navigation started when state=1
-2014-01-02 21:14:48.730 OG Journal[5225:80b] Resetting plugins due to page load.
-2014-01-02 21:15:19.245 OG Journal[5654:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-02 21:15:19.255 OG Journal[5654:80b] Unlimited access to network resources
-2014-01-02 21:15:19.288 OG Journal[5654:80b] [CDVTimer][splashscreen] 10.592997ms
-2014-01-02 21:15:19.289 OG Journal[5654:80b] [CDVTimer][TotalPluginStartup] 11.229992ms
-2014-01-02 21:15:19.477 OG Journal[5654:80b] Resetting plugins due to page load.
-2014-01-02 21:15:19.502 OG Journal[5654:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6460E3FB-0C65-40E9-9D4D-F8504D0EC4BE/OG%20Journal.app/www/index2.html
-2014-01-02 21:15:19.506 OG Journal[5654:80b] Resetting plugins due to page load.
-2014-01-02 21:15:20.146 OG Journal[5654:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2014-01-02 21:15:20.150 OG Journal[5654:80b] Resetting plugins due to page load.
-2014-01-02 21:15:30.005 OG Journal[5654:80b] Finished load of: http://jdev.osirisguitar.com/
-2014-01-02 21:16:32.206 OG Journal[6113:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-02 21:16:32.216 OG Journal[6113:80b] Unlimited access to network resources
-2014-01-02 21:16:32.248 OG Journal[6113:80b] [CDVTimer][splashscreen] 10.446966ms
-2014-01-02 21:16:32.248 OG Journal[6113:80b] [CDVTimer][TotalPluginStartup] 11.020958ms
-2014-01-02 21:16:32.419 OG Journal[6113:80b] Resetting plugins due to page load.
-2014-01-02 21:16:32.443 OG Journal[6113:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6460E3FB-0C65-40E9-9D4D-F8504D0EC4BE/OG%20Journal.app/www/index2.html
-2014-01-02 21:16:32.447 OG Journal[6113:80b] Resetting plugins due to page load.
-2014-01-02 21:16:32.846 OG Journal[6113:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2014-01-02 21:16:32.850 OG Journal[6113:80b] Resetting plugins due to page load.
-2014-01-02 21:16:43.184 OG Journal[6113:80b] Finished load of: http://jdev.osirisguitar.com/
-2014-01-02 21:17:10.509 OG Journal[6113:80b] CDVWebViewDelegate: Navigation started when state=1
-2014-01-02 21:17:10.510 OG Journal[6113:80b] Failed to load webpage with error: CDVWebViewDelegate: Navigation started when state=1
-2014-01-02 21:17:10.511 OG Journal[6113:80b] Resetting plugins due to page load.
-2014-01-02 21:17:21.922 OG Journal[6113:80b] Finished load of: http://www.osirisguitar.com/journalsupport/
-2014-01-02 21:17:48.519 OG Journal[6577:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-02 21:17:48.529 OG Journal[6577:80b] Unlimited access to network resources
-2014-01-02 21:17:48.561 OG Journal[6577:80b] [CDVTimer][splashscreen] 9.878993ms
-2014-01-02 21:17:48.562 OG Journal[6577:80b] [CDVTimer][TotalPluginStartup] 10.437012ms
-2014-01-02 21:17:48.735 OG Journal[6577:80b] Resetting plugins due to page load.
-2014-01-02 21:17:48.759 OG Journal[6577:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6460E3FB-0C65-40E9-9D4D-F8504D0EC4BE/OG%20Journal.app/www/index2.html
-2014-01-02 21:17:48.765 OG Journal[6577:80b] Resetting plugins due to page load.
-2014-01-02 21:17:49.129 OG Journal[6577:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2014-01-02 21:17:49.132 OG Journal[6577:80b] Resetting plugins due to page load.
-2014-01-02 21:18:00.584 OG Journal[6577:80b] Finished load of: http://jdev.osirisguitar.com/
-2014-01-02 21:18:08.467 OG Journal[6577:80b] Resetting plugins due to page load.
-2014-01-02 21:18:08.476 OG Journal[6577:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2014-01-02 21:18:08.476 OG Journal[6577:80b] Resetting plugins due to page load.
-2014-01-02 21:18:08.480 OG Journal[6577:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2014-01-02 21:18:08.481 OG Journal[6577:80b] Resetting plugins due to page load.
-2014-01-02 21:18:17.470 OG Journal[6577:80b] Finished load of: http://jdev.osirisguitar.com/
-2014-01-02 21:19:00.161 OG Journal[6577:80b] Resetting plugins due to page load.
-2014-01-02 21:19:05.787 OG Journal[6577:80b] Finished load of: http://jdev.osirisguitar.com/
-2014-01-02 21:19:34.378 OG Journal[6577:80b] Resetting plugins due to page load.
-2014-01-02 21:19:34.382 OG Journal[6577:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2014-01-02 21:19:34.382 OG Journal[6577:80b] Resetting plugins due to page load.
-2014-01-02 21:19:39.253 OG Journal[6577:80b] Finished load of: http://www.osirisguitar.com/journalsupport/
-2014-01-02 21:20:46.342 OG Journal[7142:80b] Multi-tasking -> Device: YES, App: YES
-2014-01-02 21:20:46.351 OG Journal[7142:80b] Unlimited access to network resources
-2014-01-02 21:20:46.386 OG Journal[7142:80b] [CDVTimer][splashscreen] 10.495007ms
-2014-01-02 21:20:46.387 OG Journal[7142:80b] [CDVTimer][TotalPluginStartup] 11.254966ms
-2014-01-02 21:20:46.590 OG Journal[7142:80b] Resetting plugins due to page load.
-2014-01-02 21:20:46.616 OG Journal[7142:80b] Finished load of: file:///Users/andersbornholm/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/6460E3FB-0C65-40E9-9D4D-F8504D0EC4BE/OG%20Journal.app/www/index2.html
-2014-01-02 21:20:46.623 OG Journal[7142:80b] Resetting plugins due to page load.
-2014-01-02 21:20:47.113 OG Journal[7142:80b] Failed to load webpage with error: The operation couldn’t be completed. (NSURLErrorDomain error -999.)
-2014-01-02 21:20:47.118 OG Journal[7142:80b] Resetting plugins due to page load.
-2014-01-02 21:20:58.751 OG Journal[7142:80b] Finished load of: http://jdev.osirisguitar.com/
-2014-01-02 21:21:40.616 OG Journal[7142:80b] Resetting plugins due to page load.
-2014-01-02 21:21:45.999 OG Journal[7142:80b] Finished load of: http://jdev.osirisguitar.com/
-2014-01-02 21:23:17.317 OG Journal[7142:80b] Resetting plugins due to page load.
-2014-01-02 21:23:24.146 OG Journal[7142:80b] Finished load of: http://www.osirisguitar.com/journalsupport/
-2014-01-02 21:23:28.941 OG Journal[7142:80b] CDVWebViewDelegate: Navigation started when state=1
-2014-01-02 21:23:28.942 OG Journal[7142:80b] Failed to load webpage with error: CDVWebViewDelegate: Navigation started when state=1
-2014-01-02 21:23:28.944 OG Journal[7142:80b] Resetting plugins due to page load.
+2015-03-20 15:09:20.100 OG Journal[85114:4848386] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:09:20.101 OG Journal[85114:4848386] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:09:20.102 OG Journal[85114:4848386] Unlimited access to network resources
+2015-03-20 15:09:20.104 OG Journal[85114:4848386] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:09:20.181 OG Journal[85114:4848386] [CDVTimer][splashscreen] 16.717970ms
+2015-03-20 15:09:20.181 OG Journal[85114:4848386] [CDVTimer][TotalPluginStartup] 16.838014ms
+2015-03-20 15:09:20.218 OG Journal[85114:4848386] Resetting plugins due to page load.
+2015-03-20 15:09:20.240 OG Journal[85114:4848386] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/4B016431-9E80-469A-BBFD-93CE08B73B77/OG%20Journal.app/www/index2.html
+2015-03-20 15:09:20.244 OG Journal[85114:4848386] Resetting plugins due to page load.
+2015-03-20 15:09:20.391 OG Journal[85114:4848386] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:09:20.395 OG Journal[85114:4848386] Resetting plugins due to page load.
+2015-03-20 15:09:21.491 OG Journal[85114:4848386] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:09:21.754 OG Journal[85114:4848386] Resetting plugins due to page load.
+2015-03-20 15:09:21.899 OG Journal[85114:4848386] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:11:18.168 OG Journal[85340:4851418] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:11:18.169 OG Journal[85340:4851418] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:11:18.171 OG Journal[85340:4851418] Unlimited access to network resources
+2015-03-20 15:11:18.173 OG Journal[85340:4851418] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:11:18.241 OG Journal[85340:4851418] [CDVTimer][splashscreen] 10.236025ms
+2015-03-20 15:11:18.245 OG Journal[85340:4851418] [CDVTimer][statusbar] 3.382027ms
+2015-03-20 15:11:18.245 OG Journal[85340:4851418] [CDVTimer][TotalPluginStartup] 13.849020ms
+2015-03-20 15:11:18.290 OG Journal[85340:4851418] Resetting plugins due to page load.
+2015-03-20 15:11:18.308 OG Journal[85340:4851418] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/D3947B39-34D7-44C8-858B-C67477FDBBA7/OG%20Journal.app/www/index2.html
+2015-03-20 15:11:18.311 OG Journal[85340:4851418] Resetting plugins due to page load.
+2015-03-20 15:11:18.461 OG Journal[85340:4851418] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:11:18.466 OG Journal[85340:4851418] Resetting plugins due to page load.
+2015-03-20 15:11:19.720 OG Journal[85340:4851418] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:11:35.543 OG Journal[85494:4852022] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:11:35.544 OG Journal[85494:4852022] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:11:35.545 OG Journal[85494:4852022] Unlimited access to network resources
+2015-03-20 15:11:35.546 OG Journal[85494:4852022] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:11:35.607 OG Journal[85494:4852022] [CDVTimer][splashscreen] 9.884000ms
+2015-03-20 15:11:35.610 OG Journal[85494:4852022] [CDVTimer][statusbar] 2.960026ms
+2015-03-20 15:11:35.611 OG Journal[85494:4852022] [CDVTimer][TotalPluginStartup] 13.104975ms
+2015-03-20 15:11:35.654 OG Journal[85494:4852022] Resetting plugins due to page load.
+2015-03-20 15:11:35.670 OG Journal[85494:4852022] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/6A11B848-68A2-4EFB-94F7-B1656FBCDF3A/OG%20Journal.app/www/index2.html
+2015-03-20 15:11:35.673 OG Journal[85494:4852022] Resetting plugins due to page load.
+2015-03-20 15:11:35.800 OG Journal[85494:4852022] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:11:35.804 OG Journal[85494:4852022] Resetting plugins due to page load.
+2015-03-20 15:11:36.822 OG Journal[85494:4852022] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:12:40.049 OG Journal[85671:4854134] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:12:40.049 OG Journal[85671:4854134] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:12:40.050 OG Journal[85671:4854134] Unlimited access to network resources
+2015-03-20 15:12:40.052 OG Journal[85671:4854134] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:12:40.115 OG Journal[85671:4854134] [CDVTimer][splashscreen] 9.562016ms
+2015-03-20 15:12:40.118 OG Journal[85671:4854134] [CDVTimer][statusbar] 2.942026ms
+2015-03-20 15:12:40.118 OG Journal[85671:4854134] [CDVTimer][TotalPluginStartup] 12.737036ms
+2015-03-20 15:12:40.187 OG Journal[85671:4854134] Resetting plugins due to page load.
+2015-03-20 15:12:40.206 OG Journal[85671:4854134] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/0BCB8F3D-D8BF-4A86-A805-B00E66E74CB7/OG%20Journal.app/www/index2.html
+2015-03-20 15:12:40.209 OG Journal[85671:4854134] Resetting plugins due to page load.
+2015-03-20 15:12:40.350 OG Journal[85671:4854134] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:12:40.355 OG Journal[85671:4854134] Resetting plugins due to page load.
+2015-03-20 15:12:41.430 OG Journal[85671:4854134] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:13:08.053 OG Journal[85818:4854877] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:13:08.053 OG Journal[85818:4854877] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:13:08.054 OG Journal[85818:4854877] Unlimited access to network resources
+2015-03-20 15:13:08.057 OG Journal[85818:4854877] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:13:08.130 OG Journal[85818:4854877] [CDVTimer][splashscreen] 11.376023ms
+2015-03-20 15:13:08.133 OG Journal[85818:4854877] [CDVTimer][statusbar] 2.878010ms
+2015-03-20 15:13:08.133 OG Journal[85818:4854877] [CDVTimer][TotalPluginStartup] 14.472008ms
+2015-03-20 15:13:08.198 OG Journal[85818:4854877] Resetting plugins due to page load.
+2015-03-20 15:13:08.214 OG Journal[85818:4854877] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/3E718AF3-CC47-42B7-93F8-C97DB160FAF6/OG%20Journal.app/www/index2.html
+2015-03-20 15:13:08.217 OG Journal[85818:4854877] Resetting plugins due to page load.
+2015-03-20 15:13:08.366 OG Journal[85818:4854877] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:13:08.369 OG Journal[85818:4854877] Resetting plugins due to page load.
+2015-03-20 15:13:09.352 OG Journal[85818:4854877] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:16:31.940 OG Journal[86228:4859369] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:16:31.941 OG Journal[86228:4859369] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:16:31.942 OG Journal[86228:4859369] Unlimited access to network resources
+2015-03-20 15:16:31.943 OG Journal[86228:4859369] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:16:32.005 OG Journal[86228:4859369] [CDVTimer][splashscreen] 9.841025ms
+2015-03-20 15:16:32.008 OG Journal[86228:4859369] [CDVTimer][statusbar] 2.897978ms
+2015-03-20 15:16:32.009 OG Journal[86228:4859369] [CDVTimer][TotalPluginStartup] 12.973011ms
+2015-03-20 15:16:32.077 OG Journal[86228:4859369] Resetting plugins due to page load.
+2015-03-20 15:16:32.095 OG Journal[86228:4859369] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/10C46568-BC32-4461-A078-9C19AA5D31D6/OG%20Journal.app/www/index2.html
+2015-03-20 15:16:32.098 OG Journal[86228:4859369] Resetting plugins due to page load.
+2015-03-20 15:16:32.228 OG Journal[86228:4859369] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:16:32.233 OG Journal[86228:4859369] Resetting plugins due to page load.
+2015-03-20 15:16:33.321 OG Journal[86228:4859369] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:17:11.585 OG Journal[86386:4860160] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:17:11.586 OG Journal[86386:4860160] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:17:11.587 OG Journal[86386:4860160] Unlimited access to network resources
+2015-03-20 15:17:11.589 OG Journal[86386:4860160] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:17:11.651 OG Journal[86386:4860160] [CDVTimer][splashscreen] 10.046005ms
+2015-03-20 15:17:11.654 OG Journal[86386:4860160] [CDVTimer][statusbar] 3.028989ms
+2015-03-20 15:17:11.654 OG Journal[86386:4860160] [CDVTimer][TotalPluginStartup] 13.297021ms
+2015-03-20 15:17:11.716 OG Journal[86386:4860160] Resetting plugins due to page load.
+2015-03-20 15:17:11.733 OG Journal[86386:4860160] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/67B7B23E-705A-4745-B919-78184447B9BA/OG%20Journal.app/www/index2.html
+2015-03-20 15:17:11.738 OG Journal[86386:4860160] Resetting plugins due to page load.
+2015-03-20 15:17:11.878 OG Journal[86386:4860160] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:17:11.883 OG Journal[86386:4860160] Resetting plugins due to page load.
+2015-03-20 15:17:12.945 OG Journal[86386:4860160] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:20:04.536 OG Journal[86660:4862986] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:20:04.537 OG Journal[86660:4862986] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:20:04.538 OG Journal[86660:4862986] Unlimited access to network resources
+2015-03-20 15:20:04.539 OG Journal[86660:4862986] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:20:04.603 OG Journal[86660:4862986] [CDVTimer][splashscreen] 10.011017ms
+2015-03-20 15:20:04.606 OG Journal[86660:4862986] [CDVTimer][statusbar] 2.763033ms
+2015-03-20 15:20:04.606 OG Journal[86660:4862986] [CDVTimer][TotalPluginStartup] 12.988031ms
+2015-03-20 15:20:04.658 OG Journal[86660:4862986] Resetting plugins due to page load.
+2015-03-20 15:20:04.674 OG Journal[86660:4862986] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/D7FC6A3F-63CC-4728-BE04-8B13C2737336/OG%20Journal.app/www/index2.html
+2015-03-20 15:20:04.677 OG Journal[86660:4862986] Resetting plugins due to page load.
+2015-03-20 15:20:04.812 OG Journal[86660:4862986] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:20:04.816 OG Journal[86660:4862986] Resetting plugins due to page load.
+2015-03-20 15:20:05.972 OG Journal[86660:4862986] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:20:21.338 OG Journal[86771:4863504] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:20:21.339 OG Journal[86771:4863504] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:20:21.340 OG Journal[86771:4863504] Unlimited access to network resources
+2015-03-20 15:20:21.342 OG Journal[86771:4863504] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:20:21.433 OG Journal[86771:4863504] [CDVTimer][splashscreen] 11.400044ms
+2015-03-20 15:20:21.437 OG Journal[86771:4863504] [CDVTimer][statusbar] 3.407001ms
+2015-03-20 15:20:21.437 OG Journal[86771:4863504] [CDVTimer][TotalPluginStartup] 15.103996ms
+2015-03-20 15:20:21.507 OG Journal[86771:4863504] Resetting plugins due to page load.
+2015-03-20 15:20:21.528 OG Journal[86771:4863504] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/503F18EE-F3D4-4A54-9B54-4406A1E88176/OG%20Journal.app/www/index2.html
+2015-03-20 15:20:21.531 OG Journal[86771:4863504] Resetting plugins due to page load.
+2015-03-20 15:20:21.761 OG Journal[86771:4863504] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:20:21.767 OG Journal[86771:4863504] Resetting plugins due to page load.
+2015-03-20 15:20:22.813 OG Journal[86771:4863504] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:20:29.996 OG Journal[86883:4863905] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:20:29.997 OG Journal[86883:4863905] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:20:29.998 OG Journal[86883:4863905] Unlimited access to network resources
+2015-03-20 15:20:30.000 OG Journal[86883:4863905] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:20:30.071 OG Journal[86883:4863905] [CDVTimer][splashscreen] 10.571003ms
+2015-03-20 15:20:30.074 OG Journal[86883:4863905] [CDVTimer][statusbar] 3.023982ms
+2015-03-20 15:20:30.074 OG Journal[86883:4863905] [CDVTimer][TotalPluginStartup] 13.823032ms
+2015-03-20 15:20:30.135 OG Journal[86883:4863905] Resetting plugins due to page load.
+2015-03-20 15:20:30.153 OG Journal[86883:4863905] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/3FD8CE36-BAAD-4B81-B574-A02F4B457EC5/OG%20Journal.app/www/index2.html
+2015-03-20 15:20:30.156 OG Journal[86883:4863905] Resetting plugins due to page load.
+2015-03-20 15:20:30.314 OG Journal[86883:4863905] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:20:30.318 OG Journal[86883:4863905] Resetting plugins due to page load.
+2015-03-20 15:20:31.405 OG Journal[86883:4863905] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:20:49.763 OG Journal[86984:4864563] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:20:49.763 OG Journal[86984:4864563] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:20:49.764 OG Journal[86984:4864563] Unlimited access to network resources
+2015-03-20 15:20:49.766 OG Journal[86984:4864563] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:20:49.869 OG Journal[86984:4864563] [CDVTimer][splashscreen] 12.295008ms
+2015-03-20 15:20:49.874 OG Journal[86984:4864563] [CDVTimer][statusbar] 4.587948ms
+2015-03-20 15:20:49.874 OG Journal[86984:4864563] [CDVTimer][TotalPluginStartup] 17.262042ms
+2015-03-20 15:20:49.933 OG Journal[86984:4864563] Resetting plugins due to page load.
+2015-03-20 15:20:49.954 OG Journal[86984:4864563] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/02E3FA0F-B276-40D1-9548-2001143EFCFC/OG%20Journal.app/www/index2.html
+2015-03-20 15:20:49.957 OG Journal[86984:4864563] Resetting plugins due to page load.
+2015-03-20 15:20:50.140 OG Journal[86984:4864563] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:20:50.146 OG Journal[86984:4864563] Resetting plugins due to page load.
+2015-03-20 15:20:51.250 OG Journal[86984:4864563] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:21:41.432 OG Journal[87169:4865351] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:21:41.433 OG Journal[87169:4865351] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:21:41.434 OG Journal[87169:4865351] Unlimited access to network resources
+2015-03-20 15:21:41.436 OG Journal[87169:4865351] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:21:41.500 OG Journal[87169:4865351] [CDVTimer][splashscreen] 9.895980ms
+2015-03-20 15:21:41.503 OG Journal[87169:4865351] [CDVTimer][statusbar] 3.271997ms
+2015-03-20 15:21:41.503 OG Journal[87169:4865351] [CDVTimer][TotalPluginStartup] 13.378978ms
+2015-03-20 15:21:41.558 OG Journal[87169:4865351] Resetting plugins due to page load.
+2015-03-20 15:21:41.574 OG Journal[87169:4865351] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/A255E93B-7E0C-4647-90D1-7E4E1CA25AE8/OG%20Journal.app/www/index2.html
+2015-03-20 15:21:41.576 OG Journal[87169:4865351] Resetting plugins due to page load.
+2015-03-20 15:21:41.733 OG Journal[87169:4865351] Finished load of: http://localhost:5000/login
+2015-03-20 15:21:48.236 OG Journal[87169:4865351] Resetting plugins due to page load.
+2015-03-20 15:21:49.300 OG Journal[87169:4865351] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:22:09.280 OG Journal[87304:4865992] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:22:09.281 OG Journal[87304:4865992] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:22:09.282 OG Journal[87304:4865992] Unlimited access to network resources
+2015-03-20 15:22:09.283 OG Journal[87304:4865992] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:22:09.346 OG Journal[87304:4865992] [CDVTimer][splashscreen] 9.653032ms
+2015-03-20 15:22:09.347 OG Journal[87304:4865992] [CDVTimer][statusbar] 1.130998ms
+2015-03-20 15:22:09.347 OG Journal[87304:4865992] [CDVTimer][TotalPluginStartup] 10.985970ms
+2015-03-20 15:22:09.389 OG Journal[87304:4865992] Resetting plugins due to page load.
+2015-03-20 15:22:09.408 OG Journal[87304:4865992] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/6BA08AF1-722E-4413-9581-AA13E89A9BA6/OG%20Journal.app/www/index2.html
+2015-03-20 15:22:09.410 OG Journal[87304:4865992] Resetting plugins due to page load.
+2015-03-20 15:22:09.577 OG Journal[87304:4865992] Finished load of: http://localhost:5000/login
+2015-03-20 15:22:13.151 OG Journal[87304:4865992] Resetting plugins due to page load.
+2015-03-20 15:22:14.188 OG Journal[87304:4865992] Finished load of: http://jdev.osirisguitar.com/
+2015-03-20 15:23:26.172 OG Journal[87474:4867007] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-20 15:23:26.173 OG Journal[87474:4867007] Multi-tasking -> Device: YES, App: YES
+2015-03-20 15:23:26.174 OG Journal[87474:4867007] Unlimited access to network resources
+2015-03-20 15:23:26.176 OG Journal[87474:4867007] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-20 15:23:26.261 OG Journal[87474:4867007] [CDVTimer][splashscreen] 10.066986ms
+2015-03-20 15:23:26.263 OG Journal[87474:4867007] [CDVTimer][statusbar] 1.587033ms
+2015-03-20 15:23:26.263 OG Journal[87474:4867007] [CDVTimer][TotalPluginStartup] 11.922956ms
+2015-03-20 15:23:26.310 OG Journal[87474:4867007] Resetting plugins due to page load.
+2015-03-20 15:23:26.324 OG Journal[87474:4867007] Finished load of: file:///Users/abo/Library/Developer/CoreSimulator/Devices/57CFB452-615B-4E1D-A441-5D7817A61AD2/data/Containers/Bundle/Application/F4AA4EB7-186C-4575-939F-B1C0A36536A9/OG%20Journal.app/www/index2.html
+2015-03-20 15:23:26.327 OG Journal[87474:4867007] Resetting plugins due to page load.
+2015-03-20 15:23:26.464 OG Journal[87474:4867007] Finished load of: http://localhost:5000/login
+2015-03-20 15:23:27.648 OG Journal[87474:4867007] Resetting plugins due to page load.
+2015-03-20 15:23:29.299 OG Journal[87474:4867007] Finished load of: http://jdev.osirisguitar.com/
