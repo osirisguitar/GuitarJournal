@@ -7,7 +7,7 @@ module.exports = function(grunt) {
 			options: {
 				// more options here if you want to override JSHint defaults
 				smarttabs:true,
-				"-W099": true,
+				'-W099': true,
 				node: true,
 				globals: {
 					jQuery: true,
@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 					it: true,
 					xit: true
 				},
-				reporter: require("jshint-stylish")
+				reporter: require('jshint-stylish')
 			},
 		},
 
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 					run: true,
 					log: true,
 					logErrors: true,
-					reporter: "Spec"
+					reporter: 'Spec'
 				}
 			}
 		},
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
 					run: true,
 					log: true,
 					logErrors: true,
-					reporter: "Spec"
+					reporter: 'Spec'
 				}
 			}
 		},
@@ -100,35 +100,35 @@ module.exports = function(grunt) {
 		manifest: {
   			generate: {
 			    options: {
-			      basePath: "app/",
-			      network: ["*"],
+			      basePath: 'app/',
+			      network: ['*'],
 			      preferOnline: false,
 			      timestamp: true,
 			      hash: false,
 			      cache: [
-					"http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js",
-  					"http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.min.js",
-					"http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js",
-					"http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-cookies.min.js"
+					'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js',
+  					'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-route.min.js',
+					'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-animate.min.js',
+					'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular-cookies.min.js'
 			      ]
 			    },
 			    src: [
-			        "home.html",
-			        "compiled/*.js",
-			        "compiled/*.css",
-			        "img/*.png",
-			        "font/**.*"
+         'home.html',
+			        'compiled/*.js',
+			        'compiled/*.css',
+			        'img/*.png',
+			        'font/**.*'
 			    ],
-			    dest: "app/manifest.appcache"
+			    dest: 'app/manifest.appcache'
 			}
 		},
 		
-		secret: grunt.file.readJSON('secret.json'),
+		secret: grunt.file.exists('secret.json') ? grunt.file.readJSON('secret.json') : {},
 		
 		sftp: {
 			deploy: {
 			    files: {
-			      "./": ["app.js", "newrelic.js", "package.json", "Procfile", "admin/dist/**", "about/**", "api/*.js", "api/images/undefined.jpg", "app/*", "app/compiled/*", "app/css/*", "app/font/*", "app/img/*", "app/touch-icons/*"]
+			      './': ['app.js', 'newrelic.js', 'package.json', 'Procfile', 'admin/dist/**', 'about/**', 'api/*.js', 'api/images/undefined.jpg', 'app/*', 'app/compiled/*', 'app/css/*', 'app/font/*', 'app/img/*', 'app/touch-icons/*']
 			    },
 			    options: {
 			      path: '/var/journal',
