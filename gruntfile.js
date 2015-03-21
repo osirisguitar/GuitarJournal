@@ -56,8 +56,8 @@ module.exports = function(grunt) {
 				options: {
 					run: true,
 					log: true,
-					logErrors: true,
-					reporter: 'Spec'
+					logErrors: true/*,
+					reporter: 'Spec'*/
 				}
 			}
 		},
