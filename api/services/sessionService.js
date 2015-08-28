@@ -13,7 +13,46 @@ module.exports = {
    * @param callback - called with (error, sessions)
    */
   getSessions: function(userId, skipCount, callback) {
-    mongoDB.collection('Sessions').find({ "userId": userId }).sort({ date: -1 }).skip(skipCount).limit(10).toArray(callback);
+    mongoDB.collection('Sessions').find({ "userId": userId }).sort({ date: -1 }).skip(skipCount).limit(10).toArray(function (err, sessions) {
+      var instrumentIds = {};
+      var goalIds = {};
+
+      sessions.forEach(function (session) {
+        instrumentIds[session.instrumentId] = session.instrumentId;
+        goalIds[session.goalId] = session.goalId;
+      });
+
+      instrumentIds = Object.keys(instrumentIds).map(function (instrumentId) { return new ObjectID(instrumentId) });
+      goalIds = Object.keys(goalIds).map(function (goalId) { return new ObjectID(goalId) });
+
+      mongoDB.collection('Instruments').find({ _id: { $in: instrumentIds } }).toArray(function (err, instruments) {
+          var instrumentMap = {};
+
+          instruments.forEach(function (instrument) {
+            instrumentMap[instrument._id] = instrument;
+          });
+
+          mongoDB.collection('Goals').find({ _id: { $in: goalIds } }).toArray(function (err, goals) {
+            var goalMap = {};
+
+            goals.forEach(function (goal) {
+              goalMap[goal._id] = goal;
+            });
+
+            sessions.forEach(function (session) {
+              if (session.instrumentId) {
+                session.instrument = instrumentMap[session.instrumentId];
+              }
+
+              if (session.goalId) {
+                session.goal = goalMap[session.goalId];
+              }
+            })
+
+            callback(null, sessions);
+          });
+      });
+    });
   },
 
   /**
