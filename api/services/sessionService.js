@@ -13,7 +13,7 @@ module.exports = {
    * @param callback - called with (error, sessions)
    */
   getSessions: function(userId, skipCount, callback) {
-    mongoDB.collection('Sessions').find({ "userId": userId }).sort({ date: -1 }).skip(skipCount).limit(10).toArray(function (err, sessions) {
+    mongoDB.collection('Sessions').find({ "userId": userId }).sort({ date: -1 }).skip(skipCount).limit(20).toArray(function (err, sessions) {
       var instrumentIds = {};
       var goalIds = {};
 

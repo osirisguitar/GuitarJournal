@@ -11,6 +11,13 @@ module.exports = {
         console.error("Error when getting sessions", err);
         res.send(500, "An error occured when getting sessions");
       } else {
+        if (sessions) {
+          sessions.forEach(function (session) {
+            if (session.instrument && session.instrument.imageFile) {
+              session.instrument.imageUrl = req.protocol + '://' + req.host + '/api/images/' + session.instrument.imageFile + '.jpg';
+            }
+          });
+        }
         res.json(sessions);
       }
     });
