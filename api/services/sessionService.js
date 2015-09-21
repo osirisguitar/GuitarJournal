@@ -22,8 +22,8 @@ module.exports = {
         goalIds[session.goalId] = session.goalId;
       });
 
-      instrumentIds = Object.keys(instrumentIds).map(function (instrumentId) { return new ObjectID(instrumentId) });
-      goalIds = Object.keys(goalIds).map(function (goalId) { return new ObjectID(goalId) });
+      instrumentIds = Object.keys(instrumentIds).map(function (instrumentId) { return new ObjectID(instrumentId); });
+      goalIds = Object.keys(goalIds).map(function (goalId) { return new ObjectID(goalId); });
 
       mongoDB.collection('Instruments').find({ _id: { $in: instrumentIds } }).toArray(function (err, instruments) {
           var instrumentMap = {};
@@ -47,7 +47,7 @@ module.exports = {
               if (session.goalId) {
                 session.goal = goalMap[session.goalId];
               }
-            })
+            });
 
             callback(null, sessions);
           });
