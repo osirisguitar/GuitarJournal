@@ -1,3 +1,23 @@
+guitarjournal:
+  build: .
+  ports:
+    - '8888'
+  links:
+    - mongodb:mongodb
+  environment:
+    - GITARRMONGO=mongodb://mongodb:27017/guitarjournal
+    - FB_APP_ID=660009220696560
+    - FB_APP_SECRET=49a9858d8a16851c72ec51a08b0f0201
+    - FB_APP_URL=http://jdev.osirisguitar.com
+    - USE_NODETIME=false
+    - PORT=8888
+    - ALLOWSIMPLELOGIN=true
+    - PRESALT=pl@nk@
+    - POSTSALT=v0ldeM0rt
+    - SMTP_HOST=mail.osirisguitar.com
+    - SMTP_USER=journal@osirisguitar.com
+    - SMTP_PASSWORD=vy6NDwBtXa2eHWCd
+    - SMTP_PORT=587
 mongodb:
   image: 'mongo:2.6'
   ports:

@@ -3,6 +3,9 @@
   "description": "The guitarist practice journal",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "start": "node app"
+  },
   "dependencies": {
     "angular-growl": "~0.1.0",
     "body-parser": "~1.8.2",
