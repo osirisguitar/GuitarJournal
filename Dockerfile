@@ -11,6 +11,7 @@ RUN npm install --production
 
 # Copy application files
 COPY ./app.js /app/
+COPY ./app /app/app
 COPY ./about /app/about
 COPY ./api /app/api
 COPY ./admin /app/admin
