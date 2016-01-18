@@ -4,13 +4,17 @@ var sessionService = require('../services/sessionService');
 
 module.exports = {
   getSessions: function(req, res, next) {
+    console.log('GetSession entry', Date.now());
     var skip = req.params.skip ? parseInt(req.params.skip, 10) : 0;
 
+    console.log('GetSession call service', Date.now());
     sessionService.getSessions(req.user._id, skip, function(err, sessions) {
+      console.log('GetSession service returned', Date.now());
       if (err) {
         console.error("Error when getting sessions", err);
         res.send(500, "An error occured when getting sessions");
       } else {
+        console.log('GetSession returning answers');
         res.json(sessions);
       }
     });

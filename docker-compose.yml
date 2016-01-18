@@ -1,7 +1,7 @@
 guitarjournal:
   build: .
   ports:
-    - '8888'
+    - '8888:8888'
   links:
     - mongodb:mongodb
   environment:
