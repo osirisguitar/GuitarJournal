@@ -10,6 +10,7 @@ module.exports = {
 
   loggedIn: function(req, res) {
     if (req.isAuthenticated()) {
+      console.log('loggedIn', Date.Now());
       req.user._csrf = req.csrfToken();
       res.json(req.user);   
     } else {

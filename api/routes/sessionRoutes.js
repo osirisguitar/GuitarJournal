@@ -8,7 +8,7 @@ module.exports = {
     console.log('GetSession entry', start);
     var skip = req.params.skip ? parseInt(req.params.skip, 10) : 0;
 
-    console.log('GetSession call service', Date.now() - start);
+    console.log('GetSession call service', Date.now() - start, Date.now());
     sessionService.getSessions(req.user._id, skip, function(err, sessions) {
       console.log('GetSession service returned', Date.now() - start);
       if (err) {
